@@ -1,0 +1,115 @@
+/* 🏗️ Conteneur principal */
+.categories-container {
+    text-align: center;
+    padding: 2rem;
+    background-color: #faefe6;
+}
+
+/* 📰 Titre principal */
+.section-title {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    color: #131212;
+}
+
+/* 🧾 Description */
+.section-description {
+    font-size: 2.5rem;
+    color: #555;
+    margin-bottom: 5rem;
+}
+
+/* 🔲 Grille responsive */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    justify-items: center;
+}
+
+/* 📦 Carte de catégorie avec fond image */
+.category-card {
+    position: relative;
+    width: 100%;
+    max-width: 650px;
+    height: 650px;
+    background-size: cover;              /* adapte à la taille */
+    background-position: center center;  /* centrage parfait */
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    color: white;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-6px);
+}
+
+/* ☁️ Dégradé lisible sur l’image */
+.category-overlay {
+    width: 100%;
+    padding: 2rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.0) 60%);
+    box-sizing: border-box;
+}
+
+/* 🏷️ Titre */
+.category-name {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+/* 📜 Description */
+.category-description {
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+    color: #f3f3f3;
+}
+
+/* 🔘 Lien bouton */
+.category-link {
+    display: inline-block;
+    background-color: #d72638;
+    padding: 0.6rem 1.4rem;
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.category-link:hover {
+    background-color: #a71b28;
+}
+
+/* 📱 Responsive : 2 colonnes en tablette */
+@media screen and (max-width: 1024px) {
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 📱 Responsive : 1 colonne en mobile */
+@media screen and (max-width: 600px) {
+    .categories-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-card {
+        max-width: 90%;
+        height: 500px; /* réajustée pour mobile */
+    }
+
+    .category-name {
+        font-size: 1.8rem;
+    }
+
+    .category-description {
+        font-size: 1.2rem;
+    }
+}

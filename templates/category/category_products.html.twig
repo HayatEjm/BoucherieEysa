@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits de
+	{{ category.name }}
+{% endblock %}
+
+{% block body %}
+	<h1>Nos morceaux de
+		{{ category.name }}</h1>
+
+	<ul>
+		{% for product in products %}
+			<li>
+				<strong>{{ product.name }}</strong>
+				–
+				{{ product.price }}
+				€ /
+				{{ product.unit }}
+				{% if product.image %}
+					<br>
+					<img src="{{ product.image }}" alt="{{ product.name }}" width="150">
+				{% endif %}
+			</li>
+
+			{% if product.description %}
+				<p>{{ product.description }}</p>
+			{% endif %}
+			{% if product.stock is not null %}
+				<p>Stock disponible :
+					{{ product.stock }}</p>
+			{% endif %}
+
+
+		{% else %}
+			<li>Aucun produit disponible pour cette catégorie.</li>
+		{% endfor %}
+	</ul>
+
+	<a style="margin-left:2rem" href="{{ path('app_category_index') }}">Retour aux catégories</a>
+{% endblock %}

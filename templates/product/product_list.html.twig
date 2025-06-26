@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Nos produits</title>
+</head>
+<body>
+    <h1>Liste des produits</h1>
+
+    <ul>
+        {% for product in products %}
+            <li>
+                <strong>{{ product.name }}</strong><br>
+                {{ product.description }}<br>
+                Prix : {{ product.price }} € / {{ product.unit }}<br>
+                {% if product.image %}
+                    <img src="{{ product.image }}" alt="{{ product.name }}" width="150">
+                {% endif %}
+            </li>
+        {% else %}
+            <li>Aucun produit trouvé.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
