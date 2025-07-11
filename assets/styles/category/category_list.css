@@ -1,11 +1,44 @@
 /* 🏗️ Conteneur principal */
 .categories-container {
     text-align: center;
-    padding: 2rem;
-    background-color: #faefe6;
+    padding: 3rem 2rem;
+    background-color: #ffffff;
+    min-height: 50vh;
 }
 
-/* 📰 Titre principal */
+/* ☁️ Dégradé lisible sur l'image */
+.category-overlay {
+    width: 100%;
+    padding: 2rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.0) 60%);
+    box-sizing: border-box;
+}
+
+/* 🏷️ Titre */
+.category-name {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+/* 🏗️ Conteneur principal */
+.categories-container {
+    text-align: center;
+    padding: 3rem 2rem;
+  
+    min-height: 50vh;
+}
+
+/* � Section centrée (titre + description + grille) */
+.categories-section {
+    max-width: auto;
+    margin: 0 auto;
+    padding: 15px 15px;
+    background-color: #f8f4e3; /* Couleur de fond douce */
+    border-radius: 10px;
+}
+
+/* �📰 Titre principal */
 .section-title {
     font-size: 5rem;
     margin-bottom: 1rem;
@@ -17,6 +50,7 @@
     font-size: 2.5rem;
     color: #555;
     margin-bottom: 5rem;
+    text-align: center;
 }
 
 /* 🔲 Grille responsive */
@@ -25,14 +59,15 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     justify-items: center;
+    /* La largeur est maintenant héritée du parent .categories-section */
 }
 
 /* 📦 Carte de catégorie avec fond image */
 .category-card {
     position: relative;
     width: 100%;
-    max-width: 650px;
-    height: 650px;
+    max-width: 400px;
+    height: 400px;
     background-size: cover;              /* adapte à la taille */
     background-position: center center;  /* centrage parfait */
     background-repeat: no-repeat;
@@ -55,13 +90,6 @@
     padding: 2rem;
     background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.0) 60%);
     box-sizing: border-box;
-}
-
-/* 🏷️ Titre */
-.category-name {
-    font-size: 5rem;
-    margin-bottom: 1rem;
-    font-weight: bold;
 }
 
 /* 📜 Description */

@@ -18,3 +18,22 @@
 /public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
+
+###> documentation files ###
+DOCUMENTATION_API.md
+###< documentation files ###
+
+
+.idea/
+
+GuidesPerso/
+TVA_BOUCHERIE_IMPLEMENTEE.md
+CHECKLIST_CORRECTIONS_CSS.md
+NETTOYAGE_CSS_TERMINE.md

@@ -1,0 +1,186 @@
+/* ==========================================
+   BANDEAU COMMUN - Style adaptatif par page
+   ========================================== */
+
+.page-banner {
+    position: relative;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    overflow: hidden;
+    margin-bottom: 0;
+    /* BANDEAU BEIGE ORIGINAL de votre charte */
+    background: #f8f6f2;
+}
+
+/* Conteneur du bandeau */
+.banner-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Contenu du bandeau */
+.banner-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Titre principal */
+.banner-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    font-family: 'Arial', sans-serif;
+    color: #2c3e50; /* Texte foncé sur fond beige */
+    text-align: center;
+}
+
+/* Sous-titre */
+.banner-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    color: #555; /* Texte gris foncé pour la lisibilité */
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Bouton d'action - VISIBLE */
+.banner-button {
+    display: inline-block !important;
+    background: #8B0000 !important;
+    color: white !important;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.banner-button:hover {
+    background: #A52A2A !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    color: white !important;
+    text-decoration: none;
+}
+
+/* Badges dans le bandeau */
+.page-banner .hero-badges {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 30px 0;
+}
+
+.page-banner .badge-eysa-inverse {
+    background: #f5f3f0 !important; /* Fond crème */
+    color: #8B0000 !important; /* Texte bordeaux */
+    border: 2px solid #8B0000; /* Bordure bordeaux */
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.page-banner .badge-eysa-inverse:hover {
+    background: #8B0000 !important;
+    color: white !important;
+    transform: translateY(-2px);
+}
+
+.page-banner .badge-eysa-inverse i {
+    color: inherit;
+    margin-right: 8px;
+}
+
+/* Style du bouton dans le bandeau */
+.page-banner .banner-button {
+    display: inline-block;
+    background: #8B0000;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(139, 0, 0, 0.3);
+    margin-top: 20px;
+}
+
+.page-banner .banner-button:hover {
+    background: #A52A2A;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 0, 0, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-banner {
+        height: 300px;
+    }
+    
+    .banner-title {
+        font-size: 2.5rem;
+    }
+    
+    .banner-subtitle {
+        font-size: 1rem;
+        margin-bottom: 25px;
+    }
+    
+    .banner-button {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+    
+    .page-banner .hero-badges {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .page-banner .badge-eysa-inverse {
+        width: 250px;
+        text-align: center;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-banner {
+        height: 250px;
+    }
+    
+    .banner-title {
+        font-size: 2rem;
+    }
+    
+    .banner-subtitle {
+        font-size: 0.9rem;
+    }
+}

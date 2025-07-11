@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EYSA Boucherie - Accueil{% endblock %}
+
+{% block body %}
+    {# 🎯 Section Hero avec image de fond #}
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">EYSA BOUCHERIE</h1>
+            <p class="hero-subtitle">Découvrez notre sélection de produits</p>
+            <p class="hero-description">
+                Une boucherie traditionnelle qui privilégie la qualité, le goût et le savoir-faire artisanal. 
+                Nos viandes sont sélectionnées avec soin auprès d'éleveurs locaux pour vous garantir fraîcheur et saveur.
+            </p>
+            <a href="{{ path('app_category_index') }}" class="btn-hero">Découvrir</a>
+        </div>
+        <div class="hero-image">
+            <img src="{{ asset('images/hero-meat.jpg') }}" alt="Viandes de qualité" data-fallback="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=800&h=600&fit=crop'">
+{#
+    Toute la logique JavaScript spécifique à cette page est désormais déplacée dans
+    le fichier assets/js/home.js, importé via assets/app.js.
+    
+    Cette séparation garantit :
+    - Un template Twig allégé et lisible
+    - Une centralisation de la logique JS pour la maintenance
+    - Le respect du MVC et des bonnes pratiques Symfony
+#}
+        </div>
+    </section>
+
+    {# 🏷️ Section catégories principales #}
+    <section class="categories-section">
+        <div class="container">
+            <h2 class="section-title">Nos spécialités</h2>
+            <p class="section-description">
+                Explorez nos différentes gammes de produits carnés, 
+                chacune sélectionnée pour sa qualité exceptionnelle.
+            </p>
+            
+            <div class="categories-preview">
+                {% for category in categories|slice(0, 5) %}
+                    <div class="category-card-mini">
+                        <div class="category-image">
+                            <img src="{% if category.image %}{{ asset('images/' ~ category.image) }}{% else %}https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=300&h=300&fit=crop{% endif %}" 
+                                 alt="{{ category.name }}">
+                        </div>
+                        <h3 class="category-name">{{ category.name }}</h3>
+                        <a href="{{ path('app_category_show', { id: category.id }) }}" class="btn-category">Voir les produits</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {# ⭐ Section avantages avec grille 2x2 #}
+    <section class="advantages-section">
+        <div class="container">
+            <h2 class="section-title">Pourquoi nous choisir ?</h2>
+            
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon">🥩</div>
+                    <h3>Qualité Premium</h3>
+                    <p>Nos viandes sont sélectionnées auprès d'éleveurs locaux pour vous garantir une qualité irréprochable.</p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">🛒</div>
+                    <h3>Click & Collect</h3>
+                    <p>Commandez en ligne et venez retirer vos produits en boutique selon vos disponibilités.</p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">👨‍🍳</div>
+                    <h3>Savoir-faire Artisanal</h3>
+                    <p>Notre équipe de bouchers expérimentés met tout son savoir-faire à votre service.</p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">🌱</div>
+                    <h3>Engagement Local</h3>
+                    <p>Nous privilégions les circuits courts et soutenons les producteurs de notre région.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# 🎖️ Section produits vedettes #}
+    {% if featuredProducts|length > 0 %}
+    <section class="featured-products-section">
+        <div class="container">
+            <h2 class="section-title">Nos produits vedettes</h2>
+            <p class="section-description">Une sélection de nos meilleures pièces du moment</p>
+            
+            <div class="products-grid">
+                {% for product in featuredProducts %}
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="{% if product.image %}{{ asset('images/' ~ product.image) }}{% else %}https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=300&h=200&fit=crop{% endif %}" 
+                                 alt="{{ product.name }}">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">{{ product.name }}</h3>
+                            <p class="product-description">{{ product.description|slice(0, 100) }}{% if product.description|length > 100 %}...{% endif %}</p>
+                            <div class="product-price">{{ product.price|number_format(2, ',', ' ') }}€ / {{ product.unit|default('kg') }}</div>
+                            <button class="btn-add-to-cart" data-product-id="{{ product.id }}">
+                                <i class="icon-cart"></i> Ajouter au panier
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <div class="text-center">
+                <a href="{{ path('app_category_index') }}" class="btn-view-all">Voir tous nos produits</a>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    {# 📞 Section contact et informations #}
+    <section class="info-section">
+        <div class="container">
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>📍 Notre adresse</h3>
+                    <p>123 Rue du Dr Schweitzer<br>49400 Saumur</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3>📞 Nous contacter</h3>
+                    <p>Téléphone : 02 41 50 57 18<br>Email : contact@eysa-boucherie.fr</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3>🕒 Nos horaires</h3>
+                    <p>Du mardi au samedi<br>09h00 - 12h30 | 15h30 - 19h15<br>Dimanche : 10h00 - 13h00</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3>🚗 Click & Collect</h3>
+                    <p>Commandez en ligne<br>Retirez selon vos créneaux</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

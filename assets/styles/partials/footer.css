@@ -1,0 +1,222 @@
+/* ==========================================
+   FOOTER PRINCIPAL - Fond noir comme le header
+   ========================================== */
+
+.footer-main {
+    background: #1a1a1a; /* Noir comme le header */
+    color: #ffffff;
+    padding: 60px 0 20px;
+    margin-top: 80px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+/* Sections du footer */
+.footer-section h4 {
+    color: #f8f6f2; /* Beige clair */
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #8B0000; /* Bordure bordeaux */
+    padding-bottom: 10px;
+}
+
+.footer-section h5 {
+    color: #f8f6f2;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 20px 0 10px;
+}
+
+/* Items de contact */
+.footer-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    gap: 12px;
+}
+
+.footer-item i {
+    color: #8B0000; /* Icônes bordeaux */
+    font-size: 1.1rem;
+    width: 20px;
+    margin-top: 2px;
+}
+
+.footer-item span,
+.footer-item div {
+    color: #cccccc;
+    line-height: 1.5;
+}
+
+.footer-item strong {
+    color: #f8f6f2;
+    font-weight: 600;
+}
+
+/* Horaires - Style spécifique pour le footer */
+.footer-main .footer-schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-main .schedule-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #333;
+    background: transparent !important; /* Force le fond transparent */
+    border-radius: 0 !important; /* Supprime les bordures arrondies */
+}
+
+.footer-main .schedule-item:hover {
+    background: transparent !important; /* Pas de changement au hover */
+}
+
+.footer-main .schedule-item:last-child {
+    border-bottom: none; /* Supprime la bordure du dernier élément */
+}
+
+.footer-main .schedule-item .day {
+    color: #f8f6f2 !important;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.footer-main .schedule-item .hours {
+    color: #cccccc !important;
+    font-size: 0.9rem;
+    text-align: right;
+}
+
+/* Navigation footer */
+.footer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-nav a,
+.footer-link {
+    color: #cccccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.footer-nav a:hover,
+.footer-link:hover {
+    color: #8B0000; /* Hover bordeaux */
+    text-decoration: none;
+}
+
+.footer-link {
+    display: inline-block;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+/* Réseaux sociaux */
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #333;
+    border-radius: 50%;
+    color: #cccccc;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: #8B0000;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Footer bottom */
+.footer-bottom {
+    border-top: 1px solid #333;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-bottom p {
+    color: #999;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.footer-legal {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-legal a {
+    color: #999;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-legal a:hover {
+    color: #8B0000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-main {
+        padding: 40px 0 20px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .footer-legal {
+        justify-content: center;
+    }
+    
+    .footer-main .schedule-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+        background: transparent !important;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+}

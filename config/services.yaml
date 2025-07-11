@@ -22,3 +22,14 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Service\AwsS3Service:
+        arguments:
+            $accessKeyId: '%env(AWS_ACCESS_KEY_ID)%'
+            $secretAccessKey: '%env(AWS_S3_SECRET_KEY)%'
+            $bucket: '%env(AWS_BUCKET)%'
+            $region: '%env(AWS_REGION)%'
+
+    App\Service\PickupSlotService:
+        arguments:
+            $projectDir: '%kernel.project_dir%'

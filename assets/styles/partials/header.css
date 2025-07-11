@@ -1,83 +1,286 @@
-/* 🌑 En-tête principal avec fond noir */
+/* ========================================================================
+   HEADER AVEC FOND NOIR - BOUCHERIE EYSA
+   ======================================================================== */
+
+/* 
+   🌑 HEADER PRINCIPAL
+   Fond noir avec texte blanc pour un design élégant
+   
+   👩‍💻 POUR TOI : Ce fichier gère uniquement le header (en-tête).
+   Les couleurs sont définies clairement : fond noir, texte blanc.
+   Si tu veux changer le design, modifie les couleurs ici.
+*/
+
 .main-header {
-    background-color: #000;
-    color: #fff;
-    padding: 1.5rem 2rem;
+    background-color: #1a1a1a !important; /* Noir header */
+    color: #ffffff !important; /* Texte blanc */
+    padding: 3rem 1.5rem 2rem;
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* 📦 Conteneur interne : logo + nav + icônes */
+/* Conteneur principal du header */
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* 🔠 Logo texte */
+/* ========================================================================
+   LOGO
+   ======================================================================== */
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 4rem;
+    margin-top: -1rem;
+}
+
 .logo a {
-    font-size: 2rem;
-    color: white;
-    text-decoration: none;
+    font-size: 2.5rem;
+    color: #ffffff !important; /* Blanc important */
+    text-decoration: none !important;
     font-weight: bold;
     letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
 }
 
-/* 🔗 Navigation principale */
-.nav-links ul {
-    list-style: none;
+.logo a:hover {
+    color: #ffffff !important; /* Reste blanc au survol */
+}
+
+.logo a::after {
+    content: "";
+    display: block;
+    margin: 0.5rem auto 0;
+    width: 60%;
+    height: 2px;
+    background-color: #ffffff; /* Ligne blanche sous le logo */
+}
+
+/* ========================================================================
+   NAVIGATION
+   ======================================================================== */
+
+.nav-links {
     display: flex;
-    gap: 2rem;
+    list-style: none;
     margin: 0;
     padding: 0;
+    gap: 2rem;
+}
+
+.nav-links ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2rem;
 }
 
 .nav-links a {
-    color: white;
-    text-decoration: none;
+    color: #ffffff !important; /* Blanc important */
+    text-decoration: none !important;
     font-size: 1.1rem;
     transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
-    color: #d72638;
+    color: #d72638 !important; /* Rouge au survol */
 }
 
 .arrow {
     font-size: 0.9rem;
+    color: #ffffff !important;
 }
 
-/* 🛍️ Icônes à droite */
+/* ========================================================================
+   ICÔNES HEADER (Panier, etc.)
+   ======================================================================== */
+
 .header-icons {
     display: flex;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1.5rem;
 }
 
-.header-icons a {
-    color: white;
-    text-decoration: none;
+.icon-link {
+    color: #ffffff !important; /* Blanc important pour les icônes */
+    text-decoration: none !important;
     font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease;
 }
 
-.header-icons i {
-    margin-right: 0.4rem;
+.icon-link:hover {
+    color: #d72638 !important; /* Rouge au survol */
 }
 
-/* 📱 Responsive (optionnel pour plus tard) */
+.icon-link i {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+    color: #ffffff !important; /* Icônes blanches */
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    text-align: center;
+    line-height: 1;
+}
+
+/* Badge du panier */
+.cart-badge {
+    background: #d72638 !important; /* Rouge */
+    color: #ffffff !important; /* Texte blanc */
+    border-radius: 50%;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
+    margin-left: 0.3rem;
+}
+
+/* ========================================================================
+   RESPONSIVE MOBILE
+   ======================================================================== */
+
 @media screen and (max-width: 768px) {
     .header-container {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
+        align-items: center;
+        gap: 1.5rem;
     }
 
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
     .nav-links ul {
         flex-direction: column;
+        align-items: center;
         gap: 1rem;
     }
 
     .header-icons {
-        align-self: flex-end;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1.2rem;
     }
+    
+    .logo a {
+        font-size: 2rem;
+    }
+}
+
+/* ========================================================================
+   FORÇAGE POUR ÉVITER L'ÉCRASEMENT PAR D'AUTRES CSS
+   ======================================================================== */
+
+/* 
+   Ces règles avec !important forcent le texte blanc dans le header.
+   C'est pour éviter que d'autres CSS viennent mettre du bordeaux.
+*/
+
+.main-header a {
+    color: #ffffff !important;
+}
+
+.main-header .nav-links a {
+    color: #ffffff !important;
+}
+
+.main-header .icon-link {
+    color: #ffffff !important;
+}
+
+.main-header .logo a {
+    color: #ffffff !important;
+}
+
+/* Au survol, seul le rouge est autorisé */
+.main-header a:hover {
+    color: #d72638 !important;
+}
+
+.main-header .nav-links a:hover {
+    color: #d72638 !important;
+}
+
+.main-header .icon-link:hover {
+    color: #d72638 !important;
+}
+
+
+/* ========================================================================
+   Menu deroulant pour "Nos produits"
+   ======================================================================== */
+.dropdown {
+  position: relative;
+}
+
+.dropdown .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #1a1a1a; /* Même couleur que le header */
+  min-width: 200px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  margin-top: 8px;
+  border-radius: 6px;
+  padding: 8px 0;
+  top: 100%;
+  left: 0;
+  list-style: none;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif; /* Même police que le header */
+}
+
+.dropdown-content.show {
+  display: block !important;
+}
+
+.dropdown-content li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-content li a {
+  display: block;
+  padding: 12px 20px;
+  color: #ffffff !important; /* Blanc comme le header */
+  text-decoration: none !important;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent; /* Petite barre à gauche */
+}
+
+.dropdown-content li a:hover {
+  background-color: #333333; /* Gris plus clair pour le survol */
+  color: #d72638 !important; /* Rouge comme les liens du header */
+  border-left-color: #d72638; /* Barre rouge au survol */
+}
+
+/* Responsive pour mobile */
+@media screen and (max-width: 768px) {
+  .dropdown .dropdown-content {
+    position: static;
+    display: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+    background-color: #333333; /* Légèrement plus clair sur mobile */
+    border-radius: 4px;
+  }
+  
+  .dropdown-content.show {
+    display: block;
+  }
+  
+  .dropdown-content li a {
+    padding: 15px 20px; /* Plus d'espace sur mobile */
+    font-size: 1.1rem;
+  }
 }

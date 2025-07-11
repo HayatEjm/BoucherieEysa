@@ -1,0 +1,19 @@
+# Configuration des créneaux de retrait Click & Collect
+pickup_slots:
+    # Limite maximum de commandes par créneau
+    max_orders_per_slot: 10
+    
+    # Définition des créneaux horaires
+    time_slots:
+        matin: "09:00-12:30"
+        apres-midi: "15:30-19:15"
+    
+    # Jours fermés (0 = dimanche, 1 = lundi, etc.)
+    closed_days: [1]  # Lundi fermé
+    
+    # Nombre de jours à afficher dans le calendrier
+    days_ahead: 7
+    
+    # Horaires spéciaux par jour de la semaine
+    special_hours:
+        0: "10:00-13:00"  # Dimanche : seulement matin modifié

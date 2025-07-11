@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }} - EYSA BOUCHERIE{% endblock %}
+
+{% block body %}
+<div class="product-detail-page">
+    {# Fil d'Ariane #}
+    <nav class="breadcrumb-nav">
+        <div class="container">
+            <ol class="breadcrumb-list">
+                <li><a href="{{ path('app_home') }}">🏠 Accueil</a></li>
+                <li><a href="{{ path('app_category_index') }}">Nos produits</a></li>
+                {% if product.category %}
+                    <li><a href="{{ path('app_category_show', { id: product.category.id }) }}">{{ product.category.name }}</a></li>
+                {% endif %}
+                <li class="current">{{ product.name }}</li>
+            </ol>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="product-detail-grid">
+            {# Section Image #}
+            <div class="product-image-section">
+                <div class="product-image-main">
+                    {% if product.image %}
+                        <img src="{{ asset('images/' ~ product.image) }}" alt="{{ product.name }}" class="main-image">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=600&h=600&fit=crop" alt="{{ product.name }}" class="main-image">
+                    {% endif %}
+                </div>
+                
+                {# Badges qualité simples #}
+                <div class="quality-badges">
+                    <span class="badge badge-fresh">Fraîcheur garantie</span>
+                    <span class="badge badge-local">Origine locale</span>
+                </div>
+            </div>
+
+            {# Section Informations #}
+            <div class="product-info-section">
+                {# En-tête produit #}
+                <div class="product-header">
+                    <h1 class="product-title">{{ product.name }}</h1>
+                    {% if product.category %}
+                        <div class="product-category">{{ product.category.name }}</div>
+                    {% endif %}
+                </div>
+
+                {# Description #}
+                {% if product.description %}
+                    <div class="product-description">
+                        {{ product.description }}
+                    </div>
+                {% endif %}
+
+                {# Calculateur de prix simple #}
+                <div class="price-calculator">
+                    <h3>⚖️ Pesez votre viande</h3>
+                    
+                    <div class="price-display">
+                        <div class="current-price" id="total-price">
+                            {{ (product.minWeight / 1000 * product.price)|number_format(2, ',', ' ') }}€
+                        </div>
+                        <div class="price-per-kg">
+                            {{ product.price|number_format(2, ',', ' ') }}€ / kg
+                        </div>
+                    </div>
+
+                    {# Sélecteur de quantité (composant) #}
+                    {% include 'components/quantity_selector.html.twig' with {
+                        minWeight: product.minWeight,
+                        maxWeight: product.maxWeight,
+                        price: product.price
+                    } %}
+
+                    {# Notice poids minimum (composant) #}
+                    {% include 'components/min_weight_notice.html.twig' with { minWeight: product.minWeight } %}
+
+                    {# Bouton ajout panier (composant) #}
+                    {% include 'components/add_to_cart_button.html.twig' with {
+                        productId: product.id,
+                        minWeight: product.minWeight
+                    } %}
+                </div>
+            </div>
+        </div>
+
+        {# Onglets d'informations (composant) #}
+        {% include 'components/product_tabs.html.twig' with { product: product } %}
+    </div>
+</div>
+
+{# Toast notification #}
+<div id="toast" class="toast"></div>
+
+
+
+
+{% endblock %}

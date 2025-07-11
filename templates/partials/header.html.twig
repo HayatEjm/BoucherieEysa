@@ -1,28 +1,65 @@
 <header class="main-header">
-	<div class="header-container">
+	<div class="logo-container">
 		<div class="logo">
-			<a href="{{ path('app_category_index') }}">EYSA BOUCHERIE</a>
+			<a href="{{ path('app_home') }}">EYSA BOUCHERIE</a>
 		</div>
+	</div>
 
+	<div class="header-container">
 		<nav class="nav-links">
 			<ul>
-				<li><ahref="{{ path('app_category_index') }}">ACCUEIL</a></li>
-				<li><a href="#">NOS PRODUITS<span class="arrow">▼</span></a></li>
-				<li><a href="#">CLICK & COLLECT</a></li>
-				<li><a href="#">NOTRE PHILOSOPHIE</a></li>
+				<li>
+					<a href="{{ path('app_home') }}">ACCUEIL</a>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropbtn">NOS PRODUITS
+						<span class="arrow">▼</span>
+					</a>
+					<ul class="dropdown-content">
+						{% for category in categories %}
+							<li>
+								<a href="{{ path('app_category_show', { id: category.id }) }}">{{ category.name }}</a>
+							</li>
+						{% endfor %}
+					</ul>
+
+				</li>
+
+				<li>
+					<a href="{{ path('app_click_collect') }}">CLICK & COLLECT</a>
+				</li>
+				<li>
+					<a href="{{ path('app_philosophy') }}">NOTRE PHILOSOPHIE</a>
+				</li>
+				<li>
+					<a href="{{ path('app_contact') }}">CONTACT</a>
+				</li>
 			</ul>
 		</nav>
 
 		<div class="header-icons">
-			<a href="#">
-				<i class="icon-user"></i>
-				Mon compte</a>
-			<a href="#">
-				<i class="icon-cart"></i>
+			<a href="#" class="icon-link">
+				<i class="fa-solid fa-user" aria-hidden="true"></i>
+				<span class="label">Mon compte</span>
 			</a>
-			<a href="#">
-				<i class="icon-search"></i>
+			{# 🛒 PANIER - Lien avec badge dynamique #}
+			<a href="{{ path('app_cart_index') }}" class="icon-link cart-icon-container" aria-label="Panier" data-tooltip="Voir mon panier">
+				<i class="fa-solid fa-cart-shopping cart-icon" aria-hidden="true"></i>
+				<span class="cart-badge hidden" id="cart-badge" data-count="0" aria-label="0 articles dans le panier">0</span>
 			</a>
+			
+			{# 🔍 RECHERCHE - Dropdown simple #}
+			<div class="search-container">
+				<a href="#" class="icon-link" id="searchToggle" aria-label="Rechercher">
+					<i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+				</a>
+				<div class="search-dropdown" id="searchDropdown">
+					<input type="text" id="searchInput" placeholder="Rechercher un produit..." autocomplete="off">
+					<div id="searchResults">
+						<p class="search-hint">Tapez au moins 2 caractères...</p>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </header>

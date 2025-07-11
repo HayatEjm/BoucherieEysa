@@ -1,0 +1,56 @@
+{# 
+    PARTIAL : RÉSUMÉ DU PANIER POUR CHECKOUT
+    
+    Variables attendues :
+    - cartSummary : Résumé du panier avec totaux
+#}
+
+<div class="checkout-card">
+    <h2 class="checkout-card__title">
+        <i class="fas fa-shopping-cart"></i>
+        Récapitulatif de votre commande
+    </h2>
+    
+    {# Articles du panier #}
+    <div class="checkout-items">
+        {% for item in cartSummary.items %}
+            <div class="checkout-item">
+                <div class="checkout-item__info">
+                    <h4 class="checkout-item__name">{{ item.product.name }}</h4>
+                    <p class="checkout-item__details">
+                        {{ item.quantity }} x {{ item.product.priceHT|number_format(2, ',', ' ') }} € HT
+                    </p>
+                </div>
+                <div class="checkout-item__total">
+                    {{ item.totalTTC|number_format(2, ',', ' ') }} € TTC
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    {# Totaux #}
+    <div class="checkout-totals">
+        <div class="checkout-total-line">
+            <span>Sous-total HT :</span>
+            <span>{{ cartSummary.totalHT|number_format(2, ',', ' ') }} €</span>
+        </div>
+        <div class="checkout-total-line">
+            <span>TVA :</span>
+            <span>{{ cartSummary.totalTVA|number_format(2, ',', ' ') }} €</span>
+        </div>
+        <div class="checkout-total-line checkout-total-line--final">
+            <strong>
+                <span>Total TTC :</span>
+                <span>{{ cartSummary.totalTTC|number_format(2, ',', ' ') }} €</span>
+            </strong>
+        </div>
+    </div>
+
+    {# Lien retour au panier #}
+    <div class="checkout-back-to-cart">
+        <a href="{{ path('app_cart_index') }}" class="btn-eysa btn-eysa-secondary btn-small">
+            <i class="fas fa-edit"></i>
+            Modifier mon panier
+        </a>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+/* ========================================================================
+   CSS POUR LA PAGE LISTE PRODUITS PAR CATÉGORIE - BOUCHERIE EYSA
+   ======================================================================== */
+
+/* Styles pour la validation visuelle */
+.quantity-input.error {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+}
+
+.min-weight-notice {
+    font-size: 0.85em;
+    color: #6c757d;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.min-weight-notice i {
+    color: #17a2b8;
+}
+
+.notification {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Ajoutez ici d'autres styles spécifiques à la page catégorie produits */

@@ -1,0 +1,611 @@
+/* ========================================================================
+   CSS SPÉCIFIQUE POUR LA PAGE PANIER
+   ======================================================================== */
+
+/* 
+   Je crée ce fichier pour styliser uniquement la page panier.
+   J'utilise le même design system que le reste du site (couleurs, espacements, etc.)
+   mais j'ajoute des styles spécifiques pour les interactions du panier.
+*/
+
+/* ========================================================================
+   CONTENEUR PRINCIPAL DU PANIER
+   ======================================================================== */
+
+/* Je style le conteneur principal de la page panier */
+.cart-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    background: var(--color-cream);
+}
+
+/* Je m'assure que le titre de la page est bien visible */
+.cart-title {
+    font-family: var(--font-primary);
+    font-size: 2.5rem;
+    color: var(--color-burgundy);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+/* ========================================================================
+   MESSAGE PANIER VIDE
+   ======================================================================== */
+
+/* Je style le message quand le panier est vide */
+.cart-empty {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+}
+
+.cart-empty h2 {
+    color: var(--color-burgundy);
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.cart-empty p {
+    color: var(--color-text);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+/* Je style le bouton pour continuer les achats */
+.btn-continue-shopping {
+    background: var(--color-burgundy);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.btn-continue-shopping:hover {
+    background: var(--color-burgundy-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* ========================================================================
+   ARTICLES DU PANIER
+   ======================================================================== */
+
+/* Je style chaque article dans le panier */
+.cart-items {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto auto;        /* J'enlève une colonne (quantité) */
+    gap: 1.5rem;                                      
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--color-light-gray);
+    align-items: center;
+    min-height: 120px;                               
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+/* Je style l'image du produit dans le panier - TAILLE CONTRÔLÉE */
+.cart-item-image {
+    width: 80px !important;           /* Je force la largeur */
+    height: 80px !important;          /* Je force la hauteur */
+    min-width: 80px;                  /* Largeur minimum */
+    max-width: 80px;                  /* Largeur maximum */
+    object-fit: cover;                /* Je garde les proportions */
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    flex-shrink: 0;                   /* L'image ne rétrécit pas */
+    overflow: hidden;                 /* Je cache ce qui dépasse */
+}
+
+/* Je m'assure que l'IMG à l'intérieur respecte aussi les dimensions */
+.cart-item-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    display: block;
+}
+
+/* Je style les informations du produit */
+.cart-item-info h3 {
+    color: var(--color-burgundy);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.cart-item-info p {
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.cart-item-price {
+    font-weight: 700;
+    color: var(--color-burgundy);
+    font-size: 1.1rem;
+}
+
+/* ========================================================================
+   CONTRÔLES DE QUANTITÉ - SUPPRIMÉS (pas de sens pour une boucherie)
+   ======================================================================== */
+
+/* 
+   J'ai enlevé les contrôles +/- car pour une boucherie, 
+   chaque article correspond à un poids/quantité spécifique choisie 
+   au moment de l'ajout. Pas besoin de modifier après.
+*/
+
+/* ========================================================================
+   BOUTON SUPPRIMER
+   ======================================================================== */
+
+/* Je style le bouton pour supprimer un article */
+.btn-remove-item {
+    background: var(--color-danger);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-remove-item:hover {
+    background: #c53030;
+    transform: translateY(-1px);
+}
+
+.btn-remove-item i {
+    font-size: 0.8rem;
+}
+
+/* ========================================================================
+   RÉSUMÉ DU PANIER
+   ======================================================================== */
+
+/* Je crée une section pour le résumé et les totaux */
+.cart-summary {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.cart-summary h3 {
+    color: var(--color-burgundy);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--color-light-gray);
+}
+
+.summary-row:last-child {
+    border-bottom: none;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-burgundy);
+    padding-top: 1rem;
+}
+
+.summary-label {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.summary-value {
+    font-weight: 700;
+    color: var(--color-burgundy);
+}
+
+/* ========================================================================
+   NOUVEAUX STYLES POUR TVA - BOUCHERIE EYSA
+   ======================================================================== */
+
+/* Style pour les lignes du résumé (nouvelle structure) */
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e5ddd4; /* Bordure beige claire */
+}
+
+.summary-line:last-child {
+    border-bottom: none;
+}
+
+/* Ligne de total plus visible */
+.summary-line.total {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #8B1538; /* Bordeaux */
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+    border-top: 2px solid #8B1538;
+}
+
+/* Ligne TVA - style discret mais visible */
+.summary-line.tax-info {
+    background-color: #FAF7F2; /* Beige très clair */
+    margin: 0.5rem -1rem; /* Déborde légèrement */
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    border: none;
+}
+
+.tax-label {
+    color: #5a5a5a; /* Gris moyen */
+    font-style: italic;
+}
+
+.tax-amount {
+    color: #8B1538; /* Bordeaux */
+    font-weight: 600;
+}
+
+/* Ligne livraison */
+.summary-line.shipping .free {
+    color: #065f46; /* Vert foncé */
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Séparateur */
+.summary-divider {
+    border: none;
+    border-top: 1px solid #e5ddd4;
+    margin: 1rem 0;
+}
+
+/* ========================================================================
+   ACTIONS DU PANIER
+   ======================================================================== */
+
+/* Je groupe les boutons d'action en bas du panier */
+.cart-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-clear-cart {
+    background: var(--color-danger);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-clear-cart:hover {
+    background: #c53030;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+.btn-checkout {
+    background: linear-gradient(135deg, var(--color-burgundy), var(--color-burgundy-dark));
+    color: var(--color-burgundy);
+    border: none;
+    padding: 1rem 3rem;
+    border-radius: var(--border-radius);
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-checkout:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-strong);
+}
+
+
+
+/* ========================================================================
+   NOTIFICATIONS TOAST
+   ======================================================================== */
+
+/* Je style les notifications qui apparaissent lors des actions */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--color-burgundy);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-strong);
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+.toast.success {
+    background: var(--color-success);
+}
+
+.toast.error {
+    background: var(--color-danger);
+}
+
+/* ========================================================================
+   MODAL DE CONFIRMATION
+   ======================================================================== */
+
+/* Je crée une modal pour confirmer la suppression */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: var(--shadow-strong);
+}
+
+.modal-content h3 {
+    color: var(--color-burgundy);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.modal-content p {
+    color: var(--color-text);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.btn-confirm {
+    background: var(--color-danger);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-confirm:hover {
+    background: #c53030;
+}
+
+.btn-cancel {
+    background: var(--color-gray);
+    color: var(--color-text);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-cancel:hover {
+    background: var(--color-dark-gray);
+    color: white;
+}
+
+/* ========================================================================
+   RESPONSIVITÉ
+   ======================================================================== */
+
+/* Je m'assure que le panier est responsive sur tous les appareils */
+@media (max-width: 768px) {
+    /* Sur mobile, je passe les articles en colonne */
+    .cart-item {
+        grid-template-columns: 80px 1fr;
+        gap: 1rem;
+    }
+    
+    .cart-item-image {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .cart-item-controls {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--color-light-gray);
+    }
+    
+    .cart-actions {
+        flex-direction: column;
+    }
+    
+    .btn-checkout,
+    .btn-clear-cart {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 1.5rem;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart-container {
+        padding: 1rem 0.5rem;
+    }
+    
+    .cart-title {
+        font-size: 2rem;
+    }
+    
+    .cart-item {
+        padding: 1rem;
+    }
+    
+    .quantity-controls {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .quantity-input {
+        width: 40px;
+    }
+}
+
+/* ========================================================================
+   ANIMATIONS ET TRANSITIONS
+   ======================================================================== */
+
+/* J'ajoute des animations fluides pour une meilleure UX */
+.cart-item {
+    transition: all 0.3s ease;
+}
+
+.cart-item:hover {
+    background: var(--color-light-gray);
+}
+
+/* Animation pour la suppression d'un article */
+.cart-item.removing {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: all 0.5s ease;
+}
+
+/* Animation pour le chargement */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-burgundy);
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ========================================================================
+   CORRECTIONS SPÉCIFIQUES POUR LES IMAGES DISPROPORTIONNÉES
+   ======================================================================== */
+
+/* Je m'assure qu'aucun autre style ne vient perturber mes images de panier */
+.cart-item .cart-item-image,
+.cart-items .cart-item .cart-item-image,
+.cart-item-image.cart-item-image {
+    width: 80px !important;
+    height: 80px !important;
+    max-width: 80px !important;
+    max-height: 80px !important;
+    min-width: 80px !important;
+    min-height: 80px !important;
+}
+
+/* Je force aussi les images à l'intérieur */
+.cart-item-image img,
+.cart-item .cart-item-image img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: cover !important;
+}
+
+/* Si il y a un placeholder, même taille */
+.cart-item-image .product-placeholder {
+    width: 80px !important;
+    height: 80px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-light-gray);
+    border-radius: var(--border-radius);
+    color: var(--color-gray);
+    font-size: 1.5rem;
+}
+
+/* ========================================================================
+   ARTICLES DU PANIER
+   ======================================================================== */

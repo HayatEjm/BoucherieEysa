@@ -1,0 +1,293 @@
+/* ========================================================================
+   PAGE NOTRE PHILOSOPHIE - BOUCHERIE EYSA
+   ======================================================================== */
+
+/* 
+   🏪 PAGE PHILOSOPHIE
+   Design élégant et professionnel pour présenter les valeurs de la boucherie
+   
+   👩‍💻 POUR TOI : Ce fichier gère le style de la page "Notre Philosophie".
+   Les couleurs suivent le design system : beige, bordeaux, et noir.
+*/
+
+.philosophy-container {
+    min-height: 100vh;
+}
+
+/* ========================================================================
+   SECTIONS GÉNÉRALES
+   ======================================================================== */
+
+.philosophy-section {
+    padding: 4rem 0;
+    background-color: #ffffff;
+}
+
+.philosophy-section.alt-bg {
+    background-color: #f8f6f3; /* Beige très clair */
+}
+
+.section-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-content.reverse {
+    grid-template-columns: 1fr 1fr;
+}
+
+.section-text {
+    padding: 1rem;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    color: #2c1810; /* Brun foncé */
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.section-title i {
+    color: #d72638; /* Rouge accent */
+    font-size: 1.8rem;
+}
+
+.lead {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #5d4e37; /* Brun moyen */
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.section-text p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.section-image {
+    padding: 1rem;
+}
+
+.section-image img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.section-image img:hover {
+    transform: translateY(-5px);
+}
+
+/* ========================================================================
+   POINTS QUALITÉ
+   ======================================================================== */
+
+.quality-points {
+    margin-top: 2rem;
+}
+
+.quality-point {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.quality-point i {
+    color: #28a745; /* Vert validation */
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.quality-point span {
+    font-weight: 500;
+    color: #333;
+}
+
+/* ========================================================================
+   STATISTIQUES ENGAGEMENT
+   ======================================================================== */
+
+.engagement-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.stat {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-top: 4px solid #d72638;
+}
+
+.stat strong {
+    display: block;
+    font-size: 2rem;
+    color: #d72638;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.stat span {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+
+/* ========================================================================
+   SECTION CTA (Call To Action)
+   ======================================================================== */
+
+.philosophy-cta {
+    background: linear-gradient(135deg, #2c1810 0%, #5d4e37 100%);
+    color: #ffffff;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.cta-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.cta-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #d72638;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #b91e2f;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(215, 38, 56, 0.3);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+
+.btn-secondary:hover {
+    background-color: #ffffff;
+    color: #2c1810;
+    transform: translateY(-2px);
+}
+
+/* ========================================================================
+   RESPONSIVE MOBILE
+   ======================================================================== */
+
+@media screen and (max-width: 768px) {
+    .philosophy-section {
+        padding: 2.5rem 0;
+    }
+
+    .section-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+
+    .section-content.reverse {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .lead {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+
+    .section-text {
+        text-align: center;
+    }
+
+    .engagement-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .cta-content h2 {
+        font-size: 2rem;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .section-title {
+        font-size: 1.5rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .section-image img {
+        height: 250px;
+    }
+
+    .philosophy-section {
+        padding: 2rem 0;
+    }
+}

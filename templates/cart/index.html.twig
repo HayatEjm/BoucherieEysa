@@ -1,0 +1,248 @@
+{# 
+   Template de la page panier
+   
+   CE QUE JE FAIS :
+   - J'affiche tous les articles du panier avec leurs quantités
+   - Je propose des boutons +/- pour modifier les quantités
+   - J'affiche le total en temps réel
+   - Je gère le cas du panier vide avec un message
+   - Je fournis des boutons pour vider le panier ou continuer les achats
+   
+   VARIABLES REÇUES DU CONTROLLER :
+   - cartItems : array des articles du panier
+   - totalQuantity : nombre total d'articles
+   - totalPrice : prix total en euros
+   - isEmpty : true si le panier est vide
+#}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier - Boucherie Eysa{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="cart-page">
+    
+    {# EN-TÊTE DE LA PAGE PANIER #}
+    <section class="cart-header section-eysa">
+        <div class="cc-container">
+            <div class="cart-header-content">
+                <h1 class="title-eysa-2">
+                    <i class="fas fa-shopping-cart"></i>
+                    Mon panier
+                </h1>
+                
+                {% if not isEmpty %}
+                    <p class="cart-summary-text">
+                        <strong>{{ totalQuantity }}</strong> article{{ totalQuantity > 1 ? 's' : '' }} 
+                        pour un total de <strong>{{ cart.totalTTC|number_format(2, ',', ' ') }} € TTC</strong>
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    {# CONTENU PRINCIPAL DU PANIER #}
+    <section class="cart-content section-eysa-alt">
+        <div class="cc-container">
+            
+            {% if isEmpty %}
+                {# PANIER VIDE - Message sympathique avec actions #}
+                <div class="cart-empty">
+                    <div class="empty-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h2 class="title-eysa-3">Votre panier est vide</h2>
+                    <p class="text-eysa-body">
+                        Découvrez notre sélection de viandes fraîches et commencez vos achats !
+                    </p>
+                    <div class="empty-actions">
+                        <a href="{{ path('app_products') }}" class="btn-eysa btn-eysa-primary">
+                            <i class="fas fa-meat"></i>
+                            Découvrir nos produits
+                        </a>
+                        <a href="{{ path('app_category_index') }}" class="btn-eysa btn-eysa-secondary">
+                            <i class="fas fa-list"></i>
+                            Voir les catégories
+                        </a>
+                    </div>
+                </div>
+                
+            {% else %}
+                {# PANIER AVEC ARTICLES #}
+                <div class="cart-items-container">
+                    
+                    {# LISTE DES ARTICLES #}
+                    <div class="cart-items-list">
+                        {% for cartItem in cartItems %}
+                            <div class="cart-item card-eysa" data-product-id="{{ cartItem.product.id }}">
+                                
+                                {# IMAGE DU PRODUIT #}
+                                <div class="cart-item-image">
+                                    {% if cartItem.product.image %}
+                                        <img src="{{ asset('images/' ~ cartItem.product.image) }}" 
+                                             alt="{{ cartItem.product.name }}"
+                                             loading="lazy">
+                                    {% else %}
+                                        <div class="product-placeholder">
+                                            <i class="fas fa-image"></i>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                {# INFORMATIONS DU PRODUIT #}
+                                <div class="cart-item-info">
+                                    <h3 class="product-name">
+                                        <a href="{{ path('app_product_show', {id: cartItem.product.id}) }}">
+                                            {{ cartItem.product.name }}
+                                        </a>
+                                    </h3>
+                                    
+                                    {% if cartItem.product.description %}
+                                        <p class="product-description">
+                                            {{ cartItem.product.description|slice(0, 100) }}...
+                                        </p>
+                                    {% endif %}
+                                    
+                                    <div class="item-details">
+                                        <span class="unit-price">
+                                            Prix unitaire : <strong>{{ cartItem.unitPrice|number_format(2, ',', ' ') }} €</strong>
+                                        </span>
+                                        {# J'enlève les contrôles de quantité - pas de sens pour une boucherie #}
+                                    </div>
+                                </div>
+                                
+                                {# PRIX TOTAL ET SUPPRESSION UNIQUEMENT #}
+                                <div class="cart-item-controls">
+                                    {# TOTAL DE CET ARTICLE #}
+                                    <div class="item-total">
+                                        <span class="total-label">Total :</span>
+                                        <span class="total-amount" data-product-id="{{ cartItem.product.id }}">
+                                            {{ cartItem.total|number_format(2, ',', ' ') }} €
+                                        </span>
+                                    </div>
+                                    
+                                    {# BOUTON SUPPRIMER UNIQUEMENT #}
+                                    <button type="button" 
+                                            class="btn-remove"
+                                            data-product-id="{{ cartItem.product.id }}"
+                                            title="Retirer du panier">
+                                        <i class="fas fa-trash"></i>
+                                        Supprimer
+                                    </button>
+                                </div>
+                                
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                    {# RÉSUMÉ ET ACTIONS #}
+                    <div class="cart-summary">
+                        <div class="summary-card card-eysa">
+                            <h3 class="title-eysa-3">Résumé de la commande</h3>
+                            
+                            <div class="summary-details">
+                                <div class="summary-line">
+                                    <span>Articles ({{ totalQuantity }}) :</span>
+                                    <span id="cart-total">{{ cart.totalTTC|number_format(2, ',', ' ') }} € TTC</span>
+                                </div>
+                                
+                                {# LIGNE TVA - TRANSPARENCE #}
+                                <div class="summary-line tax-info">
+                                    <span class="tax-label">
+                                        <small>dont TVA ({{ cart.taxRate }}%) :</small>
+                                    </span>
+                                    <span class="tax-amount">
+                                        <small>{{ cart.taxAmount|number_format(2, ',', ' ') }} €</small>
+                                    </span>
+                                </div>
+                                
+                                <div class="summary-line shipping">
+                                    <span>Livraison :</span>
+                                    <span class="free">Retrait gratuit</span>
+                                </div>
+                                
+                                <hr class="summary-divider">
+                                
+                                <div class="summary-line total">
+                                    <strong>
+                                        <span>Total TTC :</span>
+                                        <span id="cart-final-total">{{ cart.totalTTC|number_format(2, ',', ' ') }} €</span>
+                                    </strong>
+                                </div>
+                            </div>
+                            
+                            {# ACTIONS PRINCIPALES #}
+                            <div class="cart-actions">
+                                <a href="{{ path('app_cart_checkout') }}" 
+                                   class="btn-eysa btn-eysa-primary btn-checkout">
+                                    <i class="fas fa-credit-card"></i>
+                                    Finaliser ma commande
+                                </a>
+                                
+                                <a href="{{ path('app_products') }}" 
+                                   class="btn-eysa btn-eysa-secondary">
+                                    <i class="fas fa-arrow-left"></i>
+                                    Continuer mes achats
+                                </a>
+                                
+                                <button type="button" 
+                                        class="btn-clear-cart"
+                                        onclick="confirmClearCart()">
+                                    <i class="fas fa-trash"></i>
+                                    Vider le panier
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            {% endif %}
+            
+        </div>
+    </section>
+    
+</div>
+
+{# MODAL DE CONFIRMATION POUR VIDER LE PANIER #}
+<div id="confirm-clear-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h3>Confirmer</h3>
+        <p>Êtes-vous sûr de vouloir vider votre panier ?</p>
+        <div class="modal-actions">
+            <button type="button" class="btn-eysa btn-eysa-primary" onclick="clearCart()">
+                Oui, vider le panier
+            </button>
+            <button type="button" class="btn-eysa btn-eysa-secondary" onclick="closeModal()">
+                Annuler
+            </button>
+        </div>
+    </div>
+</div>
+
+{# NOTIFICATION TOAST #}
+<div id="cart-toast" class="toast" style="display: none;">
+    <span id="toast-message"></span>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {#
+        Toute logique JavaScript spécifique à cette page est désormais déplacée dans
+        le fichier assets/js/cart_page.js, importé via assets/app.js.
+        
+        Cette approche garantit :
+        - Une séparation claire des responsabilités (MVC)
+        - Aucun JS inline ni attribut d’événement dans le template
+        - Une meilleure maintenabilité et pédagogie du code
+        
+        Pour toute interaction JS spécifique (suppression, vidage, modale, etc.),
+        modifiez uniquement le fichier JS dédié.
+    #}
+    </script>
+{% endblock %}

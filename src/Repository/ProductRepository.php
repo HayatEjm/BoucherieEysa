@@ -16,6 +16,32 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    /**
+     * Recherche de produits par nom avec tri par pertinence (version simple)
+     */
+    public function searchByName(string $query, int $limit = 10): array
+    {
+        // D'abord chercher ceux qui commencent par la recherche
+        $qb = $this->createQueryBuilder('p');
+        
+        return $qb
+            ->andWhere('p.name LIKE :query OR p.description LIKE :query')
+            ->setParameter('query', '%' . $query . '%')
+            // Tri simple : ceux qui commencent par la recherche en premier
+            ->addOrderBy('
+                CASE 
+                    WHEN LOWER(p.name) LIKE :startQuery THEN 0
+                    ELSE 1
+                END
+            ', 'ASC')
+            ->addOrderBy('LENGTH(p.name)', 'ASC')
+            ->addOrderBy('p.name', 'ASC')
+            ->setParameter('startQuery', strtolower($query) . '%')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Product[] Returns an array of Product objects
     //     */

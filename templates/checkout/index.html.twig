@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Finaliser ma commande - Boucherie Eysa{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="checkout-page">
+    
+    {# EN-TÊTE DE LA PAGE CHECKOUT #}
+    <section class="checkout-header section-eysa">
+        <div class="cc-container">
+            <div class="checkout-header-content">
+                <h1 class="title-eysa-2">
+                    <i class="fas fa-credit-card"></i>
+                    Finaliser ma commande
+                </h1>
+                <p class="checkout-subtitle">
+                    Récapitulatif de votre commande et informations de retrait
+                </p>
+            </div>
+        </div>
+    </section>
+
+    {# CONTENU PRINCIPAL DU CHECKOUT #}
+    <section class="checkout-content section-eysa-alt">
+        <div class="cc-container">
+            <div class="checkout-layout">
+                
+                {# COLONNE GAUCHE : RÉSUMÉ DE LA COMMANDE #}
+                <div class="checkout-summary">
+                    {{ include('checkout/_cart_summary.html.twig') }}
+                </div>
+
+                {# COLONNE DROITE : FORMULAIRE DE CHECKOUT #}
+                <div class="checkout-form">
+                    {{ include('checkout/_checkout_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    
+    {# Configuration pour le checkout manager #}
+    <script>
+        // Configuration passée au checkout manager
+        window.checkoutConfig = {
+            apiUrl: '{{ path('api_pickup_slots_list')|e('js') }}',
+            daysToShow: 7
+        };
+    </script>
+{% endblock %}
