@@ -1,0 +1,30 @@
+{# Composant : Sélecteur de quantité avec boutons +, -, suggestions #}
+<div class="quantity-controls">
+    <label class="quantity-label">Quantité souhaitée :</label>
+    <div class="quantity-input-group">
+        <button type="button" class="qty-btn qty-minus" data-action="decrease" aria-label="Diminuer la quantité">-</button>
+        <input type="number"
+               id="quantity-input"
+               class="quantity-input"
+               value="{{ minWeight }}"
+               min="{{ minWeight }}"
+               step="100"
+               max="{{ maxWeight|default(5000) }}"
+               data-min="{{ minWeight }}"
+               data-price="{{ price }}"
+               autocomplete="off"
+               inputmode="numeric"
+               aria-label="Quantité en grammes">
+        <button type="button" class="qty-btn qty-plus" data-action="increase" aria-label="Augmenter la quantité">+</button>
+        <span class="quantity-unit" id="quantity-unit-display">g</span>
+    </div>
+</div>
+<div class="quantity-suggestions">
+    <span class="suggestions-label">Suggestions :</span>
+    <div class="suggestion-buttons" id="suggestion-buttons">
+        <button class="suggestion-btn" data-qty="250" type="button">250g<span class="suggestion-desc">1-2 pers.</span></button>
+        <button class="suggestion-btn" data-qty="500" type="button">500g<span class="suggestion-desc">2-3 pers.</span></button>
+        <button class="suggestion-btn" data-qty="750" type="button">750g<span class="suggestion-desc">3-4 pers.</span></button>
+        <button class="suggestion-btn" data-qty="1000" type="button">1kg<span class="suggestion-desc">4+ pers.</span></button>
+    </div>
+</div>

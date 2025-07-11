@@ -29,3 +29,7 @@ services:
             $secretAccessKey: '%env(AWS_S3_SECRET_KEY)%'
             $bucket: '%env(AWS_BUCKET)%'
             $region: '%env(AWS_REGION)%'
+
+    App\Service\PickupSlotService:
+        arguments:
+            $projectDir: '%kernel.project_dir%'

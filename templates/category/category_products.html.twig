@@ -1,18 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ category.name }} - EYSA BOUCHERIE{% endblock %}
+{% block title %}
+    {{ category.name }} - EYSA BOUCHERIE
+{% endblock %}
 
 {% block body %}
 <div class="products-container">
     <div class="page-header">
-        <h1>{{ category.name }}</h1>
-        <p class="subtitle">Découvrez notre sélection de {{ category.name|lower }}</p>
-        
         <div class="breadcrumb">
             <a href="{{ path('app_category_index') }}">
                 <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Retour aux catégories
             </a>
+            <span class="separator">></span>
+            <span class="current">{{ category.name }}</span>
         </div>
+        <h1>{{ category.name }}</h1>
+        <p class="subtitle">Découvrez notre sélection de {{ category.name|lower }}</p>
     </div>
 
     {% if products is not empty %}
@@ -26,32 +29,17 @@
                             <img src="{{ asset('images/fallback.jpg') }}" alt="{{ product.name }}">
                         {% endif %}
                     </div>
-                    
                     <div class="product-info">
                         <h3 class="product-name">{{ product.name }}</h3>
-                        {% if product.description %}
-                            <p class="product-description">{{ product.description }}</p>
-                        {% endif %}
-                        
+                        <p class="product-description">{{ product.description }}</p>
                         <div class="product-price">
-                            <span class="price">{{ product.price }}€</span>
+                            <span class="price">{{ product.price|number_format(2, ',', ' ') }}€</span>
                             <span class="unit">/ {{ product.unit }}</span>
                         </div>
-                        
-                        {% if product.stock is not null %}
-                            <div class="product-stock">
-                                <i class="fa-solid fa-box" aria-hidden="true"></i>
-                                <span>Stock : {{ product.stock }}</span>
-                            </div>
-                        {% endif %}
-                        
                         <div class="product-actions">
-                            <button class="btn btn-primary" disabled>
-                                <i class="fa-solid fa-eye" aria-hidden="true"></i> Voir détails
-                            </button>
-                            <button class="btn btn-cart" onclick="addToCart({{ product.id }})">
-                                <i class="fa-solid fa-cart-plus" aria-hidden="true"></i> Ajouter au panier
-                            </button>
+                            <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-primary">
+                                <i class="fa-solid fa-eye" aria-hidden="true"></i> Voir détails & Commander
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -60,19 +48,20 @@
     {% else %}
         <div class="no-products">
             <i class="fa-solid fa-box-open" aria-hidden="true"></i>
-            <h3>Aucun produit disponible</h3>
-            <p>Nous n'avons pas de produits dans la catégorie "{{ category.name }}" pour le moment.</p>
+            <h3>Aucun produit trouvé</h3>
+            <p>Il n'y a pas de produits dans cette catégorie pour le moment.</p>
             <a href="{{ path('app_category_index') }}" class="btn btn-primary">
                 <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Retour aux catégories
             </a>
         </div>
     {% endif %}
 </div>
+{% endblock %}
 
-<script>
-function addToCart(productId) {
-    // TODO: Implémenter l'ajout au panier
-    alert('Produit ajouté au panier ! (Fonctionnalité à implémenter)');
-}
-</script>
+{% block javascripts %}
+{#
+    Toute la logique JS de gestion des produits et du panier est désormais externalisée dans
+    assets/js/category_products.js (importé via assets/app.js).
+    Ce template ne contient plus aucun code JS inline, pour respecter le MVC et garantir la maintenabilité.
+#}
 {% endblock %}

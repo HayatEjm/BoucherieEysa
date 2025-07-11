@@ -1,0 +1,14 @@
+{# Composant : Notice poids minimum #}
+{% if minWeight %}
+    <div class="min-weight-notice">
+        <i class="fa-solid fa-info-circle" aria-hidden="true"></i>
+        <span class="notice-text">
+            Commande à partir de
+            {% if minWeight >= 1000 %}
+                {{ (minWeight / 1000)|number_format(1, ',', '') }}kg minimum
+            {% else %}
+                {{ minWeight }}g minimum
+            {% endif %}
+        </span>
+    </div>
+{% endif %}

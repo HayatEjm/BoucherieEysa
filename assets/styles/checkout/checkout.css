@@ -1,0 +1,428 @@
+/* 
+   CHECKOUT STYLES - Styles pour les pages de finalisation de commande
+   
+   Architecture :
+   - Layout en deux colonnes (résumé + formulaire)
+   - Design cohérent avec le design system
+   - Responsive mobile-first
+   - États de validation et erreurs
+*/
+
+/* ========== LAYOUT PRINCIPAL ========== */
+.checkout-page {
+    min-height: 100vh;
+    background: var(--color-background);
+}
+
+.checkout-header {
+    background: var(--color-primary);
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.checkout-header-content h1 {
+    margin-bottom: 0.5rem;
+}
+
+.checkout-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.checkout-content {
+    padding: 3rem 0;
+}
+
+.checkout-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ========== CARTES CHECKOUT ========== */
+.checkout-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--color-border);
+    height: fit-content;
+}
+
+.checkout-card__title {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkout-card__title i {
+    font-size: 1.2rem;
+}
+
+/* ========== RÉSUMÉ DU PANIER ========== */
+.checkout-items {
+    margin-bottom: 2rem;
+}
+
+.checkout-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.checkout-item:last-child {
+    border-bottom: none;
+}
+
+.checkout-item__info h4 {
+    font-size: 1rem;
+    color: var(--color-text);
+    margin: 0 0 0.25rem 0;
+}
+
+.checkout-item__details {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+.checkout-item__total {
+    font-weight: 600;
+    color: var(--color-primary);
+    font-size: 1rem;
+}
+
+/* ========== TOTAUX ========== */
+.checkout-totals {
+    border-top: 2px solid var(--color-border);
+    padding-top: 1rem;
+}
+
+.checkout-total-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.checkout-total-line--final {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.checkout-back-to-cart {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+/* ========== FORMULAIRE ========== */
+.checkout-section {
+    margin-bottom: 2rem;
+}
+
+.checkout-section__title {
+    font-size: 1.2rem;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkout-section__title i {
+    color: var(--color-primary);
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    flex: 1;
+}
+
+.form-group--half {
+    flex: 0 1 calc(50% - 0.5rem);
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.form-group .form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--color-border);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-group .form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.1);
+}
+
+.form-group .form-control:invalid {
+    border-color: var(--color-error);
+}
+
+/* ========== INFORMATIONS RETRAIT ========== */
+.pickup-info {
+    background: var(--color-background);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.pickup-info__text {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.pickup-info__text i {
+    color: var(--color-primary);
+    margin-right: 0.5rem;
+}
+
+/* ========== ACTIONS ========== */
+.checkout-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.checkout-actions .btn-eysa {
+    flex: 1;
+    min-width: 200px;
+}
+
+/* ========== PAGE DE SUCCÈS ========== */
+.checkout-success-page {
+    min-height: 100vh;
+    background: var(--color-background);
+}
+
+.checkout-success-header {
+    background: var(--color-success);
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.success-icon i {
+    animation: successPulse 2s ease-in-out infinite;
+}
+
+@keyframes successPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.success-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.checkout-success-details {
+    padding: 3rem 0;
+}
+
+.success-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.success-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--color-border);
+}
+
+.success-card__title {
+    font-size: 1.3rem;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pickup-details > * {
+    margin-bottom: 1rem;
+}
+
+.pickup-number {
+    background: var(--color-primary);
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.pickup-number__value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: block;
+    margin-top: 0.5rem;
+}
+
+.pickup-datetime, .pickup-address {
+    margin-bottom: 1rem;
+}
+
+.pickup-datetime p, .pickup-address p {
+    margin: 0.25rem 0;
+}
+
+.order-summary > * {
+    margin-bottom: 1rem;
+}
+
+.order-items {
+    margin: 1rem 0;
+    padding: 1rem 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.order-total {
+    text-align: right;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+.next-steps ol {
+    padding-left: 1.5rem;
+}
+
+.next-steps li {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.success-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+/* ========== ERREURS DE FORMULAIRE ========== */
+.form-error {
+    color: var(--color-error);
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.form-group .form-control.is-invalid {
+    border-color: var(--color-error);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .checkout-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+
+    .checkout-card {
+        padding: 1.5rem;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .form-group--half {
+        flex: 1;
+    }
+
+    .checkout-actions {
+        flex-direction: column;
+    }
+
+    .checkout-actions .btn-eysa {
+        min-width: auto;
+    }
+
+    .success-layout {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+
+    .success-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pickup-number__value {
+        font-size: 1.2rem;
+    }
+}
+
+/* ========== ÉTATS DE CHARGEMENT ========== */
+.checkout-loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.checkout-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-border);
+    border-top: 2px solid var(--color-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

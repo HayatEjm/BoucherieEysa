@@ -1,0 +1,175 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Notre Philosophie - EYSA BOUCHERIE{% endblock %}
+
+{% block body %}
+
+{# Bandeau de la page #}
+{{ include('partials/page_banner.html.twig', {bannerData: bannerData}) }}
+
+<div class="philosophy-container">
+    
+    {# Section Histoire et Tradition #}
+    <section class="philosophy-section">
+        <div class="container">
+            <div class="section-content">
+                <div class="section-text">
+                    <h2 class="section-title">
+                        <i class="fas fa-history"></i>
+                        Une tradition familiale
+                    </h2>
+                    <p class="lead">
+                        Depuis plusieurs générations, la boucherie Eysa perpétue l'art traditionnel de la boucherie. 
+                        Notre savoir-faire se transmet de père en fils, alliant techniques ancestrales et exigences modernes.
+                    </p>
+                    <p>
+                        Chaque jour, nous sélectionnons avec soin nos viandes auprès d'éleveurs locaux qui partagent 
+                        nos valeurs de respect de l'animal et de qualité. Cette approche artisanale nous permet de 
+                        vous garantir des produits d'exception, travaillés dans le respect des traditions.
+                    </p>
+                </div>
+                <div class="section-image">
+                    <img src="/images/tradition-boucherie.jpg" alt="Tradition boucherie" data-fallback="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=600&h=400&fit=crop'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# Section Qualité #}
+    <section class="philosophy-section alt-bg">
+        <div class="container">
+            <div class="section-content reverse">
+                <div class="section-image">
+                    <img src="/images/qualite-viande.jpg" alt="Qualité des viandes" data-fallback="https://images.unsplash.com/photo-1588347818107-4ac518dbf3e0?w=600&h=400&fit=crop'">
+                </div>
+                <div class="section-text">
+                    <h2 class="section-title">
+                        <i class="fas fa-award"></i>
+                        L'excellence avant tout
+                    </h2>
+                    <p class="lead">
+                        Notre engagement pour la qualité commence dès la sélection de nos fournisseurs. 
+                        Nous privilégions les élevages locaux et raisonnés, pour une viande goûteuse et saine.
+                    </p>
+                    <div class="quality-points">
+                        <div class="quality-point">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Traçabilité complète de nos produits</span>
+                        </div>
+                        <div class="quality-point">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Maturation optimale en chambre froide</span>
+                        </div>
+                        <div class="quality-point">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Découpe traditionnelle à la demande</span>
+                        </div>
+                        <div class="quality-point">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Respect de la chaîne du froid</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# Section Savoir-faire #}
+    <section class="philosophy-section">
+        <div class="container">
+            <div class="section-content">
+                <div class="section-text">
+                    <h2 class="section-title">
+                        <i class="fas fa-tools"></i>
+                        Un savoir-faire artisanal
+                    </h2>
+                    <p class="lead">
+                        Nos bouchers maîtrisent l'art de la découpe et de la préparation. 
+                        Chaque geste est précis, chaque conseil personnalisé selon vos besoins.
+                    </p>
+                    <p>
+                        Que vous souhaitiez une côte de bœuf pour un repas de fête, des steaks pour un barbecue 
+                        ou de la viande hachée fraîche, nous adaptons notre service à vos envies culinaires. 
+                        Notre équipe se tient à votre disposition pour vous conseiller sur la cuisson, 
+                        les marinades et les accompagnements.
+                    </p>
+                </div>
+                <div class="section-image">
+                    <img src="/images/savoir-faire.jpg" alt="Savoir-faire artisanal" data-fallback="https://images.unsplash.com/photo-1556909252-f72b03e6c42f?w=600&h=400&fit=crop'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# Section Engagement Local #}
+    <section class="philosophy-section alt-bg">
+        <div class="container">
+            <div class="section-content reverse">
+                <div class="section-image">
+                    <img src="/images/local-circuit-court.jpg" alt="Circuits courts" data-fallback="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600&h=400&fit=crop'">
+{#
+    Toute la logique JavaScript spécifique à cette page est désormais déplacée dans
+    le fichier assets/js/philosophy.js, importé via assets/app.js.
+    
+    Cette séparation garantit :
+    - Un template Twig allégé et lisible
+    - Une centralisation de la logique JS pour la maintenance
+    - Le respect du MVC et des bonnes pratiques Symfony
+#}
+                </div>
+                <div class="section-text">
+                    <h2 class="section-title">
+                        <i class="fas fa-leaf"></i>
+                        Engagement local et responsable
+                    </h2>
+                    <p class="lead">
+                        Nous croyons fermement aux circuits courts et au soutien des producteurs locaux. 
+                        Plus de 80% de nos viandes proviennent d'élevages situés dans un rayon de 50 kilomètres.
+                    </p>
+                    <p>
+                        Cette approche nous permet non seulement de vous proposer des produits ultra-frais, 
+                        mais aussi de participer au développement économique de notre région. Nous entretenons 
+                        des relations de confiance avec nos éleveurs, basées sur le respect mutuel et la qualité.
+                    </p>
+                    <div class="engagement-stats">
+                        <div class="stat">
+                            <strong>80%</strong>
+                            <span>de nos viandes sont locales</span>
+                        </div>
+                        <div class="stat">
+                            <strong>50km</strong>
+                            <span>rayon maximum de nos éleveurs</span>
+                        </div>
+                        <div class="stat">
+                            <strong>15</strong>
+                            <span>partenaires éleveurs fidèles</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# Section CTA #}
+    <section class="philosophy-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Découvrez notre sélection</h2>
+                <p>Venez goûter la différence de la qualité artisanale</p>
+                <div class="cta-buttons">
+                    <a href="{{ path('app_category_index') }}" class="btn btn-primary">
+                        <i class="fas fa-shopping-basket"></i>
+                        Voir nos produits
+                    </a>
+                    <a href="{{ path('app_click_collect') }}" class="btn btn-secondary">
+                        <i class="fas fa-clock"></i>
+                        Commander en ligne
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}

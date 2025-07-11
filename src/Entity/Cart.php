@@ -250,7 +250,7 @@ class Cart
     {
         $total = 0;
         foreach ($this->cartItems as $item) {
-            $total += $item->getSubtotal();
+            $total += $item->getTotal();
         }
         $this->totalCents = (int) ($total * 100); // Conversion en centimes
         $this->updateTimestamp();

@@ -27,6 +27,18 @@ class OrderItem
     #[ORM\Column(type: 'float')]
     private float $unitPrice;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $unitPriceHtCents = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $totalHtCents = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $totalTvaCents = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $totalTtcCents = null;
+
     public function getId(): int
     {
         return $this->id;
@@ -85,5 +97,68 @@ class OrderItem
     {
         $this->commande = $commande;
         return $this;
+    }
+
+    // ========== MÉTHODES POUR LA GESTION DES PRIX EN CENTIMES ==========
+    
+    public function getUnitPriceHtCents(): ?int
+    {
+        return $this->unitPriceHtCents;
+    }
+    
+    public function setUnitPriceHtCents(?int $unitPriceHtCents): static
+    {
+        $this->unitPriceHtCents = $unitPriceHtCents;
+        return $this;
+    }
+    
+    public function getTotalHtCents(): ?int
+    {
+        return $this->totalHtCents;
+    }
+    
+    public function setTotalHtCents(?int $totalHtCents): static
+    {
+        $this->totalHtCents = $totalHtCents;
+        return $this;
+    }
+    
+    public function getTotalTvaCents(): ?int
+    {
+        return $this->totalTvaCents;
+    }
+    
+    public function setTotalTvaCents(?int $totalTvaCents): static
+    {
+        $this->totalTvaCents = $totalTvaCents;
+        return $this;
+    }
+    
+    public function getTotalTtcCents(): ?int
+    {
+        return $this->totalTtcCents;
+    }
+    
+    public function setTotalTtcCents(?int $totalTtcCents): static
+    {
+        $this->totalTtcCents = $totalTtcCents;
+        return $this;
+    }
+    
+    // ========== MÉTHODES DE CONVERSION EUROS ==========
+    
+    public function getTotalHt(): float
+    {
+        return $this->totalHtCents ? $this->totalHtCents / 100 : 0.0;
+    }
+    
+    public function getTotalTva(): float
+    {
+        return $this->totalTvaCents ? $this->totalTvaCents / 100 : 0.0;
+    }
+    
+    public function getTotalTtc(): float
+    {
+        return $this->totalTtcCents ? $this->totalTtcCents / 100 : 0.0;
     }
 }

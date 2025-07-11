@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+// #[Route(path:'/category')]
 class CategoryController extends AbstractController
 {
     // Afficher la liste des catégories
@@ -15,7 +17,7 @@ class CategoryController extends AbstractController
     public function index(CategoryRepository $categoryRepository): Response
     {
         $categories = $categoryRepository->findAll();
-          // On affiche les données pour debug
+        
     // dd($categories);
 
         return $this->render('category/category_list.html.twig', [
@@ -29,11 +31,9 @@ class CategoryController extends AbstractController
     {
         $products = $category->getProducts();
 
-        return $this->render('product/product_list.html.twig', [
+        return $this->render('category/category_products.html.twig', [
             'category' => $category,
             'products' => $products,
-            'page_title' => 'Produits - ' . $category->getName(),
-            'page_subtitle' => 'Découvrez notre sélection de ' . strtolower($category->getName()),
         ]);
     }
   

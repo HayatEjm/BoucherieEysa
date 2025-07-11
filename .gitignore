@@ -26,6 +26,10 @@ npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
+###> documentation files ###
+DOCUMENTATION_API.md
+###< documentation files ###
+
 
 .idea/
 

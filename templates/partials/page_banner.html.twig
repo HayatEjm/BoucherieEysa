@@ -25,7 +25,7 @@
             {% endif %}
             
             {# Bouton principal #}
-            {% if bannerData.button_text %}
+            {% if bannerData.button_text is defined and bannerData.button_text %}
                 <a href="{{ bannerData.button_link }}" class="banner-button">
                     {{ bannerData.button_text }}
                 </a>

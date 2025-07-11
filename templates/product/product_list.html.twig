@@ -1,3 +1,13 @@
+{#
+    Les styles CSS spécifiques à la page liste produits (ex : .products-grid, .product-card, etc.)
+    sont désormais déplacés dans le fichier assets/styles/product/product_list.css,
+    importé via assets/app.js.
+    
+    Cette séparation garantit :
+    - Un template Twig allégé et lisible
+    - Une centralisation des styles pour la maintenance
+    - Le respect du MVC et des bonnes pratiques Symfony
+#}
 {% extends 'base.html.twig' %}
 
 {% block title %}
@@ -59,7 +69,7 @@
                         <p class="product-description">{{ product.description }}</p>
                         
                         <div class="product-price">
-                            <span class="price">{{ product.price }}€</span>
+                            <span class="price">{{ product.price|number_format(2, ',', ' ') }}€</span>
                             <span class="unit">/ {{ product.unit }}</span>
                         </div>
                         

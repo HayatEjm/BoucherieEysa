@@ -1,6 +1,4 @@
-/* ========================================================================
-   JAVASCRIPT GLOBAL POUR LA GESTION DU PANIER
-   ======================================================================== */
+// GESTION DU PANIER - SCRIPT GLOBAL
 
 /**
  * Je crée ce fichier pour gérer toutes les interactions liées au panier
@@ -43,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // J'initialise les gestionnaires d'événements
     initializeEventListeners();
     
-    console.log('✅ Système panier initialisé avec succès');
+    console.log(' Système panier initialisé avec succès');
 });
 
 /**
@@ -53,11 +51,11 @@ function initializeElements() {
     cartBadge = document.getElementById('cart-badge');
     
     if (!cartBadge) {
-        console.warn('⚠️ Badge panier non trouvé dans le DOM');
+        console.warn('Badge panier non trouvé dans le DOM');
         return;
     }
     
-    console.log('📍 Éléments du panier trouvés et initialisés');
+    console.log('Éléments du panier trouvés et initialisés');
 }
 
 /* ========================================================================
@@ -69,7 +67,7 @@ function initializeElements() {
  */
 async function loadCartCount() {
     try {
-        console.log('🔄 Chargement du compteur panier...');
+        console.log('Chargement du compteur panier...');
         
         const response = await fetch(CART_ENDPOINTS.count, {
             method: 'GET',
@@ -91,7 +89,7 @@ async function loadCartCount() {
         // Je mets à jour l'affichage du badge
         updateBadgeDisplay();
         
-        console.log(`✅ Compteur panier chargé: ${cartCount} articles`);
+        console.log(`Compteur panier chargé: ${cartCount} articles`);
         
     } catch (error) {
         console.error('❌ Erreur lors du chargement du compteur panier:', error);
@@ -106,16 +104,18 @@ async function loadCartCount() {
  */
 function updateBadgeDisplay() {
     if (!cartBadge) return;
-    
+
     console.log(`🔄 Mise à jour du badge: ${cartCount} articles`);
-    
+
     // Je détermine le texte à afficher selon le nombre d'articles
     let displayText = cartCount.toString();
     let badgeClass = 'normal';
-    
+
     if (cartCount === 0) {
-        // Panier vide : je cache le badge
-        cartBadge.classList.add('hidden');
+        // Panier vide : j'anime la disparition si nécessaire
+        if (!cartBadge.classList.contains('hidden')) {
+            if (typeof animateBadgeDisappear === 'function') animateBadgeDisappear();
+        }
         cartBadge.setAttribute('data-count', '0');
         cartBadge.setAttribute('aria-label', 'Panier vide');
         updateTooltip(0);
@@ -128,19 +128,24 @@ function updateBadgeDisplay() {
         // 10+ articles : classe spéciale
         badgeClass = 'many';
     }
-    
+
+    // Apparition du badge si on passe de 0 à 1+
+    if (cartBadge.classList.contains('hidden')) {
+        if (typeof animateBadgeAppear === 'function') animateBadgeAppear();
+    }
+
     // Je mets à jour le contenu et les attributs
     cartBadge.textContent = displayText;
     cartBadge.setAttribute('data-count', displayText);
     cartBadge.setAttribute('aria-label', `${cartCount} articles dans le panier`);
-    
+
     // Je mets à jour les classes CSS
     cartBadge.className = `cart-badge ${badgeClass}`;
-    
+
     // Je mets à jour le tooltip
     updateTooltip(cartCount);
-    
-    console.log(`✅ Badge mis à jour: "${displayText}" (classe: ${badgeClass})`);
+
+    console.log(`✅ Badge mis à jour: \"${displayText}\" (classe: ${badgeClass})`);
 }
 
 /**
@@ -289,7 +294,7 @@ async function addToCart(productId, quantity = 1) {
             // Je montre une notification de succès
             showNotification(data.message || 'Article ajouté au panier', 'success');
             
-            console.log(`✅ Article ajouté avec succès. Nouveau total: ${cartCount}`);
+            console.log(`Article ajouté avec succès. Nouveau total: ${cartCount}`);
             
             return true;
             
@@ -298,7 +303,7 @@ async function addToCart(productId, quantity = 1) {
         }
         
     } catch (error) {
-        console.error('❌ Erreur lors de l\'ajout au panier:', error);
+        console.error('Erreur lors de l\'ajout au panier:', error);
         showNotification('Erreur lors de l\'ajout au panier', 'error');
         return false;
     }
@@ -312,7 +317,7 @@ async function addToCart(productId, quantity = 1) {
  * J'affiche une notification toast
  */
 function showNotification(message, type = 'info') {
-    console.log(`📢 Notification: ${message} (${type})`);
+    console.log(`Notification: ${message} (${type})`);
     
     // Je crée l'élément toast
     const toast = document.createElement('div');
@@ -346,7 +351,7 @@ function showNotification(message, type = 'info') {
  * J'initialise tous les gestionnaires d'événements
  */
 function initializeEventListeners() {
-    console.log('🔗 Initialisation des événements panier...');
+    console.log('Initialisation des événements panier...');
     
     // Je gère les boutons "Ajouter au panier" sur toutes les pages
     initializeAddToCartButtons();
@@ -354,7 +359,7 @@ function initializeEventListeners() {
     // Je gère le rafraîchissement du badge lors de changements
     initializeBadgeRefresh();
     
-    console.log('✅ Événements panier initialisés');
+    console.log('Événements panier initialisés');
 }
 
 /**
@@ -364,7 +369,7 @@ function initializeAddToCartButtons() {
     // Je cherche tous les boutons avec la classe 'add-to-cart'
     const addToCartButtons = document.querySelectorAll('.add-to-cart, [data-add-to-cart]');
     
-    console.log(`📦 ${addToCartButtons.length} boutons "Ajouter au panier" trouvés`);
+    console.log(` ${addToCartButtons.length} boutons "Ajouter au panier" trouvés`);
     
     addToCartButtons.forEach(button => {
         button.addEventListener('click', handleAddToCartClick);
@@ -383,24 +388,34 @@ async function handleAddToCartClick(event) {
     const productId = button.getAttribute('data-product-id') || 
                      button.getAttribute('data-add-to-cart') ||
                      button.dataset.productId;
-                     
-    const quantity = parseInt(button.getAttribute('data-quantity') || '1');
-    
+    let quantity = parseInt(button.getAttribute('data-quantity'), 10);
+    if (isNaN(quantity) || quantity < 1) quantity = 1;
+
+    // Vérification minWeight côté client si présent
+    let minWeight = button.getAttribute('data-min-weight');
+    if (minWeight !== null) {
+        minWeight = parseInt(minWeight, 10);
+        if (!isNaN(minWeight) && quantity < minWeight) {
+            showNotification(`Quantité minimale requise : ${minWeight}`, 'error');
+            return;
+        }
+    }
+
     if (!productId) {
         console.error('❌ ID de produit manquant sur le bouton');
-        showNotification('Erreur: produit non identifié', 'error');
+        showNotification('Erreur : produit non identifié', 'error');
         return;
     }
-    
+
     // Je désactive temporairement le bouton pour éviter les clics multiples
     const originalText = button.textContent;
     button.disabled = true;
     button.textContent = 'Ajout en cours...';
-    
+
     try {
         // J'ajoute l'article au panier
         const success = await addToCart(productId, quantity);
-        
+
         if (success) {
             // Je change temporairement le texte du bouton
             button.textContent = '✓ Ajouté !';
@@ -413,9 +428,10 @@ async function handleAddToCartClick(event) {
             button.textContent = originalText;
             button.disabled = false;
         }
-        
+
     } catch (error) {
         console.error('❌ Erreur lors de l\'ajout:', error);
+        showNotification('Erreur technique lors de l\'ajout au panier', 'error');
         button.textContent = originalText;
         button.disabled = false;
     }
@@ -432,8 +448,7 @@ function initializeBadgeRefresh() {
         loadCartCount();
     });
     
-    // Je peux aussi rafraîchir périodiquement (optionnel)
-    // setInterval(loadCartCount, 60000); // Toutes les minutes
+ 
 }
 
 /* ========================================================================

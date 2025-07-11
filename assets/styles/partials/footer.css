@@ -65,29 +65,41 @@
     font-weight: 600;
 }
 
-/* Horaires */
-.footer-schedule {
+/* Horaires - Style spécifique pour le footer */
+.footer-main .footer-schedule {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.schedule-item {
+.footer-main .schedule-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 0;
+    padding: 12px 0;
     border-bottom: 1px solid #333;
+    background: transparent !important; /* Force le fond transparent */
+    border-radius: 0 !important; /* Supprime les bordures arrondies */
 }
 
-.schedule-item .day {
-    color: #f8f6f2;
+.footer-main .schedule-item:hover {
+    background: transparent !important; /* Pas de changement au hover */
+}
+
+.footer-main .schedule-item:last-child {
+    border-bottom: none; /* Supprime la bordure du dernier élément */
+}
+
+.footer-main .schedule-item .day {
+    color: #f8f6f2 !important;
     font-weight: 500;
+    font-size: 0.95rem;
 }
 
-.schedule-item .hours {
-    color: #cccccc;
+.footer-main .schedule-item .hours {
+    color: #cccccc !important;
     font-size: 0.9rem;
+    text-align: right;
 }
 
 /* Navigation footer */
@@ -197,10 +209,11 @@
         justify-content: center;
     }
     
-    .schedule-item {
+    .footer-main .schedule-item {
         flex-direction: column;
         text-align: center;
         gap: 5px;
+        background: transparent !important;
     }
     
     .social-links {

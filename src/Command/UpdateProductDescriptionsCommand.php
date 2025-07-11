@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
- * 📝 COMMANDE POUR AJOUTER LES DESCRIPTIONS PRODUITS
+ * COMMANDE POUR AJOUTER LES DESCRIPTIONS PRODUITS
  * 
  * Cette commande met à jour toutes les descriptions des produits
  * avec des textes appétissants et professionnels pour la boucherie.
@@ -101,12 +101,12 @@ class UpdateProductDescriptionsCommand extends Command
             
             // CHARCUTERIE FRAÎCHE
             48 => "Merguez épicées, saucisses traditionnelles orientales. Mélange bœuf-agneau aux épices authentiques. Parfaites grillées au barbecue. Saveurs relevées pour vos grillades.",
-            49 => "Chipolatas aux herbes de Provence. Saucisses de porc parfumées aux herbes fraîches. Idéales grillées ou poêlées. Saveur méditerranéenne authentique.",
-            50 => "Saucisses au curry, création originale de la maison. Porc épicé aux saveurs exotiques. Parfaites pour vos barbecues originaux. Dépaysement garanti.",
-            51 => "Saucisses au fromage, spécialité fondante. Porc et fromage fondu à cœur. Idéales poêlées lentement. Les enfants adorent cette création gourmande.",
+            49 => "Chipolatas aux herbes de Provence. Saucisses de veau parfumées aux herbes fraîches. Idéales grillées ou poêlées. Saveur méditerranéenne authentique.",
+            50 => "Saucisses au curry, création originale de la maison. Veau épicé aux saveurs exotiques. Parfaites pour vos barbecues originaux. Dépaysement garanti.",
+            51 => "Saucisses au fromage, spécialité fondante. Veau et fromage fondu à cœur. Idéales poêlées lentement. Les enfants adorent cette création gourmande.",
             52 => "Saucisses orientales, mélange d'épices authentiques. Saveurs de cumin, coriandre et paprika. Parfaites grillées pour vos soirées à thème. Voyage culinaire assuré.",
-            53 => "Chorizette, petit chorizo français. Saucisse de porc au paprika doux. Parfaite à l'apéritif ou en tapas. Saveur douce et parfumée, facile à partager.",
-            54 => "Saucisses de volaille, alternative légère. Chair de porc et volaille mélangées. Moins grasses que les saucisses traditionnelles. Parfaites pour une cuisine plus saine.",
+            53 => "Chorizette, petit chorizo français. Saucisse de boeuf au paprika doux. Parfaite à l'apéritif ou en tapas. Saveur douce et parfumée, facile à partager.",
+            54 => "Saucisses de volaille, alternative légère. Chair de volaille mélangées. Moins grasses que les saucisses traditionnelles. Parfaites pour une cuisine plus saine.",
             
             // PRODUITS MARINÉS ET PRÉPARÉS
             55 => "Hauts de cuisses de poulet désossés marinés. Marinés 24h aux herbes et épices. Chair moelleuse et parfumée. Prêts à cuire, idéals pour les pressés.",

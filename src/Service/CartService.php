@@ -34,27 +34,9 @@ class CartService
         private CartItemRepository $cartItemRepository,
         private EntityManagerInterface $entityManager,
         private RequestStack $requestStack
-    ) {
-        // J'injecte toutes mes dépendances pour pouvoir travailler
-        // - CartRepository : pour gérer les paniers
-        // - CartItemRepository : pour gérer les articles
-        // - EntityManager : pour sauvegarder en base
-        // - RequestStack : pour accéder à la session
-    }
+    ) {}
 
-    /**
-     * Je récupère le panier de l'utilisateur actuel
-     * 
-     * COMMENT JE FONCTIONNE :
-     * 1. Je récupère l'ID de session de l'utilisateur
-     * 2. Je cherche son panier en base ou j'en crée un nouveau
-     * 3. Je le retourne prêt à être utilisé
-     * 
-     * POURQUOI C'EST PRATIQUE :
-     * - L'utilisateur n'a pas besoin de compte pour avoir un panier
-     * - Son panier persiste tant que sa session existe
-     * - Je gère automatiquement la création/récupération
-     */
+    // Récupère le panier de l'utilisateur actuel (création auto si besoin)
     public function getCurrentCart(): Cart
     {
         // Je récupère la session de l'utilisateur
@@ -76,64 +58,82 @@ class CartService
         return $this->cartRepository->findOrCreateBySessionId($sessionId);
     }
 
-    /**
-     * J'ajoute un produit au panier intelligemment
-     * 
-     * COMMENT JE FONCTIONNE :
-     * 1. Je vérifie si le produit est déjà dans le panier
-     * 2. Si oui, j'augmente la quantité
-     * 3. Si non, je crée un nouvel article
-     * 4. Je recalcule le total du panier
-     * 5. Je sauvegarde tout en base
-     * 
-     * POURQUOI C'EST INTELLIGENT :
-     * - Pas de doublons dans le panier
-     * - Quantités automatiquement gérées
-     * - Total toujours à jour
-     */
+    // Ajoute un produit au panier (ou augmente la quantité)
     public function addProduct(Product $product, int $quantity = 1): CartItem
     {
+        // Limites personnalisables
+        $MAX_PER_PRODUCT = 5000; // ex: 5000g ou 5 unités max par produit
+        $MAX_TOTAL = 30; // max 30 articles au total dans le panier
+
         // Je valide que la quantité est positive
         if ($quantity <= 0) {
             throw new \InvalidArgumentException('La quantité doit être positive');
         }
 
+        // Je valide le poids minimum si le produit en a un
+        if ($product->getMinWeight() !== null && $quantity < $product->getMinWeight()) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'Quantité insuffisante pour %s. Minimum requis : %dg',
+                    $product->getName(),
+                    $product->getMinWeight()
+                )
+            );
+        }
+
+        // Je valide le poids maximum si le produit en a un
+        if ($product->getMaxWeight() !== null && $quantity > $product->getMaxWeight()) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'Quantité trop importante pour %s. Maximum autorisé : %dg',
+                    $product->getName(),
+                    $product->getMaxWeight()
+                )
+            );
+        }
+
         $cart = $this->getCurrentCart();
-        
-        // Je cherche si ce produit est déjà dans le panier
         $existingItem = $this->cartItemRepository->findByCartAndProduct($cart, $product);
-        
+
+        // Calcul de la quantité totale après ajout
+        $currentProductQty = $existingItem ? $existingItem->getQuantity() : 0;
+        $futureProductQty = $currentProductQty + $quantity;
+        if ($futureProductQty > $MAX_PER_PRODUCT) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'Vous ne pouvez pas ajouter plus de %d unités de ce produit dans le panier.', $MAX_PER_PRODUCT
+                )
+            );
+        }
+
+        // Calcul du total global après ajout
+        $currentTotal = $this->getTotalQuantity();
+        $futureTotal = $currentTotal + $quantity;
+        if ($futureTotal > $MAX_TOTAL) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'Vous ne pouvez pas avoir plus de %d articles dans votre panier.', $MAX_TOTAL
+                )
+            );
+        }
+
         if ($existingItem) {
-            // Le produit existe déjà, j'augmente la quantité
             $existingItem->increaseQuantity($quantity);
             $cartItem = $existingItem;
         } else {
-            // Nouveau produit, je crée un nouvel article
             $cartItem = new CartItem();
             $cartItem->setCart($cart);
             $cartItem->setProduct($product);
             $cartItem->setQuantity($quantity);
-            $cartItem->setUnitPrice($product->getPrice()); // Je copie le prix actuel
-            
-            // J'ajoute l'article au panier
+            $cartItem->setUnitPrice($product->getPrice());
             $cart->addCartItem($cartItem);
         }
-        
-        // Je recalcule le total du panier et je sauvegarde
+
         $this->updateCartTotal($cart);
-        
         return $cartItem;
     }
 
-    /**
-     * Je retire un produit du panier
-     * 
-     * COMMENT JE FONCTIONNE :
-     * 1. Je trouve l'article dans le panier
-     * 2. Je le supprime complètement
-     * 3. Je recalcule le total
-     * 4. Je sauvegarde
-     */
+    // Retire un produit du panier
     public function removeProduct(Product $product): bool
     {
         $cart = $this->getCurrentCart();
@@ -145,27 +145,41 @@ class CartService
         
         // Je retire l'article du panier et je le supprime
         $cart->removeCartItem($cartItem);
-        $this->cartItemRepository->remove($cartItem, false); // Je ne flush pas encore
-        
+        $this->cartItemRepository->remove($cartItem, true); // Flush immédiat pour garantir la suppression
+
         // Je recalcule le total et je sauvegarde tout
         $this->updateCartTotal($cart);
-        
+
         return true;
     }
 
-    /**
-     * Je modifie la quantité d'un produit dans le panier
-     * 
-     * COMMENT JE FONCTIONNE :
-     * 1. Je trouve l'article dans le panier
-     * 2. Si nouvelle quantité = 0, je supprime l'article
-     * 3. Sinon, je mets à jour la quantité
-     * 4. Je recalcule et sauvegarde
-     */
+    // Modifie la quantité d'un produit dans le panier
     public function updateProductQuantity(Product $product, int $newQuantity): bool
     {
         if ($newQuantity < 0) {
             throw new \InvalidArgumentException('La quantité ne peut pas être négative');
+        }
+        
+        // Je valide le poids minimum si le produit en a un (sauf si on supprime)
+        if ($newQuantity > 0 && $product->getMinWeight() !== null && $newQuantity < $product->getMinWeight()) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'Quantité insuffisante pour %s. Minimum requis : %dg',
+                    $product->getName(),
+                    $product->getMinWeight()
+                )
+            );
+        }
+
+        // Je valide le poids maximum si le produit en a un
+        if ($newQuantity > 0 && $product->getMaxWeight() !== null && $newQuantity > $product->getMaxWeight()) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'Quantité trop importante pour %s. Maximum autorisé : %dg',
+                    $product->getName(),
+                    $product->getMaxWeight()
+                )
+            );
         }
         
         $cart = $this->getCurrentCart();
@@ -189,11 +203,7 @@ class CartService
         return true;
     }
 
-    /**
-     * J'augmente la quantité d'un produit
-     * 
-     * UTILITÉ : Pour les boutons "+" dans l'interface
-     */
+    // Augmente la quantité d'un produit
     public function increaseProductQuantity(Product $product, int $amount = 1): bool
     {
         $cart = $this->getCurrentCart();
@@ -211,11 +221,7 @@ class CartService
         return true;
     }
 
-    /**
-     * Je diminue la quantité d'un produit
-     * 
-     * UTILITÉ : Pour les boutons "-" dans l'interface
-     */
+    // Diminue la quantité d'un produit
     public function decreaseProductQuantity(Product $product, int $amount = 1): bool
     {
         $cart = $this->getCurrentCart();
@@ -238,14 +244,7 @@ class CartService
         return true;
     }
 
-    /**
-     * Je vide complètement le panier
-     * 
-     * COMMENT JE FONCTIONNE :
-     * 1. Je supprime tous les articles du panier
-     * 2. Je remets le total à 0
-     * 3. Je sauvegarde
-     */
+    // Vide complètement le panier
     public function clearCart(): void
     {
         $cart = $this->getCurrentCart();
@@ -253,60 +252,40 @@ class CartService
         // Je supprime tous les articles en une fois (plus rapide)
         $this->cartItemRepository->clearCart($cart);
         
-        // Je remets le total à zéro
-        $cart->setTotalCents(0);
+        // Je vide le panier (cela recalculera automatiquement le total à 0)
+        $cart->clear();
         $this->cartRepository->save($cart);
     }
 
-    /**
-     * Je récupère le nombre total d'articles dans le panier
-     * 
-     * UTILITÉ : Pour afficher le badge du panier (ex: "3" articles)
-     */
+    // Nombre total d'articles dans le panier
     public function getTotalQuantity(): int
     {
         $cart = $this->getCurrentCart();
         return $this->cartItemRepository->calculateCartTotalQuantity($cart);
     }
 
-    /**
-     * Je récupère le total en euros du panier
-     * 
-     * UTILITÉ : Pour afficher le prix total à payer
-     */
+    // Total en euros du panier
     public function getTotalPrice(): float
     {
         $cart = $this->getCurrentCart();
         return $cart->getTotal();
     }
 
-    /**
-     * Je vérifie si le panier est vide
-     * 
-     * UTILITÉ : Pour masquer le badge ou afficher un message spécial
-     */
+    // Vérifie si le panier est vide
     public function isEmpty(): bool
     {
         $cart = $this->getCurrentCart();
         return $cart->isEmpty();
     }
 
-    /**
-     * Je récupère tous les articles du panier ordonnés
-     * 
-     * UTILITÉ : Pour afficher la liste complète dans la page panier
-     */
+    // Retourne tous les articles du panier (ordonnés)
     public function getCartItems(): array
     {
         $cart = $this->getCurrentCart();
         return $this->cartItemRepository->findByCartOrderedByDate($cart);
     }
 
-    /**
-     * Je vérifie si un produit est déjà dans le panier
-     * 
-     * UTILITÉ : Pour changer l'affichage des boutons (ex: "Ajouter" vs "Déjà ajouté")
-     */
+    // Vérifie si un produit est déjà dans le panier
     public function hasProduct(Product $product): bool
     {
         $cart = $this->getCurrentCart();
@@ -314,11 +293,7 @@ class CartService
         return $cartItem !== null;
     }
 
-    /**
-     * Je récupère la quantité d'un produit dans le panier
-     * 
-     * UTILITÉ : Pour afficher "Quantité: 3" sur les pages produits
-     */
+    // Récupère la quantité d'un produit dans le panier
     public function getProductQuantity(Product $product): int
     {
         $cart = $this->getCurrentCart();
@@ -326,14 +301,7 @@ class CartService
         return $cartItem ? $cartItem->getQuantity() : 0;
     }
 
-    /**
-     * Je mets à jour le total du panier (méthode privée)
-     * 
-     * POURQUOI PRIVÉE ?
-     * - Utilisée en interne par mes autres méthodes
-     * - Évite les erreurs en la rendant inaccessible de l'extérieur
-     * - Centralise le calcul du total
-     */
+    // Met à jour le total du panier (interne)
     private function updateCartTotal(Cart $cart): void
     {
         // Je recalcule le total en additionnant tous les articles
@@ -343,12 +311,7 @@ class CartService
         $this->cartRepository->save($cart);
     }
 
-    /**
-     * Je fournis un résumé complet du panier
-     * 
-     * UTILITÉ : Pour les APIs, les confirmations, les emails
-     * RETOURNE : Un tableau avec toutes les infos importantes
-     */
+    // Retourne un résumé complet du panier (pour l'API)
     public function getCartSummary(): array
     {
         $cart = $this->getCurrentCart();
@@ -356,15 +319,21 @@ class CartService
         return [
             'totalQuantity' => $this->getTotalQuantity(),
             'totalPrice' => $this->getTotalPrice(),
-            'totalProducts' => $cart->getTotalProducts(),
+            'totalProducts' => $cart->getTotalItems(),
+            'totalHT' => $cart->getTotalHT(),
+            'totalTTC' => $cart->getTotalTTC(),
+            'totalTVA' => $cart->getTaxAmount(),
             'isEmpty' => $this->isEmpty(),
             'items' => array_map(function (CartItem $item) {
                 return [
-                    'productId' => $item->getProduct()->getId(),
-                    'productName' => $item->getProduct()->getName(),
+                    'product' => [
+                        'id' => $item->getProduct()->getId(),
+                        'name' => $item->getProduct()->getName(),
+                        'priceHT' => $item->getProduct()->getPrice(),
+                    ],
                     'quantity' => $item->getQuantity(),
                     'unitPrice' => $item->getUnitPrice(),
-                    'total' => $item->getTotal(),
+                    'totalTTC' => $item->getTotal(),
                 ];
             }, $this->getCartItems())
         ];

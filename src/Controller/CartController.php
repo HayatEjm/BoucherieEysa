@@ -336,4 +336,22 @@ class CartController extends AbstractController
             return new JsonResponse(['error' => $e->getMessage()], 500);
         }
     }
+
+    /**
+     * REDIRECTION VERS LE NOUVEAU CHECKOUT
+     * 
+     * ROUTE : GET/POST /panier/checkout
+     * 
+     * Cette route redirige vers le nouveau système de checkout
+     */
+    #[Route('/panier/checkout', name: 'app_cart_checkout', methods: ['GET', 'POST'])]
+    public function checkout(Request $request): Response
+    {
+        // Redirection vers le nouveau système de checkout
+        return $this->redirectToRoute('app_checkout_index');
+    }
+
+    /**
+     * TRAITER LA COMMANDE FINALE - Je sauvegarde la commande avec le créneau
+     */
 }

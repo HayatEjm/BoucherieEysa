@@ -1,4 +1,63 @@
 /* ========================================================================
+   STYLES POUR LA MENTION DU POIDS MINIMUM (extraits du template)
+   ======================================================================== */
+
+.min-weight-notice {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+    border: 1px solid #ffc107;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 15px 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.min-weight-notice i {
+    color: #856404;
+    margin-right: 8px;
+    font-size: 1.1em;
+}
+
+.notice-text {
+    color: #856404;
+    font-weight: 600;
+    font-size: 1em;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.notice-explanation {
+    color: #6c5500;
+    font-style: italic;
+    font-size: 0.85em;
+    opacity: 0.9;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .min-weight-notice {
+        margin: 10px 0;
+        padding: 10px 12px;
+    }
+    .notice-text {
+        font-size: 0.95em;
+    }
+    .notice-explanation {
+        font-size: 0.8em;
+    }
+}
+/* ========================================================================
    CSS POUR LA PAGE DE DÉTAIL PRODUIT - BOUCHERIE EYSA
    ======================================================================== */
 

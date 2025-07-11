@@ -12,19 +12,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
-    // Cette méthode est appelée quand on visite l'URL "/products"
+    // Redirige toute tentative d'accès à /products vers la page d'accueil ou une autre page pertinente
     #[Route('/products', name: 'app_products')]
-    public function index(ProductRepository $productRepository): Response
+    public function index(): Response
     {
-        // On récupère tous les produits via le repository
-        $products = $productRepository->findAll();
-
-        // On passe les produits à la vue (fichier Twig)
-        return $this->render('product/product_list.html.twig', [
-            'products' => $products,
-            'page_title' => 'Tous nos Produits',
-            'page_subtitle' => 'Découvrez notre sélection complète de viandes de qualité',
-        ]);
+        // Redirection vers la page d'accueil ou une autre page de ton choix
+        return $this->redirectToRoute('app_home');
     }
 
     // Afficher les détails d'un produit

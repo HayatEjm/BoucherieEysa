@@ -15,7 +15,16 @@
             <a href="{{ path('app_category_index') }}" class="btn-hero">Découvrir</a>
         </div>
         <div class="hero-image">
-            <img src="{{ asset('images/hero-meat.jpg') }}" alt="Viandes de qualité" onerror="this.src='https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=800&h=600&fit=crop'">
+            <img src="{{ asset('images/hero-meat.jpg') }}" alt="Viandes de qualité" data-fallback="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=800&h=600&fit=crop'">
+{#
+    Toute la logique JavaScript spécifique à cette page est désormais déplacée dans
+    le fichier assets/js/home.js, importé via assets/app.js.
+    
+    Cette séparation garantit :
+    - Un template Twig allégé et lisible
+    - Une centralisation de la logique JS pour la maintenance
+    - Le respect du MVC et des bonnes pratiques Symfony
+#}
         </div>
     </section>
 
@@ -115,17 +124,17 @@
             <div class="info-grid">
                 <div class="info-card">
                     <h3>📍 Notre adresse</h3>
-                    <p>123 Rue de la Boucherie<br>75000 Paris</p>
+                    <p>123 Rue du Dr Schweitzer<br>49400 Saumur</p>
                 </div>
                 
                 <div class="info-card">
                     <h3>📞 Nous contacter</h3>
-                    <p>Téléphone : 01 23 45 67 89<br>Email : contact@eysa-boucherie.fr</p>
+                    <p>Téléphone : 02 41 50 57 18<br>Email : contact@eysa-boucherie.fr</p>
                 </div>
                 
                 <div class="info-card">
                     <h3>🕒 Nos horaires</h3>
-                    <p>Du mardi au samedi<br>8h00 - 19h30</p>
+                    <p>Du mardi au samedi<br>09h00 - 12h30 | 15h30 - 19h15<br>Dimanche : 10h00 - 13h00</p>
                 </div>
                 
                 <div class="info-card">

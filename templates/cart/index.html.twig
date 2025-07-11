@@ -178,11 +178,11 @@
                             
                             {# ACTIONS PRINCIPALES #}
                             <div class="cart-actions">
-                                <button type="button" 
-                                        class="btn-eysa btn-eysa-primary btn-checkout">
+                                <a href="{{ path('app_cart_checkout') }}" 
+                                   class="btn-eysa btn-eysa-primary btn-checkout">
                                     <i class="fas fa-credit-card"></i>
                                     Finaliser ma commande
-                                </button>
+                                </a>
                                 
                                 <a href="{{ path('app_products') }}" 
                                    class="btn-eysa btn-eysa-secondary">
@@ -232,228 +232,17 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
-    <script>
-        // 🛒 JAVASCRIPT POUR LA PAGE PANIER
-        // Je gère toutes les interactions : +/-, suppression, vidage, etc.
+    {#
+        Toute logique JavaScript spécifique à cette page est désormais déplacée dans
+        le fichier assets/js/cart_page.js, importé via assets/app.js.
         
-        /**
-         * Je gère les boutons de quantité (+/-)
-         * COMMENT JE FONCTIONNE :
-         * 1. J'écoute les clics sur les boutons +/-
-         * 2. J'envoie une requête AJAX pour modifier la quantité
-         * 3. Je mets à jour l'affichage sans recharger la page
-         */
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            // J'écoute tous les boutons de quantité
-            document.querySelectorAll('.btn-quantity').forEach(button => {
-                button.addEventListener('click', function() {
-                    const productId = this.dataset.productId;
-                    const action = this.dataset.action;
-                    const quantityInput = document.querySelector(`#quantity-${productId}`);
-                    let currentQuantity = parseInt(quantityInput.value);
-                    
-                    if (action === 'increase') {
-                        currentQuantity++;
-                    } else if (action === 'decrease') {
-                        currentQuantity = Math.max(0, currentQuantity - 1);
-                    }
-                    
-                    updateQuantity(productId, currentQuantity);
-                });
-            });
-            
-            // J'écoute les changements directs dans les inputs de quantité
-            document.querySelectorAll('.quantity-input').forEach(input => {
-                input.addEventListener('change', function() {
-                    const productId = this.dataset.productId;
-                    const newQuantity = Math.max(0, parseInt(this.value) || 0);
-                    updateQuantity(productId, newQuantity);
-                });
-            });
-            
-            // J'écoute les boutons de suppression
-            document.querySelectorAll('.btn-remove').forEach(button => {
-                button.addEventListener('click', function() {
-                    const productId = this.dataset.productId;
-                    removeProduct(productId);
-                });
-            });
-            
-        });
+        Cette approche garantit :
+        - Une séparation claire des responsabilités (MVC)
+        - Aucun JS inline ni attribut d’événement dans le template
+        - Une meilleure maintenabilité et pédagogie du code
         
-        /**
-         * Je mets à jour la quantité d'un produit via AJAX
-         */
-        function updateQuantity(productId, newQuantity) {
-            const formData = new FormData();
-            formData.append('quantity', newQuantity);
-            
-            fetch(`/panier/update/${productId}`, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    if (newQuantity === 0) {
-                        // Je supprime la ligne si quantité = 0
-                        document.querySelector(`[data-product-id="${productId}"]`).remove();
-                    } else {
-                        // Je mets à jour l'affichage
-                        document.querySelector(`#quantity-${productId}`).value = newQuantity;
-                        updateItemTotal(productId, data.cartSummary);
-                    }
-                    
-                    updateCartTotals(data.cartSummary);
-                    showToast(data.message);
-                    updateCartBadge(); // Je mets à jour le badge du header
-                    
-                    // Si le panier devient vide, je recharge la page
-                    if (data.cartSummary.isEmpty) {
-                        location.reload();
-                    }
-                } else {
-                    showToast(data.error || 'Erreur lors de la mise à jour', 'error');
-                }
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-                showToast('Erreur de connexion', 'error');
-            });
-        }
-        
-        /**
-         * Je supprime un produit du panier
-         */
-        function removeProduct(productId) {
-            fetch(`/panier/remove/${productId}`, {
-                method: 'POST',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Je supprime la ligne du produit
-                    document.querySelector(`[data-product-id="${productId}"]`).remove();
-                    updateCartTotals(data.cartSummary);
-                    showToast(data.message);
-                    updateCartBadge();
-                    
-                    // Si le panier devient vide, je recharge la page
-                    if (data.cartSummary.isEmpty) {
-                        location.reload();
-                    }
-                } else {
-                    showToast(data.error || 'Erreur lors de la suppression', 'error');
-                }
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-                showToast('Erreur de connexion', 'error');
-            });
-        }
-        
-        /**
-         * Je mets à jour les totaux affichés
-         */
-        function updateCartTotals(cartSummary) {
-            document.getElementById('cart-total').textContent = 
-                cartSummary.totalPrice.toFixed(2).replace('.', ',') + ' €';
-            document.getElementById('cart-final-total').textContent = 
-                cartSummary.totalPrice.toFixed(2).replace('.', ',') + ' €';
-        }
-        
-        /**
-         * Je mets à jour le sous-total d'un article
-         */
-        function updateItemTotal(productId, cartSummary) {
-            const item = cartSummary.items.find(item => item.productId == productId);
-            if (item) {
-                const totalElement = document.querySelector(`[data-product-id="${productId}"] .total-amount`);
-                if (totalElement) {
-                    totalElement.textContent = item.total.toFixed(2).replace('.', ',') + ' €';
-                }
-            }
-        }
-        
-        /**
-         * Je mets à jour le badge du panier dans le header
-         */
-        function updateCartBadge() {
-            fetch('/panier/count')
-                .then(response => response.json())
-                .then(data => {
-                    const badge = document.getElementById('cart-count');
-                    if (badge) {
-                        badge.textContent = data.count;
-                        badge.style.display = data.isEmpty ? 'none' : 'block';
-                    }
-                })
-                .catch(error => console.error('Erreur mise à jour badge:', error));
-        }
-        
-        /**
-         * J'affiche une notification toast
-         */
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('cart-toast');
-            const messageSpan = document.getElementById('toast-message');
-            
-            messageSpan.textContent = message;
-            toast.className = `toast ${type}`;
-            toast.style.display = 'block';
-            
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 3000);
-        }
-        
-        /**
-         * Je confirme avant de vider le panier
-         */
-        function confirmClearCart() {
-            document.getElementById('confirm-clear-modal').style.display = 'block';
-        }
-        
-        /**
-         * Je vide le panier après confirmation
-         */
-        function clearCart() {
-            fetch('/panier/clear', {
-                method: 'POST',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    location.reload(); // Je recharge pour afficher le panier vide
-                } else {
-                    showToast(data.error || 'Erreur lors du vidage', 'error');
-                }
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-                showToast('Erreur de connexion', 'error');
-            });
-            
-            closeModal();
-        }
-        
-        /**
-         * Je ferme la modal
-         */
-        function closeModal() {
-            document.getElementById('confirm-clear-modal').style.display = 'none';
-        }
-        
+        Pour toute interaction JS spécifique (suppression, vidage, modale, etc.),
+        modifiez uniquement le fichier JS dédié.
+    #}
     </script>
 {% endblock %}

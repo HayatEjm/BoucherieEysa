@@ -64,9 +64,7 @@ Exemple : var(--primary-color) = votre couleur bordeaux #8B1538
   
   /* 🏷️ COULEURS NEUTRES - Couleurs de base */
   --white: #ffffff;                    /* ⚪ Blanc pur → UTILISÉ DANS : cartes, boutons secondaires */
-  --light-gray: var(--beige-light);   /* 🟤 Gris clair (= beige) → UTILISÉ DANS : backgrounds légers */
   --medium-gray: #9ca3af;             /* ⚫ Gris moyen → UTILISÉ DANS : bordures, séparateurs */
-  --dark-gray: var(--text-primary);   /* ⚫ Gris foncé → UTILISÉ DANS : textes importants */
   --border-color: #e5ddd4;            /* 🟤 Bordure beige → UTILISÉ DANS : contours de cartes */
   
   /* 🏷️ COULEURS SYSTÈME - Pour messages d'état */
@@ -85,8 +83,7 @@ Exemple : var(--primary-color) = votre couleur bordeaux #8B1538
   --font-family-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;    /* 📄 Police principale → UTILISÉ DANS : tous les textes */
   --font-family-headings: 'Georgia', 'Times New Roman', serif;               /* 📄 Police titres → UTILISÉ DANS : h1, h2, h3... */
   
-  /* 📏 TAILLES DE TEXTE - Du plus petit au plus grand */
-  --font-size-xs: 0.75rem;            /* 📏 Très petit (12px) → UTILISÉ DANS : badges, annotations */
+  /* 📏 TAILLES DE TEXTE - Essentielles seulement */
   --font-size-sm: 0.875rem;           /* 📏 Petit (14px) → UTILISÉ DANS : sous-textes */
   --font-size-base: 1rem;             /* 📏 Normal (16px) → UTILISÉ DANS : textes courants */
   --font-size-lg: 1.125rem;           /* 📏 Grand (18px) → UTILISÉ DANS : textes importants */
@@ -94,10 +91,8 @@ Exemple : var(--primary-color) = votre couleur bordeaux #8B1538
   --font-size-2xl: 1.5rem;            /* 📏 XXL (24px) → UTILISÉ DANS : titres sections */
   --font-size-3xl: 1.875rem;          /* 📏 XXXL (30px) → UTILISÉ DANS : gros titres */
   --font-size-4xl: 2.25rem;           /* 📏 XXXXL (36px) → UTILISÉ DANS : titre principal page */
-  --font-size-5xl: 3rem;              /* 📏 Énorme (48px) → UTILISÉ DANS : titre hero */
   
-  /* ⚖️ ÉPAISSEUR DE TEXTE - Du plus fin au plus gras */
-  --font-weight-light: 300;           /* ⚖️ Fin → UTILISÉ DANS : textes délicats */
+  /* ⚖️ ÉPAISSEUR DE TEXTE - Essentielles seulement */
   --font-weight-normal: 400;          /* ⚖️ Normal → UTILISÉ DANS : textes courants */
   --font-weight-medium: 500;          /* ⚖️ Moyen → UTILISÉ DANS : textes importants */
   --font-weight-semibold: 600;        /* ⚖️ Semi-gras → UTILISÉ DANS : sous-titres */
@@ -149,22 +144,12 @@ Exemple : var(--primary-color) = votre couleur bordeaux #8B1538
 
   /* 
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  📱 RESPONSIVE - Tailles d'écran (à partir de ces largeurs)
+  � CONTENEURS - Largeur principale du site
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   */
   
-  /* 📱 POINTS DE RUPTURE */
-  --breakpoint-sm: 576px;             /* 📱 Petite tablette → UTILISÉ DANS : @media queries */
-  --breakpoint-md: 768px;             /* 📱 Tablette → UTILISÉ DANS : changements layout */
-  --breakpoint-lg: 992px;             /* 📱 Petit desktop → UTILISÉ DANS : grilles adaptatives */
-  --breakpoint-xl: 1200px;            /* 📱 Grand desktop → UTILISÉ DANS : layouts larges */
-  
-  /* 📐 LARGEURS CONTENEURS - Largeurs maximales selon l'écran */
-  --container-sm: 540px;              /* 📐 Petit conteneur → UTILISÉ DANS : petits écrans */
-  --container-md: 720px;              /* 📐 Moyen conteneur → UTILISÉ DANS : tablettes */
-  --container-lg: 960px;              /* 📐 Grand conteneur → UTILISÉ DANS : desktop */
-  --container-xl: 1140px;             /* 📐 Très grand conteneur → UTILISÉ DANS : grands écrans */
-  --container-xxl: 1320px;            /* 📐 Énorme conteneur → UTILISÉ DANS : très grands écrans */
+  /* � CONTENEUR PRINCIPAL */
+  --container-xl: 1140px;             /* 📐 Conteneur principal → UTILISÉ DANS : tous les layouts */
 }
 
 /* 
@@ -367,7 +352,7 @@ body {
   padding: var(--spacing-xs) var(--spacing-sm);
   background-color: var(--success-color);
   color: var(--white);
-  font-size: var(--font-size-xs);
+  font-size: 0.75rem;                  /* 12px directement */
   font-weight: var(--font-weight-medium);
   border-radius: var(--border-radius-sm);
   text-transform: uppercase;

@@ -1,0 +1,113 @@
+{# 
+    PARTIAL : FORMULAIRE DE CHECKOUT
+    
+    Variables attendues :
+    - form : Formulaire Symfony (CheckoutFormType)
+#}
+
+<div class="checkout-card">
+    <h2 class="checkout-card__title">
+        <i class="fas fa-user-edit"></i>
+        Vos informations de retrait
+    </h2>
+    
+    {{ form_start(form, {
+        'action': path('app_checkout_process'),
+        'method': 'POST',
+        'attr': {
+            'id': 'checkout-form',
+            'novalidate': 'novalidate'
+        }
+    }) }}
+
+        {# INFORMATIONS CLIENT #}
+        <div class="checkout-section">
+            <h3 class="checkout-section__title">
+                <i class="fas fa-user"></i>
+                Vos coordonnées
+            </h3>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form_label(form.customerName) }}
+                    {{ form_widget(form.customerName) }}
+                    {{ form_errors(form.customerName) }}
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group form-group--half">
+                    {{ form_label(form.customerPhone) }}
+                    {{ form_widget(form.customerPhone) }}
+                    {{ form_errors(form.customerPhone) }}
+                </div>
+                <div class="form-group form-group--half">
+                    {{ form_label(form.customerEmail) }}
+                    {{ form_widget(form.customerEmail) }}
+                    {{ form_errors(form.customerEmail) }}
+                </div>
+            </div>
+        </div>
+
+        {# CRÉNEAU DE RETRAIT #}
+        <div class="checkout-section">
+            <h3 class="checkout-section__title">
+                <i class="fas fa-clock"></i>
+                Créneau de retrait
+            </h3>
+            
+            <div class="form-row">
+                <div class="form-group form-group--half">
+                    {{ form_label(form.pickupDate) }}
+                    {{ form_widget(form.pickupDate) }}
+                    {{ form_errors(form.pickupDate) }}
+                </div>
+                <div class="form-group form-group--half">
+                    {{ form_label(form.pickupTimeSlot) }}
+                    {{ form_widget(form.pickupTimeSlot) }}
+                    {{ form_errors(form.pickupTimeSlot) }}
+                </div>
+            </div>
+            
+            <div class="pickup-info">
+                <p class="pickup-info__text">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Adresse de retrait :</strong><br>
+                    Boucherie Eysa<br>
+                    123 Rue de la Viande<br>
+                    75000 Paris
+                </p>
+            </div>
+        </div>
+
+        {# COMMENTAIRES #}
+        <div class="checkout-section">
+            <h3 class="checkout-section__title">
+                <i class="fas fa-comment"></i>
+                Commentaires (optionnel)
+            </h3>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form_label(form.notes) }}
+                    {{ form_widget(form.notes) }}
+                    {{ form_errors(form.notes) }}
+                </div>
+            </div>
+        </div>
+
+        {# ACTIONS DU FORMULAIRE #}
+        <div class="checkout-actions">
+            {{ form_widget(form.submit) }}
+            
+            <a href="{{ path('app_cart_index') }}" class="btn-eysa btn-eysa-secondary">
+                <i class="fas fa-arrow-left"></i>
+                Retour au panier
+            </a>
+        </div>
+
+        {# Champs cachés et CSRF #}
+        {{ form_rest(form) }}
+
+    {{ form_end(form) }}
+</div>

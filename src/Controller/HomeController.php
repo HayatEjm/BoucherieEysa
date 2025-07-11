@@ -2,14 +2,15 @@
 
 namespace App\Controller;
 
-use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * 🏠 CONTROLLER HOME - Je gère la page d'accueil
+ * CONTROLLER HOME - Je gère la page d'accueil
  * 
  * POURQUOI CE CONTROLLER ?
  * - Je affiche la page d'accueil avec les sections principales
@@ -19,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * 🏠 Page d'accueil principale
+     * Page d'accueil principale
      * 
      * POURQUOI CETTE MÉTHODE ?
      * - Point d'entrée principal du site

@@ -4,13 +4,12 @@
 
 {% block body %}
     <section class="categories-container">
-        <div class="categories-section">
-            <h1 class="section-title">Découvrez nos catégories</h1>
-            <p class="section-description">
-                Retrouvez ici toutes nos catégories de viandes et produits. Cliquez sur l'une d'elles pour découvrir les produits disponibles.
-            </p>
+        <h1 class="section-title">Découvrez nos catégories</h1>
+        <p class="section-description">
+            Retrouvez ici toutes nos catégories de viandes et produits. Cliquez sur l'une d'elles pour découvrir les produits disponibles.
+        </p>
 
-            <div class="categories-grid">
+        <div class="categories-grid">
             {% for category in categories %}
                 <div class="category-card"
                      style="background-image: url('{% if category.image %}{{ asset('images/' ~ category.image) }}{% else %}{{ asset('images/fallback.jpg') }}{% endif %}');">
@@ -30,7 +29,6 @@
             {% else %}
                 <p>Aucune catégorie trouvée.</p>
             {% endfor %}
-            </div>
         </div>
     </section>
 {% endblock %}

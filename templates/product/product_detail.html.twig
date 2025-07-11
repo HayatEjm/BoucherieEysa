@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="product-detail-page">
-    {# Fil d'Ariane simple et clair #}
+    {# Fil d'Ariane #}
     <nav class="breadcrumb-nav">
         <div class="container">
             <ol class="breadcrumb-list">
@@ -67,190 +67,34 @@
                         </div>
                     </div>
 
-                    {# Contrôles de quantité simples #}
-                    <div class="quantity-controls">
-                        <label class="quantity-label">Quantité souhaitée :</label>
-                        <div class="quantity-input-group">
-                            <button type="button" class="qty-btn qty-minus" data-action="decrease">-</button>
-                            <input type="number" 
-                                   id="quantity-input" 
-                                   class="quantity-input" 
-                                   value="{{ product.minWeight }}" 
-                                   min="{{ product.minWeight }}" 
-                                   step="100"
-                                   max="5000"
-                                   data-min="{{ product.minWeight }}"
-                                   data-price="{{ product.price }}">
-                            <button type="button" class="qty-btn qty-plus" data-action="increase">+</button>
-                            <span class="quantity-unit" id="quantity-unit-display">g</span>
-                        </div>
-                    </div>
+                    {# Sélecteur de quantité (composant) #}
+                    {% include 'components/quantity_selector.html.twig' with {
+                        minWeight: product.minWeight,
+                        maxWeight: product.maxWeight,
+                        price: product.price
+                    } %}
 
-                    {# Suggestions de quantité #}
-                    <div class="quantity-suggestions">
-                        <span class="suggestions-label">Suggestions :</span>
-                        <div class="suggestion-buttons" id="suggestion-buttons">
-                            <button class="suggestion-btn" data-qty="250">250g<span class="suggestion-desc">1-2 pers.</span></button>
-                            <button class="suggestion-btn" data-qty="500">500g<span class="suggestion-desc">2-3 pers.</span></button>
-                            <button class="suggestion-btn" data-qty="750">750g<span class="suggestion-desc">3-4 pers.</span></button>
-                            <button class="suggestion-btn" data-qty="1000">1kg<span class="suggestion-desc">4+ pers.</span></button>
-                        </div>
-                    </div>
+                    {# Notice poids minimum (composant) #}
+                    {% include 'components/min_weight_notice.html.twig' with { minWeight: product.minWeight } %}
 
-                    {# Bouton ajout panier #}
-                    <button class="add-to-cart-btn" 
-                            data-product-id="{{ product.id }}"
-                            onclick="addToCartWithQuantity({{ product.id }})">
-                        🛒 Ajouter au panier
-                    </button>
+                    {# Bouton ajout panier (composant) #}
+                    {% include 'components/add_to_cart_button.html.twig' with {
+                        productId: product.id,
+                        minWeight: product.minWeight
+                    } %}
                 </div>
             </div>
         </div>
 
-        {# Onglets d'informations #}
-        <div class="product-tabs">
-            <nav class="tabs-nav">
-                <button class="tab-btn active" data-tab="description">Description</button>
-                <button class="tab-btn" data-tab="details">Détails</button>
-                <button class="tab-btn" data-tab="preparation">Préparation</button>
-            </nav>
-
-            <div class="tab-content">
-                <div class="tab-panel active" id="tab-description">
-                    <h3>🥩 Description du produit</h3>
-                    <p>{{ product.description ?: 'Produit de qualité exceptionnelle, sélectionné avec soin par nos bouchers.' }}</p>
-                </div>
-
-                <div class="tab-panel" id="tab-details">
-                    <h3>📋 Informations détaillées</h3>
-                    <ul>
-                        <li><strong>Catégorie :</strong> {{ product.category ? product.category.name : 'Non spécifiée' }}</li>
-                        <li><strong>Prix au kg :</strong> {{ product.price|number_format(2, ',', ' ') }}€</li>
-                        <li><strong>Quantité minimale :</strong> {{ product.minWeight }}g</li>
-                        <li><strong>Quantité maximale :</strong> {{ product.maxWeight ?: 5000 }}g</li>
-                        <li><strong>Unité de vente :</strong> Au poids</li>
-                    </ul>
-                </div>
-
-                <div class="tab-panel" id="tab-preparation">
-                    <h3>👨‍🍳 Conseils de préparation</h3>
-                    <p>Nos bouchers sont à votre disposition pour vous conseiller sur la préparation et la cuisson de ce produit.</p>
-                    <p><strong>💡 Astuce :</strong> Sortez votre viande du réfrigérateur 30 minutes avant la cuisson pour un résultat optimal.</p>
-                </div>
-            </div>
-        </div>
+        {# Onglets d'informations (composant) #}
+        {% include 'components/product_tabs.html.twig' with { product: product } %}
     </div>
 </div>
 
 {# Toast notification #}
 <div id="toast" class="toast"></div>
 
-<script>
-/* 
-   📜 JAVASCRIPT POUR LA PAGE PRODUIT
-   
-   👩‍💻 POUR TOI : Ce script gère :
-   ✅ Le calculateur de prix en temps réel
-   ✅ Les boutons +/- de quantité  
-   ✅ Les suggestions de quantité
-   ✅ L'ajout au panier
-   ✅ Les onglets d'informations
-   ✅ Les notifications toast
-   
-   Tout est commenté pour t'aider à comprendre !
-*/
 
-// Variables globales simples
-let currentQuantity = {{ product.minWeight }};
-const productPrice = {{ product.price }};
-const minQuantity = {{ product.minWeight }};
 
-// Fonction pour calculer le prix
-function calculatePrice() {
-    const quantity = parseInt(document.getElementById('quantity-input').value);
-    const totalPrice = (quantity / 1000) * productPrice;
-    document.getElementById('total-price').textContent = totalPrice.toFixed(2).replace('.', ',') + '€';
-}
 
-// Gestion des boutons +/-
-document.addEventListener('DOMContentLoaded', function() {
-    const quantityInput = document.getElementById('quantity-input');
-    const minusBtn = document.querySelector('.qty-minus');
-    const plusBtn = document.querySelector('.qty-plus');
-    
-    // Bouton -
-    minusBtn.addEventListener('click', function() {
-        let currentValue = parseInt(quantityInput.value);
-        if (currentValue > minQuantity) {
-            quantityInput.value = currentValue - 100;
-            calculatePrice();
-        }
-    });
-    
-    // Bouton +
-    plusBtn.addEventListener('click', function() {
-        let currentValue = parseInt(quantityInput.value);
-        if (currentValue < 5000) {
-            quantityInput.value = currentValue + 100;
-            calculatePrice();
-        }
-    });
-    
-    // Recalcul automatique quand on tape dans le champ
-    quantityInput.addEventListener('input', calculatePrice);
-    
-    // Suggestions de quantité
-    document.querySelectorAll('.suggestion-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const qty = this.getAttribute('data-qty');
-            quantityInput.value = qty;
-            calculatePrice();
-        });
-    });
-    
-    // Gestion des onglets
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const tabId = this.getAttribute('data-tab');
-            
-            // Retirer active de tous les boutons et panneaux
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-            
-            // Activer le bon bouton et panneau
-            this.classList.add('active');
-            document.getElementById('tab-' + tabId).classList.add('active');
-        });
-    });
-});
-
-// Fonction pour ajouter au panier
-function addToCartWithQuantity(productId) {
-    const quantity = parseInt(document.getElementById('quantity-input').value);
-    
-    // Vérification simple
-    if (quantity < minQuantity) {
-        showToast('Quantité trop faible ! Minimum ' + minQuantity + 'g', 'error');
-        return;
-    }
-    
-    // Appel à l'API panier (fonction définie dans cart.js)
-    if (typeof addToCart === 'function') {
-        addToCart(productId, quantity);
-    } else {
-        showToast('🛒 Produit ajouté au panier !', 'success');
-    }
-}
-
-// Fonction pour afficher les notifications
-function showToast(message, type = 'success') {
-    const toast = document.getElementById('toast');
-    toast.textContent = message;
-    toast.className = 'toast toast-' + type + ' show';
-    
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 3000);
-}
-</script>
 {% endblock %}

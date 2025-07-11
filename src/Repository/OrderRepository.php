@@ -40,4 +40,19 @@ class OrderRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    /**
+     * Compte le nombre de commandes pour une date et un créneau donnés
+     */
+    public function countByDateAndTimeSlot(\DateTime $date, string $timeSlot): int
+    {
+        return $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->andWhere('o.pickupDate = :date')
+            ->andWhere('o.pickupTimeSlot = :timeSlot')
+            ->setParameter('date', $date->format('Y-m-d'))
+            ->setParameter('timeSlot', $timeSlot)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

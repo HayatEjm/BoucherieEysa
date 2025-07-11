@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact - Boucherie Eysa Saumur{% endblock %}
+
+{% block body %}
+<!-- Banner de page -->
+<div class="page-banner">
+    <div class="banner-container">
+        <h1 class="banner-title">Contactez-nous</h1>
+        <p class="banner-subtitle">Une question ? Une commande spéciale ? Nous sommes là pour vous aider</p>
+    </div>
+</div>
+
+<div class="contact-page">
+    <div class="container">
+        <!-- Messages flash -->
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i>
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <div class="contact-content">
+            <!-- Formulaire de contact -->
+            <div class="contact-form-section">
+                <h2>Envoyez-nous un message</h2>
+                <p class="form-intro">Remplissez le formulaire ci-dessous et nous vous répondrons rapidement.</p>
+                
+                {{ form_start(form, {'attr': {'class': 'contact-form'}}) }}
+                    <div class="form-row">
+                        <div class="form-col">
+                            {{ form_row(form.name) }}
+                        </div>
+                        <div class="form-col">
+                            {{ form_row(form.email) }}
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-col">
+                            {{ form_row(form.phone) }}
+                        </div>
+                        <div class="form-col">
+                            {{ form_row(form.subject) }}
+                        </div>
+                    </div>
+                    
+                    {{ form_row(form.message) }}
+                    
+                    <div class="form-submit">
+                        {{ form_row(form.submit) }}
+                    </div>
+                {{ form_end(form) }}
+            </div>
+<br><br>
+
+            <!-- Section informations - Style identique à la page d'accueil -->
+            <section class="info-section">
+                <div class="container">
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3>📍 Notre adresse</h3>
+                            <p>123 Rue du Dr Schweitzer<br>49400 Saumur</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3>📞 Nous contacter</h3>
+                            <p>Téléphone : 02 41 50 57 18<br>Email : contact@eysa-boucherie.fr</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3>🕒 Nos horaires</h3>
+                            <p>Du mardi au samedi<br>09h00 - 12h30 | 15h30 - 19h15<br>Dimanche : 10h00 - 13h00</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3>🚗 Click & Collect</h3>
+                            <p>Commandez en ligne<br>Retirez selon vos créneaux</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
