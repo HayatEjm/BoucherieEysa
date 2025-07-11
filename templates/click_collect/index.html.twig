@@ -1,0 +1,313 @@
+{# 
+   Template de la page dédiée Click & Collect
+   Cette page explique en détail notre service de commande en ligne avec retrait en magasin
+   
+   Structure:
+   - Hero section avec titre principal et description
+   - Section des étapes détaillées (réutilise notre composant)
+   - Section avantages avec icônes
+   - Section informations pratiques (horaires, adresse)
+   - Section FAQ
+   - Call-to-action final pour commencer
+#}
+
+{% extends 'base.html.twig' %}
+
+{# Titre de la page qui apparaîtra dans l'onglet du navigateur #}
+{% block title %}Click & Collect - Commandez en ligne, retirez en magasin{% endblock %}
+
+{# On importe le CSS spécifique au Click & Collect #}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+{% endblock %}
+
+{% block body %}
+
+{# BANDEAU COMMUN - Changera selon la page #}
+{{ include('partials/page_banner.html.twig', {bannerData: bannerData}) }}
+
+<div class="click-collect-page">
+    {# 
+        SECTION ÉTAPES - Container CSS pur
+        Inclusion du composant réutilisable avec containers CSS purs
+    #}
+    <section class="steps-section section-eysa">
+        <div class="cc-container">
+            <h2 class="title-eysa-2 cc-text-center">Comment ça marche ?</h2>
+            {# Inclusion du composant réutilisable que nous avons créé #}
+            {% include 'partials/click_collect_steps.html.twig' %}
+        </div>
+    </section>
+
+    {# 
+        SECTION AVANTAGES - Grille 2x2 CSS pur
+        Cette section met en avant les bénéfices en 2 rangées de 2 cartes agrandies
+    #}
+    <section class="advantages-section section-eysa-alt">
+        <div class="cc-container">
+            <h2 class="title-eysa-2 cc-text-center">Pourquoi choisir notre Click & Collect ?</h2>
+            <div class="advantages-grid">
+                {# Avantage 1: Qualité #}
+                <div class="advantage-card card-eysa">
+                    <div class="advantage-icon">
+                        <i class="fas fa-award" style="font-size: 3.5rem; color: var(--primary-color);"></i>
+                    </div>
+                    <h4 class="title-eysa-3">Qualité garantie</h4>
+                    <p class="text-eysa-body">
+                        Nos bouchers sélectionnent personnellement chaque pièce selon vos critères. 
+                        Même qualité qu'en magasin, avec l'expertise de nos professionnels.
+                    </p>
+                </div>
+                
+                {# Avantage 2: Temps #}
+                <div class="advantage-card card-eysa">
+                    <div class="advantage-icon">
+                        <i class="fas fa-stopwatch" style="font-size: 3.5rem; color: var(--success-color);"></i>
+                    </div>
+                    <h4 class="title-eysa-3">Gain de temps</h4>
+                    <p class="text-eysa-body">
+                        Commandez à votre rythme depuis chez vous. Plus d'attente en magasin, 
+                        votre commande vous attend au comptoir.
+                    </p>
+                </div>
+                
+                {# Avantage 3: Flexibilité #}
+                <div class="advantage-card card-eysa">
+                    <div class="advantage-icon">
+                        <i class="fas fa-calendar-check" style="font-size: 3.5rem; color: var(--info-color);"></i>
+                    </div>
+                    <h4 class="title-eysa-3">Horaires flexibles</h4>
+                    <p class="text-eysa-body">
+                        Choisissez votre créneau de retrait selon vos disponibilités. 
+                        Service disponible pendant toutes nos heures d'ouverture.
+                    </p>
+                </div>
+                
+                {# Avantage 4: Expertise & Conseils - NOUVEAU #}
+                <div class="advantage-card card-eysa">
+                    <div class="advantage-icon">
+                        <i class="fas fa-user-graduate" style="font-size: 3.5rem; color: var(--warning-color);"></i>
+                    </div>
+                    <h4 class="title-eysa-3">Expertise & Conseils</h4>
+                    <p class="text-eysa-body">
+                        Profitez de nos conseils personnalisés lors du retrait : cuisson, découpe, 
+                        recettes et recommandations d'accompagnement par nos maîtres bouchers.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# 
+        SECTION RETRAIT - Container CSS pur avec image de fond optionnelle
+        Informations pratiques pour le retrait avec design moderne et convivial
+    #}
+    <section class="pickup-section section-eysa with-background" style="background-image: linear-gradient(135deg, rgba(245, 238, 220, 0.92) 0%, rgba(233, 223, 196, 0.92) 100%), url('{{ asset('images/preparation.jpg') }}');">
+        <div class="cc-container">
+            <div class="pickup-content">
+                <div class="pickup-text">
+                    <h2 class="title-eysa-2">Votre retrait en magasin</h2>
+                    <p class="text-eysa-lead pickup-subtitle">
+                        Simple, rapide et sur mesure
+                    </p>
+                    
+                    <div class="pickup-details">
+                        <div class="pickup-item">
+                            <div class="pickup-icon">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <div class="pickup-info">
+                                <h4>Stationnement facile</h4>
+                                <p>Places de parking directement devant la boucherie</p>
+                            </div>
+                        </div>
+                        
+                        <div class="pickup-item">
+                            <div class="pickup-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="pickup-info">
+                                <h4>Créneaux flexibles</h4>
+                                <p>Du mardi au dimanche, pendant nos heures d'ouverture<br>
+                                <strong>Préparation en 2h maximum</strong></p>
+                            </div>
+                        </div>
+                        
+                        <div class="pickup-item">
+                            <div class="pickup-icon">
+                                <i class="fas fa-receipt"></i>
+                            </div>
+                            <div class="pickup-info">
+                                <h4>Numéro de retrait</h4>
+                                <p>Présentez votre numéro de commande reçu par SMS/email<br>
+                                <strong>Paiement sur place uniquement</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pickup-schedule">
+                    <h3 class="title-eysa-3">Horaires de retrait</h3>
+                    <div class="schedule-list">
+                        <div class="schedule-item closed">
+                            <span class="day">Lundi</span>
+                            <span class="hours">Fermé</span>
+                        </div>
+                        <div class="schedule-item">
+                            <span class="day">Mardi - Vendredi</span>
+                            <span class="hours">8h30 - 12h30<br>15h30 - 19h00</span>
+                        </div>
+                        <div class="schedule-item">
+                            <span class="day">Samedi</span>
+                            <span class="hours">8h00 - 19h00</span>
+                        </div>
+                        <div class="schedule-item">
+                            <span class="day">Dimanche</span>
+                            <span class="hours">8h00 - 12h30</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# 
+        SECTION FAQ - Container CSS pur
+        Questions fréquentes avec accordion CSS personnalisé
+    #}
+    <section class="faq-section section-eysa-alt">
+        <div class="cc-container-narrow">
+            <h2 class="title-eysa-2 cc-text-center">Questions fréquentes</h2>
+            
+            {# FAQ simple avec détails/summary HTML5 #}
+            <div class="faq-list" style="margin-top: 2rem;">
+                
+                {# FAQ 1: Délai de préparation #}
+                <details class="faq-item card-eysa" style="margin-bottom: 1rem;">
+                    <summary class="faq-question" style="cursor: pointer; font-weight: 600; color: var(--primary-color); padding: 1rem; font-size: 1.1rem;">
+                        <i class="fas fa-question-circle" style="margin-right: 0.5rem; color: var(--primary-color);"></i>
+                        Quel est le délai pour préparer ma commande ?
+                    </summary>
+                    <div class="faq-answer" style="padding: 0 1rem 1rem 1rem; color: var(--text-primary); line-height: 1.6;">
+                        Nous préparons votre commande dans les 2 heures suivant votre validation. 
+                        Vous recevrez un SMS/email de confirmation dès qu'elle sera prête au retrait.
+                    </div>
+                </details>
+                
+                {# FAQ 2: Modification commande #}
+                <details class="faq-item card-eysa" style="margin-bottom: 1rem;">
+                    <summary class="faq-question" style="cursor: pointer; font-weight: 600; color: var(--primary-color); padding: 1rem; font-size: 1.1rem;">
+                        <i class="fas fa-question-circle" style="margin-right: 0.5rem; color: var(--primary-color);"></i>
+                        Puis-je modifier ma commande après validation ?
+                    </summary>
+                    <div class="faq-answer" style="padding: 0 1rem 1rem 1rem; color: var(--text-primary); line-height: 1.6;">
+                        Les modifications sont possibles jusqu'à 30 minutes après la validation de votre commande. 
+                        Contactez-nous par téléphone pour toute modification.
+                    </div>
+                </details>
+
+                {# FAQ 3: Paiement #}
+                <details class="faq-item card-eysa" style="margin-bottom: 1rem;">
+                    <summary class="faq-question" style="cursor: pointer; font-weight: 600; color: var(--primary-color); padding: 1rem; font-size: 1.1rem;">
+                        <i class="fas fa-question-circle" style="margin-right: 0.5rem; color: var(--primary-color);"></i>
+                        Comment puis-je payer ma commande ?
+                    </summary>
+                    <div class="faq-answer" style="padding: 0 1rem 1rem 1rem; color: var(--text-primary); line-height: 1.6;">
+                        Le paiement s'effectue en magasin lors du retrait : espèces, carte bancaire, 
+                        chèques ou tickets restaurant acceptés.
+                    </div>
+                </details>
+
+                {# FAQ 4: Délai de retrait #}
+                <details class="faq-item card-eysa" style="margin-bottom: 1rem;">
+                    <summary class="faq-question" style="cursor: pointer; font-weight: 600; color: var(--primary-color); padding: 1rem; font-size: 1.1rem;">
+                        <i class="fas fa-question-circle" style="margin-right: 0.5rem; color: var(--primary-color);"></i>
+                        Combien de temps ai-je pour récupérer ma commande ?
+                    </summary>
+                    <div class="faq-answer" style="padding: 0 1rem 1rem 1rem; color: var(--text-primary); line-height: 1.6;">
+                        Votre commande vous attend pendant 24h maximum. Au-delà, nous ne pouvons 
+                        garantir la fraîcheur des produits et devrons malheureusement l'annuler.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    {# 
+        SECTION CALL-TO-ACTION FINALE
+        Incitation à l'action pour convertir le visiteur en client
+    #}
+    {# 
+        SECTION CTA FINALE - Container CSS pur
+        Incitation à l'action avec CSS pur uniquement
+    #}
+    <section class="section-eysa-alt">
+        <div class="cc-container-narrow cc-text-center">
+            <h2 class="title-eysa-2">Prêt à commander ?</h2>
+            <p class="text-eysa-lead" style="margin-bottom: 2rem;">
+                Découvrez notre sélection de viandes fraîches et passez votre première commande Click & Collect dès maintenant !
+            </p>
+            <div class="cc-flex-center cc-gap-md" style="flex-wrap: wrap;">
+                {# Bouton vers la liste des produits - CSS pur #}
+                <a href="{{ path('app_products') }}" class="btn-eysa btn-eysa-primary">
+                    <i class="fas fa-shopping-cart" style="margin-right: 0.5rem;"></i>
+                    Voir nos produits
+                </a>
+                {# Bouton vers les catégories - CSS pur #}
+                <a href="{{ path('app_category_index') }}" class="btn-eysa btn-eysa-secondary">
+                    <i class="fas fa-list" style="margin-right: 0.5rem;"></i>
+                    Nos catégories
+                </a>
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}
+
+{# 
+   JavaScript optionnel pour cette page
+   On peut ajouter des interactions comme un scroll fluide vers les sections
+#}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        // Smooth scroll pour les liens internes (si on en ajoute)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animation des cartes au scroll (optionnel, pour l'UX)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe les cartes pour les animer
+        document.querySelectorAll('.advantage-card, .pickup-item, .schedule-item').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+{% endblock %}

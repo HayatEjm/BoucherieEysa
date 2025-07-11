@@ -1,0 +1,35 @@
+{# 
+    BANDEAU COMMUN - Visuel qui change selon la page
+    Usage: {{ include('partials/page_banner.html.twig', {bannerData: bannerData}) }}
+#}
+
+<section class="page-banner">
+    <div class="banner-container">
+        <div class="banner-content">
+            <h1 class="banner-title">{{ bannerData.title }}</h1>
+            <p class="banner-subtitle">{{ bannerData.subtitle }}</p>
+            
+            {# Badges spécifiques au Click & Collect #}
+            {% if bannerData.show_badges is defined and bannerData.show_badges %}
+                <div class="hero-badges" style="margin: 30px 0;">
+                    <span class="badge-eysa-inverse">
+                        <i class="fas fa-clock me-2"></i>GAIN DE TEMPS
+                    </span>
+                    <span class="badge-eysa-inverse">
+                        <i class="fas fa-shield-alt me-2"></i>PRODUITS FRAIS GARANTIS
+                    </span>
+                    <span class="badge-eysa-inverse">
+                        <i class="fas fa-user-check me-2"></i>SERVICE PERSONNALISÉ
+                    </span>
+                </div>
+            {% endif %}
+            
+            {# Bouton principal #}
+            {% if bannerData.button_text %}
+                <a href="{{ bannerData.button_link }}" class="banner-button">
+                    {{ bannerData.button_text }}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</section>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Upload - Boucherie Eysa</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 2rem; }
+        .form-container { max-width: 500px; margin: 0 auto; }
+        input[type="file"] { margin: 1rem 0; padding: 0.5rem; }
+        button { background: #8B0000; color: white; padding: 1rem 2rem; border: none; cursor: pointer; }
+        button:hover { background: #660000; }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>🧪 Test Upload d'Image</h1>
+        <p>Page de test pour vérifier l'upload vers S3</p>
+        
+        <form action="/upload-image" method="POST" enctype="multipart/form-data">
+            <div>
+                <label for="image">Choisir une image :</label><br>
+                <input type="file" name="image" id="image" accept="image/*" required>
+            </div>
+            <button type="submit">🚀 Tester l'Upload</button>
+        </form>
+        
+        <hr>
+        <p><strong>Ce qui va se passer :</strong></p>
+        <ul>
+            <li>✅ Si ça marche : dd() avec SUCCESS + URL</li>
+            <li>❌ Si erreur : dd() avec le message d'erreur</li>
+        </ul>
+    </div>
+</body>
+</html>

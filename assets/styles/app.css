@@ -1,3 +1,83 @@
+/* ========================================================================
+   CSS PRINCIPAL DE L'APPLICATION
+   ======================================================================== */
+
+/* Import du design system principal */
+@import './design-system-new.css';
+
+/* Import des composants partiels */
+@import './partials/header.css';
+@import './partials/footer.css';
+@import './partials/page_banner.css';
+
+/* Import des pages spécifiques */
+@import './home.css';
+@import './partials/click_collect.css';
+
+/* Import des sections produits et catégories */
+@import './category/category_list.css';
+@import './product/product_list_simple.css';
+@import './product/product_detail.css';
+
+/* Import du système panier */
+@import './cart/cart.css';
+@import './cart/cart_badge.css';
+
+/* CSS général de base */
 body {
     background-color: white;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-secondary);
+    line-height: 1.6;
+    color: var(--color-text);
+}
+
+/* Reset de base */
+* {
+    box-sizing: border-box;
+}
+
+/* Liens de base */
+a {
+    color: var(--color-burgundy);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--color-burgundy-dark);
+}
+
+/* ========================================================================
+   SUPPRESSION DES SPINNERS POUR TOUS LES INPUTS NUMBER
+   ======================================================================== */
+
+/* 
+   IMPORTANT : Ces règles suppriment les flèches (spinners) des inputs number.
+   C'est important pour une meilleure UX sur mobile et un design plus propre.
+*/
+
+/* Supprimer les flèches (spinners) des inputs number sur WebKit (Chrome, Safari, Edge) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    display: none; /* Ajout pour forcer la suppression */
+}
+
+/* Supprimer les flèches (spinners) des inputs number sur Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Règle supplémentaire pour s'assurer que ça marche partout */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    opacity: 0;
+    height: 0;
+    width: 0;
+    margin: 0;
+    -webkit-appearance: none;
+    appearance: none;
 }

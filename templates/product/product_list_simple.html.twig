@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if page_title is defined %}
+        {{ page_title }} - EYSA BOUCHERIE
+    {% else %}
+        Nos Produits - EYSA BOUCHERIE
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="products-container">
+    <div class="page-header">
+        {% if category is defined %}
+            <div class="breadcrumb">
+                <a href="{{ path('app_category_index') }}">Catégories</a> 
+                <span class="separator">></span> 
+                <span class="current">{{ category.name }}</span>
+            </div>
+        {% endif %}
+        
+        <h1>
+            {% if page_title is defined %}
+                {{ page_title }}
+            {% else %}
+                Nos Produits
+            {% endif %}
+        </h1>
+        
+        <p class="subtitle">
+            {% if page_subtitle is defined %}
+                {{ page_subtitle }}
+            {% else %}
+                Découvrez notre sélection de viandes de qualité
+            {% endif %}
+        </p>
+        
+        {% if category is defined %}
+            <a href="{{ path('app_products') }}" class="btn btn-outline">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voir tous les produits
+            </a>
+        {% endif %}
+    </div>
+
+    {% if products is not empty %}
+        <div class="products-grid">
+            {% for product in products %}
+                <div class="product-card">
+                    <div class="product-image">
+                        {% if product.image %}
+                            <img src="{{ asset('images/' ~ product.image) }}" alt="{{ product.name }}">
+                        {% else %}
+                            <img src="{{ asset('images/fallback.jpg') }}" alt="{{ product.name }}">
+                        {% endif %}
+                    </div>
+                    
+                    <div class="product-info">
+                        <h3 class="product-name">{{ product.name }}</h3>
+                        <p class="product-description">{{ product.description }}</p>
+                        
+                        <div class="product-price">
+                            <span class="price">{{ product.price|number_format(2, ',', ' ') }}€</span>
+                            <span class="unit">/ {{ product.unit }}</span>
+                        </div>
+                        
+                        <div class="product-actions">
+                            <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-outline">
+                                <i class="fa-solid fa-eye" aria-hidden="true"></i> Voir détails
+                            </a>
+                            {# 🛒 PANIER - Bouton d'ajout rapide #}
+                            <button class="btn btn-primary add-to-cart" 
+                                    data-product-id="{{ product.id }}" 
+                                    data-quantity="1"
+                                    title="Ajouter {{ product.name }} au panier">
+                                <i class="fa-solid fa-cart-plus" aria-hidden="true"></i> Ajouter au panier
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="no-products">
+            <i class="fa-solid fa-box-open" aria-hidden="true"></i>
+            <h3>Aucun produit trouvé</h3>
+            <p>Il n'y a pas de produits dans cette catégorie pour le moment.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

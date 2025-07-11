@@ -29,9 +29,11 @@ class CategoryController extends AbstractController
     {
         $products = $category->getProducts();
 
-        return $this->render('category/category_products.html.twig', [
+        return $this->render('product/product_list.html.twig', [
             'category' => $category,
             'products' => $products,
+            'page_title' => 'Produits - ' . $category->getName(),
+            'page_subtitle' => 'Découvrez notre sélection de ' . strtolower($category->getName()),
         ]);
     }
   

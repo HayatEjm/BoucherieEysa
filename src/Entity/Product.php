@@ -41,6 +41,13 @@ class Product
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $unit = null;
 
+    // Nouvelles propriétés pour la gestion du poids
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $minWeight = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $maxWeight = null;
+
     public function __construct()
     {
         $this->orderItems = new ArrayCollection();
@@ -162,6 +169,30 @@ class Product
     {
         $this->unit = $unit;
 
+        return $this;
+    }
+
+    // Getter et Setter pour le poids minimum
+    public function getMinWeight(): ?int
+    {
+        return $this->minWeight;
+    }
+
+    public function setMinWeight(?int $minWeight): static
+    {
+        $this->minWeight = $minWeight;
+        return $this;
+    }
+
+    // Getter et Setter pour le poids maximum
+    public function getMaxWeight(): ?int
+    {
+        return $this->maxWeight;
+    }
+
+    public function setMaxWeight(?int $maxWeight): static
+    {
+        $this->maxWeight = $maxWeight;
         return $this;
     }
 }

@@ -1,0 +1,590 @@
+/* ========================================================================
+   CSS POUR LA PAGE DE DÉTAIL PRODUIT - BOUCHERIE EYSA
+   ======================================================================== */
+
+/* 
+   📄 CE FICHIER CONTIENT :
+   ✅ Styles pour la page de détail d'un produit
+   ✅ Design responsive et moderne  
+   ✅ Calculateur de prix interactif
+   ✅ Boutons d'action (ajouter au panier)
+   ✅ Informations produit complètes
+   
+   👩‍💻 POUR TOI : Ce fichier est commenté pour t'aider à comprendre
+   chaque section et pouvoir modifier facilement les couleurs,
+   tailles, espacements selon tes besoins.
+*/
+
+/* ========================================================================
+   CONTENEUR PRINCIPAL
+   ======================================================================== */
+
+.product-detail-page {
+    background: #FAF7F2; /* Beige clair - arrière-plan général */
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+
+.product-detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ========================================================================
+   FIL D'ARIANE (Navigation)
+   ======================================================================== */
+
+.breadcrumb-nav {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.breadcrumb-list {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.9rem;
+}
+
+.breadcrumb-list li {
+    display: flex;
+    align-items: center;
+}
+
+/* Petite flèche entre les éléments */
+.breadcrumb-list li:not(:last-child)::after {
+    content: '>';
+    margin: 0 0.5rem;
+    color: #8a8a8a; /* Gris clair */
+}
+
+.breadcrumb-list a {
+    color: #8B1538; /* Bordeaux */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb-list a:hover {
+    color: #6B1028; /* Bordeaux foncé au survol */
+}
+
+.breadcrumb-list .current {
+    color: #2c2c2c; /* Gris foncé pour l'élément actuel */
+    font-weight: 600;
+}
+
+/* ========================================================================
+   GRILLE PRINCIPALE (Image + Infos)
+   ======================================================================== */
+
+.product-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 50% image, 50% infos */
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+/* Sur mobile : une seule colonne */
+@media (max-width: 768px) {
+    .product-detail-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* ========================================================================
+   SECTION IMAGE
+   ======================================================================== */
+
+.product-image-section {
+    position: relative;
+}
+
+.product-image-main {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    aspect-ratio: 1; /* Image carrée */
+}
+
+.main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Effet zoom léger au survol */
+.main-image:hover {
+    transform: scale(1.05);
+}
+
+/* Badges qualité (Fresh, Local, etc.) */
+.quality-badges {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.badge-fresh {
+    background: #065f46; /* Vert foncé */
+    color: white;
+}
+
+.badge-local {
+    background: #8B1538; /* Bordeaux */
+    color: white;
+}
+
+/* ========================================================================
+   SECTION INFORMATIONS
+   ======================================================================== */
+
+.product-info-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Nom du produit */
+.product-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c2c2c;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+/* Catégorie */
+.product-category {
+    font-size: 1rem;
+    color: #8B1538; /* Bordeaux */
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+/* Description */
+.product-description {
+    font-size: 1.1rem;
+    color: #5a5a5a; /* Gris moyen */
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+/* ========================================================================
+   CALCULATEUR DE PRIX
+   ======================================================================== */
+
+.price-calculator {
+    background: #F5F1E8; /* Beige chaleureux */
+    border: 2px solid #e5ddd4; /* Bordure beige */
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.price-calculator h3 {
+    color: #8B1538; /* Bordeaux */
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+/* Affichage du prix */
+.price-display {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.current-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #8B1538; /* Bordeaux pour le prix */
+}
+
+.price-per-kg {
+    font-size: 0.9rem;
+    color: #8a8a8a; /* Gris clair */
+    margin-top: 0.5rem;
+}
+
+/* ========================================================================
+   CONTRÔLES DE QUANTITÉ
+   ======================================================================== */
+
+.quantity-controls {
+    margin-bottom: 1.5rem;
+}
+
+.quantity-label {
+    display: block;
+    font-weight: 600;
+    color: #2c2c2c;
+    margin-bottom: 0.5rem;
+}
+
+.quantity-input-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Boutons + et - */
+.qty-btn {
+    background: #8B1538; /* Bordeaux */
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.qty-btn:hover {
+    background: #6B1028; /* Bordeaux foncé */
+    transform: scale(1.05);
+}
+
+/* Champ de saisie quantité */
+.quantity-input {
+    background: white;
+    color: #2c2c2c;
+    border: 2px solid #e5ddd4;
+    padding: 0.75rem;
+    width: 80px;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+/* IMPORTANT : Supprimer les spinners (flèches) des inputs number */
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    display: none;
+}
+
+.quantity-input {
+    -moz-appearance: textfield; /* Firefox */
+    appearance: textfield; /* Standard */
+}
+
+.quantity-unit {
+    font-weight: 600;
+    color: #5a5a5a;
+}
+
+/* ========================================================================
+   SUGGESTIONS DE QUANTITÉ
+   ======================================================================== */
+
+.quantity-suggestions {
+    margin-bottom: 1.5rem;
+}
+
+.suggestions-label {
+    display: block;
+    font-weight: 600;
+    color: #2c2c2c;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.suggestion-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.suggestion-btn {
+    background: white;
+    border: 2px solid #8B1538; /* Bordeaux */
+    color: #8B1538;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.suggestion-btn:hover {
+    background: #8B1538;
+    color: white;
+}
+
+.suggestion-desc {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: normal;
+    margin-top: 0.2rem;
+    opacity: 0.8;
+}
+
+/* ========================================================================
+   BOUTON AJOUTER AU PANIER
+   ======================================================================== */
+
+.add-to-cart-btn {
+    background: #8B1538; /* Bordeaux */
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.add-to-cart-btn:hover {
+    background: #6B1028; /* Bordeaux foncé */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(139, 21, 56, 0.3);
+}
+
+/* ========================================================================
+   ONGLETS D'INFORMATIONS
+   ======================================================================== */
+
+.product-tabs {
+    margin-top: 3rem;
+}
+
+.tabs-nav {
+    display: flex;
+    border-bottom: 2px solid #e5ddd4;
+    margin-bottom: 2rem;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    color: #8a8a8a;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+.tab-btn.active {
+    color: #8B1538; /* Bordeaux */
+    border-bottom-color: #8B1538;
+    font-weight: 600;
+}
+
+.tab-btn:hover {
+    color: #8B1538;
+}
+
+.tab-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+/* ========================================================================
+   NOTIFICATIONS TOAST
+   ======================================================================== */
+
+.toast {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast-success {
+    background: #065f46; /* Vert foncé */
+}
+
+.toast-error {
+    background: #dc2626; /* Rouge */
+}
+
+/* ========================================================================
+   RESPONSIVE - MOBILE
+   ======================================================================== */
+
+@media (max-width: 768px) {
+    .product-detail-page {
+        padding: 1rem;
+    }
+    
+    .product-title {
+        font-size: 1.5rem;
+    }
+    
+    .quantity-input-group {
+        justify-content: center;
+    }
+    
+    .qty-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .suggestion-buttons {
+        justify-content: center;
+    }
+    
+    .tabs-nav {
+        flex-wrap: wrap;
+    }
+    
+    .tab-btn {
+        flex: 1;
+        min-width: 120px;
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* ========================================================================
+   STYLES POUR L'ANCIEN TEMPLATE (Compatibilité)
+   ======================================================================== */
+
+/* Si tu utilises encore l'ancien template product_detail.html.twig */
+.product-detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    background: #FAF7F2;
+}
+
+.product-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.product-image-detail {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    aspect-ratio: 1;
+}
+
+.product-image-detail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-info {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-info h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c2c2c;
+    margin-bottom: 0.5rem;
+}
+
+.product-info .category {
+    color: #8B1538;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.product-info .description {
+    color: #5a5a5a;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #8B1538;
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    padding: 0.75rem;
+    border: 2px solid #e5ddd4;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: #8B1538;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background: #6B1028;
+    transform: translateY(-2px);
+}

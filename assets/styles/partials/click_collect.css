@@ -1,0 +1,796 @@
+/* 🏗️ CLICK & COLLECT SECTION - Style beige chaleureux */
+
+.click-collect-section {
+    background: linear-gradient(135deg, var(--beige-light) 0%, var(--beige-medium) 100%);
+    padding: var(--spacing-4xl) 0;
+    margin: var(--spacing-2xl) 0;
+}
+
+.click-collect-container {
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    padding: 0 var(--spacing-xl);
+    
+}
+
+/* Titre section */
+.section-title {
+    font-size: var(--font-size-4xl);
+    color: var(--secondary-color);
+    margin-bottom: var(--spacing-sm);
+    font-weight: var(--font-weight-semibold);
+    font-family: var(--font-family-headings);
+    text-align: center;
+}
+
+.section-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--medium-gray);
+    margin-bottom: var(--spacing-2xl);
+    font-style: italic;
+}
+
+/* Grille des étapes */
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+}
+
+/* Carte étape */
+.step-card {
+    background: var(--white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.step-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #d72638, #b71c2b);
+}
+
+.step-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+}
+
+/* Icône étape */
+.step-icon {
+    margin-bottom: 1.5rem;
+}
+
+.step-icon i {
+    font-size: 3rem;
+    color: #d72638;
+    background: linear-gradient(135deg, #d72638, #b71c2b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Contenu étape */
+.step-content h3 {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    font-weight: 600;
+}
+
+.step-content p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+/* Bouton étape */
+.step-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: var(--white);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.5px;
+    transition: all var(--transition-normal);
+    text-transform: uppercase;
+}
+
+.step-btn:hover {
+    background: linear-gradient(135deg, var(--primary-dark), #a01728);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(215, 38, 56, 0.4);
+    color: var(--white);
+}
+
+/* 📄 STYLES POUR LA PAGE CLICK & COLLECT DÉDIÉE */
+
+/* Section Hero avec beige chaleureux */
+.click-collect-page .hero-section {
+    background: linear-gradient(135deg, var(--beige-warm) 0%, var(--beige-dark) 100%);
+    color: var(--secondary-color);
+    padding: var(--spacing-4xl) 0;
+    margin-bottom: 0;
+}
+
+.click-collect-page .hero-section h1 {
+    font-size: var(--font-size-5xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-lg);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: var(--secondary-color);
+}
+
+.click-collect-page .hero-section .lead {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-xl);
+    opacity: 0.9;
+    color: var(--secondary-light);
+}
+
+.click-collect-page .hero-badges {
+    margin-top: 2rem;
+}
+
+.click-collect-page .hero-badges .badge {
+    font-size: 0.9rem;
+    padding: 0.7rem 1.2rem;
+    border-radius: 25px;
+    font-weight: 500;
+}
+
+/* Section Steps - beige chaleureux */
+.click-collect-page .steps-section {
+    padding: var(--spacing-4xl) 0;
+    background: var(--beige-light);
+}
+
+.click-collect-page .steps-section h2 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 3rem;
+}
+
+/* ==========================================
+   SECTION AVANTAGES - VERSION SIMPLE
+   ========================================== */
+
+.advantages-section {
+    padding: 80px 0;
+    background: #f8f6f2;
+}
+
+.advantages-section h2 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 50px;
+    text-align: center;
+    max-width: 1000px;              /* Même largeur que les cartes */
+    margin-left: auto;             /* Centré */
+    margin-right: auto;            /* Centré */
+}
+
+/* GRILLE 2x2 - FACILE À MODIFIER */
+.advantages-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;  /* 2 colonnes égales */
+    gap: 100px;                       /* Espace entre les cartes */
+    max-width: auto;               /* Largeur max du conteneur */
+    margin: auto;                 /* Centré */
+}
+
+/* CARTES - DIMENSIONS FACILES À CHANGER */
+.advantage-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px 30px;            /* MODIFIEZ ICI pour + ou - d'espace intérieur */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    
+    /* DIMENSIONS DE LA CARTE - MODIFIEZ ICI */
+    width: 100%;                   /* Largeur automatique */
+    height: 250px;                 /* MODIFIEZ CETTE VALEUR pour la hauteur */
+    
+    /* Flexbox pour centrer le contenu */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;       /* Centre verticalement */
+    align-items: center;           /* Centre horizontalement */
+    
+    transition: transform 0.3s ease;
+}
+
+.advantage-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* ICÔNES */
+.advantage-card .advantage-icon {
+    margin-bottom: 15px;
+}
+
+.advantage-card .advantage-icon i {
+    font-size: 3rem;              /* MODIFIEZ ICI pour changer la taille des icônes */
+}
+
+/* TITRES */
+.advantage-card h4 {
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 1.5rem;            /* MODIFIEZ ICI pour la taille du titre */
+    margin-bottom: 15px;
+    text-align: center;           /* Force le centrage du titre */
+    width: 100%;                  /* Prend toute la largeur disponible */
+}
+
+/* TEXTE */
+.advantage-card p {
+    color: #666;
+    font-size: 1rem;           /* MODIFIEZ ICI pour la taille du texte */
+    line-height: 1.5;
+    text-align: center;           /* Centre le texte */
+    width: 100%;                  /* Prend toute la largeur */
+    margin-top: auto;             /* Pousse le texte vers le bas */
+}
+
+/* RESPONSIVE - MOBILE */
+@media (max-width: 768px) {
+    .advantages-grid {
+        grid-template-columns: 1fr;  /* 1 seule colonne sur mobile */
+        gap: 20px;
+        max-width: 350px;
+    }
+    
+    .advantage-card {
+        height: 200px;              /* MODIFIEZ ICI pour la hauteur mobile */
+        padding: 25px 15px;
+    }
+}
+
+/* Section Informations Pratiques */
+.practical-info-section {
+    padding: 5rem 0;
+}
+
+.practical-info-section h2 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 3rem;
+}
+
+.info-card {
+    height: 100%;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.info-card:hover {
+    border-color: #007bff !important;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,123,255,0.15);
+}
+
+.info-card h4 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.info-card ul li {
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.info-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Section FAQ */
+.faq-section {
+    padding: 5rem 0;
+}
+
+.faq-section h2 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 3rem;
+}
+
+.faq-section .accordion-button {
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 1.2rem 1.5rem;
+    border: none;
+    background: white;
+}
+
+.faq-section .accordion-button:not(.collapsed) {
+    background: #e7f3ff;
+    color: #0056b3;
+    border-color: #b3d9ff;
+}
+
+.faq-section .accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(0,123,255,0.25);
+}
+
+.faq-section .accordion-body {
+    padding: 1.5rem;
+    background: #f8f9fa;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.faq-section .accordion-item {
+    border: 1px solid #dee2e6;
+    border-radius: 8px !important;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+}
+
+/* Section CTA finale avec bordeaux élégant */
+.cta-section {
+    padding: var(--spacing-4xl) 0;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%) !important;
+}
+
+.cta-section h2 {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-lg);
+    color: var(--white);
+}
+
+.cta-section .lead {
+    font-size: var(--font-size-lg);
+    opacity: 0.95;
+    margin-bottom: var(--spacing-xl);
+    color: var(--white);
+}
+
+/* Styles CTA remplacés par btn-eysa - voir plus bas */
+
+/* 📦 CONTAINERS CSS PURS - Sans Bootstrap */
+
+/* Container principal responsive */
+.cc-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+}
+
+/* Container étroit pour textes centrés */
+.cc-container-narrow {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+}
+
+/* Container large pour sections étendues */
+.cc-container-wide {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+}
+
+/* Système de grille CSS pur */
+.cc-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -1rem;
+}
+
+.cc-col {
+    flex: 1;
+    padding: 0 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Colonnes spécifiques */
+.cc-col-1 { flex: 0 0 100%; }
+.cc-col-2 { flex: 0 0 50%; }
+.cc-col-3 { flex: 0 0 33.333%; }
+.cc-col-4 { flex: 0 0 25%; }
+
+/* Centrage des contenus */
+.cc-text-center {
+    text-align: center;
+}
+
+.cc-flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Espacement entre éléments */
+.cc-gap-sm { gap: 1rem; }
+.cc-gap-md { gap: 1.5rem; }
+.cc-gap-lg { gap: 2rem; }
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .cc-container,
+    .cc-container-narrow,
+    .cc-container-wide {
+        padding: 0 1rem;
+    }
+    
+    .cc-col-2,
+    .cc-col-3,
+    .cc-col-4 {
+        flex: 0 0 100%;
+    }
+    
+    .cc-row {
+        margin: 0 -0.5rem;
+    }
+    
+    .cc-col {
+        padding: 0 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cc-container,
+    .cc-container-narrow,
+    .cc-container-wide {
+        padding: 0 0.75rem;
+    }
+}
+
+/* ==========================================
+   SECTION INTRO avec badges
+   ========================================== */
+
+.intro-section {
+    padding: 60px 0;
+    background: #f8f6f2; /* Même beige que le reste */
+}
+
+.intro-section h2 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.intro-section p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-badges {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Badges inversés - Texte bordeaux sur fond blanc/crème */
+.badge-eysa-inverse {
+    background: #f5f3f0 !important; /* Fond crème */
+    color: #8B0000 !important; /* Texte bordeaux */
+    border: 2px solid #8B0000; /* Bordure bordeaux */
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.badge-eysa-inverse:hover {
+    background: #8B0000 !important; /* Inverse au hover */
+    color: white !important;
+    transform: translateY(-2px);
+}
+
+.badge-eysa-inverse i {
+    color: inherit;
+}
+
+/* Bouton COMMENCER sous les badges */
+.btn-eysa {
+    display: inline-block;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-eysa-primary {
+    background: #8B0000;
+    color: white;
+    box-shadow: 0 4px 15px rgba(139, 0, 0, 0.3);
+}
+
+.btn-eysa-primary:hover {
+    background: #A52A2A;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 0, 0, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+/* Responsive pour les badges */
+@media (max-width: 768px) {
+    .hero-badges {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 2rem !important;
+    }
+    
+    .badge-eysa-inverse {
+        width: 250px;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .btn-eysa {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+}
+
+/* 🚗 SECTION RETRAIT - Design moderne et convivial */
+.pickup-section {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Version avec image de fond activée via style inline */
+.pickup-section.with-background {
+    background: linear-gradient(
+        135deg,
+        rgba(245, 238, 220, 0.92) 0%,
+        rgba(233, 223, 196, 0.92) 100%
+    );
+    min-height: 600px;
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+}
+
+.pickup-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-3xl);
+    align-items: start;
+}
+
+.pickup-text {
+    padding-right: var(--spacing-xl);
+}
+
+.pickup-subtitle {
+    color: var(--primary-color);
+    font-style: italic;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.pickup-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+.pickup-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--primary-color);
+    transition: all var(--transition-normal);
+    backdrop-filter: blur(5px);
+}
+
+.pickup-item:hover {
+    transform: translateX(5px);
+    box-shadow: var(--shadow-md);
+}
+
+.pickup-icon {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.pickup-info h4 {
+    color: var(--secondary-color);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-xs);
+}
+
+.pickup-info p {
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.pickup-info strong {
+    color: var(--primary-color);
+}
+
+/* Planning de retrait */
+.pickup-schedule {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--beige-medium);
+    backdrop-filter: blur(5px);
+}
+
+.pickup-schedule h3 {
+    color: var(--secondary-color);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--beige-medium);
+}
+
+.schedule-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.schedule-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    background: var(--beige-light);
+    transition: all var(--transition-normal);
+}
+
+.schedule-item:hover {
+    background: var(--beige-medium);
+}
+
+.schedule-item.closed {
+    opacity: 0.6;
+    background: var(--light-gray);
+}
+
+.schedule-item .day {
+    font-weight: var(--font-weight-semibold);
+    color: var(--secondary-color);
+    min-width: 120px;
+}
+
+.schedule-item .hours {
+    color: var(--text-primary);
+    text-align: right;
+    line-height: 1.4;
+}
+
+.schedule-item.closed .hours {
+    color: var(--medium-gray);
+    font-style: italic;
+}
+
+/* Animation d'entrée */
+.pickup-item {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideInUp 0.6s ease forwards;
+}
+
+.pickup-item:nth-child(1) { animation-delay: 0.1s; }
+.pickup-item:nth-child(2) { animation-delay: 0.2s; }
+.pickup-item:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes slideInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .pickup-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-2xl);
+    }
+    
+    .pickup-text {
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .pickup-item {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--spacing-md);
+    }
+    
+    .pickup-icon {
+        align-self: center;
+    }
+    
+    .pickup-info h4 {
+        text-align: center;
+    }
+    
+    .schedule-item {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--spacing-xs);
+    }
+    
+    .schedule-item .day {
+        min-width: auto;
+        font-size: var(--font-size-lg);
+    }
+    
+    .schedule-item .hours {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .pickup-details {
+        gap: var(--spacing-lg);
+    }
+    
+    .pickup-item {
+        padding: var(--spacing-md);
+    }
+    
+    .pickup-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+}
