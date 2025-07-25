@@ -1,20 +1,12 @@
-/* ========================================================================
-   HEADER AVEC FOND NOIR - BOUCHERIE EYSA
-   ======================================================================== */
 
-/* 
-   🌑 HEADER PRINCIPAL
-   Fond noir avec texte blanc pour un design élégant
-   
-   👩‍💻 POUR TOI : Ce fichier gère uniquement le header (en-tête).
-   Les couleurs sont définies clairement : fond noir, texte blanc.
-   Si tu veux changer le design, modifie les couleurs ici.
-*/
+
+/*  Header principal de la Boucherie Eysa
+    Fond noir avec texte blanc et rouge au survol*/
 
 .main-header {
     background-color: #1a1a1a !important; /* Noir header */
     color: #ffffff !important; /* Texte blanc */
-    padding: 3rem 1.5rem 2rem;
+    padding: 2rem 1.5rem 1.5rem;
     font-family: 'Segoe UI', sans-serif;
 }
 
@@ -27,9 +19,7 @@
     margin: 0 auto;
 }
 
-/* ========================================================================
-   LOGO
-   ======================================================================== */
+/* LOGO */
 
 .logo-container {
     text-align: center;
@@ -54,15 +44,13 @@
 .logo a::after {
     content: "";
     display: block;
-    margin: 0.5rem auto 0;
+    margin: 2rem auto 0;
     width: 60%;
     height: 2px;
     background-color: #ffffff; /* Ligne blanche sous le logo */
 }
 
-/* ========================================================================
-   NAVIGATION
-   ======================================================================== */
+/* NAVIGATION */
 
 .nav-links {
     display: flex;
@@ -96,9 +84,7 @@
     color: #ffffff !important;
 }
 
-/* ========================================================================
-   ICÔNES HEADER (Panier, etc.)
-   ======================================================================== */
+/* Icones header */
 
 .header-icons {
     display: flex;
@@ -116,7 +102,7 @@
 }
 
 .icon-link:hover {
-    color: #d72638 !important; /* Rouge au survol */
+    color: #8B1538!important; /* Rouge au survol */
 }
 
 .icon-link i {
@@ -132,7 +118,7 @@
 
 /* Badge du panier */
 .cart-badge {
-    background: #d72638 !important; /* Rouge */
+    background: #8B1538 !important; /* Rouge */
     color: #ffffff !important; /* Texte blanc */
     border-radius: 50%;
     padding: 0.2rem 0.5rem;
@@ -140,9 +126,7 @@
     margin-left: 0.3rem;
 }
 
-/* ========================================================================
-   RESPONSIVE MOBILE
-   ======================================================================== */
+/* Responsive mobile */
 
 @media screen and (max-width: 768px) {
     .header-container {
@@ -174,13 +158,10 @@
     }
 }
 
-/* ========================================================================
-   FORÇAGE POUR ÉVITER L'ÉCRASEMENT PAR D'AUTRES CSS
-   ======================================================================== */
+
 
 /* 
-   Ces règles avec !important forcent le texte blanc dans le header.
-   C'est pour éviter que d'autres CSS viennent mettre du bordeaux.
+  Je force car sinon il se fait écraser par d'autres règles CSS.
 */
 
 .main-header a {
@@ -201,21 +182,18 @@
 
 /* Au survol, seul le rouge est autorisé */
 .main-header a:hover {
-    color: #d72638 !important;
+    color: #8B1538 !important;
 }
 
 .main-header .nav-links a:hover {
-    color: #d72638 !important;
+    color: #8B1538 !important;
 }
 
 .main-header .icon-link:hover {
-    color: #d72638 !important;
+    color: #8B1538 !important;
 }
 
-
-/* ========================================================================
-   Menu deroulant pour "Nos produits"
-   ======================================================================== */
+/* Menu déroulant "nos produits" */
 .dropdown {
   position: relative;
 }
@@ -280,6 +258,7 @@
   }
   
   .dropdown-content li a {
+    color: #ffffff !important; /* Blanc sur mobile */
     padding: 15px 20px; /* Plus d'espace sur mobile */
     font-size: 1.1rem;
   }

@@ -31,9 +31,9 @@ body {
     background-color: white;
     margin: 0;
     padding: 0;
-    font-family: var(--font-secondary);
-    line-height: 1.6;
-    color: var(--color-text);
+    font-family: var(--font-family-primary);
+    line-height: 1;
+    color: var(--text-primary);
 }
 
 /* Reset de base */
@@ -43,12 +43,12 @@ body {
 
 /* Liens de base */
 a {
-    color: var(--color-burgundy);
+    color: var(--primary-color);
     text-decoration: none;
 }
 
 a:hover {
-    color: var(--color-burgundy-dark);
+    color: var(--primary-dark);
 }
 
 /* ========================================================================
@@ -65,7 +65,7 @@ input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-    display: none; /* Ajout pour forcer la suppression */
+    display: none;
 }
 
 /* Supprimer les flèches (spinners) des inputs number sur Firefox */
@@ -181,7 +181,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .search-item:hover {
-    background: var(--bg-beige);
+    background: var(--beige-light);
     transform: translateY(-1px);
 }
 

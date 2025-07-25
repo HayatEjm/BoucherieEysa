@@ -2,20 +2,28 @@
    JS DÉDIÉ À LA PAGE CLICK & COLLECT (click_collect/index.html.twig)
    ======================================================================== */
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Smooth scroll pour les liens internes
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
+document.addEventListener('DOMContentLoaded', function () {
+  // Smooth scroll pour les ancres valides
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href')
+
+      // Ignorer si href="#" seul
+      if (!targetId || targetId === '#') return
+
+      const target = document.querySelector(targetId)
+
+      if (target) {
+        e.preventDefault()
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        })
+      }
+    })
+  })
+})
+
     // Animation des cartes au scroll (optionnel, pour l'UX)
     const observerOptions = {
         threshold: 0.1,
@@ -35,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(card);
     });
-});
+
 // ========================================================================
 // Fin du JS dédié à la page Click & Collect
 // ========================================================================

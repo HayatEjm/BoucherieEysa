@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'app_contact')]
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, \Symfony\Component\Mailer\MailerInterface $mailer): Response
     {
         $contact = new Contact();
         $form = $this->createForm(ContactForm::class, $contact);
@@ -25,10 +25,18 @@ class ContactController extends AbstractController
             // Enregistrement en base de données
             $entityManager->persist($contact);
             $entityManager->flush();
-            
+
+            // Envoi d'un email de confirmation à l'utilisateur
+            $email = (new \Symfony\Component\Mime\Email())
+                ->from('contact@boucherie-eysa.fr')
+                ->to($contact->getEmail())
+                ->subject('Confirmation de votre message')
+                ->html('<p>Merci pour votre message ! Nous vous répondrons rapidement.</p>');
+            $mailer->send($email);
+
             // Message de confirmation
             $this->addFlash('success', 'Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.');
-            
+
             // Redirection pour éviter la resoumission du formulaire
             return $this->redirectToRoute('app_contact');
         }

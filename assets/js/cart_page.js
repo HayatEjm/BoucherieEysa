@@ -1,4 +1,9 @@
+
+
+
 // Gestion des boutons "Vider le panier" et modale de confirmation (extraction du inline JS)
+
+
 document.addEventListener('DOMContentLoaded', function() {
     const btnClearCart = document.getElementById('btn-clear-cart');
     const modal = document.getElementById('confirm-clear-modal');

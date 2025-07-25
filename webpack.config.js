@@ -21,9 +21,13 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+    .addEntry('cart-app', './assets/js/cart-app.js')
+ 
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
+
+    .enableVueLoader()
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
@@ -56,6 +60,11 @@ Encore
         config.corejs = '3.38';
     })
 
+    //active le support Vue.js
+    .enableVueLoader(() => { }, {
+        runtimeCompilerBuild: true
+    })
+    // enables Vue.js support
     // enables Sass/SCSS support
     //.enableSassLoader()
 
@@ -71,6 +80,9 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
-;
+  
+    ;
+
+
 
 module.exports = Encore.getWebpackConfig();

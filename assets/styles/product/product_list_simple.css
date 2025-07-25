@@ -201,9 +201,9 @@
 }
 
 .no-products i {
-    font-size: 4rem;
+    /* font-size: 2rem; */
     color: #ddd;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .no-products h3 {

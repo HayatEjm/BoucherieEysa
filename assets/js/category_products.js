@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const productId = input.dataset.productId;
         const minWeight = parseInt(input.dataset.minGrams);
         const maxWeight = parseInt(input.dataset.maxGrams);
-        const price = parseFloat(input.closest('.product-card').querySelector('.quick-add-btn')?.dataset.price || 0);
+        var productCard = input.closest('.product-card');
+        var price = productCard ? parseFloat(productCard.querySelector('.quick-add-btn')?.dataset.price || 0) : 0;
         function validateAndUpdatePrice() {
             const currentUnit = input.dataset.currentUnit;
             let currentValue = parseFloat(input.value);

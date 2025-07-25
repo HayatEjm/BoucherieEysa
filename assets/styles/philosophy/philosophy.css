@@ -1,22 +1,9 @@
-/* ========================================================================
-   PAGE NOTRE PHILOSOPHIE - BOUCHERIE EYSA
-   ======================================================================== */
-
-/* 
-   🏪 PAGE PHILOSOPHIE
-   Design élégant et professionnel pour présenter les valeurs de la boucherie
-   
-   👩‍💻 POUR TOI : Ce fichier gère le style de la page "Notre Philosophie".
-   Les couleurs suivent le design system : beige, bordeaux, et noir.
-*/
+/* PAGE NOTRE PHILOSOPHIE */
 
 .philosophy-container {
     min-height: 100vh;
 }
-
-/* ========================================================================
-   SECTIONS GÉNÉRALES
-   ======================================================================== */
+/* Section générale */
 
 .philosophy-section {
     padding: 4rem 0;
@@ -91,9 +78,7 @@
     transform: translateY(-5px);
 }
 
-/* ========================================================================
-   POINTS QUALITÉ
-   ======================================================================== */
+/* Points qualité */
 
 .quality-points {
     margin-top: 2rem;
@@ -121,9 +106,7 @@
     color: #333;
 }
 
-/* ========================================================================
-   STATISTIQUES ENGAGEMENT
-   ======================================================================== */
+/* STATISTIQUES D'ENGAGEMENT */
 
 .engagement-stats {
     display: grid;
@@ -155,9 +138,7 @@
     font-weight: 500;
 }
 
-/* ========================================================================
-   SECTION CTA (Call To Action)
-   ======================================================================== */
+/* SECTION CTA (Call To Action) */
 
 .philosophy-cta {
     background: linear-gradient(135deg, #2c1810 0%, #5d4e37 100%);
@@ -222,9 +203,7 @@
     transform: translateY(-2px);
 }
 
-/* ========================================================================
-   RESPONSIVE MOBILE
-   ======================================================================== */
+/* Responsive mobile */
 
 @media screen and (max-width: 768px) {
     .philosophy-section {

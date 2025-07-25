@@ -1,0 +1,114 @@
+/* === Barre de recherche (Dropdown) === */
+
+/* Le conteneur principal */
+.search-container {
+  position: relative; /* Pour positionner le menu déroulant */
+  display: inline-block; /* S'adapte au contenu */
+  z-index: 1000; /* S'assure que le menu passe au-dessus du reste */
+}
+
+/* Icône de recherche (loupe) */
+.search-container .icon-link {
+  font-size: 1.2rem;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Bloc déroulant qui s'affiche quand on clique sur la loupe */
+.search-dropdown {
+  display: none; /* Masqué par défaut */
+  position: absolute;
+  top: 120%; /* Juste en dessous de la loupe */
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  max-width: 90vw;
+  padding: 1rem;
+}
+
+/* Quand Vue ajoute la classe `.show`, on affiche la dropdown */
+.search-dropdown.show {
+  display: block;
+}
+
+/* Champ de recherche */
+.search-dropdown input[type="text"] {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* Résultats affichés sous le champ */
+.search-results {
+  margin-top: 1rem;
+  max-height: 250px;
+  overflow-y: auto; /* Scroll si trop de résultats */
+  font-size: 0.95rem;
+}
+
+/* Titre des sections (produits ou catégories) */
+.search-results h4 {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid #eee;
+}
+
+/* Un résultat (produit ou catégorie) */
+.search-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f2f2f2;
+  cursor: pointer;
+}
+
+.search-item:last-child {
+  border-bottom: none;
+}
+
+.search-item strong {
+  font-weight: bold;
+  color: #222;
+}
+
+.search-item span {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* Messages : chargement, aide ou aucun résultat */
+.search-loading,
+.search-hint,
+.search-no-results {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #888;
+  padding: 1rem 0;
+  font-style: italic;
+}
+
+/* Petite animation pour le spinner */
+.search-loading i.fa-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive : sur petits écrans */
+@media (max-width: 600px) {
+  .search-dropdown {
+    width: 100%;
+    right: auto;
+    left: 0;
+  }
+}

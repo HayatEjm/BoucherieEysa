@@ -107,15 +107,15 @@ class CartService
         }
 
         // Calcul du total global après ajout
-        $currentTotal = $this->getTotalQuantity();
-        $futureTotal = $currentTotal + $quantity;
-        if ($futureTotal > $MAX_TOTAL) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'Vous ne pouvez pas avoir plus de %d articles dans votre panier.', $MAX_TOTAL
-                )
-            );
-        }
+      // Nouveau test (produits distincts) :
+$cartItems = $this->cartItemRepository->findByCart($cart);
+$distinctCount = count($cartItems) + ($existingItem ? 0 : 1);
+if ($distinctCount > $MAX_TOTAL) {
+    throw new \InvalidArgumentException(
+        sprintf('Vous ne pouvez pas avoir plus de %d produits différents dans votre panier.', $MAX_TOTAL)
+    );
+}
+
 
         if ($existingItem) {
             $existingItem->increaseQuantity($quantity);
@@ -256,13 +256,14 @@ class CartService
         $cart->clear();
         $this->cartRepository->save($cart);
     }
-
-    // Nombre total d'articles dans le panier
+    // Retourne le nombre total d'articles dans le panier
+    
     public function getTotalQuantity(): int
     {
-        $cart = $this->getCurrentCart();
-        return $this->cartItemRepository->calculateCartTotalQuantity($cart);
+        // On compte juste le nombre de CartItem, pas la somme des quantités
+        return count($this->getCartItems());
     }
+
 
     // Total en euros du panier
     public function getTotalPrice(): float

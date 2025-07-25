@@ -33,3 +33,7 @@ services:
     App\Service\PickupSlotService:
         arguments:
             $projectDir: '%kernel.project_dir%'
+    
+
+    App\Twig\AppExtension:
+        tags: ['twig.extension']
