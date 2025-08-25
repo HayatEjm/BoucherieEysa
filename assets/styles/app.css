@@ -10,7 +10,6 @@
 @import './partials/footer.css';
 @import './partials/page_banner.css';
 @import './partials/pickup-slots.css';
-@import './partials/checkout.css';
 
 /* Import des pages spécifiques */
 @import './home.css';

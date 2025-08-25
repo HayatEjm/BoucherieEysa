@@ -1188,3 +1188,23 @@ Array
         )
 
 )
+Array
+(
+    [id] => 21
+    [quantity] => 500
+    [POST] => Array
+        (
+            [quantity] => 500
+        )
+
+)
+Array
+(
+    [id] => 49
+    [quantity] => 100
+    [POST] => Array
+        (
+            [quantity] => 100
+        )
+
+)
