@@ -3,7 +3,7 @@
    ======================================================================== */
 
 /* Import du design system principal */
-@import './design-system-new.css';
+@import './design-system.css';
 
 /* Import des composants partiels */
 @import './partials/header.css';

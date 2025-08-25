@@ -14,11 +14,17 @@ export const useCartStore = defineStore('cart', {
   actions: {
     async fetchSummary() {
       this.loading = true
-      const data = await cartApi.getSummary()
-      this.items = data.items
-      this.totalQuantity = data.totalQuantity
-      this.totalPrice = data.totalTTC
-      this.isEmpty = this.totalQuantity === 0
+      try {
+        const data = await cartApi.getSummary()
+        this.items = data.items
+        this.totalQuantity = data.totalQuantity
+        this.totalPrice = data.totalTTC
+        this.isEmpty = this.totalQuantity === 0
+      } catch (error) {
+        console.error('❌ Store: Erreur fetchSummary:', error)
+        this.totalQuantity = 0
+        this.isEmpty = true
+      }
       this.loading = false
     },
 

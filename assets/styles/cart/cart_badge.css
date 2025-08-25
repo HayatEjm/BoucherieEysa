@@ -27,12 +27,12 @@
 /* Je style l'icône panier elle-même */
 .cart-icon {
     font-size: 1.5rem;
-    color: var(--color-burgundy);
+    color: var(--primary-color);
     transition: all 0.3s ease;
 }
 
 .cart-icon:hover {
-    color: var(--color-burgundy-dark);
+    color: var(--primary-dark);
 }
 
 /* ========================================================================
@@ -44,8 +44,8 @@
     position: absolute;
     top: -8px;
     right: -8px;
-    background: linear-gradient(135deg, var(--color-burgundy), var(--color-burgundy-dark));
-    color: white;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: var(--white);
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -56,7 +56,7 @@
     font-weight: 700;
     line-height: 1;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    border: 2px solid white;
+    border: 2px solid var(--white);
     z-index: 10;
 }
 
@@ -80,7 +80,7 @@
     }
     50% {
         transform: scale(1.3);
-        background: var(--color-success);
+        background: var(--success-color);
     }
     100% {
         transform: scale(1);

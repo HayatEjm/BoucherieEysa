@@ -9,6 +9,8 @@ import { createPinia } from 'pinia'
 import DropdownMenu from './components/DropdownMenu.vue'
 import ProductDetail from './components/ProductDetail.vue'
 import SearchBar from './components/SearchBar.vue'
+import CartBadge from './components/CartBadge.vue'
+import AddToCartButton from './components/AddToCartButton.vue'
 
 // --- Composant Menu Déroulant (Header)
 const mountPoint = document.getElementById('vue-dropdown-menu')
@@ -32,6 +34,42 @@ if (searchEl) {
   const searchApp = createApp(SearchBar)
   searchApp.mount(searchEl)
   console.log('🟢 Composant SearchBar monté avec succès')
+}
+
+// --- Composant Vue CartBadge
+const cartBadgeEl = document.getElementById('cart-badge')
+if (cartBadgeEl) {
+  try {
+    const badgeApp = createApp(CartBadge)
+    badgeApp.use(createPinia())
+    badgeApp.mount(cartBadgeEl)
+    console.log('🟢 Composant CartBadge monté avec succès')
+  } catch (error) {
+    console.error('❌ Erreur lors du montage du composant CartBadge :', error)
+  }
+}
+
+// --- Composants Vue AddToCartButton (remplace les boutons legacy)
+const addToCartButtons = document.querySelectorAll('.add-to-cart[data-product-id]')
+if (addToCartButtons.length > 0) {
+  console.log(`🟢 ${addToCartButtons.length} boutons "Ajouter au panier" trouvés`)
+  
+  addToCartButtons.forEach(button => {
+    const productId = button.dataset.productId
+    const quantity = parseInt(button.dataset.quantity) || 1
+    
+    if (productId) {
+      const buttonApp = createApp(AddToCartButton, {
+        productId,
+        quantity,
+        customClass: button.className,
+        text: button.textContent.trim()
+      })
+      
+      buttonApp.use(createPinia())
+      buttonApp.mount(button)
+    }
+  })
 }
 
 
@@ -67,15 +105,12 @@ if (el) {
 import './js/header.js'
 import './js/category_products.js'
 import './js/click_collect.js'
-import './js/cart_page.js'
 import './bootstrap.js'
-// import './js/cart.js'
 import './js/pickupSlots.js'
-// import './search.js'
 
 // --- Fonts & Design System
 import '@fortawesome/fontawesome-free/css/all.min.css'
-import './styles/design-system-new.css'
+import './styles/design-system.css'
 
 // --- CSS Global & Pages
 import './styles/app.css'
@@ -90,7 +125,6 @@ import './styles/philosophy/philosophy.css'
 import './styles/product/product_list_simple.css'
 import './styles/product/product_detail.css'
 import './styles/checkout/checkout.css'
-import './styles/cart/cart.css'
 import './styles/cart/cart_badge.css'
 
 // Fin

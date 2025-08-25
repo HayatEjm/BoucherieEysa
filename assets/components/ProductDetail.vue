@@ -13,7 +13,7 @@ console.log('Méthodes dispo:', Object.keys(cart))
 const props = defineProps({
   product:     { type: Object, required: true },
   minWeight:   { type: Number, required: true },
-  maxWeight:   { type: Number, default: 5000 },
+  maxWeight:   { type: Number, default: 6000 },
   step:        { type: Number, default: 100 },
   suggestions: { type: Array,  default: () => [500, 1000, 1500] }
 })
@@ -43,13 +43,14 @@ async function addToCart() {
 
   try {
     const message = await cart.addToCart(props.product.id, quantity.value)
-   toast.showToast('Produit ajouté au panier')
+    toast.showToast('Produit ajouté au panier')
   } catch (err) {
     toast.showToast(err.message || 'Erreur lors de l’ajout au panier', 'error')
   } finally {
     isAdding.value = false
   }
 }
+import ToastVue from './ToastVue.vue'
 </script>
 
 <template>
@@ -135,6 +136,7 @@ async function addToCart() {
         <span v-if="isAdding">Ajout en cours…</span>
         <span v-else>Ajouter au panier</span>
       </button>
+       <ToastVue />
     </div>
   </div>
 </template>

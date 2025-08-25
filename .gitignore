@@ -37,3 +37,6 @@ GuidesPerso/
 TVA_BOUCHERIE_IMPLEMENTEE.md
 CHECKLIST_CORRECTIONS_CSS.md
 NETTOYAGE_CSS_TERMINE.md
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###

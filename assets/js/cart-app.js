@@ -1,3 +1,7 @@
+// assets/cart-app.js
+import '../styles/design-system.css';  //  variables et tokens
+import '../styles/cart/cart.css';      // styles spécifiques panier 
+
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
