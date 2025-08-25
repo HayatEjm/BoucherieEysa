@@ -67,16 +67,6 @@
     color: white;
 }
 
-.btn-primary {
-    background: #d72638;
-    color: white;
-}
-
-.btn-primary:hover {
-    background: #b71c2b;
-    transform: translateY(-2px);
-}
-
 /* Grille des produits - style épuré */
 .products-grid {
     display: grid;

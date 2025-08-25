@@ -180,17 +180,6 @@
     cursor: pointer;
 }
 
-.btn-primary {
-    background-color: #d72638;
-    color: #ffffff;
-}
-
-.btn-primary:hover {
-    background-color: #b91e2f;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(215, 38, 56, 0.3);
-}
-
 .btn-secondary {
     background-color: transparent;
     color: #ffffff;
