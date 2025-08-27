@@ -1,0 +1,106 @@
+{# Template pour la page "Mon Compte" #}
+{# J'étends le layout principal pour garder la cohérence du site #}
+{% extends 'base.html.twig' %}
+
+{# Titre de la page qui s'affiche dans l'onglet du navigateur #}
+{% block title %}Mon Compte - Boucherie Eysa{% endblock %}
+
+{# Contenu principal de la page #}
+{% block body %}
+    <div class="account-container">
+        {# En-tête de la page avec le nom de l'utilisateur #}
+        <div class="account-header">
+            <h1>Mon Compte</h1>
+            <p class="welcome-message">
+                Bonjour 
+                {% if user.fullName %}
+                    {{ user.fullName }} !
+                {% else %}
+                    {{ user.email }} !
+                {% endif %}
+            </p>
+        </div>
+
+        {# Section principale avec les informations du compte #}
+        <div class="account-content">
+            
+            {# Carte informations personnelles #}
+            <div class="account-card">
+                <h2><i class="fas fa-user"></i> Mes Informations</h2>
+                <div class="account-info">
+                    <p><strong>Email :</strong> {{ user.email }}</p>
+                    {% if user.firstName %}
+                        <p><strong>Prénom :</strong> {{ user.firstName }}</p>
+                    {% endif %}
+                    {% if user.lastName %}
+                        <p><strong>Nom :</strong> {{ user.lastName }}</p>
+                    {% endif %}
+                    {% if user.phone %}
+                        <p><strong>Téléphone :</strong> {{ user.phone }}</p>
+                    {% endif %}
+                    <p><strong>Membre depuis :</strong> 
+                        {# Je formate la date d'inscription si elle existe #}
+                        {% if user.createdAt is defined %}
+                            {{ user.createdAt|date('d/m/Y') }}
+                        {% else %}
+                            {# Fallback si pas de date définie #}
+                            Récemment
+                        {% endif %}
+                    </p>
+                </div>
+                
+                {# Bouton pour modifier le profil (préparé pour plus tard) #}
+                <div class="account-actions">
+                    <a href="{{ path('app_account_profile') }}" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Modifier mon profil
+                    </a>
+                </div>
+            </div>
+
+            {# Carte historique des commandes (préparée pour plus tard) #}
+            <div class="account-card">
+                <h2><i class="fas fa-shopping-bag"></i> Mes Commandes</h2>
+                <div class="orders-section">
+                    {# TODO : Boucle sur les commandes quand j'aurai cette fonctionnalité #}
+                    <p class="no-orders">Vous n'avez pas encore passé de commande.</p>
+                    <a href="{{ path('app_home') }}" class="btn btn-outline">
+                        <i class="fas fa-store"></i> Découvrir nos produits
+                    </a>
+                </div>
+            </div>
+
+            {# Carte actions rapides #}
+            <div class="account-card">
+                <h2><i class="fas fa-tools"></i> Actions Rapides</h2>
+                <div class="quick-actions">
+                    {# Actions principales côte à côte #}
+                    <div class="main-actions">
+                        <a href="{{ path('app_cart_index') }}" class="btn btn-secondary">
+                            <i class="fas fa-shopping-cart"></i> Mon Panier
+                        </a>
+                        <a href="{{ path('app_home') }}" class="btn btn-secondary">
+                            <i class="fas fa-home"></i> Accueil
+                        </a>
+                    </div>
+                    
+                    {# Action de déconnexion séparée #}
+                    <div class="logout-action">
+                        <a href="{{ path('app_logout') }}" class="btn btn-outline btn-logout">
+                            <i class="fas fa-sign-out-alt"></i> Se déconnecter
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    {# J'inclus le CSS spécifique pour cette page #}
+    {{ encore_entry_link_tags('account') }}
+{% endblock %}
+
+{# Scripts spécifiques si nécessaire (pour plus tard) #}
+{% block javascripts %}
+    {{ parent() }}
+    {# TODO : Scripts pour les actions du compte si nécessaire #}
+{% endblock %}

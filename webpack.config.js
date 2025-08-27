@@ -22,12 +22,27 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addEntry('cart-app', './assets/js/cart-app.js')
+    .addEntry('cart-badge', './assets/js/cart-badge-app.js')
+    .addStyleEntry('account', './assets/styles/account.css')
  
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 
     .enableVueLoader()
+
+    // 🚀 OPTIMISATIONS PERFORMANCE PANIER
+    .configureSplitChunks((splitChunks) => {
+        splitChunks.cacheGroups = {
+            vendor: {
+                test: /[\\/]node_modules[\\/]/,
+                name: 'vendor',
+                chunks: 'all',
+                minSize: 0,
+                maxSize: 500000, // Limite à 500KB par chunk
+            }
+        }
+    })
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
@@ -46,8 +61,8 @@ Encore
     // .enableBuildNotifications()
 
     .enableSourceMaps(!Encore.isProduction())
-    // enables hashed filenames (e.g. app.abc123.css)
-    .enableVersioning(Encore.isProduction())
+    // enables hashed filenames (e.g. app.abc123.css) - DISABLED for cleaner filenames
+    .enableVersioning(false)
 
     // configure Babel
     // .configureBabel((config) => {
@@ -62,8 +77,16 @@ Encore
 
     //active le support Vue.js
     .enableVueLoader(() => { }, {
-        runtimeCompilerBuild: true
+        runtimeCompilerBuild: true // Réactive le runtime compiler pour les templates inline
     })
+
+    // 🚀 OPTIMISATIONS AVANCÉES (mode production seulement) - TEMPORAIREMENT DÉSACTIVÉ
+    // .when(Encore.isProduction(), encoreInstance => {
+    //     encoreInstance.configureOptimization((optimization) => {
+    //         optimization.minimize = true
+    //         optimization.sideEffects = false
+    //     })
+    // })
     // enables Vue.js support
     // enables Sass/SCSS support
     //.enableSassLoader()

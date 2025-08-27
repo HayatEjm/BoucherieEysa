@@ -19,6 +19,7 @@
     font-size: 2rem;
     margin-bottom: 1rem;
     font-weight: bold;
+    color: white !important; /* Force le blanc pour les noms de catégories */
 }
 
 /*  Conteneur principal */
@@ -135,6 +136,7 @@
 
     .category-name {
         font-size: 1.8rem;
+        color: white !important; /* Force le blanc aussi en mobile */
     }
 
     .category-description {

@@ -19,6 +19,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $firstName = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $lastName = null;
+
+    #[ORM\Column(length: 20, nullable: true)]
+    private ?string $phone = null;
+
     /**
      * @var list<string> The user roles
      */
@@ -102,5 +111,61 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    // ========== NOUVEAUX CHAMPS PROFIL ==========
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(?string $firstName): static
+    {
+        $this->firstName = $firstName;
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(?string $lastName): static
+    {
+        $this->lastName = $lastName;
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): static
+    {
+        $this->phone = $phone;
+        return $this;
+    }
+
+    /**
+     * Retourne le nom complet de l'utilisateur
+     */
+    public function getFullName(): string
+    {
+        if ($this->firstName && $this->lastName) {
+            return trim($this->firstName . ' ' . $this->lastName);
+        }
+        
+        // Fallback sur l'email si pas de nom complet
+        return $this->email ?? 'Utilisateur';
+    }
+
+    /**
+     * Vérifie si le profil est complet
+     */
+    public function isProfileComplete(): bool
+    {
+        return $this->firstName && $this->lastName && $this->phone;
     }
 }

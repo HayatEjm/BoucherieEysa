@@ -1,0 +1,103 @@
+{# Template pour la page d'inscription #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription - Boucherie Eysa{% endblock %}
+
+{% block body %}
+    <div class="auth-container">
+        <div class="auth-card">
+            {# En-tête du formulaire #}
+            <div class="auth-header">
+                <h1>Créer un compte</h1>
+                <p>Rejoignez la communauté Boucherie Eysa</p>
+            </div>
+
+            {# Messages flash (succès/erreurs) #}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i>
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {# Formulaire d'inscription #}
+            {{ form_start(signupForm, {'attr': {'class': 'auth-form'}}) }}
+                
+                {# Champ email #}
+                <div class="form-group">
+                    {{ form_label(signupForm.email, null, {'label_attr': {'class': 'form-label'}}) }}
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        {{ form_widget(signupForm.email, {'attr': {
+                            'class': 'form-control',
+                            'placeholder': 'votre@email.com'
+                        }}) }}
+                    </div>
+                    {{ form_errors(signupForm.email) }}
+                </div>
+
+                {# Champ mot de passe #}
+                <div class="form-group">
+                    {{ form_label(signupForm.password, null, {'label_attr': {'class': 'form-label'}}) }}
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        {{ form_widget(signupForm.password, {'attr': {
+                            'class': 'form-control',
+                            'placeholder': 'Mot de passe sécurisé'
+                        }}) }}
+                    </div>
+                    {{ form_errors(signupForm.password) }}
+                    <small class="form-hint">
+                        Le mot de passe doit contenir au moins 6 caractères
+                    </small>
+                </div>
+
+                {# TODO : Champ confirmation mot de passe si ajouté au formulaire #}
+                {# <div class="form-group">
+                    <label for="password_confirm">
+                        <i class="fas fa-lock"></i>
+                        Confirmer le mot de passe
+                    </label>
+                    <input type="password" class="form-control" placeholder="Confirmez votre mot de passe">
+                </div> #}
+
+                {# Bouton d'inscription #}
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-user-plus"></i>
+                    Créer mon compte
+                </button>
+
+            {{ form_end(signupForm) }}
+
+            {# Liens utiles #}
+            <div class="auth-links">
+                <p>Déjà un compte ?</p>
+                <a href="{{ path('app_login') }}" class="btn btn-outline">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Se connecter
+                </a>
+            </div>
+
+            {# Retour à l'accueil #}
+            <div class="auth-back">
+                <a href="{{ path('app_home') }}" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Retour à l'accueil
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{# CSS spécifique pour l'authentification #}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/css/auth.css') }}">
+{% endblock %}

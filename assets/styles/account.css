@@ -1,0 +1,295 @@
+/* ===================================
+   CSS pour la page Mon Compte
+   Fichier: assets/styles/account.css
+   ================================= */
+
+/* Container principal de la page compte */
+.account-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* En-tête de la page Mon Compte */
+.account-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 12px;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.account-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.welcome-message {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* Contenu principal avec grille des cartes */
+.account-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+        "info"
+        "commands actions";
+    gap: 2rem;
+}
+
+/* Carte informations sur toute la largeur */
+.account-card:nth-child(1) {
+    grid-area: info;
+}
+
+/* Cartes commandes et actions côte à côte */
+.account-card:nth-child(2) {
+    grid-area: commands;
+}
+
+.account-card:nth-child(3) {
+    grid-area: actions;
+}
+
+/* Sur écrans plus larges, ajuster la grille */
+@media (min-width: 768px) {
+    .account-content {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+            "info info"
+            "commands actions";
+    }
+}
+
+/* Cartes individuelles du compte */
+.account-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.account-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.account-card h2 {
+    color: #8b1538;
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.account-card h2 i {
+    font-size: 1.2rem;
+    color: #8b1538;
+}
+
+/* Informations personnelles */
+.account-info {
+    margin-bottom: 2rem;
+}
+
+.account-info p {
+    margin: 1.25rem 0;
+    font-size: 1rem;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: #f8fafc;
+    border-radius: 6px;
+    border-left: 3px solid #8b1538;
+}
+
+.account-info strong {
+    color: #8b1538;
+    min-width: 120px;
+    font-weight: 600;
+}
+
+/* Actions du compte */
+.account-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.account-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background-color: #8b1538;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #6b1028;
+    transform: translateY(-1px);
+}
+
+/* Section commandes */
+.orders-section {
+    text-align: center;
+}
+
+.no-orders {
+    color: #6b7280;
+    margin-bottom: 3rem;
+    font-style: italic;
+}
+
+/* Actions rapides */
+.quick-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+/* Groupe des actions principales (Panier + Accueil) */
+.main-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Bouton de déconnexion séparé */
+.logout-action {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e7eb;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.quick-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    text-align: center;
+    min-height: 50px;
+    min-width: 140px;
+}
+
+.btn-secondary {
+    background-color: #8b1538;
+    color: white;
+    border: 2px solid #8b1538;
+}
+
+.btn-secondary:hover {
+    background-color: #6b1028;
+    border-color: #6b1028;
+    transform: translateY(-1px);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: #8b1538;
+    border: 2px solid #8b1538;
+}
+
+.btn-outline:hover {
+    background-color: #8b1538;
+    color: white;
+}
+
+.btn-logout {
+    border-color: #dc2626;
+    color: #dc2626;
+}
+
+.btn-logout:hover {
+    background-color: #dc2626;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .account-container {
+        margin: 1rem auto;
+        padding: 0 0.5rem;
+    }
+    
+    .account-header {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+    }
+    
+    .account-header h1 {
+        font-size: 2rem;
+    }
+    
+    .account-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .account-card {
+        padding: 1.5rem;
+    }
+    
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+    
+    .account-actions .btn {
+        padding: 0.875rem 1rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .account-header {
+        padding: 1rem;
+    }
+    
+    .account-header h1 {
+        font-size: 1.75rem;
+    }
+    
+    .welcome-message {
+        font-size: 1rem;
+    }
+    
+    .account-card {
+        padding: 1rem;
+    }
+    
+    .account-info strong {
+        min-width: 80px;
+        font-size: 0.9rem;
+    }
+}

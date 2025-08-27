@@ -3,7 +3,7 @@ import '../styles/design-system.css';  //  variables et tokens
 import '../styles/cart/cart.css';      // styles spécifiques panier 
 
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { pinia } from '../stores/pinia'
 
 // J'importe le composant CartApp (qui inclut CartView et ToastVue)
 import CartApp from '../components/CartApp.vue'
@@ -17,5 +17,5 @@ const app = createApp({
   `
 })
 
-app.use(createPinia())
+app.use(pinia)
 app.mount('#cart-app')

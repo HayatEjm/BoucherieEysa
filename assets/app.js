@@ -5,7 +5,7 @@ console.log(' app.js bien chargé');
 
 
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { pinia } from './stores/pinia'
 import DropdownMenu from './components/DropdownMenu.vue'
 import ProductDetail from './components/ProductDetail.vue'
 import SearchBar from './components/SearchBar.vue'
@@ -27,11 +27,10 @@ if (mountPoint) {
 }
 
 // --- Composant Vue SearchBar
-
-
 const searchEl = document.querySelector('.search-container')
 if (searchEl) {
   const searchApp = createApp(SearchBar)
+  searchApp.use(pinia) // ✅ Utilisation de Pinia partagée
   searchApp.mount(searchEl)
   console.log('🟢 Composant SearchBar monté avec succès')
 }
@@ -41,7 +40,7 @@ const cartBadgeEl = document.getElementById('cart-badge')
 if (cartBadgeEl) {
   try {
     const badgeApp = createApp(CartBadge)
-    badgeApp.use(createPinia())
+    badgeApp.use(pinia)
     badgeApp.mount(cartBadgeEl)
     console.log('🟢 Composant CartBadge monté avec succès')
   } catch (error) {
@@ -49,7 +48,7 @@ if (cartBadgeEl) {
   }
 }
 
-// --- Composants Vue AddToCartButton (remplace les boutons legacy)
+// --- Composants Vue AddToCartButton (version simple qui fonctionne)
 const addToCartButtons = document.querySelectorAll('.add-to-cart[data-product-id]')
 if (addToCartButtons.length > 0) {
   console.log(`🟢 ${addToCartButtons.length} boutons "Ajouter au panier" trouvés`)
@@ -66,7 +65,7 @@ if (addToCartButtons.length > 0) {
         text: button.textContent.trim()
       })
       
-      buttonApp.use(createPinia())
+      buttonApp.use(pinia)
       buttonApp.mount(button)
     }
   })
@@ -90,7 +89,7 @@ if (el) {
       step,
       suggestions
     })
-    app.use(createPinia())
+    app.use(pinia)
     app.mount(el)
 
     console.log('🟢 Composant ProductDetail monté avec succès (avec Pinia)')
@@ -126,6 +125,8 @@ import './styles/product/product_list_simple.css'
 import './styles/product/product_detail.css'
 import './styles/checkout/checkout.css'
 import './styles/cart/cart_badge.css'
+import './styles/auth/auth.css'
+import './styles/account/account.css'
 
 // Fin
 console.log('🎉 Fin de chargement app.js (Vue + Styles + JS)');

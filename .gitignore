@@ -28,6 +28,9 @@ yarn-error.log
 
 ###> documentation files ###
 DOCUMENTATION_API.md
+GUIDE_AUTHENTIFICATION_ETAPES.md
+# Ignorer tous les fichiers Markdown
+*.md
 ###< documentation files ###
 
 

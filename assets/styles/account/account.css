@@ -1,0 +1,291 @@
+/* CSS pour la page "Mon Compte" */
+
+/* Je réutilise les variables du design system */
+:root {
+    --account-primary: var(--primary-color, #8B4513);
+    --account-secondary: var(--secondary-color, #F5F5DC);
+    --account-accent: var(--accent-color, #CD853F);
+    --account-text: var(--text-color, #333);
+    --account-bg: var(--bg-color, #fff);
+    --account-border: #e0e0e0;
+    --account-shadow: rgba(0, 0, 0, 0.08);
+}
+
+/* Container principal */
+.account-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    min-height: calc(100vh - 200px);
+}
+
+/* En-tête de la page */
+.account-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--account-secondary) 0%, #fff 100%);
+    border-radius: 12px;
+    border: 1px solid var(--account-border);
+}
+
+.account-header h1 {
+    color: var(--account-primary);
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.welcome-message {
+    color: var(--account-text);
+    font-size: 1.1rem;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Contenu principal */
+.account-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+/* Cartes de contenu */
+.account-card {
+    background: var(--account-bg);
+    border: 1px solid var(--account-border);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px var(--account-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.account-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Titres des cartes */
+.account-card h2 {
+    color: var(--account-primary);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.account-card h2 i {
+    margin-right: 0.75rem;
+    color: var(--account-accent);
+    font-size: 1.2rem;
+}
+
+/* Informations du compte */
+.account-info {
+    margin-bottom: 1.5rem;
+}
+
+.account-info p {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.account-info strong {
+    color: var(--account-primary);
+    font-weight: 500;
+    display: inline-block;
+    min-width: 100px;
+}
+
+/* Actions du compte */
+.account-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Section commandes */
+.orders-section {
+    text-align: center;
+}
+
+.no-orders {
+    color: var(--account-text);
+    opacity: 0.7;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background: var(--account-secondary);
+    border-radius: 8px;
+}
+
+/* Actions rapides */
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+/* Boutons */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    line-height: 1.4;
+}
+
+.btn i {
+    margin-right: 0.5rem;
+}
+
+.btn-primary {
+    background: var(--account-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #7a3e12;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+}
+
+.btn-secondary {
+    background: var(--account-accent);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #b8773a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(205, 133, 63, 0.3);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--account-primary);
+    border: 2px solid var(--account-primary);
+}
+
+.btn-outline:hover {
+    background: var(--account-primary);
+    color: white;
+}
+
+/* Bouton déconnexion avec style spécial */
+.btn-logout {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-logout:hover {
+    background: #dc3545;
+    color: white;
+}
+
+/* Responsive - Tablette */
+@media (min-width: 768px) {
+    .account-content {
+        grid-template-columns: 2fr 1fr;
+    }
+    
+    .account-card:first-child {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Responsive - Desktop */
+@media (min-width: 1024px) {
+    .account-container {
+        padding: 3rem 2rem;
+    }
+    
+    .account-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+    }
+    
+    .account-card:first-child {
+        grid-column: 1 / -1;
+    }
+    
+    .quick-actions {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+    .account-container {
+        padding: 1.5rem 1rem;
+    }
+    
+    .account-header {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .account-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .welcome-message {
+        font-size: 1rem;
+    }
+    
+    .account-card {
+        padding: 1.5rem;
+    }
+    
+    .account-card h2 {
+        font-size: 1.2rem;
+    }
+    
+    .account-actions {
+        flex-direction: column;
+    }
+    
+    .quick-actions {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .btn {
+        padding: 0.875rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* États de chargement (pour plus tard) */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid var(--account-primary);
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

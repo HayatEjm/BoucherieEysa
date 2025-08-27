@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier mon profil - Boucherie Eysa{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1 class="auth-title">
+                <i class="fas fa-user-edit"></i>
+                Modifier mon profil
+            </h1>
+            <p class="auth-subtitle">
+                Mettez à jour vos informations personnelles
+            </p>
+        </div>
+
+        {# Messages flash #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i>
+                {{ message }}
+            </div>
+        {% endfor %}
+        
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {# Formulaire de modification du profil #}
+        {{ form_start(profileForm, {'attr': {'class': 'auth-form profile-form'}}) }}
+            <div class="form-group">
+                <label for="{{ profileForm.firstName.vars.id }}" class="form-label">
+                    <i class="fas fa-user"></i>
+                    Prénom
+                </label>
+                
+                {{ form_widget(profileForm.firstName, {'attr': {'class': 'form-input'}}) }}
+                {{ form_errors(profileForm.firstName) }}
+                <div class="form-help-text">Nécessaire pour vous contacter lors du retrait de vos commandes</div>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ profileForm.lastName.vars.id }}" class="form-label">
+                    <i class="fas fa-user"></i>
+                    Nom
+                </label>
+                
+                {{ form_widget(profileForm.lastName, {'attr': {'class': 'form-input'}}) }}
+                {{ form_errors(profileForm.lastName) }}
+                <div class="form-help-text">Requis pour vos factures et documents officiels</div>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ profileForm.phone.vars.id }}" class="form-label">
+                    <i class="fas fa-phone"></i>
+                    Téléphone
+                </label>
+               
+                {{ form_widget(profileForm.phone, {'attr': {'class': 'form-input'}}) }}
+                {{ form_errors(profileForm.phone) }}
+                 <div class="form-help-text">Indispensable pour vous contacter lors du retrait de vos commandes</div>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ profileForm.email.vars.id }}" class="form-label">
+                    <i class="fas fa-envelope"></i>
+                    Adresse email
+                </label>
+                {{ form_widget(profileForm.email, {'attr': {'class': 'form-input'}}) }}
+                {{ form_errors(profileForm.email) }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ profileForm.newPassword.first.vars.id }}" class="form-label">
+                    <i class="fas fa-key"></i>
+                    Nouveau mot de passe
+                </label>
+                {{ form_widget(profileForm.newPassword.first, {'attr': {'class': 'form-input'}}) }}
+                {{ form_errors(profileForm.newPassword.first) }}
+                <div class="form-help">Laissez vide si vous ne souhaitez le modifier</div>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ profileForm.newPassword.second.vars.id }}" class="form-label">
+                    <i class="fas fa-key"></i>
+                    Confirmer le nouveau mot de passe
+                </label>
+                {{ form_widget(profileForm.newPassword.second, {'attr': {'class': 'form-input'}}) }}
+                {{ form_errors(profileForm.newPassword.second) }}
+            </div>
+
+            {# Erreurs générales du formulaire #}
+            {{ form_errors(profileForm) }}
+
+            <div class="form-actions">
+                {{ form_widget(profileForm.save, {'attr': {'class': 'btn-primary btn-full'}}) }}
+            </div>
+        {{ form_end(profileForm) }}
+
+        {# Lien de retour #}
+        <div class="auth-footer">
+            <a href="{{ path('app_account') }}" class="link-secondary">
+                <i class="fas fa-arrow-left"></i>
+                Retour à mon compte
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
