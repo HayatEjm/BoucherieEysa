@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation de commande - Boucherie Eysa</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f8f6f3;
+            color: #2d2d2d;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(139, 69, 19, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .header p {
+            margin: 10px 0 0;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 30px;
+        }
+        .order-info {
+            background-color: #f8f6f3;
+            border-left: 4px solid #8b4513;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .order-details table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .order-details th {
+            background-color: #8b4513;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .order-details td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .order-details tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .total-row {
+            background-color: #8b4513 !important;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .pickup-info {
+            background: linear-gradient(135deg, #f8f6f3 0%, #f0ede8 100%);
+            border: 2px solid #8b4513;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        .pickup-info h3 {
+            color: #8b4513;
+            margin: 0 0 15px;
+            font-size: 20px;
+        }
+        .pickup-time {
+            font-size: 18px;
+            font-weight: bold;
+            color: #8b4513;
+            background-color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .footer {
+            background-color: #2d2d2d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        .footer a {
+            color: #f8f6f3;
+            text-decoration: none;
+        }
+        .logo {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- En-tête -->
+        <div class="header">
+            <div class="logo">🥩</div>
+            <h1>Commande Confirmée !</h1>
+            <p>Merci pour votre confiance</p>
+        </div>
+
+        <!-- Contenu principal -->
+        <div class="content">
+            <p>Bonjour <strong>{{ order.customerName }}</strong>,</p>
+            
+            <p>Nous avons bien reçu votre commande et elle est actuellement en préparation par nos bouchers experts.</p>
+
+            <!-- Informations de commande -->
+            <div class="order-info">
+                <h3 style="margin: 0 0 10px; color: #8b4513;">📋 Détails de votre commande</h3>
+                <p><strong>Numéro :</strong> #{{ order.id }}</p>
+                <p><strong>Date :</strong> {{ order.createdAt|date('d/m/Y à H:i') }}</p>
+                <p><strong>Total :</strong> <span style="color: #8b4513; font-weight: bold;">{{ (order.totalTtcCents / 100)|number_format(2, ',', ' ') }} €</span></p>
+            </div>
+
+            <!-- Détails des produits -->
+            <div class="order-details">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produit</th>
+                            <th>Quantité</th>
+                            <th>Prix unitaire</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in order.orderItems %}
+                        <tr>
+                            <td><strong>{{ item.product.name }}</strong></td>
+                            <td>{{ item.quantity }} {{ item.product.unit }}</td>
+                            <td>{{ (item.unitPriceHtCents / 100)|number_format(2, ',', ' ') }} €</td>
+                            <td>{{ (item.totalTtcCents / 100)|number_format(2, ',', ' ') }} €</td>
+                        </tr>
+                        {% endfor %}
+                        <tr class="total-row">
+                            <td colspan="3"><strong>TOTAL</strong></td>
+                            <td><strong>{{ (order.totalTtcCents / 100)|number_format(2, ',', ' ') }} €</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Informations de retrait -->
+            {% if order.pickupDate %}
+            <div class="pickup-info">
+                <h3>🏪 Retrait en magasin</h3>
+                <p>Votre commande sera prête le :</p>
+                <div class="pickup-time">
+                    {{ order.pickupDate|date('d/m/Y') }} 
+                    {% if order.pickupTimeSlot %}
+                        {{ order.pickupTimeSlot }}
+                    {% endif %}
+                </div>
+                <p><strong>📍 Boucherie Eysa</strong><br>
+                Votre adresse ici<br>
+                Téléphone : XX XX XX XX XX</p>
+            </div>
+            {% endif %}
+
+            <!-- Message personnalisé -->
+            <div style="margin: 30px 0; text-align: center; font-style: italic; color: #8b4513;">
+                <p>"Nos bouchers préparent votre commande avec le plus grand soin.<br>
+                Merci de faire confiance à notre savoir-faire traditionnel."</p>
+            </div>
+        </div>
+
+        <!-- Pied de page -->
+        <div class="footer">
+            <p><strong>Boucherie Eysa</strong> - Tradition et qualité depuis toujours</p>
+            <p>📍 Votre adresse | ☎️ XX XX XX XX XX | 📧 <a href="mailto:eysa.boucherie@gmail.com">eysa.boucherie@gmail.com</a></p>
+            <p style="margin-top: 15px; opacity: 0.8;">
+                Une question ? N'hésitez pas à nous contacter !
+            </p>
+        </div>
+    </div>
+</body>
+</html>

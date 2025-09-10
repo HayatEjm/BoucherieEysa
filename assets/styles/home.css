@@ -1,15 +1,12 @@
 /* ========================================================================
-   CSS POUR LA PAGE D'ACCUEIL - VERSION SIMPLIFIÉE
+   CSS POUR LA PAGE D'ACCUEIL 
    ======================================================================== */
+
+
 
 /* 
-   CSS simplifié sans variables pour faciliter la maintenance.
-   Couleurs directes inspirées du design beige/bordeaux de la boucherie.
-*/
-
-/* ========================================================================
    CONTENEUR GÉNÉRAL
-   ======================================================================== */
+  */
 
 .container {
   max-width: 1300px;
@@ -17,9 +14,8 @@
   padding: 0 1rem;
 }
 
-/* ========================================================================
-   SECTION HERO (BANNIÈRE PRINCIPALE)
-   ======================================================================== */
+
+ /* SECTION HERO (BANNIÈRE PRINCIPALE) */
 
 .hero-section {
   background: #faf7f2; /* Beige clair */

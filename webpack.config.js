@@ -22,8 +22,9 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addEntry('cart-app', './assets/js/cart-app.js')
-    .addEntry('cart-badge', './assets/js/cart-badge-app.js')
+    .addEntry('admin', './assets/admin/main-admin.js')
     .addStyleEntry('account', './assets/styles/account.css')
+    .addStyleEntry('auth', './assets/styles/auth.css')
  
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.

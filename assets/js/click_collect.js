@@ -1,6 +1,4 @@
-/* ========================================================================
-   JS DÉDIÉ À LA PAGE CLICK & COLLECT (click_collect/index.html.twig)
-   ======================================================================== */
+/*JS DÉDIÉ À LA PAGE CLICK & COLLECT (click_collect/index.html.twig)*/
 
 document.addEventListener('DOMContentLoaded', function () {
   // Smooth scroll pour les ancres valides
@@ -24,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 })
 
-    // Animation des cartes au scroll (optionnel, pour l'UX)
+    // Animation des cartes au scroll (pour l'UX)
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'

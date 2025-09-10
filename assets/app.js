@@ -1,6 +1,4 @@
 
-console.log(' app.js bien chargé');
-
 // --- Import Vue.js & Composants
 
 
@@ -17,12 +15,10 @@ const mountPoint = document.getElementById('vue-dropdown-menu')
 if (mountPoint) {
   try {
     const categories = JSON.parse(mountPoint.dataset.categories)
-    console.log("🟢 Point de montage menu trouvé, catégories :", categories)
-
     const dropdownApp = createApp(DropdownMenu, { categories })
     dropdownApp.mount(mountPoint)
   } catch (error) {
-    console.error("❌ Erreur lors de l'initialisation du menu déroulant :", error)
+    console.error("Erreur menu :", error)
   }
 }
 
@@ -32,7 +28,6 @@ if (searchEl) {
   const searchApp = createApp(SearchBar)
   searchApp.use(pinia) // ✅ Utilisation de Pinia partagée
   searchApp.mount(searchEl)
-  console.log('🟢 Composant SearchBar monté avec succès')
 }
 
 // --- Composant Vue CartBadge
@@ -42,17 +37,14 @@ if (cartBadgeEl) {
     const badgeApp = createApp(CartBadge)
     badgeApp.use(pinia)
     badgeApp.mount(cartBadgeEl)
-    console.log('🟢 Composant CartBadge monté avec succès')
   } catch (error) {
-    console.error('❌ Erreur lors du montage du composant CartBadge :', error)
+    console.error('Erreur CartBadge :', error)
   }
 }
 
 // --- Composants Vue AddToCartButton (version simple qui fonctionne)
 const addToCartButtons = document.querySelectorAll('.add-to-cart[data-product-id]')
 if (addToCartButtons.length > 0) {
-  console.log(`🟢 ${addToCartButtons.length} boutons "Ajouter au panier" trouvés`)
-  
   addToCartButtons.forEach(button => {
     const productId = button.dataset.productId
     const quantity = parseInt(button.dataset.quantity) || 1
@@ -91,10 +83,8 @@ if (el) {
     })
     app.use(pinia)
     app.mount(el)
-
-    console.log('🟢 Composant ProductDetail monté avec succès (avec Pinia)')
   } catch (error) {
-    console.error('❌ Erreur lors du montage du composant ProductDetail :', error)
+    console.error('Erreur ProductDetail :', error)
   }
 }
 
@@ -126,7 +116,6 @@ import './styles/product/product_detail.css'
 import './styles/checkout/checkout.css'
 import './styles/cart/cart_badge.css'
 import './styles/auth/auth.css'
-import './styles/account/account.css'
+import './styles/account.css'
 
 // Fin
-console.log('🎉 Fin de chargement app.js (Vue + Styles + JS)');

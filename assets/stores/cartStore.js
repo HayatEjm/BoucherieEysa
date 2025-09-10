@@ -39,7 +39,6 @@ export const useCartStore = defineStore('cart', {
       this.loading = true
       try {
         const data = await cartApi.getSummary()
-        console.log('📦 Données reçues du serveur:', data) // Debug
         this.items = data.items
         this.totalQuantity = data.totalQuantity
         this.totalPrice = data.totalTTC

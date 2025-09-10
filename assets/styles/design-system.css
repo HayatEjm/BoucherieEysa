@@ -68,7 +68,7 @@ Exemple : var(--primary-color) = votre couleur bordeaux #8B1538
   --border-color: #e5ddd4;            /* 🟤 Bordure beige → UTILISÉ DANS : contours de cartes */
   
   /* 🏷️ COULEURS SYSTÈME - Pour messages d'état */
-  --success-color: #065f46;           /* 🟢 Vert foncé → UTILISÉ DANS : messages de succès */
+  --success-color: #065f46;           /* Vert foncé → UTILISÉ DANS : messages de succès */
   --warning-color: #d97706;           /* 🟠 Orange → UTILISÉ DANS : alertes, avertissements */
   --danger-color: #dc2626;            /* 🔴 Rouge → UTILISÉ DANS : erreurs, suppression */
   --info-color: #0369a1;             /* 🔵 Bleu → UTILISÉ DANS : informations, aide */

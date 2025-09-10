@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Administration{% endblock %} - Boucherie Eysa</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🥩</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('admin') }}
+    {% block stylesheets %}{% endblock %}
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-cut"></i>
+                    <span class="logo-text">Boucherie Eysa</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="{{ path('admin_dashboard') }}" class="nav-link {{ app.request.get('_route') == 'admin_dashboard' ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <span class="nav-text">Tableau de bord</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="{{ path('admin_products_index') }}" class="nav-link {{ app.request.get('_route') starts with 'admin_product' ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-box"></i>
+                            <span class="nav-text">Produits</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="{{ path('admin_orders_index') }}" class="nav-link {{ app.request.get('_route') starts with 'admin_order' ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-shopping-cart"></i>
+                            <span class="nav-text">Commandes</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="{{ path('admin_users_index') }}" class="nav-link {{ app.request.get('_route') starts with 'admin_user' ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-users"></i>
+                            <span class="nav-text">Utilisateurs</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-separator"></li>
+                    
+                    <li class="nav-item">
+                        <a href="{{ path('app_home') }}" target="_blank" class="nav-link">
+                            <i class="nav-icon fas fa-external-link-alt"></i>
+                            <span class="nav-text">Voir le site</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="{{ path('app_logout') }}" class="nav-link nav-link-danger">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <span class="nav-text">Déconnexion</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name">{{ app.user.email|split('@')[0] }}</div>
+                        <div class="user-role">Administrateur</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="admin-main" id="adminMain">
+            <!-- Top Header -->
+            <header class="admin-header-bar">
+                <div class="header-left">
+                    <button class="mobile-sidebar-toggle" id="mobileSidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="page-title">{% block page_title %}Administration{% endblock %}</h1>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn" title="Notifications">
+                            <i class="fas fa-bell"></i>
+                        </button>
+                        <div class="user-menu">
+                            <span>{{ app.user.email|split('@')[0] }}</span>
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Flash Messages -->
+            {% for type, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ type == 'error' ? 'danger' : type }} alert-dismissible">
+                        <i class="fas fa-{{ type == 'success' ? 'check-circle' : (type == 'error' ? 'exclamation-circle' : 'info-circle') }}"></i>
+                        {{ message }}
+                        <button type="button" class="alert-close" onclick="this.parentElement.remove()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            
+            <!-- Page Content -->
+            <div class="admin-content">
+                {% block body %}{% endblock %}
+            </div>
+        </main>
+    </div>
+    
+    <!-- Overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- JavaScript -->
+    {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('admin') }}
+    
+    {% block javascripts %}
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sidebar toggle functionality
+        const sidebar = document.getElementById('adminSidebar');
+        const main = document.getElementById('adminMain');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const mobileSidebarToggle = document.getElementById('mobileSidebarToggle');
+        const overlay = document.getElementById('sidebarOverlay');
+        
+        function toggleSidebar() {
+            sidebar.classList.toggle('sidebar-collapsed');
+            main.classList.toggle('main-expanded');
+        }
+        
+        function openMobileSidebar() {
+            sidebar.classList.add('sidebar-mobile-open');
+            overlay.classList.add('overlay-active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeMobileSidebar() {
+            sidebar.classList.remove('sidebar-mobile-open');
+            overlay.classList.remove('overlay-active');
+            document.body.style.overflow = '';
+        }
+        
+        sidebarToggle?.addEventListener('click', toggleSidebar);
+        mobileSidebarToggle?.addEventListener('click', openMobileSidebar);
+        overlay?.addEventListener('click', closeMobileSidebar);
+        
+        // Auto-hide flash messages
+        setTimeout(() => {
+            document.querySelectorAll('.alert').forEach(alert => {
+                alert.style.opacity = '0';
+                alert.style.transform = 'translateY(-10px)';
+                setTimeout(() => alert.remove(), 300);
+            });
+        }, 5000);
+    });
+    </script>
+    {% endblock %}
+</body>
+</html>

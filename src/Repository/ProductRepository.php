@@ -42,6 +42,34 @@ class ProductRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * Trouve les produits avec un stock faible
+     */
+    public function findLowStockProducts(int $threshold = 5): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.stock <= :threshold')
+            ->andWhere('p.stock >= 0') // Exclure les stocks négatifs
+            ->setParameter('threshold', $threshold)
+            ->orderBy('p.stock', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Compte les produits avec un stock faible
+     */
+    public function countLowStockProducts(int $threshold = 5): int
+    {
+        return $this->createQueryBuilder('p')
+            ->select('COUNT(p.id)')
+            ->andWhere('p.stock <= :threshold')
+            ->andWhere('p.stock >= 0')
+            ->setParameter('threshold', $threshold)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     //    /**
     //     * @return Product[] Returns an array of Product objects
     //     */

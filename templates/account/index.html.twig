@@ -81,6 +81,13 @@
                         <a href="{{ path('app_home') }}" class="btn btn-secondary">
                             <i class="fas fa-home"></i> Accueil
                         </a>
+                        
+                        {# Bouton Administration - Visible seulement pour les admins #}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('admin_dashboard') }}" class="btn btn-admin">
+                                <i class="fas fa-cogs"></i> Administration
+                            </a>
+                        {% endif %}
                     </div>
                     
                     {# Action de déconnexion séparée #}

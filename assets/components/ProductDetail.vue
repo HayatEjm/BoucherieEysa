@@ -27,6 +27,11 @@ const totalPrice = computed(() => {
   return ((quantity.value / 1000) * props.product.pricePerKg).toFixed(2)
 })
 
+// Vérification du stock (nouvelles fonctionnalités)
+const isInStock = computed(() => {
+  return true // Toujours en stock pour l'instant
+})
+
 // Suggestion rapide
 function setSuggestion(val) {
   quantity.value = val
@@ -142,5 +147,17 @@ import ToastVue from './ToastVue.vue'
 </template>
 
 <style scoped>
-/* Styles personnalisés ici si nécessaire */
+/* Bouton désactivé pour rupture de stock */
+.btn-disabled {
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+  color: white !important;
+  cursor: not-allowed !important;
+  opacity: 0.7;
+}
+
+.btn-disabled:hover {
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+}
 </style>

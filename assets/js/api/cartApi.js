@@ -23,7 +23,7 @@ async function parseJsonResponse(res) {
 
     return data
   } catch (err) {
-    console.warn('❌ Réponse non JSON valide :', text)
+    console.warn(' Réponse non JSON valide :', text)
     throw new Error('Erreur inattendue : réponse non JSON')
   }
 }
