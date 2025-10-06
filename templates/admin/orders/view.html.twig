@@ -12,6 +12,12 @@
   <div class="section-content">
     <p><strong>{{ order.customerName ?? 'Client' }}</strong></p>
     <p>{{ order.customerEmail }} {% if order.customerPhone %} — {{ order.customerPhone }}{% endif %}</p>
+    {% if order.notes %}
+    <div class="order-notes-box" style="margin-top:18px; max-width:520px; background:#f8fafc; border-left:4px solid #8b1538; border-radius:8px; padding:14px 18px; color:#333; font-size:1.05em; box-shadow:0 2px 8px rgba(139,21,56,0.04);">
+      <div style="font-weight:600; color:#8b1538; margin-bottom:6px;"><i class="fas fa-comment-dots"></i> Message client :</div>
+      <div style="white-space:pre-line;">{{ order.notes }}</div>
+    </div>
+    {% endif %}
   </div>
 </div>
 

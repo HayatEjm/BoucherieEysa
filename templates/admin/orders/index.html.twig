@@ -16,9 +16,8 @@
     <thead>
       <tr>
         <th>N°</th>
-        <th>Client</th>
-        <th>Date</th>
         <th>Retrait</th>
+        <th>Client</th>
         <th>Total</th>
         <th>Statut</th>
         <th style="width:140px;">Actions</th>
@@ -27,15 +26,12 @@
     <tbody>
       {% for order in orders %}
         <tr>
-          <td><strong>{{ order.orderNumber ?? ('#' ~ order.id) }}</strong></td>
           <td>
-            <div class="customer-info">
-              <strong>{{ order.customerName ?: 'Client' }}</strong><br>
-              <small style="color:#666;">{{ order.customerEmail }}</small>
-              {% if order.customerPhone %}<br><small style="color:#666;"><i class="fas fa-phone"></i> {{ order.customerPhone }}</small>{% endif %}
-            </div>
+            <a href="{{ path('admin_orders_view', {id: order.id}) }}" class="order-link" style="display:inline-flex;align-items:center;gap:7px;text-decoration:none;font-weight:600;color:#8b1538;">
+              <i class="fas fa-eye" style="font-size:1.1em;"></i>
+              {{ order.orderNumber ?? ('#' ~ order.id) }}
+            </a>
           </td>
-          <td>{{ order.createdAt|date('d/m/Y H:i') }}</td>
           <td>
             {% if order.pickupDate or order.pickupTimeSlot %}
               <div class="pickup-info">
@@ -46,11 +42,17 @@
               <span style="color:#999;">Non défini</span>
             {% endif %}
           </td>
+          <td>
+            <div class="customer-info">
+              <strong>{{ order.customerName ?: 'Client' }}</strong><br>
+              <small style="color:#666;">{{ order.customerEmail }}</small>
+              {% if order.customerPhone %}<br><small style="color:#666;"><i class="fas fa-phone"></i> {{ order.customerPhone }}</small>{% endif %}
+            </div>
+          </td>
           <td><strong class="price">{{ order.totalTtc|number_format(2, ',', ' ') }}€</strong></td>
           <td><span class="status-badge status-{{ order.status }}">{{ order.status|title }}</span></td>
           <td>
             <div class="btn-group">
-              <a href="{{ path('admin_orders_view', {id: order.id}) }}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
               {# Formulaire simple pour changer le statut #}
               <form method="post" action="{{ path('admin_orders_status', {id: order.id}) }}" style="display:inline-flex; gap:6px;">
                 <select name="status" class="form-control" style="width:110px;">

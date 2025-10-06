@@ -3,6 +3,7 @@
 {% block title %}EYSA Boucherie - Accueil{% endblock %}
 
 {% block body %}
+<div class="home-page">
     {# Section Hero avec image de fond #}
     <section class="hero-section">
         <div class="hero-content">
@@ -16,19 +17,11 @@
         </div>
         <div class="hero-image">
             <img src="{{ asset('images/hero-meat.jpg') }}" alt="Viandes de qualité" data-fallback="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=800&h=600&fit=crop'">
-{#
-    Toute la logique JavaScript spécifique à cette page est désormais déplacée dans
-    le fichier assets/js/home.js, importé via assets/app.js.
-    
-    Cette séparation garantit :
-    - Un template Twig allégé et lisible
-    - Une centralisation de la logique JS pour la maintenance
-    - Le respect du MVC et des bonnes pratiques Symfony
-#}
+
         </div>
     </section>
 
-    {# 🏷️ Section catégories principales #}
+    {# Section catégories principales #}
     <section class="categories-section">
         <div class="container">
             <h2 class="section-title">Nos spécialités</h2>
@@ -52,7 +45,7 @@
         </div>
     </section>
 
-    {# ⭐ Section avantages avec grille 2x2 #}
+    {# Section avantages avec grille 2x2 #}
     <section class="advantages-section">
         <div class="container">
             <h2 class="section-title">Pourquoi nous choisir ?</h2>
@@ -85,7 +78,7 @@
         </div>
     </section>
 
-    {# 🎖️ Section produits vedettes #}
+    {#  Section produits vedettes #}
     {% if featuredProducts|length > 0 %}
     <section class="featured-products-section">
         <div class="container">
@@ -118,7 +111,8 @@
     </section>
     {% endif %}
 
-    {# 📞 Section contact et informations #}
+    </section>
+    {# Section contact et informations #}
     <section class="info-section">
         <div class="container">
             <div class="info-grid">
@@ -144,4 +138,5 @@
             </div>
         </div>
     </section>
+</div>
 {% endblock %}

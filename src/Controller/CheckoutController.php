@@ -98,8 +98,16 @@ class CheckoutController extends AbstractController
         $cart = $this->cartService->getCurrentCart();
         $cartSummary = $this->cartService->getCartSummary();
 
+
         // Créer une nouvelle commande depuis le panier
         $order = $this->orderService->createOrderFromCart($cart);
+
+        // Associer l'utilisateur connecté à la commande (relation User)
+        // Cela permet de retrouver l'historique même si l'email change
+        $user = $this->getUser();
+        if ($user) {
+            $order->setUser($user);
+        }
 
         // Créer et traiter le formulaire
         $form = $this->createForm(CheckoutFormType::class, $order);

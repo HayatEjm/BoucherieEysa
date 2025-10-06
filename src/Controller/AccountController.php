@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ProfileForm;
+use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,7 +38,7 @@ class AccountController extends AbstractController
      */
     #[Route('/mon-compte', name: 'app_account', methods: ['GET'])]
     #[IsGranted('ROLE_USER')] // ← Si pas connecté, redirection automatique vers /login
-    public function index(): Response
+    public function index(OrderRepository $orderRepository): Response
     {
         // Je récupère l'utilisateur connecté
         $user = $this->getUser();
@@ -49,13 +50,14 @@ class AccountController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
         
-        // TODO : Plus tard, je pourrai ajouter d'autres données
-        // Exemple : $orders = $orderRepository->findByUser($user);
-        
+        // Récupérer l'historique des commandes de l'utilisateur connecté
+        // (relation User → Order)
+        $orders = $orderRepository->findByUser($user);
+
         // Je passe les données au template
         return $this->render('account/index.html.twig', [
             'user' => $user,
-            // TODO : 'orders' => $orders,
+            'orders' => $orders,
         ]);
     }
     

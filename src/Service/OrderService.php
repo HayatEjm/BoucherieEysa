@@ -35,27 +35,32 @@ class OrderService
         $this->logger->info('Création commande depuis panier', ['cart_id' => $cart->getId()]);
 
         $order = new Order();
-        
+
+        // Champs obligatoires à setter (à adapter selon ton workflow)
+        $order->setPaymentMethod('non-renseigné'); // À remplacer par la vraie méthode si dispo
+        $order->setPickupAt(new \DateTime()); // À remplacer par la vraie date/heure de retrait si dispo
+
         foreach ($cart->getCartItems() as $cartItem) {
             $orderItem = new OrderItem();
             $orderItem->setProduct($cartItem->getProduct());
             $orderItem->setQuantity($cartItem->getQuantity());
+            $orderItem->setUnitPrice($cartItem->getUnitPrice()); // <-- Ajout obligatoire
             $orderItem->setUnitPriceHtCents($cartItem->getUnitPriceCents());
-            
+
             // TVA 20% pour la viande
             $htCents = $cartItem->getTotalCents();
             $tvaCents = (int) round($htCents * 0.20);
             $ttcCents = $htCents + $tvaCents;
-            
+
             $orderItem->setTotalHtCents($htCents);
             $orderItem->setTotalTvaCents($tvaCents);
             $orderItem->setTotalTtcCents($ttcCents);
-            
+
             $order->addOrderItem($orderItem);
         }
 
         $order->recalculateTotals();
-        
+
         $this->logger->info('Commande créée', [
             'order_number' => $order->getOrderNumber(),
             'total_ttc' => $order->getTotalTtc()
