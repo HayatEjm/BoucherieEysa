@@ -8,3 +8,23 @@ Array
         )
 
 )
+Array
+(
+    [id] => 52
+    [quantity] => 200
+    [POST] => Array
+        (
+            [quantity] => 200
+        )
+
+)
+Array
+(
+    [id] => 34
+    [quantity] => 500
+    [POST] => Array
+        (
+            [quantity] => 500
+        )
+
+)

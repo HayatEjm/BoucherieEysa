@@ -29,8 +29,15 @@ yarn-error.log
 ###> documentation files ###
 DOCUMENTATION_API.md
 GUIDE_AUTHENTIFICATION_ETAPES.md
-# Ignorer tous les fichiers Markdown
-*.md
+
+# Dossiers de projet - Ne pas versionner (sauf le principal)
+DOSSIER_PROJET_BROUILLON*.md
+DOSSIER_TECHNIQUE_*.md
+DOSSIER_PROJET_TEMP*.md
+
+# Documentation confidentielle
+ANNEXES_PROJET/
+CAPTURES_ECRAN/
 ###< documentation files ###
 
 

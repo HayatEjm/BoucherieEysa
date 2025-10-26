@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mentions Légales - Boucherie EYSA{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/legal.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="legal-page">
+    <h1>Mentions Légales</h1>
+    <h2>1. Éditeur du site</h2>
+    
+    <div class="contact-info">
+        <p><strong>Dénomination sociale :</strong> EYSA</p>
+        <p><strong>Forme juridique :</strong> SARL (Société à Responsabilité Limitée)</p>
+        <p><strong>Propriétaire gérant :</strong> Younès ELHAJJAM</p>
+        <p><strong>Siège social :</strong> 123 rue du Dr Schweitzer - 49400 SAUMUR</p>
+        <p><strong>Téléphone :</strong> 02 41 50 57 18</p>
+    </div>
+
+    <h3>Informations légales</h3>
+    <ul>
+        <li><strong>SIREN :</strong> 752 699 496</li>
+        <li><strong>SIRET :</strong> 752 699 496 00010</li>
+        <li><strong>TVA Intracommunautaire :</strong> FR95752699496</li>
+        <li><strong>RCS :</strong> Angers 752 699 496</li>
+        <li><strong>Code NAF :</strong> 47.22Z</li>
+        <li><strong>Date d'inscription :</strong> 13/07/2012</li>
+    </ul>
+
+    <p><strong>Activité :</strong> Commerce de détail de viandes et de produits à base de viande en magasin spécialisé</p>
+
+    <h2>2. Hébergement du site</h2>
+    <p><strong>Hébergeur :</strong> [À adapter selon votre hébergeur]<br>
+    Exemple : OVH SAS<br>
+    2 rue Kellermann - 59100 Roubaix - France</p>
+
+    <h2>3. Directeur de publication</h2>
+    <p><strong>Directeur de publication :</strong> Younès ELHAJJAM<br>
+    <strong>Contact :</strong> contact@boucherie-eysa.fr</p>
+
+    <h2>4. Propriété intellectuelle</h2>
+    <p>Le site web boucherie-eysa.fr et son contenu (textes, images, graphismes, logo, icônes, sons, logiciels) sont la propriété exclusive de EYSA, à l'exception des marques, logos ou contenus appartenant à d'autres sociétés partenaires ou auteurs.</p>
+    
+    <p>Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable de EYSA.</p>
+
+    <h2>5. Données personnelles et cookies</h2>
+    <p>Les informations recueillies sur ce site sont enregistrées dans un fichier informatisé par EYSA pour la gestion des commandes et la relation client.</p>
+    
+    <p>Conformément à la loi « informatique et libertés » et au RGPD, vous pouvez exercer votre droit d'accès, de rectification, d'effacement et de portabilité des données vous concernant en nous contactant à l'adresse : <strong>contact@boucherie-eysa.fr</strong></p>
+    
+    <p>Pour plus d'informations, consultez notre <a href="{{ path('legal_privacy') }}">Politique de confidentialité</a>.</p>
+
+    <h2>6. Responsabilité</h2>
+    <p>EYSA s'efforce de fournir des informations aussi précises que possible sur ce site. Toutefois, elle ne pourra être tenue responsable des omissions, inexactitudes et carences dans la mise à jour, qu'elles soient de son fait ou du fait des tiers partenaires qui lui fournissent ces informations.</p>
+    
+    <p>Toutes les informations proposées sur ce site sont données à titre indicatif, sont non exhaustives, et sont susceptibles d'évoluer. Elles sont données sous réserve de modifications ayant été apportées depuis leur mise en ligne.</p>
+
+    <h2>7. Droit applicable et juridiction compétente</h2>
+    <p>Les présentes mentions légales sont régies par le droit français. En cas de litige, les tribunaux français seront seuls compétents.</p>
+
+    <h2>8. Médiateur de la consommation</h2>
+    <p>En cas de litige, vous pouvez recourir au service de médiation :</p>
+    <div class="contact-info">
+        <strong>Centre de Médiation de la Consommation de Conciliateurs de Justice (CM2C)</strong><br>
+        14 rue Saint Jean - 75017 Paris<br>
+        <a href="https://www.cm2c.net" target="_blank">www.cm2c.net</a>
+    </div>
+
+    <div class="legal-footer">
+        Dernière mise à jour : {{ "now"|date("d/m/Y") }}
+    </div>
+</div>
+{% endblock %}

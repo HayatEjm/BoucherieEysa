@@ -23,6 +23,7 @@
       <tr>
         <th style="width: 80px;">Image</th>
         <th>Produit</th>
+        <th style="width: 120px;">Catégorie</th>
         <th style="width: 120px;">Prix</th>
         <th style="width: 100px;">Stock</th>
         <th style="width:220px;">Actions</th>
@@ -47,6 +48,13 @@
                 <div class="item-subtitle">{{ p.description|length > 60 ? p.description|slice(0,60) ~ '…' : p.description }}</div>
               {% endif %}
             </div>
+          </td>
+          <td>
+            {% if p.category %}
+              <span class="badge badge-secondary">{{ p.category.name }}</span>
+            {% else %}
+              <span class="badge badge-warning">Aucune catégorie</span>
+            {% endif %}
           </td>
           <td><strong>{{ p.price|number_format(2, ',', ' ') }}€</strong></td>
           <td>
@@ -87,7 +95,7 @@
         </tr>
       {% else %}
         <tr>
-          <td colspan="5" style="text-align:center;padding:48px;color:#6b7280;">
+          <td colspan="6" style="text-align:center;padding:48px;color:#6b7280;">
             <i class="fas fa-box-open" style="font-size: 3rem; margin-bottom: 16px; opacity: 0.5;"></i>
             <p style="margin: 0; font-size: 1.1rem; font-weight: 600;">Aucun produit pour le moment</p>
             <p style="margin: 8px 0 16px 0; font-size: 0.9rem;">Commencez par ajouter votre premier produit</p>

@@ -16,9 +16,8 @@ Encore
     .addEntry('cart-app', './assets/js/cart-app.js')
     .addEntry('admin', './assets/admin/main-admin.js')
 
-    // Entrées CSS (optionnel, si tu veux des fichiers CSS séparés)
-    .addStyleEntry('account', './assets/styles/account.css')
-    .addStyleEntry('auth', './assets/styles/auth.css')
+    // Entrées CSS séparées (uniquement pour les pages qui en ont besoin)
+    .addStyleEntry('legal', './assets/styles/legal.css') /* ✅ Gardé car utilisé dans templates/legal/ */
 
     // Optimisation : split des chunks
     .splitEntryChunks()

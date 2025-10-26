@@ -52,25 +52,25 @@
             
             <div class="advantages-grid">
                 <div class="advantage-card">
-                    <div class="advantage-icon">🥩</div>
+                    <div class="advantage-icon"><i class="fa-solid fa-drumstick-bite" aria-hidden="true"></i></div>
                     <h3>Qualité Premium</h3>
                     <p>Nos viandes sont sélectionnées auprès d'éleveurs locaux pour vous garantir une qualité irréprochable.</p>
                 </div>
                 
                 <div class="advantage-card">
-                    <div class="advantage-icon">🛒</div>
+                    <div class="advantage-icon"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i></div>
                     <h3>Click & Collect</h3>
                     <p>Commandez en ligne et venez retirer vos produits en boutique selon vos disponibilités.</p>
                 </div>
                 
                 <div class="advantage-card">
-                    <div class="advantage-icon">👨‍🍳</div>
+                    <div class="advantage-icon"><i class="fa-solid fa-utensils" aria-hidden="true"></i></div>
                     <h3>Savoir-faire Artisanal</h3>
                     <p>Notre équipe de bouchers expérimentés met tout son savoir-faire à votre service.</p>
                 </div>
                 
                 <div class="advantage-card">
-                    <div class="advantage-icon">🌱</div>
+                    <div class="advantage-icon"><i class="fa-solid fa-leaf" aria-hidden="true"></i></div>
                     <h3>Engagement Local</h3>
                     <p>Nous privilégions les circuits courts et soutenons les producteurs de notre région.</p>
                 </div>
@@ -92,12 +92,12 @@
                             <img src="{% if product.image %}{{ asset('images/' ~ product.image) }}{% else %}https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=300&h=200&fit=crop{% endif %}" 
                                  alt="{{ product.name }}">
                         </div>
-                        <div class="product-info">
-                            <h3 class="product-name">{{ product.name }}</h3>
-                            <p class="product-description">{{ product.description|slice(0, 100) }}{% if product.description|length > 100 %}...{% endif %}</p>
-                            <div class="product-price">{{ product.price|number_format(2, ',', ' ') }}€ / {{ product.unit|default('kg') }}</div>
+                        <div class="product-info home-product-info">
+                            <h3 class="product-name home-product-name">{{ product.name }}</h3>
+                            <p class="product-description home-product-description">{{ product.description|slice(0, 100) }}{% if product.description|length > 100 %}...{% endif %}</p>
+                            <div class="product-price home-product-price">{{ product.price|number_format(2, ',', ' ') }}€ / {{ product.unit|default('kg') }}</div>
                             <button class="btn-add-to-cart" data-product-id="{{ product.id }}">
-                                <i class="icon-cart"></i> Ajouter au panier
+                                <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Ajouter au panier
                             </button>
                         </div>
                     </div>

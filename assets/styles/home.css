@@ -1,9 +1,9 @@
 /* Affichage bordeaux des titres de catégorie uniquement sur la page d'accueil */
 .home-page .category-name {
-  color: #8b1538 !important;
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
+  color: var(--primary-color) !important; /* ✅ Utilise la variable bordeaux */
+  font-size: var(--font-size-3xl); /* ✅ Utilise la variable de taille */
+  font-weight: var(--font-weight-bold); /* ✅ Utilise la variable de poids */
+  margin-bottom: var(--spacing-md); /* ✅ Utilise la variable d'espacement */
 }
 /* ========================================================================
    CSS POUR LA PAGE D'ACCUEIL 
@@ -25,11 +25,11 @@
  /* SECTION HERO (BANNIÈRE PRINCIPALE) */
 
 .hero-section {
-  background: #faf7f2; /* Beige clair */
-  padding: 4rem 2rem;
+  background: var(--beige-light); /* ✅ Utilise la variable beige clair */
+  padding: var(--spacing-4xl) var(--spacing-xl); /* ✅ Utilise les variables d'espacement */
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: var(--spacing-3xl); /* ✅ Utilise la variable d'espacement */
   align-items: center;
   min-height: 600px;
 }
@@ -48,17 +48,17 @@
 }
 
 .hero-subtitle {
-  font-size: 1.5rem;
-  color: #6b1028; /* Bordeaux foncé */
-  margin-bottom: 1.5rem;
-  font-weight: 600;
+  font-size: var(--font-size-2xl); /* ✅ Variable de taille */
+  color: var(--primary-dark); /* ✅ Variable bordeaux foncé */
+  margin-bottom: var(--spacing-lg); /* ✅ Variable d'espacement */
+  font-weight: var(--font-weight-semibold); /* ✅ Variable de poids */
 }
 
 .hero-description {
-  font-size: 1.1rem;
-  color: #2c2c2c; /* Gris foncé */
+  font-size: var(--font-size-lg); /* ✅ Variable de taille */
+  color: var(--text-primary); /* ✅ Variable couleur de texte */
   line-height: 1.6;
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-xl); /* ✅ Variable d'espacement */
 }
 
 .btn-hero {
@@ -260,52 +260,93 @@
   margin-bottom: 3rem;
 }
 
-.product-card {
-  background: white;
-  border-radius: 8px;
+/* ✅ Correction : cartes uniformes avec hauteur égale */
+.featured-products-section .product-card {
+  background: var(--white); /* ✅ Variable couleur */
+  border-radius: var(--border-radius-md); /* ✅ Variable border-radius */
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm); /* ✅ Variable ombre */
+  transition: var(--transition-normal); /* ✅ Variable transition */
+  display: flex; /* ✅ Correction : flexbox pour hauteur égale */
+  flex-direction: column;
+  height: 100%; /* ✅ Correction : hauteur uniforme */
 }
 
-.product-card:hover {
+.featured-products-section .product-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-lg); /* ✅ Utilise la variable d'ombre forte */
 }
 
-.product-image {
+/* ✅ Images des produits vedettes - CORRECTION DÉCALAGE */
+.featured-products-section .product-image {
   width: 100%;
-  height: 200px;
+  height: 200px !important; /* ✅ Force la hauteur même si pas d'image */
   overflow: hidden;
+  flex-shrink: 0; /* ✅ Empêche l'image de rétrécir */
+  background-color: var(--beige-medium); /* ✅ Couleur de fond si pas d'image */
+  display: flex; /* ✅ Centrage de l'image */
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
-.product-image img {
+.featured-products-section .product-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
+  object-fit: cover; /* ✅ Image bien cadrée */
+  display: block; /* ✅ Élimine les espaces sous l'image */
 }
 
-.product-card:hover .product-image img {
+/* ✅ Si l'image ne se charge pas, on met une image par défaut en CSS */
+.featured-products-section .product-image::before {
+  content: "🥩";
+  font-size: 3rem;
+  color: var(--primary-color);
+  position: absolute;
+  z-index: 1;
+}
+
+.featured-products-section .product-image img[src*="images.unsplash.com"] {
+  z-index: 2; /* ✅ L'image Unsplash passe devant l'emoji */
+  position: relative;
+}
+
+/* ✅ Animation hover pour les images */
+.featured-products-section .product-card:hover .product-image img {
   transform: scale(1.05);
+  transition: transform var(--transition-normal);
 }
 
-.product-info {
-  padding: 1.5rem;
+/* ✅ Styles spécifiques pour les produits de la page d'accueil */
+.featured-products-section .home-product-info {
+  padding: var(--spacing-lg); /* ✅ Utilise la variable d'espacement */
+  display: flex; /* ✅ Correction : flexbox pour alignement */
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1; /* ✅ CORRECTION : prend l'espace disponible sans déborder */
+  min-height: 0; /* ✅ CORRECTION : permet au contenu de se redimensionner */
 }
 
-.product-name {
-  color: #8b1538; /* Bordeaux */
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+.featured-products-section .home-product-name {
+  color: var(--primary-color); /* ✅ Utilise la variable bordeaux */
+  font-size: var(--font-size-xl); /* ✅ Utilise la variable de taille */
+  margin-bottom: var(--spacing-sm); /* ✅ Utilise la variable d'espacement */
+  font-weight: var(--font-weight-semibold); /* ✅ Utilise la variable de poids */
 }
 
-.product-description {
-  color: #2c2c2c; /* Gris foncé */
+.featured-products-section .home-product-description {
+  color: var(--text-primary); /* ✅ Utilise la variable de couleur de texte */
   font-size: 0.9rem;
   margin-bottom: 1rem;
   line-height: 1.5;
+  /* ✅ CORRECTION : Empêche le débordement de texte */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limite à 3 lignes max */
+  line-clamp: 3; /* ✅ Propriété standard pour compatibilité */
+  -webkit-box-orient: vertical;
+  flex-grow: 0; /* Ne grandit pas */
+  flex-shrink: 1; /* Peut rétrécir si nécessaire */
 }
 
 .product-price {

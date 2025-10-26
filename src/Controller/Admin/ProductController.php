@@ -4,6 +4,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Product;
+use App\Entity\Category;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -36,6 +37,16 @@ class ProductController extends AbstractController
             $p->setPrice((float) $request->request->get('price', 0));
             $p->setStock((int) $request->request->get('stock', 0));
             $p->setImage($request->request->get('image', ''));
+            $p->setUnit($request->request->get('unit', 'kg'));
+            
+            // Gérer la catégorie
+            $categoryId = $request->request->get('category_id');
+            if ($categoryId) {
+                $category = $this->em->getRepository(Category::class)->find($categoryId);
+                if ($category) {
+                    $p->setCategory($category);
+                }
+            }
 
             $this->em->persist($p);
             $this->em->flush();
@@ -43,9 +54,13 @@ class ProductController extends AbstractController
             return $this->redirectToRoute('admin_products_index');
         }
 
+        // Récupérer toutes les catégories pour le formulaire
+        $categories = $this->em->getRepository(Category::class)->findAll();
+
         return $this->render('admin/products/form.html.twig', [
             'product' => null,
             'action'  => 'add',
+            'categories' => $categories,
         ]);
     }
 
@@ -58,15 +73,29 @@ class ProductController extends AbstractController
             $product->setPrice((float) $request->request->get('price', $product->getPrice()));
             $product->setStock((int) $request->request->get('stock', $product->getStock()));
             $product->setImage($request->request->get('image', $product->getImage()));
+            $product->setUnit($request->request->get('unit', $product->getUnit() ?? 'kg'));
+            
+            // Gérer la catégorie
+            $categoryId = $request->request->get('category_id');
+            if ($categoryId) {
+                $category = $this->em->getRepository(Category::class)->find($categoryId);
+                $product->setCategory($category);
+            } else {
+                $product->setCategory(null);
+            }
 
             $this->em->flush();
             $this->addFlash('success', 'Produit modifié.');
             return $this->redirectToRoute('admin_products_index');
         }
 
+        // Récupérer toutes les catégories pour le formulaire
+        $categories = $this->em->getRepository(Category::class)->findAll();
+
         return $this->render('admin/products/form.html.twig', [
             'product' => $product,
             'action'  => 'edit',
+            'categories' => $categories,
         ]);
     }
 

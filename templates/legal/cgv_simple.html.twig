@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conditions Générales de Vente - Boucherie EYSA{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('legal') }}
+{% endblock %}
+
+{% block body %}
+<div class="legal-page">
+    <h1>Conditions Générales de Vente</h1>
+
+    <div class="info-box">
+        Service Click & Collect - Commande en ligne et retrait en boutique
+    </div>
+
+    <h2>Vendeur</h2>
+    <div class="contact-info">
+        <strong>EYSA - Boucherie Eysa</strong><br>
+        SARL - Gérant : Younès ELHAJJAM<br>
+        123 rue du Dr Schweitzer - 49400 SAUMUR<br>
+        SIRET : 752 699 496 00010<br>
+        Tel : 02 41 50 57 18
+    </div>
+
+    <h2>Service</h2>
+    <p>Commande en ligne avec retrait en boutique (Click & Collect) de produits de boucherie.</p>
+
+    <h2>Commandes</h2>
+    <ul>
+        <li>Commandes via le site boucherie-eysa.fr</li>
+        <li>Choix d'un créneau de retrait</li>
+        <li>Confirmation par email</li>
+        <li>Certains produits ont des quantités minimales</li>
+    </ul>
+
+    <h2>Créneaux de retrait</h2>
+    <table class="legal-table">
+        <tr>
+            <th>Période</th>
+            <th>Horaires</th>
+        </tr>
+        <tr>
+            <td>Matin</td>
+            <td>09h00 - 12h30</td>
+        </tr>
+        <tr>
+            <td>Après-midi</td>
+            <td>15h30 - 19h15</td>
+        </tr>
+        <tr>
+            <td>Dimanche</td>
+            <td>10h00 - 13h00 (matin uniquement)</td>
+        </tr>
+    </table>
+    <p><strong>Fermé le lundi</strong> - Maximum 10 commandes par créneau</p>
+
+    <h2>Prix et paiement</h2>
+    <ul>
+        <li>Prix TTC en euros</li>
+        <li>TVA boucherie : 5,5%</li>
+        <li><strong>Paiement en boutique uniquement</strong> (espèces, carte, chèque)</li>
+    </ul>
+
+    <h2>Retrait</h2>
+    <ul>
+        <li><strong>Retrait obligatoire</strong> dans le créneau choisi</li>
+        <li>Présenter une pièce d'identité ou l'email de confirmation</li>
+        <li>En cas de non-retrait : commande annulée sans remboursement</li>
+    </ul>
+
+    <h2>Annulation</h2>
+    <div class="warning-box">
+        <strong>Annulation gratuite</strong> jusqu'à 2 heures avant le créneau<br>
+        Contact : 02 41 50 57 18 ou contact@boucherie-eysa.fr
+    </div>
+
+    <h2>Qualité</h2>
+    <ul>
+        <li>Viandes sélectionnées de producteurs locaux</li>
+        <li>Préparation le jour même</li>
+        <li>Chaîne du froid maintenue</li>
+        <li>Réclamation à faire au moment du retrait</li>
+    </ul>
+
+    <h2>Responsabilité</h2>
+    <p><strong>Notre engagement :</strong> Qualité, fraîcheur, respect des créneaux</p>
+    <p><strong>Votre engagement :</strong> Retrait dans les temps, respect de la chaîne du froid</p>
+
+    <h2>Données personnelles</h2>
+    <p>Voir notre <a href="{{ path('legal_privacy') }}">Politique de confidentialité</a></p>
+
+    <h2>Réclamations</h2>
+    <div class="contact-info">
+        <strong>Service client :</strong><br>
+        Téléphone : 02 41 50 57 18<br>
+        Email : contact@boucherie-eysa.fr<br><br>
+        <strong>Médiation :</strong> <a href="https://www.cm2c.net" target="_blank">CM2C</a>
+    </div>
+
+    <h2>Droit applicable</h2>
+    <p>Droit français - Tribunaux de Saumur compétents</p>
+
+    <div class="legal-footer">
+        Conditions en vigueur depuis le {{ "now"|date("d/m/Y") }}
+    </div>
+</div>
+{% endblock %}

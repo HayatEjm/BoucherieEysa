@@ -92,9 +92,9 @@
         <div class="footer-bottom">
             <p>&copy; {{ "now"|date("Y") }} Boucherie Eysa - Saumur. Tous droits réservés.</p>
             <div class="footer-legal">
-                <a href="#mentions">Mentions légales</a>
-                <a href="#privacy">Politique de confidentialité</a>
-                <a href="#cgv">CGV</a>
+                <a href="{{ path('legal_mentions') }}">Mentions légales</a>
+                <a href="{{ path('legal_privacy') }}">Politique de confidentialité</a>
+                <a href="{{ path('legal_cgv') }}">CGV</a>
             </div>
         </div>
     </div>

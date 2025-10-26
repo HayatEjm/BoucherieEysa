@@ -35,6 +35,29 @@
         <input id="stock" name="stock" type="number" min="0" class="form-control" required value="{{ product ? product.stock : 0 }}">
       </div>
       <div class="form-group">
+        <label for="category_id"><i class="fas fa-tags"></i> Catégorie *</label>
+        <select id="category_id" name="category_id" class="form-control" required>
+          <option value="">Choisir une catégorie</option>
+          {% for category in categories %}
+            <option value="{{ category.id }}" 
+              {% if product and product.category and product.category.id == category.id %}selected{% endif %}>
+              {{ category.name }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="unit"><i class="fas fa-ruler"></i> Unité</label>
+        <select id="unit" name="unit" class="form-control">
+          <option value="kg" {% if product and product.unit == 'kg' %}selected{% elseif not product %}selected{% endif %}>kg</option>
+          <option value="pièce" {% if product and product.unit == 'pièce' %}selected{% endif %}>pièce</option>
+          <option value="g" {% if product and product.unit == 'g' %}selected{% endif %}>g</option>
+        </select>
+      </div>
+      <div class="form-group">
         <label for="image"><i class="fas fa-image"></i> Image (nom de fichier)</label>
         <input id="image" name="image" class="form-control" value="{{ product ? product.image : '' }}" placeholder="ex: cote-boeuf.jpg">
         {% if product and product.image %}

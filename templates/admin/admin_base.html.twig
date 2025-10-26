@@ -46,6 +46,13 @@
                     </li>
                     
                     <li class="nav-item">
+                        <a href="{{ path('admin_categories_index') }}" class="nav-link {{ app.request.get('_route') starts with 'admin_categories' ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-tags"></i>
+                            <span class="nav-text">Catégories</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
                         <a href="{{ path('admin_products_index') }}" class="nav-link {{ app.request.get('_route') starts with 'admin_product' ? 'active' : '' }}">
                             <i class="nav-icon fas fa-box"></i>
                             <span class="nav-text">Produits</span>

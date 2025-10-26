@@ -27,11 +27,11 @@
 
 /* CSS général de base */
 body {
-    background-color: white;
+    background-color: var(--beige-light); /* ✅ COHÉRENT avec design-system.css */
     margin: 0;
     padding: 0;
     font-family: var(--font-family-primary);
-    line-height: 1;
+    line-height: 1.6; /* ✅ COHÉRENT avec design-system.css pour la lisibilité */
     color: var(--text-primary);
 }
 

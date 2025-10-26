@@ -103,6 +103,7 @@ import './styles/design-system.css'
 
 // --- CSS Global & Pages
 import './styles/app.css'
+import './styles/home.css' /* ✅ CORRECTION : Import manquant pour la page d'accueil */
 import './styles/category/category_list.css'
 import './styles/category/quantity-selector.css'
 import './styles/partials/header.css'
@@ -115,7 +116,7 @@ import './styles/product/product_list_simple.css'
 import './styles/product/product_detail.css'
 import './styles/checkout/checkout.css'
 import './styles/cart/cart_badge.css'
-import './styles/auth/auth.css'
+import './styles/auth/auth.css' /* ✅ Version dans /auth/ plus récente avec design system */
 import './styles/account.css'
 
 // Fin
