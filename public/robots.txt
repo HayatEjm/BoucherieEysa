@@ -1,3 +1,21 @@
+# ============================================================
+# ⚠️ MODE PRÉPRODUCTION / DÉVELOPPEMENT
+# Empêche Google et tous les autres robots d’explorer le site
+# tant que le site n’est pas finalisé.
+# Pour réactiver l’indexation, supprime ou commente ce bloc.
+# ============================================================
+
+User-agent: *
+Disallow: /
+
+# Pas de sitemap pendant la phase de préproduction
+# Sitemap: https://www.boucherie-eysa.fr/sitemap.xml
+
+
+# ============================================================
+# ✅ CONTENU NORMAL (à réactiver à la mise en ligne)
+# ============================================================
+
 # robots.txt pour Boucherie EYSA
 # https://www.boucherie-eysa.fr/robots.txt
 
@@ -36,8 +54,8 @@ Disallow: /*?*
 # Délai entre les requêtes (en secondes)
 Crawl-delay: 1
 
-# Sitemap (à créer plus tard)
-Sitemap: https://www.boucherie-eysa.fr/sitemap.xml
+# Sitemap (à activer à la mise en ligne)
+# Sitemap: https://www.boucherie-eysa.fr/sitemap.xml
 
 # Spécifique pour les moteurs français
 User-agent: Googlebot

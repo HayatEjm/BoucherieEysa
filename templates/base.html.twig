@@ -1,62 +1,58 @@
+{# templates/base.html.twig #}
 <!DOCTYPE html>
-<html lang="f		{# Favicon et icônes #}
-		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🥩</text></svg>">
-		<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/apple-touch-icon.png') }}">
-		<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32x32.png') }}">
-		<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon-16x16.png') }}">
-		
-		{# Canonical URL #}
-		<link rel="canonical" href="{% block canonical_url %}{{ app.request.uri }}{% endblock %}">>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="language" content="fr-FR">
-		
-		{# SEO Meta tags #}
-		<meta name="description" content="{% block meta_description %}Boucherie EYSA à Saumur - Click & Collect, viandes de qualité premium, produits locaux. Commandez en ligne et retirez en magasin. Service rapide et professionnel.{% endblock %}">
-		<meta name="keywords" content="{% block meta_keywords %}boucherie, Saumur, viande, click collect, bœuf, porc, agneau, volaille, charcuterie, produits locaux, qualité premium{% endblock %}">
-		<meta name="author" content="Boucherie EYSA">
-		<meta name="robots" content="{% block meta_robots %}index, follow{% endblock %}">
-		
-		{# Open Graph pour réseaux sociaux #}
-		<meta property="og:title" content="{% block og_title %}{{ block('title') }}{% endblock %}">
-		<meta property="og:description" content="{% block og_description %}{{ block('meta_description') }}{% endblock %}">
-		<meta property="og:type" content="{% block og_type %}website{% endblock %}">
-		<meta property="og:locale" content="fr_FR">
-		<meta property="og:site_name" content="Boucherie EYSA">
-		
-		{# Twitter Cards #}
-		<meta name="twitter:card" content="summary_large_image">
-		<meta name="twitter:title" content="{{ block('og_title') }}">
-		<meta name="twitter:description" content="{{ block('og_description') }}">
-		
-		<title>
-			{% block title %}Boucherie EYSA - Saumur - Click & Collect
-			{% endblock %}
-		</title>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="language" content="fr-FR">
 
-		<link
-		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+    {# --- SEO / Préprod : bloque l'indexation (enlever à la mise en ligne) --- #}
+    <meta name="robots" content="{% block meta_robots %}noindex, nofollow{% endblock %}">
 
+    {# SEO de base #}
+    <meta name="description" content="{% block meta_description %}Boucherie EYSA à Saumur - Click & Collect, viandes de qualité premium, produits locaux. Commandez en ligne et retirez en magasin. Service rapide et professionnel.{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}boucherie, Saumur, viande, click collect, bœuf, porc, agneau, volaille, charcuterie, produits locaux, qualité premium{% endblock %}">
+    <meta name="author" content="Boucherie EYSA">
 
-		{# Feuilles de style via Webpack Encore #}
-		{{ encore_entry_link_tags('app') }}
+    {# Canonical #}
+    <link rel="canonical" href="{% block canonical_url %}{{ app.request.uri }}{% endblock %}">
 
-		{% block stylesheets %}{% endblock %}
-            {{ encore_entry_link_tags('app') }}
+    {# Favicons #}
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🥩</text></svg>">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon-16x16.png') }}">
 
-		{% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-			{{ encore_entry_script_tags('app') }}
-			{% block importmap %}{% endblock %}
-		{% endblock %}
-	</head>
-	<body>
-		{% include 'partials/header.html.twig' %}
-		{% block body %}{% endblock %}
-		{% include 'partials/footer.html.twig' %}
-		
-		{# Bandeau cookie - chargé sur toutes les pages #}
-		{% include 'components/cookie_banner.html.twig' %}
-	</body>
+    {# Open Graph #}
+    <meta property="og:title" content="{% block og_title %}{{ block('title') }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ block('meta_description') }}{% endblock %}">
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Boucherie EYSA">
+
+    {# Twitter #}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ block('og_title') }}">
+    <meta name="twitter:description" content="{{ block('og_description') }}">
+
+    <title>{% block title %}Boucherie EYSA - Saumur - Click & Collect{% endblock %}</title>
+
+    {# CSS via Webpack Encore (une seule fois) #}
+    {{ encore_entry_link_tags('app') }}
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+    {% include 'partials/header.html.twig' %}
+    {% block body %}{% endblock %}
+    {% include 'partials/footer.html.twig' %}
+
+    {# JS via Webpack Encore (une seule fois) #}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+        {% block importmap %}{% endblock %}
+    {% endblock %}
+
+    {# Bandeau cookie #}
+    {% include 'components/cookie_banner.html.twig' %}
+</body>
 </html>
