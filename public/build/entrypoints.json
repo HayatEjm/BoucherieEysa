@@ -1,0 +1,51 @@
+{
+  "entrypoints": {
+    "app": {
+      "js": [
+        "/build/runtime.js",
+        "/build/838.js",
+        "/build/989.js",
+        "/build/408.js",
+        "/build/256.js",
+        "/build/537.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/214.css",
+        "/build/344.css",
+        "/build/app.css"
+      ]
+    },
+    "cart-app": {
+      "js": [
+        "/build/runtime.js",
+        "/build/838.js",
+        "/build/408.js",
+        "/build/cart-app.js"
+      ],
+      "css": [
+        "/build/344.css"
+      ]
+    },
+    "admin": {
+      "js": [
+        "/build/runtime.js",
+        "/build/838.js",
+        "/build/989.js",
+        "/build/256.js",
+        "/build/admin.js"
+      ],
+      "css": [
+        "/build/admin.css"
+      ]
+    },
+    "legal": {
+      "js": [
+        "/build/runtime.js"
+      ],
+      "css": [
+        "/build/legal.css"
+      ]
+    }
+  }
+}
