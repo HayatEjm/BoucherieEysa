@@ -1,6 +1,14 @@
-import startStimulusApp from '@symfony/stimulus-bridge/start-app';
+// assets/bootstrap.js
+import { startStimulusApp } from '@symfony/stimulus-bridge';
 
-const app = startStimulusApp();
+// (si tu as @symfony/autoimport, tu peux aussi garder la ligne suivante)
+// import '@symfony/autoimport';
 
-// register any custom, 3rd party controllers here
-// app.register('some_controller_name', SomeImportedController);
+export const app = startStimulusApp(require.context(
+  '@symfony/stimulus-bridge/lazy-controller-loader!.',
+  true,
+  /\.(j|t)sx?$/
+));
+
+// 👉 N'AJOUTE PAS une autre ligne du type "const app = startStimulusApp();"
+// 👉 N'IMPORTE PAS une seconde fois startStimulusApp

@@ -3,40 +3,43 @@
     "app": {
       "js": [
         "/build/runtime.js",
-        "/build/838.js",
-        "/build/989.js",
+        "/build/895.js",
+        "/build/602.js",
         "/build/408.js",
-        "/build/256.js",
-        "/build/537.js",
+        "/build/582.js",
+        "/build/41.js",
+        "/build/545.js",
+        "/build/508.js",
         "/build/app.js"
       ],
       "css": [
-        "/build/214.css",
-        "/build/344.css",
+        "/build/41.css",
+        "/build/545.css",
         "/build/app.css"
       ]
     },
     "cart-app": {
       "js": [
         "/build/runtime.js",
-        "/build/838.js",
+        "/build/895.js",
         "/build/408.js",
         "/build/cart-app.js"
       ],
       "css": [
-        "/build/344.css"
+        "/build/cart-app.css"
       ]
     },
     "admin": {
       "js": [
         "/build/runtime.js",
-        "/build/838.js",
-        "/build/989.js",
-        "/build/256.js",
+        "/build/895.js",
+        "/build/602.js",
+        "/build/582.js",
+        "/build/545.js",
         "/build/admin.js"
       ],
       "css": [
-        "/build/admin.css"
+        "/build/545.css"
       ]
     },
     "legal": {
