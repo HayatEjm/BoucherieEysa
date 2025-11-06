@@ -1,9 +1,9 @@
 /* Affichage bordeaux des titres de catégorie uniquement sur la page d'accueil */
 .home-page .category-name {
-  color: var(--primary-color) !important; /* ✅ Utilise la variable bordeaux */
-  font-size: var(--font-size-3xl); /* ✅ Utilise la variable de taille */
-  font-weight: var(--font-weight-bold); /* ✅ Utilise la variable de poids */
-  margin-bottom: var(--spacing-md); /* ✅ Utilise la variable d'espacement */
+  color: var(--primary-color) !important;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-md);
 }
 /* ========================================================================
    CSS POUR LA PAGE D'ACCUEIL 
@@ -25,11 +25,11 @@
  /* SECTION HERO (BANNIÈRE PRINCIPALE) */
 
 .hero-section {
-  background: var(--beige-light); /* ✅ Utilise la variable beige clair */
-  padding: var(--spacing-4xl) var(--spacing-xl); /* ✅ Utilise les variables d'espacement */
+  background: var(--beige-light);
+  padding: var(--spacing-4xl) var(--spacing-xl);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-3xl); /* ✅ Utilise la variable d'espacement */
+  gap: var(--spacing-3xl);
   align-items: center;
   min-height: 600px;
 }
@@ -48,17 +48,17 @@
 }
 
 .hero-subtitle {
-  font-size: var(--font-size-2xl); /* ✅ Variable de taille */
-  color: var(--primary-dark); /* ✅ Variable bordeaux foncé */
-  margin-bottom: var(--spacing-lg); /* ✅ Variable d'espacement */
-  font-weight: var(--font-weight-semibold); /* ✅ Variable de poids */
+  font-size: var(--font-size-2xl);
+  color: var(--primary-dark);
+  margin-bottom: var(--spacing-lg);
+  font-weight: var(--font-weight-semibold);
 }
 
 .hero-description {
-  font-size: var(--font-size-lg); /* ✅ Variable de taille */
-  color: var(--text-primary); /* ✅ Variable couleur de texte */
+  font-size: var(--font-size-lg);
+  color: var(--text-primary);
   line-height: 1.6;
-  margin-bottom: var(--spacing-xl); /* ✅ Variable d'espacement */
+  margin-bottom: var(--spacing-xl);
 }
 
 .btn-hero {
@@ -260,31 +260,31 @@
   margin-bottom: 3rem;
 }
 
-/* ✅ Correction : cartes uniformes avec hauteur égale */
+/* Cartes uniformes avec hauteur égale */
 .featured-products-section .product-card {
-  background: var(--white); /* ✅ Variable couleur */
-  border-radius: var(--border-radius-md); /* ✅ Variable border-radius */
+  background: var(--white);
+  border-radius: var(--border-radius-md);
   overflow: hidden;
-  box-shadow: var(--shadow-sm); /* ✅ Variable ombre */
-  transition: var(--transition-normal); /* ✅ Variable transition */
-  display: flex; /* ✅ Correction : flexbox pour hauteur égale */
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+  display: flex;
   flex-direction: column;
-  height: 100%; /* ✅ Correction : hauteur uniforme */
+  height: 100%;
 }
 
 .featured-products-section .product-card:hover {
   transform: translateY(-5px);
-  box-shadow: var(--shadow-lg); /* ✅ Utilise la variable d'ombre forte */
+  box-shadow: var(--shadow-lg);
 }
 
-/* ✅ Images des produits vedettes - CORRECTION DÉCALAGE */
+/* Images des produits vedettes */
 .featured-products-section .product-image {
   width: 100%;
-  height: 200px !important; /* ✅ Force la hauteur même si pas d'image */
+  height: 200px !important;
   overflow: hidden;
-  flex-shrink: 0; /* ✅ Empêche l'image de rétrécir */
-  background-color: var(--beige-medium); /* ✅ Couleur de fond si pas d'image */
-  display: flex; /* ✅ Centrage de l'image */
+  flex-shrink: 0;
+  background-color: var(--beige-medium);
+  display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -293,64 +293,64 @@
 .featured-products-section .product-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* ✅ Image bien cadrée */
-  display: block; /* ✅ Élimine les espaces sous l'image */
+  object-fit: cover;
+  display: block;
 }
 
-/* ✅ Si l'image ne se charge pas, on met une image par défaut en CSS */
-.featured-products-section .product-image::before {
+/* Image par défaut désactivée */
+/* .featured-products-section .product-image::before {
   content: "🥩";
   font-size: 3rem;
   color: var(--primary-color);
   position: absolute;
   z-index: 1;
-}
+} */
 
 .featured-products-section .product-image img[src*="images.unsplash.com"] {
-  z-index: 2; /* ✅ L'image Unsplash passe devant l'emoji */
+  z-index: 2;
   position: relative;
 }
 
-/* ✅ Animation hover pour les images */
+/* Animation hover pour les images */
 .featured-products-section .product-card:hover .product-image img {
   transform: scale(1.05);
   transition: transform var(--transition-normal);
 }
 
-/* ✅ Styles spécifiques pour les produits de la page d'accueil */
+/* Styles spécifiques pour les produits de la page d'accueil */
 .featured-products-section .home-product-info {
-  padding: var(--spacing-lg); /* ✅ Utilise la variable d'espacement */
-  display: flex; /* ✅ Correction : flexbox pour alignement */
+  padding: var(--spacing-lg);
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex-grow: 1; /* ✅ CORRECTION : prend l'espace disponible sans déborder */
-  min-height: 0; /* ✅ CORRECTION : permet au contenu de se redimensionner */
+  flex-grow: 1;
+  min-height: 0;
 }
 
 .featured-products-section .home-product-name {
-  color: var(--primary-color); /* ✅ Utilise la variable bordeaux */
-  font-size: var(--font-size-xl); /* ✅ Utilise la variable de taille */
-  margin-bottom: var(--spacing-sm); /* ✅ Utilise la variable d'espacement */
-  font-weight: var(--font-weight-semibold); /* ✅ Utilise la variable de poids */
+  color: var(--primary-color);
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-sm);
+  font-weight: var(--font-weight-semibold);
 }
 
 .featured-products-section .home-product-description {
-  color: var(--text-primary); /* ✅ Utilise la variable de couleur de texte */
+  color: var(--text-primary);
   font-size: 0.9rem;
   margin-bottom: 1rem;
   line-height: 1.5;
-  /* ✅ CORRECTION : Empêche le débordement de texte */
+  /* Empêche le débordement de texte */
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3; /* Limite à 3 lignes max */
-  line-clamp: 3; /* ✅ Propriété standard pour compatibilité */
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   flex-grow: 0; /* Ne grandit pas */
   flex-shrink: 1; /* Peut rétrécir si nécessaire */
 }
 
 .product-price {
-  color: #8b1538; /* Bordeaux */
+  color: var(--text-secondary); /* Gris moyen */
   font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 1rem;

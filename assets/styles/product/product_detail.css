@@ -273,7 +273,7 @@
 .current-price {
     font-size: 2rem;
     font-weight: 700;
-    color: #8B1538; /* Bordeaux pour le prix */
+    color: var(--text-secondary); /* Gris moyen */
 }
 
 .price-per-kg {
@@ -606,7 +606,7 @@
 .price {
     font-size: 2rem;
     font-weight: 700;
-    color: #8B1538;
+    color: var(--text-secondary);
     margin-bottom: 1rem;
 }
 

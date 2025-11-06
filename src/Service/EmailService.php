@@ -22,7 +22,7 @@ class EmailService
             $email = (new Email())
                 ->from('eysa.boucherie@gmail.com')
                 ->to($order->getCustomerEmail())
-                ->subject('✅ Commande confirmée #' . $order->getId() . ' - Boucherie Eysa')
+                ->subject('Commande confirmée #' . $order->getId() . ' - Boucherie Eysa')
                 ->html($this->twig->render('emails/order_confirmation.html.twig', [
                     'order' => $order
                 ]));

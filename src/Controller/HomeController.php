@@ -9,6 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 /**
  * CONTROLLER HOME - Je gère la page d'accueil
  * 
@@ -33,7 +36,7 @@ class HomeController extends AbstractController
     {
         $categories = $categoryRepository->findAll();
 
-        // ✅ On transforme les catégories en tableau simple pour Vue
+        // On transforme les catégories en tableau simple pour Vue
         $formattedCategories = array_map(function ($category) {
             return [
                 'id' => $category->getId(),
@@ -50,4 +53,13 @@ class HomeController extends AbstractController
             
         ]);
     }
+    #[Route('/test-404')]
+public function test404(): never {
+    throw new NotFoundHttpException('Test 404');
+}
+
+#[Route('/test-403')]
+public function test403(): never {
+    throw new AccessDeniedException('Test 403');
+}
 }

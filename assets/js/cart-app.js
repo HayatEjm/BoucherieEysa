@@ -1,21 +1,35 @@
-// assets/cart-app.js
-import '../styles/design-system.css';  //  variables et tokens
-import '../styles/cart/cart.css';      // styles spécifiques panier 
+// Point d'entrée pour la page panier
+// Chargement optimisé du composant CartApp
+import '../styles/design-system.css';
+import '../styles/cart/cart.css';
 
 import { createApp } from 'vue'
 import { pinia } from '../stores/pinia'
 
-// J'importe le composant CartApp (qui inclut CartView et ToastVue)
-import CartApp from '../components/CartApp.vue'
+async function initCartApp() {
+  try {
+    // Import dynamique pour réduire la taille du bundle principal
+    const { default: CartApp } = await import('../components/CartApp.vue');
+    
+    const app = createApp({
+      components: { CartApp },
+      template: `<CartApp />`
+    });
+    
+    app.use(pinia);
+    app.mount('#cart-app');
+    
+  } catch (error) {
+    console.error('Erreur chargement CartApp:', error);
+    
+    // Fallback en cas d'erreur de chargement
+    document.getElementById('cart-app').innerHTML = `
+      <div class="cart-error">
+        <p>Erreur de chargement du panier</p>
+        <button onclick="location.reload()">Réessayer</button>
+      </div>
+    `;
+  }
+}
 
-const app = createApp({
-  components: { CartApp },
-
-  // Voici le template inline auquel je faisais référence
-  template: `
-    <CartApp />
-  `
-})
-
-app.use(pinia)
-app.mount('#cart-app')
+initCartApp();

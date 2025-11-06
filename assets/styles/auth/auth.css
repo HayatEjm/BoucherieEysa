@@ -178,8 +178,9 @@
     color: white;
 }
 
+
 .btn-full {
-    width: 100%;
+    /* width: auto; */
     margin-bottom: 1rem;
 }
 

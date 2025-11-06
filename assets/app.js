@@ -1,16 +1,13 @@
 
-// --- Import Vue.js & Composants
-
-
+// Import Vue.js et composants principaux
 import { createApp } from 'vue'
 import { pinia } from './stores/pinia'
 import DropdownMenu from './components/DropdownMenu.vue'
-import ProductDetail from './components/ProductDetail.vue'
 import SearchBar from './components/SearchBar.vue'
 import CartBadge from './components/CartBadge.vue'
 import AddToCartButton from './components/AddToCartButton.vue'
 
-// --- Composant Menu Déroulant (Header)
+// Initialisation du menu déroulant des catégories
 const mountPoint = document.getElementById('vue-dropdown-menu')
 if (mountPoint) {
   try {
@@ -18,19 +15,19 @@ if (mountPoint) {
     const dropdownApp = createApp(DropdownMenu, { categories })
     dropdownApp.mount(mountPoint)
   } catch (error) {
-    console.error("Erreur menu :", error)
+    console.error("Erreur initialisation menu :", error)
   }
 }
 
-// --- Composant Vue SearchBar
+// Composant de recherche avec store Pinia
 const searchEl = document.querySelector('.search-container')
 if (searchEl) {
   const searchApp = createApp(SearchBar)
-  searchApp.use(pinia) // ✅ Utilisation de Pinia partagée
+  searchApp.use(pinia)
   searchApp.mount(searchEl)
 }
 
-// --- Composant Vue CartBadge
+// Badge compteur panier dans le header
 const cartBadgeEl = document.getElementById('cart-badge')
 if (cartBadgeEl) {
   try {
@@ -38,11 +35,11 @@ if (cartBadgeEl) {
     badgeApp.use(pinia)
     badgeApp.mount(cartBadgeEl)
   } catch (error) {
-    console.error('Erreur CartBadge :', error)
+    console.error('Erreur initialisation badge panier :', error)
   }
 }
 
-// --- Composants Vue AddToCartButton (version simple qui fonctionne)
+// Boutons d'ajout au panier sur toutes les pages
 const addToCartButtons = document.querySelectorAll('.add-to-cart[data-product-id]')
 if (addToCartButtons.length > 0) {
   addToCartButtons.forEach(button => {
@@ -64,59 +61,60 @@ if (addToCartButtons.length > 0) {
 }
 
 
-// --- Composant Vue.js ProductDetail
+// Sélecteur de produit sur pages détail (chargement optimisé)
 const el = document.getElementById('product-detail')
 if (el) {
-  try {
-    const product = JSON.parse(el.dataset.product)
-    const minWeight = Number(el.dataset.minWeight || 200)
-    const maxWeight = Number(el.dataset.maxWeight || 5000)
-    const step = Number(el.dataset.step || 100)
-    const suggestions = JSON.parse(el.dataset.suggestions || '[500,1000,1500]')
+  async function initProductDetail() {
+    try {
+      // Import dynamique pour optimiser le chargement initial
+      const { default: ProductDetail } = await import('./components/ProductDetail.vue')
+      
+      const product = JSON.parse(el.dataset.product)
+      const minWeight = Number(el.dataset.minWeight || 200)
+      const maxWeight = Number(el.dataset.maxWeight || 5000)
+      const step = Number(el.dataset.step || 100)
+      const suggestions = JSON.parse(el.dataset.suggestions || '[500,1000,1500]')
 
-    const app = createApp(ProductDetail, {
-      product,
-      minWeight,
-      maxWeight,
-      step,
-      suggestions
-    })
-    app.use(pinia)
-    app.mount(el)
-  } catch (error) {
-    console.error('Erreur ProductDetail :', error)
+      const app = createApp(ProductDetail, {
+        product,
+        minWeight,
+        maxWeight,
+        step,
+        suggestions
+      })
+      app.use(pinia)
+      app.mount(el)
+      
+    } catch (error) {
+      console.error('Erreur chargement ProductDetail :', error)
+      el.innerHTML = '<p>Erreur de chargement du sélecteur de produit</p>'
+    }
   }
+  
+  initProductDetail()
 }
 
 
 
-// --- Imports JS personnalisés
+// Scripts JS spécifiques aux fonctionnalités
 import './js/header.js'
 import './js/category_products.js'
 import './js/click_collect.js'
 import './bootstrap.js'
 import './js/pickupSlots.js'
 
-// --- Fonts & Design System
+// Icônes et système de design
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import './styles/design-system.css'
 
-// --- CSS Global & Pages
+// Styles principaux
 import './styles/app.css'
-import './styles/home.css' /* ✅ CORRECTION : Import manquant pour la page d'accueil */
-import './styles/category/category_list.css'
-import './styles/category/quantity-selector.css'
-import './styles/partials/header.css'
-import './styles/partials/SearchBar.css'
-import './styles/partials/footer.css'
-import './styles/partials/click_collect.css'
-import './styles/partials/pickup-slots.css'
-import './styles/philosophy/philosophy.css'
-import './styles/product/product_list_simple.css'
-import './styles/product/product_detail.css'
-import './styles/checkout/checkout.css'
-import './styles/cart/cart_badge.css'
-import './styles/auth/auth.css' /* ✅ Version dans /auth/ plus récente avec design system */
-import './styles/account.css'
 
-// Fin
+// Styles spécifiques par page/composant
+import './styles/category/quantity-selector.css' 
+import './styles/partials/SearchBar.css'
+import './styles/philosophy/philosophy.css'
+import './styles/checkout/checkout.css'
+import './styles/auth/auth.css'
+import './styles/account.css'
+import './styles/components/cookie-banner.css'

@@ -1,0 +1,57 @@
+# robots.txt pour Boucherie EYSA
+# https://www.boucherie-eysa.fr/robots.txt
+
+User-agent: *
+Allow: /
+
+# Pages autorisées spécifiquement
+Allow: /category/
+Allow: /product/
+Allow: /click-collect
+Allow: /philosophy
+Allow: /legal/
+
+# Pages interdites aux moteurs de recherche
+Disallow: /admin/
+Disallow: /account/
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /api/
+Disallow: /var/
+Disallow: /vendor/
+Disallow: /build/
+Disallow: /_profiler/
+Disallow: /_wdt/
+
+# Fichiers et dossiers techniques
+Disallow: /*.env$
+Disallow: /*.log$
+Disallow: /composer.json
+Disallow: /package.json
+Disallow: /webpack.config.js
+
+# Paramètres de requête à ignorer
+Disallow: /*?*
+
+# Délai entre les requêtes (en secondes)
+Crawl-delay: 1
+
+# Sitemap (à créer plus tard)
+Sitemap: https://www.boucherie-eysa.fr/sitemap.xml
+
+# Spécifique pour les moteurs français
+User-agent: Googlebot
+Allow: /fr/
+
+User-agent: Bingbot
+Allow: /fr/
+
+# Bloquer les mauvais bots
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /

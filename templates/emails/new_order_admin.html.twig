@@ -283,13 +283,13 @@
         <div class="actions">
             <h3>📋 Actions à effectuer</h3>
             <ul class="action-list">
-                <li>✅ Vérifier la disponibilité de tous les produits</li>
-                <li>🔪 Préparer et découper les viandes selon les quantités</li>
-                <li>📦 Emballer et étiqueter la commande #{{ order.id }}</li>
-                <li>📱 Contacter le client si nécessaire : 
+                <li>Vérifier la disponibilité de tous les produits</li>
+                <li>Préparer et découper les viandes selon les quantités</li>
+                <li>Emballer et étiqueter la commande #{{ order.id }}</li>
+                <li>Contacter le client si nécessaire : 
                     <a href="tel:{{ order.customerPhone ?? 'NON_RENSEIGNE' }}" style="color: #fed7aa;">{{ order.customerPhone ?? 'Téléphone non renseigné' }}</a>
                 </li>
-                <li>✅ Marquer la commande comme prête dans le système</li>
+                <li>Marquer la commande comme prête dans le système</li>
             </ul>
             
             <div style="margin-top: 20px; padding: 15px; background-color: rgba(229, 62, 62, 0.1); border-radius: 8px;">

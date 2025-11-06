@@ -37,6 +37,8 @@
     display: inline-block;
 }
 
+
+
 .logo a:hover {
     color: #ffffff !important; /* Reste blanc au survol */
 }

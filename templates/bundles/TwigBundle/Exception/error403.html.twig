@@ -1,0 +1,18 @@
+{# templates/bundles/TwigBundle/Exception/error403.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Accès interdit - 403{% endblock %}
+
+{% block body %}
+<div class="error-page">
+    <div class="error-container">
+        <h1>🚫 Accès refusé</h1>
+        <h2>Vous n'avez pas l'autorisation</h2>
+        <p>Cette section est réservée aux administrateurs de la boucherie.</p>
+        <div class="error-actions">
+            <a href="{{ path('app_login') }}" class="btn-eysa">🔐 Se connecter</a>
+            <a href="{{ path('app_home') }}" class="btn-eysa">🏠 Retour à l'accueil</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

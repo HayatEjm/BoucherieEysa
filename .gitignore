@@ -35,6 +35,15 @@ DOSSIER_PROJET_BROUILLON*.md
 DOSSIER_TECHNIQUE_*.md
 DOSSIER_PROJET_TEMP*.md
 
+# Fichiers de gestion de projet
+ROADMAP_BOUCHERIE_EYSA.md
+KANBAN_BOUCHERIE_EYSA.md
+ECOCONCEPTION_REELLE.md
+DOSSIER_PROJET_AJUSTE.md
+
+# Dossier académique complet
+dossier_academique/
+
 # Documentation confidentielle
 ANNEXES_PROJET/
 CAPTURES_ECRAN/

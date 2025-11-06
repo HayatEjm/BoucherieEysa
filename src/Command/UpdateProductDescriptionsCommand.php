@@ -139,13 +139,13 @@ class UpdateProductDescriptionsCommand extends Command
             if (isset($descriptions[$product->getId()])) {
                 $product->setDescription($descriptions[$product->getId()]);
                 $updated++;
-                $io->text("✅ Produit {$product->getId()}: {$product->getName()}");
+                $io->text("Produit {$product->getId()}: {$product->getName()}");
             }
         }
 
         $this->entityManager->flush();
 
-        $io->success("✅ {$updated} descriptions mises à jour avec succès !");
+        $io->success("{$updated} descriptions mises à jour avec succès !");
         $io->note('Les descriptions sont maintenant appétissantes et professionnelles.');
 
         return Command::SUCCESS;

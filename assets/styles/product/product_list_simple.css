@@ -1,4 +1,4 @@
-/* 🏗️ PRODUCT LIST - Style épuré et moderne */
+/* PRODUCT LIST - Style épuré et moderne */
 
 /* Container principal */
 .products-container {
@@ -138,7 +138,7 @@
 
 .product-price .price {
     font-size: 1.5rem;
-    color: #d72638;
+    color: var(--text-secondary);
     font-weight: bold;
 }
 

@@ -55,6 +55,12 @@
                         autocomplete="current-password"
                         placeholder="Votre mot de passe"
                     >
+                    <div class="form-help">
+                        <a href="{{ path('password_reset_request') }}" class="forgot-password-link">
+                            <i class="fas fa-key"></i>
+                            Mot de passe oublié ?
+                        </a>
+                    </div>
                 </div>
 
                 {# Champ caché pour la sécurité CSRF #}

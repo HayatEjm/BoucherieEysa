@@ -17,7 +17,7 @@ Encore
     .addEntry('admin', './assets/admin/main-admin.js')
 
     // Entrées CSS séparées (uniquement pour les pages qui en ont besoin)
-    .addStyleEntry('legal', './assets/styles/legal.css') /* ✅ Gardé car utilisé dans templates/legal/ */
+    .addStyleEntry('legal', './assets/styles/legal.css')
 
     // Optimisation : split des chunks
     .splitEntryChunks()

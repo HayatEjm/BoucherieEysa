@@ -12,10 +12,9 @@ function getJsonHeaders() {
 }
 
 async function parseJsonResponse(res) {
-  const text = await res.text()
-
   try {
-    const data = JSON.parse(text)
+    // Utiliser directement .json() qui gère mieux l'UTF-8
+    const data = await res.json()
 
     if (!res.ok || data.error) {
       throw new Error(data.error || `Erreur HTTP ${res.status}`)
@@ -23,8 +22,14 @@ async function parseJsonResponse(res) {
 
     return data
   } catch (err) {
-    console.warn(' Réponse non JSON valide :', text)
-    throw new Error('Erreur inattendue : réponse non JSON')
+    // Si erreur de parsing JSON
+    if (err instanceof SyntaxError) {
+      const text = await res.text()
+      console.warn('Réponse non JSON valide :', text)
+      throw new Error('Erreur inattendue : réponse non JSON')
+    }
+    // Si c'est une erreur métier, la propager
+    throw err
   }
 }
 
