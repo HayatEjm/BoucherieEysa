@@ -21,11 +21,14 @@ Encore
 
     // Optimisation : split des chunks
     .splitEntryChunks()
+
+    .enableVueLoader()
+
+    // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
+    .enableStimulusBridge('./assets/controllers.json')
     .enableSingleRuntimeChunk()
 
     // Support Vue.js (si utilisé)
-    .enableVueLoader()
-
     // Source maps en dev
     .enableSourceMaps(!Encore.isProduction())
     // Pas de versioning pour des noms de fichiers propres

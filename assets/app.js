@@ -1,3 +1,5 @@
+import { registerVueControllerComponents } from '@symfony/ux-vue';
+import './bootstrap.js';
 
 // Import Vue.js et composants principaux
 import { createApp } from 'vue'
@@ -118,3 +120,6 @@ import './styles/checkout/checkout.css'
 import './styles/auth/auth.css'
 import './styles/account.css'
 import './styles/components/cookie-banner.css'
+
+registerVueControllerComponents(require.context('./vue/controllers', true, /\.vue$/));
+registerVueControllerComponents();

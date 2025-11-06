@@ -247,7 +247,7 @@
         ]
     },
     "symfony/stimulus-bundle": {
-        "version": "2.26",
+        "version": "2.31",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -255,9 +255,9 @@
             "ref": "6acd9ff4f7fd5626d2962109bd4ebab351d43c43"
         },
         "files": [
-            "./assets/bootstrap.js",
-            "./assets/controllers.json",
-            "./assets/controllers/hello_controller.js"
+            "assets/bootstrap.js",
+            "assets/controllers.json",
+            "assets/controllers/hello_controller.js"
         ]
     },
     "symfony/translation": {
@@ -287,7 +287,7 @@
         ]
     },
     "symfony/ux-turbo": {
-        "version": "2.26",
+        "version": "2.31",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -296,7 +296,7 @@
         }
     },
     "symfony/ux-vue": {
-        "version": "2.27",
+        "version": "2.31",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -304,7 +304,7 @@
             "ref": "7a6b5e211acc7b10b7190e704b40f6d2bca01adf"
         },
         "files": [
-            "./assets/vue/controllers/Hello.vue"
+            "assets/vue/controllers/Hello.vue"
         ]
     },
     "symfony/validator": {
