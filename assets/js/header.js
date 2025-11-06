@@ -1,100 +1,49 @@
-/**
- * 🥩 MENU DÉROULANT PRODUITS - JavaScript simple et pédagogique
- * 
- * Ce fichier gère l'ouverture/fermeture du menu "Nos produits" au clic
- * Écrit de manière simple pour une développeuse débutante
- */
+// assets/js/header.js
+// Gestion du header et de la navigation
 
-// ✅ Attendre que la page soit complètement chargée
+// Fonctions pour le header (menu mobile, etc)
+
+// Gestion du menu mobile (si nécessaire)
 document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
     
-    console.log('🔍 DÉBUT - Initialisation du menu déroulant...');
-    
-    // 📝 ÉTAPE 1 : Récupérer les éléments du DOM
-    const dropdownToggle = document.querySelector('.dropdown-toggle[data-dropdown="products-menu"]');
-    const dropdownMenu = document.getElementById('products-menu');
-    const dropdownContainer = document.querySelector('.dropdown-container');
-    
-    console.log('🔍 dropdownToggle trouvé:', !!dropdownToggle);
-    console.log('🔍 dropdownMenu trouvé:', !!dropdownMenu);
-    console.log('🔍 dropdownContainer trouvé:', !!dropdownContainer);
-    
-    // 🔍 VÉRIFICATION : S'assurer que les éléments existent
-    if (!dropdownToggle || !dropdownMenu) {
-        console.log('❌ Menu déroulant non trouvé - éléments manquants');
-        console.log('   - dropdownToggle:', dropdownToggle);
-        console.log('   - dropdownMenu:', dropdownMenu);
-        return;
+    if (mobileMenuToggle && mobileMenu) {
+        mobileMenuToggle.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+        });
     }
     
-    console.log('✅ Tous les éléments trouvés, ajout des événements...');
-    
-    // 📝 ÉTAPE 2 : Gérer le clic sur "NOS PRODUITS"
-    dropdownToggle.addEventListener('click', function(event) {
-        console.log('🖱️ CLIC DÉTECTÉ sur NOS PRODUITS !');
-        
-        // Empêcher le comportement par défaut du lien
-        event.preventDefault();
-        
-        // Toggle : ouvrir si fermé, fermer si ouvert
-        const isOpen = dropdownMenu.classList.contains('show');
-        console.log('📋 Menu actuellement ouvert:', isOpen);
-        
-        if (isOpen) {
-            console.log('🔄 Fermeture du menu...');
-            closeDropdown();
-        } else {
-            console.log('🔄 Ouverture du menu...');
-            openDropdown();
-        }
-    });
-    
-    // 📝 ÉTAPE 3 : Fermer le menu si on clique ailleurs
+    // Fermer le menu mobile quand on clique à l'extérieur
     document.addEventListener('click', function(event) {
-        // Vérifier si le clic est en dehors du menu
-        const isClickInsideDropdown = dropdownContainer.contains(event.target);
-        
-        if (!isClickInsideDropdown && dropdownMenu.classList.contains('show')) {
-            console.log('🖱️ Clic extérieur détecté, fermeture du menu...');
-            closeDropdown();
+        if (mobileMenu && 
+            !mobileMenu.contains(event.target) && 
+            !mobileMenuToggle.contains(event.target)) {
+            mobileMenu.classList.remove('active');
         }
     });
     
-    // 📝 FONCTIONS UTILITAIRES
-    
-    /**
-     * Ouvre le menu déroulant avec animation
-     */
-    function openDropdown() {
-        console.log('🟢 Fonction openDropdown() exécutée');
-        dropdownMenu.classList.add('show');
-        dropdownToggle.setAttribute('aria-expanded', 'true');
-        console.log('🟢 Classe "show" ajoutée au menu');
-    }
-    
-    /**
-     * Ferme le menu déroulant
-     */
-    function closeDropdown() {
-        console.log('🔴 Fonction closeDropdown() exécutée');
-        dropdownMenu.classList.remove('show');
-        dropdownToggle.setAttribute('aria-expanded', 'false');
-        console.log('🔴 Classe "show" retirée du menu');
-    }
-    
-    // 📝 BONUS : Gestion des touches clavier (accessibilité)
-    dropdownToggle.addEventListener('keydown', function(event) {
-        // Ouvrir/fermer avec Entrée ou Espace
-        if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            dropdownToggle.click();
-        }
+    // Gestion du menu déroulant desktop si nécessaire
+    const dropdownTriggers = document.querySelectorAll('.dropdown-trigger');
+    dropdownTriggers.forEach(trigger => {
+        const dropdown = trigger.nextElementSibling;
         
-        // Fermer avec Échap
-        if (event.key === 'Escape') {
-            closeDropdown();
+        if (dropdown && dropdown.classList.contains('dropdown-menu')) {
+            trigger.addEventListener('mouseenter', function() {
+                dropdown.style.display = 'block';
+            });
+            
+            trigger.addEventListener('mouseleave', function() {
+                setTimeout(() => {
+                    if (!dropdown.matches(':hover')) {
+                        dropdown.style.display = 'none';
+                    }
+                }, 100);
+            });
+            
+            dropdown.addEventListener('mouseleave', function() {
+                dropdown.style.display = 'none';
+            });
         }
     });
-    
-    console.log('✅ Menu déroulant produits initialisé avec succès');
 });

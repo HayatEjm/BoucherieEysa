@@ -1,0 +1,164 @@
+{# Template pour la page "Mon Compte" #}
+{# J'étends le layout principal pour garder la cohérence du site #}
+{% extends 'base.html.twig' %}
+
+{# Titre de la page qui s'affiche dans l'onglet du navigateur #}
+{% block title %}Mon Compte - Boucherie Eysa{% endblock %}
+
+{# Contenu principal de la page #}
+{% block body %}
+    <div class="account-container">
+        {# En-tête de la page avec le nom de l'utilisateur #}
+        <div class="account-header">
+            <h1>Mon Compte</h1>
+            <p class="welcome-message">
+                Bonjour 
+                {% if user.fullName %}
+                    {{ user.fullName }} !
+                {% else %}
+                    {{ user.email }} !
+                {% endif %}
+            </p>
+        </div>
+
+        {# Section principale avec les informations du compte #}
+        <div class="account-content">
+            
+            {# Carte informations personnelles #}
+            <div class="account-card">
+                <h2><i class="fas fa-user"></i> Mes Informations</h2>
+                <div class="account-info">
+                    <p><strong>Email :</strong> {{ user.email }}</p>
+                    {% if user.firstName %}
+                        <p><strong>Prénom :</strong> {{ user.firstName }}</p>
+                    {% endif %}
+                    {% if user.lastName %}
+                        <p><strong>Nom :</strong> {{ user.lastName }}</p>
+                    {% endif %}
+                    {% if user.phone %}
+                        <p><strong>Téléphone :</strong> {{ user.phone }}</p>
+                    {% endif %}
+                    <p><strong>Membre depuis :</strong> 
+                        {# Je formate la date d'inscription si elle existe #}
+                        {% if user.createdAt is defined %}
+                            {{ user.createdAt|date('d/m/Y') }}
+                        {% else %}
+                            {# Fallback si pas de date définie #}
+                            Récemment
+                        {% endif %}
+                    </p>
+                </div>
+                
+                {# Bouton pour modifier le profil (préparé pour plus tard) #}
+                <div class="account-actions">
+                    <a href="{{ path('app_account_profile') }}" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Modifier mon profil
+                    </a>
+                </div>
+            </div>
+
+            {# Carte historique des commandes #}
+            <div class="account-card">
+                <h2><i class="fas fa-shopping-bag"></i> Mes produits commandés</h2>
+                <div class="orders-section">
+                    {% set productMap = {} %}
+                    {% for order in orders %}
+                        {% for item in order.orderItems %}
+                            {% set pid = item.product.id %}
+                            {% set current = productMap[pid] is defined ? productMap[pid] : {
+                                'product': item.product,
+                                'totalQty': 0,
+                                'lastPrice': item.unitPrice,
+                                'lastOrder': order,
+                                'lastOrderItem': item
+                            } %}
+                            {% set updated = current|merge({
+                                'totalQty': current.totalQty + item.quantity,
+                                'lastPrice': item.unitPrice,
+                                'lastOrder': order,
+                                'lastOrderItem': item
+                            }) %}
+                            {% set productMap = productMap|merge({ (pid): updated }) %}
+                        {% endfor %}
+                    {% endfor %}
+
+                    {% if productMap|length > 0 %}
+                        <ul class="orders-list">
+                            {% for pid, data in productMap %}
+                                {% set product = data.product %}
+                                {% set qty = data.totalQty %}
+                                {% set unit = product.unit ?? 'g' %}
+                                {% if unit == 'g' and qty >= 1000 %}
+                                    {% set qtyAff = (qty / 1000)|number_format(1, ',', ' ') ~ ' kg' %}
+                                {% elseif unit == 'g' %}
+                                    {% set qtyAff = qty ~ ' g' %}
+                                {% else %}
+                                    {% set qtyAff = qty ~ ' ' ~ unit %}
+                                {% endif %}
+                                <li style="margin-bottom: 1.2em; padding: 1em 1.2em; background: #f8fafc; border-radius: 10px; border-left: 3px solid #8b1538; display: flex; flex-direction: column; gap: 0.5em;">
+                                    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5em;">
+                                        <div>
+                                            <strong style="font-size:1.08em;">{{ product.name }}</strong>
+                                            <span style="color:#666; font-size:0.98em;">— {{ qtyAff }} commandé{{ qty > 1 ? 's' : '' }}</span>
+                                        </div>
+                                        <div style="text-align:right;">
+                                            <span style="font-weight:600; color:#5a5a5a; font-size:1.1em;">Dernier prix : {{ data.lastOrderItem.totalTtc|number_format(2, ',', ' ') }} €</span>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; gap:0.5em; justify-content:center; margin-top:0.5em;">
+                                        <a href="{{ path('app_checkout_order_details', {orderNumber: data.lastOrder.orderNumber}) }}" class="btn btn-sm btn-outline">Voir détail commande</a>
+                                        <a href="{{ path('app_product_show', {id: product.id}) }}" class="btn btn-sm btn-primary">Recommander</a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="no-orders">Vous n'avez pas encore passé de commande.</p>
+                        <a href="{{ path('app_home') }}" class="btn btn-outline">
+                            <i class="fas fa-store"></i> Découvrir nos produits
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            {# Carte actions rapides #}
+            <div class="account-card">
+                <h2><i class="fas fa-tools"></i> Actions Rapides</h2>
+                <div class="quick-actions">
+                    {# Actions principales côte à côte #}
+                    <div class="main-actions">
+                        <a href="{{ path('app_cart_index') }}" class="btn btn-secondary">
+                            <i class="fas fa-shopping-cart"></i> Mon Panier
+                        </a>
+                        <a href="{{ path('app_home') }}" class="btn btn-secondary">
+                            <i class="fas fa-home"></i> Accueil
+                        </a>
+                        
+                        {# Bouton Administration - Visible seulement pour les admins #}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('admin_dashboard') }}" class="btn btn-admin">
+                                <i class="fas fa-cogs"></i> Administration
+                            </a>
+                        {% endif %}
+                    </div>
+                    
+                    {# Action de déconnexion séparée #}
+                    <div class="logout-action">
+                        <a href="{{ path('app_logout') }}" class="btn btn-outline btn-logout">
+                            <i class="fas fa-sign-out-alt"></i> Se déconnecter
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{# Scripts spécifiques si nécessaire (pour plus tard) #}
+{% block javascripts %}
+    {{ parent() }}
+    {# Scripts additionnels pour interactions utilisateur si nécessaire #}
+{% endblock %}

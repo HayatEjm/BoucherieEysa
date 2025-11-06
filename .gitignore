@@ -28,6 +28,25 @@ yarn-error.log
 
 ###> documentation files ###
 DOCUMENTATION_API.md
+GUIDE_AUTHENTIFICATION_ETAPES.md
+
+# Dossiers de projet - Ne pas versionner (sauf le principal)
+DOSSIER_PROJET_BROUILLON*.md
+DOSSIER_TECHNIQUE_*.md
+DOSSIER_PROJET_TEMP*.md
+
+# Fichiers de gestion de projet
+ROADMAP_BOUCHERIE_EYSA.md
+KANBAN_BOUCHERIE_EYSA.md
+ECOCONCEPTION_REELLE.md
+DOSSIER_PROJET_AJUSTE.md
+
+# Dossier académique complet
+dossier_academique/
+
+# Documentation confidentielle
+ANNEXES_PROJET/
+CAPTURES_ECRAN/
 ###< documentation files ###
 
 
@@ -37,3 +56,6 @@ GuidesPerso/
 TVA_BOUCHERIE_IMPLEMENTEE.md
 CHECKLIST_CORRECTIONS_CSS.md
 NETTOYAGE_CSS_TERMINE.md
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###

@@ -1,4 +1,4 @@
-/* 🏗️ PRODUCT LIST - Style épuré et moderne */
+/* PRODUCT LIST - Style épuré et moderne */
 
 /* Container principal */
 .products-container {
@@ -65,16 +65,6 @@
 .btn-outline:hover {
     background: #d72638;
     color: white;
-}
-
-.btn-primary {
-    background: #d72638;
-    color: white;
-}
-
-.btn-primary:hover {
-    background: #b71c2b;
-    transform: translateY(-2px);
 }
 
 /* Grille des produits - style épuré */
@@ -148,7 +138,7 @@
 
 .product-price .price {
     font-size: 1.5rem;
-    color: #d72638;
+    color: var(--text-secondary);
     font-weight: bold;
 }
 
@@ -201,9 +191,9 @@
 }
 
 .no-products i {
-    font-size: 4rem;
+    /* font-size: 2rem; */
     color: #ddd;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .no-products h3 {

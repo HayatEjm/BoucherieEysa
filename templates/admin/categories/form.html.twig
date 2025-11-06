@@ -1,0 +1,69 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% block title %}{{ action == 'add' ? 'Ajouter une catégorie' : 'Modifier la catégorie' }}{% endblock %}
+
+{% block body %}
+<div class="admin-header">
+    <h1><i class="fas fa-{{ action == 'add' ? 'plus' : 'edit' }}"></i> {{ action == 'add' ? 'Nouvelle catégorie' : 'Modifier la catégorie' }}</h1>
+    <p class="subtitle">Organisez vos produits en catégories</p>
+</div>
+
+<div class="admin-actions" style="margin-bottom:20px;">
+    <a href="{{ path('admin_categories_index') }}" class="btn btn-outline">
+        <i class="fas fa-arrow-left"></i> Retour aux catégories
+    </a>
+</div>
+
+<div class="admin-form">
+    <form method="post">
+        <div class="form-group">
+            <label for="name"><i class="fas fa-tag"></i> Nom de la catégorie *</label>
+            <input id="name" name="name" class="form-control" required 
+                value="{{ category ? category.name : '' }}" 
+                placeholder="Ex: Bœuf, Porc, Volaille...">
+        </div>
+
+        <div class="form-group">
+            <label for="description"><i class="fas fa-align-left"></i> Description</label>
+            <textarea id="description" name="description" rows="3" class="form-control" 
+                placeholder="Décrivez cette catégorie...">{{ category ? category.description : '' }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="image"><i class="fas fa-image"></i> Image (nom de fichier)</label>
+            <input id="image" name="image" class="form-control" 
+                value="{{ category ? category.image : '' }}" 
+                placeholder="ex: category-boeuf.jpg">
+            <small class="form-text text-muted">L'image doit être placée dans le dossier public/images/</small>
+            {% if category and category.image %}
+                <div style="margin-top:10px;">
+                    <img src="{{ asset('images/' ~ category.image) }}" alt="{{ category.name }}" 
+                        style="max-width:150px;border-radius:8px;">
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="admin-actions">
+            <button class="btn btn-success">
+                <i class="fas fa-save"></i> {{ action == 'add' ? 'Créer la catégorie' : 'Enregistrer les modifications' }}
+            </button>
+            <a href="{{ path('admin_categories_index') }}" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Annuler
+            </a>
+        </div>
+    </form>
+</div>
+
+{% if action == 'edit' and category and category.products|length > 0 %}
+<div class="admin-section">
+    <h3><i class="fas fa-box"></i> Produits dans cette catégorie ({{ category.products|length }})</h3>
+    <div class="products-list">
+        {% for product in category.products %}
+            <div class="product-item">
+                <strong>{{ product.name }}</strong> - {{ product.price }}€
+                <small class="text-muted">Stock: {{ product.stock }}</small>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}

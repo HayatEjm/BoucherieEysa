@@ -1,0 +1,123 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% block title %}Produits{% endblock %}
+
+{% block body %}
+<div class="admin-header">
+  <h1><i class="fas fa-boxes"></i> Gestion des produits</h1>
+  <p class="subtitle">Gérez votre catalogue et surveillez vos stocks</p>
+</div>
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; padding: 24px; background: var(--admin-white); border-radius: var(--admin-radius); box-shadow: var(--admin-shadow-sm);">
+  <div>
+    <h3 style="margin: 0 0 4px 0; color: var(--admin-primary);">{{ products|length }} produit{{ products|length > 1 ? 's' : '' }} au total</h3>
+    <p style="margin: 0; color: #6b7280;">Dernière mise à jour : {{ "now"|date("d/m/Y à H:i") }}</p>
+  </div>
+  <a href="{{ path('admin_products_add') }}" class="btn btn-success">
+    <i class="fas fa-plus"></i> Nouveau produit
+  </a>
+</div>
+
+<div style="background: var(--admin-white); border-radius: var(--admin-radius); box-shadow: var(--admin-shadow-sm); overflow: hidden;">
+  <table class="admin-table" style="margin-top: 0;">
+    <thead>
+      <tr>
+        <th style="width: 80px;">Image</th>
+        <th>Produit</th>
+        <th style="width: 120px;">Catégorie</th>
+        <th style="width: 120px;">Prix</th>
+        <th style="width: 100px;">Stock</th>
+        <th style="width:220px;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in products %}
+        <tr>
+          <td>
+            {% if p.image %}
+              <img src="{{ asset('images/products/' ~ p.image) }}" alt="{{ p.name }}" style="width:50px;height:50px;object-fit:cover;border-radius:8px;">
+            {% else %}
+              <div style="width:50px;height:50px;background:#f0f0f0;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#999;">
+                <i class="fas fa-image"></i>
+              </div>
+            {% endif %}
+          </td>
+          <td>
+            <div class="item-info">
+              <div class="item-title">{{ p.name }}</div>
+              {% if p.description %}
+                <div class="item-subtitle">{{ p.description|length > 60 ? p.description|slice(0,60) ~ '…' : p.description }}</div>
+              {% endif %}
+            </div>
+          </td>
+          <td>
+            {% if p.category %}
+              <span class="badge badge-secondary">{{ p.category.name }}</span>
+            {% else %}
+              <span class="badge badge-warning">Aucune catégorie</span>
+            {% endif %}
+          </td>
+          <td><strong>{{ p.price|number_format(2, ',', ' ') }}€</strong></td>
+          <td>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <div class="stock-indicator {{ p.stock == 0 ? 'stock-out' : (p.stock <= 5 ? 'stock-low' : 'stock-good') }}">
+                {% if p.stock == 0 %} 
+                  Rupture
+                {% elseif p.stock <= 5 %} 
+                  {{ p.stock }} restant{{ p.stock > 1 ? 's' : '' }}
+                {% else %} 
+                  {{ p.stock }} en stock
+                {% endif %}
+              </div>
+            </div>
+            <form action="{{ path('admin_products_stock', {id: p.id}) }}" method="post" style="margin-top:8px;display:flex;gap:8px;align-items:center;">
+              <input type="number" name="stock" value="{{ p.stock }}" min="0" 
+                     style="width:70px; padding: 6px 8px; border: 1px solid var(--admin-gray-200); border-radius: 4px; text-align: center; font-weight: 600;" 
+                     class="form-control">
+              <button class="btn btn-sm btn-info" title="Mettre à jour le stock">
+                <i class="fas fa-save"></i>
+              </button>
+            </form>
+          </td>
+          <td>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <a href="{{ path('admin_products_edit', {id: p.id}) }}" class="btn btn-sm btn-primary" title="Modifier le produit">
+                <i class="fas fa-edit"></i>
+              </a>
+              <form action="{{ path('admin_products_delete', {id: p.id}) }}" method="post" 
+                    onsubmit="return confirm('⚠️ Êtes-vous sûr de vouloir supprimer ce produit ?');" 
+                    style="display:inline;">
+                <button class="btn btn-sm btn-danger" title="Supprimer le produit">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      {% else %}
+        <tr>
+          <td colspan="6" style="text-align:center;padding:48px;color:#6b7280;">
+            <i class="fas fa-box-open" style="font-size: 3rem; margin-bottom: 16px; opacity: 0.5;"></i>
+            <p style="margin: 0; font-size: 1.1rem; font-weight: 600;">Aucun produit pour le moment</p>
+            <p style="margin: 8px 0 16px 0; font-size: 0.9rem;">Commencez par ajouter votre premier produit</p>
+            <a href="{{ path('admin_products_add') }}" class="btn btn-success">
+              <i class="fas fa-plus"></i> Ajouter un produit
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% if products|length > 0 %}
+<div style="margin-top: 32px; text-align: center; padding: 24px; background: var(--admin-gray-50); border-radius: var(--admin-radius); border: 2px dashed var(--admin-gray-200);">
+  <p style="margin: 0 0 16px 0; color: #6b7280;">
+    <i class="fas fa-lightbulb"></i> 
+    <strong>Conseil :</strong> Surveillez régulièrement vos stocks pour éviter les ruptures
+  </p>
+  <a href="{{ path('admin_products_add') }}" class="btn btn-success">
+    <i class="fas fa-plus"></i> Ajouter un autre produit
+  </a>
+</div>
+{% endif %}
+{% endblock %}

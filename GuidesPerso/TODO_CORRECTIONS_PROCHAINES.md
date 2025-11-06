@@ -53,6 +53,18 @@
   - Taille des assets CSS/JS
   - Images optimisées
 
+## 🎓 **PRÉPARATION SOUTENANCE**
+- [ ] **Schéma architectural pour le jury** 🎯
+  - **Fichier créé** : `SCHEMA_ARCHITECTURE_BOUCHERIE_EYSA.md` ✅
+  - **Actions à faire** :
+    - [ ] Imprimer le schéma en A3 couleur pour présentation
+    - [ ] Préparer un pointeur pour suivre les flèches lors de l'explication
+    - [ ] Chronométrer l'explication (max 7 minutes)
+    - [ ] Préparer des exemples concrets pour chaque partie
+    - [ ] Mémoriser le discours de justification technique
+  - **Objectif** : Défendre l'architecture hybride pragmatique `/api/` + `/panier/`
+  - **Arguments clés** : Séparation métier/technique, évolutivité, performance
+
 ## 🚀 **AMÉLIORATIONS FUTURES**
 - [ ] **UX/UI** :
   - Animations et micro-interactions

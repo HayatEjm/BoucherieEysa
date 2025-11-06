@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouvelle commande - Boucherie Eysa</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #2d3748;
+        }
+        .container {
+            max-width: 650px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(45, 55, 72, 0.15);
+        }
+        .header {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+            position: relative;
+        }
+        .header::before {
+            content: "🚨";
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 24px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 700;
+        }
+        .header p {
+            margin: 8px 0 0;
+            font-size: 16px;
+            opacity: 0.95;
+        }
+        .content {
+            padding: 30px;
+        }
+        .urgent-box {
+            background: linear-gradient(135deg, #fed7d7 0%, #feb2b2 100%);
+            border: 2px solid #e53e3e;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .urgent-box h2 {
+            color: #c53030;
+            margin: 0 0 10px;
+            font-size: 20px;
+        }
+        .order-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #c53030;
+            background-color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .customer-info {
+            background-color: #edf2f7;
+            border-left: 4px solid #4299e1;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .customer-info h3 {
+            color: #2b6cb0;
+            margin: 0 0 15px;
+        }
+        .order-details table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .order-details th {
+            background-color: #2d3748;
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .order-details td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+        }
+        .order-details tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        .total-row {
+            background-color: #38a169 !important;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .pickup-alert {
+            background: linear-gradient(135deg, #fef5e7 0%, #fed7aa 100%);
+            border: 2px solid #f6ad55;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        .pickup-alert h3 {
+            color: #c05621;
+            margin: 0 0 15px;
+            font-size: 18px;
+        }
+        .pickup-time {
+            font-size: 20px;
+            font-weight: bold;
+            color: #c05621;
+            background-color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 10px 0;
+            border: 2px solid #f6ad55;
+        }
+        .actions {
+            background-color: #2d3748;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        .actions h3 {
+            margin: 0 0 15px;
+            color: #f7fafc;
+        }
+        .action-list {
+            text-align: left;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .action-list li {
+            margin: 8px 0;
+            padding-left: 10px;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background-color: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2b6cb0;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #718096;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- En-tête urgent -->
+        <div class="header">
+            <h1>NOUVELLE COMMANDE</h1>
+            <p>Action requise - Préparation nécessaire</p>
+        </div>
+
+        <!-- Contenu principal -->
+        <div class="content">
+            <!-- Alerte urgente -->
+            <div class="urgent-box">
+                <h2>🛒 Commande à préparer immédiatement</h2>
+                <div class="order-number">#{{ order.id }}</div>
+                <p><strong>Reçue le :</strong> {{ order.createdAt|date('d/m/Y à H:i:s') }}</p>
+            </div>
+
+            <!-- Informations client -->
+            <div class="customer-info">
+                <h3>👤 Informations Client</h3>
+                <p><strong>Nom :</strong> {{ order.customerName }}</p>
+                <p><strong>Email :</strong> <a href="mailto:{{ order.customerEmail }}">{{ order.customerEmail }}</a></p>
+                {% if order.customerPhone %}
+                <p><strong>Téléphone :</strong> <a href="tel:{{ order.customerPhone }}">{{ order.customerPhone }}</a></p>
+                {% endif %}
+            </div>
+
+            <!-- Statistiques rapides -->
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">{{ order.orderItems|length }}</div>
+                    <div class="stat-label">Produits</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">{{ (order.totalTtcCents / 100)|number_format(0, ',', ' ') }}€</div>
+                    <div class="stat-label">Total</div>
+                </div>
+                <div class="stat">
+                    {% set totalWeight = 0 %}
+                    {% for item in order.orderItems %}
+                        {% if item.product.unit in ['kg', 'g'] %}
+                            {% set totalWeight = totalWeight + item.quantity %}
+                        {% endif %}
+                    {% endfor %}
+                    <div class="stat-value">{{ totalWeight|number_format(1, ',', ' ') }}</div>
+                    <div class="stat-label">Kg approx.</div>
+                </div>
+            </div>
+
+            <!-- Détails des produits à préparer -->
+            <div class="order-details">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>🥩 Produit à préparer</th>
+                            <th>📦 Quantité</th>
+                            <th>💰 Prix unit.</th>
+                            <th>💵 Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in order.orderItems %}
+                        <tr>
+                            <td><strong>{{ item.product.name }}</strong>
+                                {% if item.product.category %}
+                                <br><small style="color: #718096;">{{ item.product.category.name }}</small>
+                                {% endif %}
+                            </td>
+                            <td><strong style="color: #c53030;">{{ item.quantity }} {{ item.product.unit }}</strong></td>
+                            <td>{{ (item.unitPriceHtCents / 100)|number_format(2, ',', ' ') }} €</td>
+                            <td><strong>{{ (item.totalTtcCents / 100)|number_format(2, ',', ' ') }} €</strong></td>
+                        </tr>
+                        {% endfor %}
+                        <tr class="total-row">
+                            <td colspan="3"><strong>💰 TOTAL COMMANDE</strong></td>
+                            <td><strong>{{ (order.totalTtcCents / 100)|number_format(2, ',', ' ') }} €</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Créneau de retrait -->
+            {% if order.pickupDate %}
+            <div class="pickup-alert">
+                <h3>🕐 Créneau de retrait</h3>
+                <p><strong>La commande doit être prête pour :</strong></p>
+                <div class="pickup-time">
+                    {{ order.pickupDate|date('d/m/Y') }} 
+                    {% if order.pickupTimeSlot %}
+                        {{ order.pickupTimeSlot }}
+                    {% endif %}
+                </div>
+                <p style="color: #c05621; font-weight: bold; margin-top: 15px;">
+                    ⏰ Temps de préparation restant à calculer
+                </p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Actions à effectuer -->
+        <div class="actions">
+            <h3>📋 Actions à effectuer</h3>
+            <ul class="action-list">
+                <li>Vérifier la disponibilité de tous les produits</li>
+                <li>Préparer et découper les viandes selon les quantités</li>
+                <li>Emballer et étiqueter la commande #{{ order.id }}</li>
+                <li>Contacter le client si nécessaire : 
+                    <a href="tel:{{ order.customerPhone ?? 'NON_RENSEIGNE' }}" style="color: #fed7aa;">{{ order.customerPhone ?? 'Téléphone non renseigné' }}</a>
+                </li>
+                <li>Marquer la commande comme prête dans le système</li>
+            </ul>
+            
+            <div style="margin-top: 20px; padding: 15px; background-color: rgba(229, 62, 62, 0.1); border-radius: 8px;">
+                <p style="margin: 0; font-weight: bold; color: #fed7aa;">
+                    🚨 Cette notification nécessite une action immédiate de votre part
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

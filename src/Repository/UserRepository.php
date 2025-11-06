@@ -33,6 +33,38 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * Compte les nouveaux utilisateurs pour une date donnée
+     */
+    public function countNewUsersByDate(\DateTime $date): int
+    {
+        $startOfDay = clone $date;
+        $startOfDay->setTime(0, 0, 0);
+        
+        $endOfDay = clone $date;
+        $endOfDay->setTime(23, 59, 59);
+
+        return $this->createQueryBuilder('u')
+            ->select('COUNT(u.id)')
+            ->andWhere('u.createdAt >= :start')
+            ->andWhere('u.createdAt <= :end')
+            ->setParameter('start', $startOfDay)
+            ->setParameter('end', $endOfDay)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * Compte le total des utilisateurs
+     */
+    public function countTotalUsers(): int
+    {
+        return $this->createQueryBuilder('u')
+            ->select('COUNT(u.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     //    /**
     //     * @return User[] Returns an array of User objects
     //     */

@@ -1,0 +1,42 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% block title %}Utilisateurs{% endblock %}
+
+{% block body %}
+<div class="admin-header">
+  <h1><i class="fas fa-users"></i> Utilisateurs</h1>
+  <p class="subtitle">Liste simple (email, nom, rôles)</p>
+</div>
+
+<div class="admin-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Rôles</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+        <tr>
+          <td>
+            {% set display = (u.firstName or u.lastName) ? (u.firstName ~ ' ' ~ u.lastName) : (u.email|split('@')[0]) %}
+            {{ display|trim }}
+            {% if u.phone %}<br><small style="color:#666;"><i class="fas fa-phone"></i> {{ u.phone }}</small>{% endif %}
+          </td>
+          <td>{{ u.email }}</td>
+          <td>
+            {% for r in u.roles %}
+              <span class="role-badge {{ r == 'ROLE_ADMIN' ? 'role-admin' : 'role-user' }}">
+                {{ r == 'ROLE_ADMIN' ? 'Admin' : 'Client' }}
+              </span>
+            {% endfor %}
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="3" style="text-align:center;color:#666;padding:20px;">Aucun utilisateur</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

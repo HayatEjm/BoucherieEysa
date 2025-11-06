@@ -87,6 +87,53 @@
     margin-bottom: 1rem;
 }
 
+/* ===== BADGES DE STOCK ===== */
+.product-image {
+    position: relative;
+}
+
+.stock-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.stock-badge.out-of-stock {
+    background: #dc3545;
+    color: white;
+}
+
+.stock-badge.low-stock {
+    background: #ffc107;
+    color: #333;
+}
+
+/* ===== PRODUIT EN RUPTURE ===== */
+.product-card.out-of-stock {
+    opacity: 0.7;
+}
+
+.product-card.out-of-stock .product-image img {
+    filter: grayscale(100%);
+}
+
+.btn-disabled {
+    background: #6c757d;
+    color: white;
+    cursor: not-allowed;
+}
+
+.btn-disabled:hover {
+    background: #6c757d;
+}
+
 @media (max-width: 768px) {
     .products-grid {
         grid-template-columns: 1fr;
@@ -136,7 +183,7 @@
 }
 
 .page-header h1 {
-    color: var(--bordeaux-fonce);
+    color: var(--primary-color);
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
@@ -158,13 +205,13 @@
     padding: 0.75rem 1.5rem;
     border-radius: 25px;
     text-decoration: none;
-    color: var(--bordeaux-fonce);
+    color: var(--primary-color);
     font-weight: 500;
     transition: all 0.3s ease;
 }
 
 .breadcrumb:hover {
-    background: var(--bordeaux-fonce);
+    background: var(--primary-color);
     color: white;
     transform: translateY(-2px);
 }
@@ -239,7 +286,7 @@
 }
 
 .product-name {
-    color: var(--bordeaux-fonce);
+    color: var(--primary-color);
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.75rem;
@@ -271,7 +318,7 @@
 }
 
 .price {
-    color: var(--bordeaux-fonce);
+    color: var(--text-secondary);
     font-size: 1.5rem;
     font-weight: 700;
 }
@@ -297,7 +344,7 @@
 }
 
 .product-stock i {
-    color: var(--bordeaux-fonce);
+    color: var(--primary-color);
 }
 
 /* ========================================================================
@@ -327,24 +374,14 @@
     flex: 1;
 }
 
-.btn-primary {
-    background: var(--bordeaux-fonce);
-    color: white;
-}
-
-.btn-primary:hover {
-    background: var(--bordeaux-moyen);
-    transform: translateY(-2px);
-}
-
 .btn-cart {
     background: var(--beige-fonce);
-    color: var(--bordeaux-fonce);
-    border: 2px solid var(--bordeaux-fonce);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
 }
 
 .btn-cart:hover {
-    background: var(--bordeaux-fonce);
+    background: var(--primary-color);
     color: white;
     transform: translateY(-2px);
 }
@@ -365,13 +402,13 @@
 
 .no-products i {
     font-size: 4rem;
-    color: var(--bordeaux-fonce);
+    color: var(--primary-color);
     margin-bottom: 1.5rem;
     opacity: 0.6;
 }
 
 .no-products h3 {
-    color: var(--bordeaux-fonce);
+    color: var(--primary-color);
     font-size: 1.5rem;
     margin-bottom: 1rem;
 }
@@ -387,7 +424,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 1rem 2rem;
-    background: var(--bordeaux-fonce);
+    background: var(--primary-color);
     color: white;
     text-decoration: none;
     border-radius: 8px;
@@ -396,7 +433,7 @@
 }
 
 .no-products .btn:hover {
-    background: var(--bordeaux-moyen);
+    background: var(--primary-dark);
     transform: translateY(-2px);
 }
 
@@ -456,3 +493,4 @@
         font-size: 1.25rem;
     }
 }
+

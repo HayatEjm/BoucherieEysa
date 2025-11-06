@@ -1,0 +1,124 @@
+<?php
+// Liste produits + créer/éditer/supprimer + mise à jour stock (formulaire simple)
+
+namespace App\Controller\Admin;
+
+use App\Entity\Product;
+use App\Entity\Category;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
+#[IsGranted('ROLE_ADMIN')]
+#[Route('/admin/products', name: 'admin_products_')]
+class ProductController extends AbstractController
+{
+    public function __construct(private EntityManagerInterface $em) {}
+
+    #[Route('', name: 'index', methods: ['GET'])]
+    public function index(): Response
+    {
+        $products = $this->em->getRepository(Product::class)->findBy([], ['id' => 'DESC']);
+        return $this->render('admin/products/index.html.twig', ['products' => $products]);
+    }
+
+    #[Route('/add', name: 'add', methods: ['GET','POST'])]
+    public function add(Request $request): Response
+    {
+        if ($request->isMethod('POST')) {
+            $p = new Product();
+            // Champs principaux (simples)
+            $p->setName($request->request->get('name', ''));
+            $p->setDescription($request->request->get('description', ''));
+            $p->setPrice((float) $request->request->get('price', 0));
+            $p->setStock((int) $request->request->get('stock', 0));
+            $p->setImage($request->request->get('image', ''));
+            $p->setUnit($request->request->get('unit', 'kg'));
+            
+            // Gérer la catégorie
+            $categoryId = $request->request->get('category_id');
+            if ($categoryId) {
+                $category = $this->em->getRepository(Category::class)->find($categoryId);
+                if ($category) {
+                    $p->setCategory($category);
+                }
+            }
+
+            $this->em->persist($p);
+            $this->em->flush();
+            $this->addFlash('success', 'Produit ajouté.');
+            return $this->redirectToRoute('admin_products_index');
+        }
+
+        // Récupérer toutes les catégories pour le formulaire
+        $categories = $this->em->getRepository(Category::class)->findAll();
+
+        return $this->render('admin/products/form.html.twig', [
+            'product' => null,
+            'action'  => 'add',
+            'categories' => $categories,
+        ]);
+    }
+
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET','POST'])]
+    public function edit(Product $product, Request $request): Response
+    {
+        if ($request->isMethod('POST')) {
+            $product->setName($request->request->get('name', $product->getName()));
+            $product->setDescription($request->request->get('description', $product->getDescription()));
+            $product->setPrice((float) $request->request->get('price', $product->getPrice()));
+            $product->setStock((int) $request->request->get('stock', $product->getStock()));
+            $product->setImage($request->request->get('image', $product->getImage()));
+            $product->setUnit($request->request->get('unit', $product->getUnit() ?? 'kg'));
+            
+            // Gérer la catégorie
+            $categoryId = $request->request->get('category_id');
+            if ($categoryId) {
+                $category = $this->em->getRepository(Category::class)->find($categoryId);
+                $product->setCategory($category);
+            } else {
+                $product->setCategory(null);
+            }
+
+            $this->em->flush();
+            $this->addFlash('success', 'Produit modifié.');
+            return $this->redirectToRoute('admin_products_index');
+        }
+
+        // Récupérer toutes les catégories pour le formulaire
+        $categories = $this->em->getRepository(Category::class)->findAll();
+
+        return $this->render('admin/products/form.html.twig', [
+            'product' => $product,
+            'action'  => 'edit',
+            'categories' => $categories,
+        ]);
+    }
+
+    #[Route('/{id}/stock', name: 'stock', methods: ['POST'])]
+    public function stock(Product $product, Request $request): Response
+    {
+        $newStock = (int) $request->request->get('stock', $product->getStock());
+        if ($newStock < 0) {
+            $this->addFlash('error', 'Stock invalide.');
+            return $this->redirectToRoute('admin_products_index');
+        }
+        $product->setStock($newStock);
+        $this->em->flush();
+        $this->addFlash('success', 'Stock mis à jour.');
+        return $this->redirectToRoute('admin_products_index');
+    }
+
+    #[Route('/{id}/delete', name: 'delete', methods: ['POST'])]
+    public function delete(Product $product): Response
+    {
+        $this->em->remove($product);
+        $this->em->flush();
+        $this->addFlash('success', 'Produit supprimé.');
+        return $this->redirectToRoute('admin_products_index');
+    }
+}

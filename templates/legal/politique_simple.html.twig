@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Politique de Confidentialité - Boucherie EYSA{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('legal') }}
+{% endblock %}
+
+{% block body %}
+<div class="legal-page">
+    <h1>Politique de Confidentialité</h1>
+
+    <div class="info-box">
+        Cette politique explique comment nous collectons et utilisons vos données personnelles.
+    </div>
+
+    <h2>Responsable du traitement</h2>
+    <div class="contact-info">
+        <strong>EYSA - Boucherie Eysa</strong><br>
+        Younès ELHAJJAM<br>
+        123 rue du Dr Schweitzer - 49400 SAUMUR<br>
+        contact@boucherie-eysa.fr
+    </div>
+
+    <h2>Données collectées</h2>
+    <h3>Pour vos commandes :</h3>
+    <ul>
+        <li>Nom et prénom</li>
+        <li>Adresse email</li>
+        <li>Numéro de téléphone</li>
+        <li>Détails de commande</li>
+    </ul>
+
+    <h3>Pour la navigation :</h3>
+    <ul>
+        <li>Cookies techniques (panier)</li>
+        <li>Adresse IP (sécurité)</li>
+    </ul>
+
+    <h2>Utilisation des données</h2>
+    <p>Vos données sont utilisées exclusivement pour :</p>
+    <ul>
+        <li>Traiter vos commandes</li>
+        <li>Vous envoyer des confirmations par email</li>
+        <li>Vous contacter en cas de problème</li>
+    </ul>
+
+    <h2>Durée de conservation</h2>
+    <table class="legal-table">
+        <tr>
+            <th>Type de données</th>
+            <th>Durée</th>
+        </tr>
+        <tr>
+            <td>Données de commande</td>
+            <td>3 ans</td>
+        </tr>
+        <tr>
+            <td>Cookies de session</td>
+            <td>Fin de session</td>
+        </tr>
+    </table>
+
+    <h2>Vos droits</h2>
+    <p>Vous disposez des droits suivants :</p>
+    <ul>
+        <li><strong>Droit d'accès :</strong> connaître vos données</li>
+        <li><strong>Droit de rectification :</strong> corriger vos données</li>
+        <li><strong>Droit d'effacement :</strong> supprimer vos données</li>
+        <li><strong>Droit à la portabilité :</strong> récupérer vos données</li>
+    </ul>
+
+    <h2>Exercer vos droits</h2>
+    <p>Contactez-nous à : <strong>contact@boucherie-eysa.fr</strong><br>
+    Réponse sous 30 jours maximum.</p>
+
+    <h2>Réclamation</h2>
+    <p>Vous pouvez déposer une réclamation auprès de la CNIL : <a href="https://www.cnil.fr/fr/plaintes" target="_blank">www.cnil.fr/fr/plaintes</a></p>
+
+    <div class="legal-footer">
+        Dernière mise à jour : {{ "now"|date("d/m/Y") }}
+    </div>
+</div>
+{% endblock %}

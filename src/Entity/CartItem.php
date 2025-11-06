@@ -6,7 +6,7 @@ use App\Repository\CartItemRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * 🛒 ENTITÉ CARTITEM - Je représente un article dans le panier
+ * ENTITÉ CARTITEM - Je représente un article dans le panier
  * 
  * POURQUOI CETTE ENTITÉ ?
  * - Je relie un produit à un panier avec une quantité
@@ -180,8 +180,12 @@ class CartItem
      */
     public function getTotalCents(): int
     {
-        return $this->quantity * $this->unitPriceCents;
+         if ($this->unitPriceCents === null || $this->quantity === null) {
+        return 0;
     }
+         return (int) round(($this->quantity / 1000) * $this->unitPriceCents);
+    }
+    
 
     /**
      * Je fournis une représentation textuelle de moi-même

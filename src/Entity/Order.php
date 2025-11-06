@@ -3,6 +3,7 @@ namespace App\Entity;
 
 use App\Entity\OrderItem;
 use App\Entity\Payment;
+use App\Entity\User;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -79,6 +80,14 @@ class Order
         $this->orderNumber = $this->generateOrderNumber();
     }
 
+    /**
+     * L'utilisateur ayant passé la commande (relation ManyToOne)
+     * Permet de retrouver l'historique même si l'email change
+     */
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    private ?User $user = null;
+
     public function getId(): int
     {
         return $this->id;
@@ -107,6 +116,20 @@ class Order
         }
         return $this;
     }
+
+        /**
+         * Getter/Setter pour la relation User
+         */
+        public function getUser(): ?User
+        {
+            return $this->user;
+        }
+
+        public function setUser(?User $user): static
+        {
+            $this->user = $user;
+            return $this;
+        }
 
     public function getCreatedAt(): DateTime
     {

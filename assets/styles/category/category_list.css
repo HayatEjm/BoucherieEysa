@@ -1,4 +1,4 @@
-/* 🏗️ Conteneur principal */
+/*  Conteneur principal */
 .categories-container {
     text-align: center;
     padding: 3rem 2rem;
@@ -6,7 +6,7 @@
     min-height: 50vh;
 }
 
-/* ☁️ Dégradé lisible sur l'image */
+/*  Dégradé lisible sur l'image */
 .category-overlay {
     width: 100%;
     padding: 2rem;
@@ -14,14 +14,15 @@
     box-sizing: border-box;
 }
 
-/* 🏷️ Titre */
+/*  Titre */
 .category-name {
-    font-size: 3rem;
+    font-size: 2rem;
     margin-bottom: 1rem;
     font-weight: bold;
+    color: white !important; /* Force le blanc pour les noms de catégories */
 }
 
-/* 🏗️ Conteneur principal */
+/*  Conteneur principal */
 .categories-container {
     text-align: center;
     padding: 3rem 2rem;
@@ -135,6 +136,7 @@
 
     .category-name {
         font-size: 1.8rem;
+        color: white !important; /* Force le blanc aussi en mobile */
     }
 
     .category-description {

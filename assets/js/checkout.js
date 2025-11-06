@@ -7,7 +7,6 @@ window.checkoutConfig = {
 // Si Vue.js est requis côté client, importez-le via Webpack/Encore ou documentez l'import CDN ici
 // import Vue from 'vue';
 // Système de checkout avec sélection de créneaux
-console.log('🛒 Initialisation du checkout...');
 
 /**
  * Initialise le système de checkout avec sélection de créneaux
@@ -46,7 +45,6 @@ class CheckoutManager {
                     apiUrl: this.config.apiUrl,
                     onSlotSelected: this.config.onSlotSelected
                 });
-                console.log('✅ Sélecteur de créneaux initialisé');
             } else {
                 console.error('❌ initPickupSlotSelector non disponible');
                 this.showError('Erreur lors du chargement du sélecteur de créneaux');
@@ -58,7 +56,6 @@ class CheckoutManager {
      * Gestionnaire par défaut de sélection de créneau
      */
     defaultSlotHandler(slot) {
-        console.log('🎯 Créneau sélectionné:', slot);
         this.selectedSlot = slot;
         
         // Remplir les champs cachés
@@ -185,7 +182,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Créer l'instance du checkout manager
     window.checkoutManager = new CheckoutManager(config);
     
-    console.log('✅ Checkout initialisé');
 });
 
 // Export pour utilisation globale

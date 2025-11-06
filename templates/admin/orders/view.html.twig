@@ -1,0 +1,52 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% block title %}Détail commande{% endblock %}
+
+{% block body %}
+<div class="admin-header">
+  <h1><i class="fas fa-receipt"></i> {{ order.orderNumber ?? ('#' ~ order.id) }}</h1>
+  <p class="subtitle">Créée le {{ order.createdAt|date('d/m/Y H:i') }}</p>
+</div>
+
+<div class="admin-section">
+  <div class="section-header"><i class="fas fa-user"></i> Client</div>
+  <div class="section-content">
+    <p><strong>{{ order.customerName ?? 'Client' }}</strong></p>
+    <p>{{ order.customerEmail }} {% if order.customerPhone %} — {{ order.customerPhone }}{% endif %}</p>
+    {% if order.notes %}
+    <div class="order-notes-box" style="margin-top:18px; max-width:520px; background:#f8fafc; border-left:4px solid #8b1538; border-radius:8px; padding:14px 18px; color:#333; font-size:1.05em; box-shadow:0 2px 8px rgba(139,21,56,0.04);">
+      <div style="font-weight:600; color:#8b1538; margin-bottom:6px;"><i class="fas fa-comment-dots"></i> Message client :</div>
+      <div style="white-space:pre-line;">{{ order.notes }}</div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="admin-section">
+  <div class="section-header"><i class="fas fa-box"></i> Articles</div>
+  <div class="section-content">
+    {% if order.items|length > 0 %}
+      <ul>
+        {% for it in order.items %}
+          <li>
+            {{ it.product ? it.product.name : 'Produit' }} — x{{ it.quantity }}
+            — {{ it.totalTtc ? (it.totalTtc|number_format(2, ',', ' ') ~ '€') : '' }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p style="color:#666;">Aucun article</p>
+    {% endif %}
+  </div>
+</div>
+
+<div class="admin-section">
+  <div class="section-header"><i class="fas fa-euro-sign"></i> Total</div>
+  <div class="section-content">
+    <p><strong>Total TTC : {{ order.totalTtc|number_format(2, ',', ' ') }}€</strong></p>
+  </div>
+</div>
+
+<div class="admin-actions">
+  <a href="{{ path('admin_orders_index') }}" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Retour</a>
+</div>
+{% endblock %}

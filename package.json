@@ -14,21 +14,13 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
     "core-js": "^3.43.0",
+    "pinia": "^3.0.3",
     "regenerator-runtime": "^0.14.1"
   },
   "devDependencies": {
     "@symfony/webpack-encore": "^5.1.0",
-    "webpack": "^5.100.1",
-    "webpack-cli": "^5.1.4"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/HayatEjm/BoucherieEysa.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/HayatEjm/BoucherieEysa/issues"
-  },
-  "homepage": "https://github.com/HayatEjm/BoucherieEysa#readme"
+    "@vue/compiler-sfc": "^3.5.17",
+    "vue": "^3.5.17",
+    "vue-loader": "^17.4.2"
+  }
 }

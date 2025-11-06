@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mentions Légales - Boucherie EYSA{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('legal') }}
+{% endblock %}
+
+{% block body %}
+<div class="legal-page">
+    <h1>Mentions Légales</h1>
+
+    <h2>Éditeur du site</h2>
+    <div class="contact-info">
+        <strong>EYSA</strong><br>
+        SARL - Gérant : Younès ELHAJJAM<br>
+        123 rue du Dr Schweitzer - 49400 SAUMUR<br>
+        Téléphone : 02 41 50 57 18<br>
+        Email : contact@boucherie-eysa.fr
+    </div>
+
+    <p><strong>SIRET :</strong> 752 699 496 00010<br>
+    <strong>TVA :</strong> FR95752699496<br>
+    <strong>RCS :</strong> Angers 752 699 496</p>
+
+    <h2>Hébergement</h2>
+    <p>Ce site est hébergé par [Nom de votre hébergeur]</p>
+
+    <h2>Directeur de publication</h2>
+    <p>Younès ELHAJJAM</p>
+
+    <h2>Propriété intellectuelle</h2>
+    <p>Le contenu de ce site (textes, images, logos) est la propriété de EYSA. Toute reproduction est interdite sans autorisation.</p>
+
+    <h2>Données personnelles</h2>
+    <p>Les données collectées sont utilisées uniquement pour le traitement des commandes. Vous disposez d'un droit d'accès, de rectification et de suppression en contactant : contact@boucherie-eysa.fr</p>
+    <p>Voir notre <a href="{{ path('legal_privacy') }}">Politique de confidentialité</a> pour plus de détails.</p>
+
+    <h2>Responsabilité</h2>
+    <p>EYSA s'efforce de maintenir les informations à jour mais ne peut garantir leur exactitude absolue.</p>
+
+    <h2>Droit applicable</h2>
+    <p>Ces mentions sont régies par le droit français. Les tribunaux de Saumur sont compétents en cas de litige.</p>
+
+    <h2>Médiation</h2>
+    <p>En cas de litige : <a href="https://www.cm2c.net" target="_blank">CM2C - Centre de Médiation</a></p>
+
+    <div class="legal-footer">
+        Dernière mise à jour : {{ "now"|date("d/m/Y") }}
+    </div>
+</div>
+{% endblock %}

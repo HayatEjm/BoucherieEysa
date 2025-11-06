@@ -1,0 +1,16 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/login/signup.css') }}">
+{% endblock %}
+{% block body %}
+    <section>
+    <div class= "form">
+        {{form_start(signupForm)}}
+        <div class="form-profil">
+        {{form_row(signupForm)}}    
+        </div>
+        <button type="submit">SignUp</boutton>
+    
+        {{form_end(signupForm)}}
+        </div>
+    </section>
+{% endblock %}

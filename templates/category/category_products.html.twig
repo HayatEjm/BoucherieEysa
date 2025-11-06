@@ -21,12 +21,25 @@
     {% if products is not empty %}
         <div class="products-grid">
             {% for product in products %}
-                <div class="product-card">
+                <div class="product-card {% if not product.inStock %}out-of-stock{% endif %}">
                     <div class="product-image">
                         {% if product.image %}
                             <img src="{{ asset('images/' ~ product.image) }}" alt="{{ product.name }}">
                         {% else %}
                             <img src="{{ asset('images/fallback.jpg') }}" alt="{{ product.name }}">
+                        {% endif %}
+                        
+                        {# Badge rupture de stock #}
+                        {% if not product.inStock %}
+                            <div class="stock-badge out-of-stock">
+                                <i class="fas fa-times-circle"></i>
+                                Rupture de stock
+                            </div>
+                        {% elseif product.lowStock %}
+                            <div class="stock-badge low-stock">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Stock faible
+                            </div>
                         {% endif %}
                     </div>
                     <div class="product-info">
@@ -37,8 +50,9 @@
                             <span class="unit">/ {{ product.unit }}</span>
                         </div>
                         <div class="product-actions">
+                            {# Toujours permettre de voir les détails #}
                             <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-primary">
-                                <i class="fa-solid fa-eye" aria-hidden="true"></i> Voir détails & Commander
+                                <i class="fa-solid fa-eye" aria-hidden="true"></i> Voir détails & Commander 
                             </a>
                         </div>
                     </div>
@@ -50,7 +64,7 @@
             <i class="fa-solid fa-box-open" aria-hidden="true"></i>
             <h3>Aucun produit trouvé</h3>
             <p>Il n'y a pas de produits dans cette catégorie pour le moment.</p>
-            <a href="{{ path('app_category_index') }}" class="btn btn-primary">
+            <a href="{{ path('app_category_index') }}" class="btn-primary">
                 <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Retour aux catégories
             </a>
         </div>

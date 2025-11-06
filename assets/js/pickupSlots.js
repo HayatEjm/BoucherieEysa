@@ -293,4 +293,4 @@ window.initPickupSlotSelector = function(containerId = 'pickup-slot-app', option
     return app.mount(container);
 };
 
-console.log('Module pickupSlots chargé avec succès');
+// Export pour utilisation dans d'autres modules

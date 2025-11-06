@@ -1,0 +1,143 @@
+{# Bandeau Cookie - Conforme RGPD #}
+
+<div id="cookie-banner" class="cookie-banner" style="display: none;">
+    <div class="cookie-banner-content">
+        <div class="cookie-banner-text">
+            <p>
+                <i class="fas fa-cookie-bite"></i>
+                Nous utilisons des cookies pour améliorer votre expérience sur notre site et analyser notre trafic.
+                <a href="{{ path('legal_privacy') }}" target="_blank">En savoir plus</a>
+            </p>
+        </div>
+        <div class="cookie-banner-actions">
+            <button onclick="acceptCookies('all')" class="btn-cookie btn-cookie-accept">
+                <i class="fas fa-check"></i> Tout accepter
+            </button>
+            <button onclick="acceptCookies('essential')" class="btn-cookie btn-cookie-essential">
+                <i class="fas fa-shield-alt"></i> Essentiel uniquement
+            </button>
+            <button onclick="acceptCookies('none')" class="btn-cookie btn-cookie-refuse">
+                <i class="fas fa-times"></i> Tout refuser
+            </button>
+        </div>
+    </div>
+</div>
+
+{# Script JavaScript inline - sûr et simple #}
+<script>
+(function() {
+    'use strict';
+    
+    const COOKIE_KEY = 'eysa-cookie-consent';
+    
+    // Vérifier si l'utilisateur a déjà donné son consentement (avec expiration)
+    function hasConsent() {
+        const consent = localStorage.getItem(COOKIE_KEY);
+        if (!consent) return false;
+        
+        try {
+            const consentData = JSON.parse(consent);
+            const consentDate = new Date(consentData.timestamp);
+            const expiryDate = new Date(consentDate.getTime() + (365 * 24 * 60 * 60 * 1000)); // 1 an
+            
+            // Si expiré, supprimer le consentement
+            if (new Date() > expiryDate) {
+                localStorage.removeItem(COOKIE_KEY);
+                return false;
+            }
+            
+            return true;
+        } catch (e) {
+            // Si erreur de parsing, supprimer et redemander
+            localStorage.removeItem(COOKIE_KEY);
+            return false;
+        }
+    }
+    
+    // Afficher le bandeau si pas de consentement
+    function initCookieBanner() {
+        if (!hasConsent()) {
+            const banner = document.getElementById('cookie-banner');
+            if (banner) {
+                // Animation d'apparition
+                banner.style.display = 'block';
+                setTimeout(() => {
+                    banner.classList.add('cookie-banner-visible');
+                }, 100);
+            }
+        }
+    }
+    
+    // Fonction globale pour accepter les cookies
+    window.acceptCookies = function(type) {
+        // Sauvegarder le consentement
+        const consentData = {
+            type: type,
+            timestamp: new Date().toISOString(),
+            version: '1.0'
+        };
+        
+        localStorage.setItem(COOKIE_KEY, JSON.stringify(consentData));
+        
+        // Masquer le bandeau avec animation
+        const banner = document.getElementById('cookie-banner');
+        if (banner) {
+            banner.classList.add('cookie-banner-hiding');
+            setTimeout(() => {
+                banner.style.display = 'none';
+            }, 300);
+        }
+        
+        // Activer les cookies selon le choix
+        activateCookies(type);
+        
+        console.log('Consentement cookies enregistré:', type);
+    };
+    
+    // Fonction globale pour les paramètres
+    window.showCookieSettings = function() {
+        alert('Paramètres des cookies :\n\n' +
+              '• Cookies essentiels : Nécessaires au fonctionnement du site\n' +
+              '• Cookies analytiques : Mesure d\'audience anonyme\n' +
+              '• Cookies marketing : Publicité ciblée\n\n' +
+              'Fonctionnalité complète à implémenter avec une modale.');
+    };
+    
+    // Activer les cookies selon le type
+    function activateCookies(type) {
+        if (type === 'all') {
+            // Activer Google Analytics si configuré
+            console.log('Analytics activés');
+            // Activer pixels marketing
+            console.log('Marketing activé');
+        } else if (type === 'essential') {
+            console.log('Cookies essentiels uniquement');
+        } else if (type === 'none') {
+            console.log('Tous cookies refusés - seule la session Symfony reste active');
+            // Supprimer tous les cookies non essentiels si existants
+            // document.cookie.split(";").forEach(cookie => {
+            //     const name = cookie.split("=")[0].trim();
+            //     if (!['PHPSESSID'].includes(name)) {
+            //         document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            //     }
+            // });
+        }
+        // Les cookies essentiels (session Symfony) restent toujours actifs
+        console.log('Session Symfony active');
+    }
+    
+    // Fonction utilitaire pour révoquer le consentement (pour les tests)
+    window.revokeCookies = function() {
+        localStorage.removeItem(COOKIE_KEY);
+        location.reload();
+    };
+    
+    // Initialisation au chargement du DOM
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCookieBanner);
+    } else {
+        initCookieBanner();
+    }
+    
+})();
+</script>

@@ -1,0 +1,248 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Politique de Confidentialité - Boucherie EYSA{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/legal.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="legal-page">
+    <h1>Politique de Confidentialité</h1>
+    
+    <div class="info-box">
+        <strong>Votre vie privée est importante pour nous.</strong> Cette politique explique quelles données personnelles nous collectons, comment nous les utilisons et quels sont vos droits.
+    </div>
+
+    <h2>1. Responsable du traitement</h2>
+    <div class="contact-info">
+        <strong>EYSA - Boucherie Eysa</strong><br>
+        Représentée par M. Younès ELHAJJAM<br>
+        123 rue du Dr Schweitzer - 49400 SAUMUR<br>
+        Tél : 02 41 50 57 18<br>
+        Email : contact@boucherie-eysa.fr
+    </div>
+
+    <h2>2. Quelles données collectons-nous ?</h2>
+    
+    <h3>Lors de vos commandes</h3>
+    <ul>
+        <li><strong>Nom et prénom</strong> (pour identifier votre commande)</li>
+        <li><strong>Adresse email</strong> (pour la confirmation de commande)</li>
+        <li><strong>Numéro de téléphone</strong> (en cas de problème avec votre commande)</li>
+        <li><strong>Détails de commande</strong> (produits, quantités, créneaux choisis)</li>
+    </ul>
+
+    <h3>Lors de votre navigation</h3>
+    <ul>
+        <li><strong>Cookies techniques</strong> (panier, session de navigation)</li>
+        <li><strong>Adresse IP</strong> (pour la sécurité du site)</li>
+        <li><strong>Pages visitées</strong> (pour améliorer le service)</li>
+    </ul>
+
+    <div class="warning-box">
+        <strong>Nous ne collectons que le strict nécessaire</strong> pour traiter vos commandes et améliorer votre expérience.
+    </div>
+
+                    <hr class="my-4">
+
+                    <h2 class="h4 text-primary mb-4">3. Pourquoi utilisons-nous ces données ?</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="h6"><i class="fas fa-shopping-cart text-primary me-2"></i>Gestion des commandes</h3>
+                            <ul class="small">
+                                <li>Traitement et préparation de vos commandes</li>
+                                <li>Confirmation par email</li>
+                                <li>Contact en cas de problème</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="h6"><i class="fas fa-chart-line text-primary me-2"></i>Amélioration du service</h3>
+                            <ul class="small">
+                                <li>Optimisation des créneaux</li>
+                                <li>Amélioration du site web</li>
+                                <li>Statistiques anonymes</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <h2 class="h4 text-primary mb-4">4. Base légale du traitement</h2>
+                    <p>Nos traitements reposent sur :</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-balance-scale text-success me-2"></i> <strong>Exécution du contrat</strong> : traitement de vos commandes</li>
+                        <li><i class="fas fa-shield-alt text-success me-2"></i> <strong>Intérêt légitime</strong> : amélioration du service et sécurité</li>
+                        <li><i class="fas fa-check text-success me-2"></i> <strong>Obligations légales</strong> : comptabilité, factures</li>
+                    </ul>
+
+                    <hr class="my-4">
+
+                    <h2 class="h4 text-primary mb-4">5. Qui peut accéder à vos données ?</h2>
+                    
+                    <div class="alert alert-success">
+                        <i class="fas fa-lock me-2"></i>
+                        <strong>Vos données restent chez nous !</strong> Nous ne vendons ni ne louons jamais vos informations personnelles.
+                    </div>
+
+                    <p>Accès limité à :</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-user text-primary me-2"></i> <strong>Notre équipe boucherie</strong> (préparation des commandes)</li>
+                        <li><i class="fas fa-server text-primary me-2"></i> <strong>Notre hébergeur technique</strong> (stockage sécurisé)</li>
+                        <li><i class="fas fa-envelope text-primary me-2"></i> <strong>Service d'envoi d'emails</strong> (confirmations de commande uniquement)</li>
+                    </ul>
+
+                    <hr class="my-4">
+
+                    <h2 class="h4 text-primary mb-4">6. Combien de temps conservons-nous vos données ?</h2>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Type de données</th>
+                                    <th>Durée de conservation</th>
+                                    <th>Justification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Données de commande</td>
+                                    <td><strong>3 ans</strong></td>
+                                    <td>Obligations comptables et garanties</td>
+                                </tr>
+                                <tr>
+                                    <td>Cookies de session</td>
+                                    <td><strong>Fin de session</strong></td>
+                                    <td>Fonctionnement du panier</td>
+                                </tr>
+                                <tr>
+                                    <td>Logs de connexion</td>
+                                    <td><strong>1 an</strong></td>
+                                    <td>Sécurité et maintenance</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <h2 class="h4 text-primary mb-4">7. Vos droits RGPD</h2>
+                    
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h3 class="h6 text-primary">🔍 Droit d'accès</h3>
+                                    <p class="small">Connaître les données que nous avons sur vous</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h3 class="h6 text-primary">✏️ Droit de rectification</h3>
+                                    <p class="small">Corriger des informations inexactes</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h3 class="h6 text-primary">🗑️ Droit d'effacement</h3>
+                                    <p class="small">Supprimer vos données (sous conditions)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h3 class="h6 text-primary">📦 Droit à la portabilité</h3>
+                                    <p class="small">Récupérer vos données dans un format lisible</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info mt-4">
+                        <i class="fas fa-envelope me-2"></i>
+                        <strong>Comment exercer vos droits ?</strong><br>
+                        Contactez-nous à <strong>contact@boucherie-eysa.fr</strong> ou par courrier. 
+                        Nous répondrons sous <strong>30 jours maximum</strong>.
+                    </div>
+
+                    <hr class="my-4">
+
+                    <h2 class="h4 text-primary mb-4">8. Sécurité de vos données</h2>
+                    <p>Nous mettons en place des mesures techniques et organisationnelles pour protéger vos données :</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-lock text-success me-2"></i> <strong>Chiffrement HTTPS</strong> pour toutes les communications</li>
+                        <li><i class="fas fa-shield-alt text-success me-2"></i> <strong>Serveurs sécurisés</strong> avec mise à jour régulière</li>
+                        <li><i class="fas fa-user-shield text-success me-2"></i> <strong>Accès limité</strong> aux données par mot de passe</li>
+                        <li><i class="fas fa-save text-success me-2"></i> <strong>Sauvegardes régulières</strong> et chiffrées</li>
+                    </ul>
+
+                    <hr class="my-4">
+
+                    <h2 class="h4 text-primary mb-4">9. Cookies</h2>
+                    <p>Nous utilisons uniquement des <strong>cookies techniques essentiels</strong> :</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-shopping-basket text-primary me-2"></i> <strong>Panier de commande</strong> (se souvenir de vos produits)</li>
+                        <li><i class="fas fa-user-circle text-primary me-2"></i> <strong>Session de navigation</strong> (maintenir votre connexion)</li>
+                        <li><i class="fas fa-shield-alt text-primary me-2"></i> <strong>Sécurité CSRF</strong> (protection contre les attaques)</li>
+                    </ul>
+
+                    <div class="alert alert-success">
+                        <i class="fas fa-smile me-2"></i>
+                        <strong>Aucun cookie de tracking ou publicitaire !</strong> Nous respectons votre navigation.
+                    </div>
+
+                    <hr class="my-4">
+
+                    <h2 class="h4 text-primary mb-4">10. Contact et réclamations</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-envelope fa-2x text-primary mb-2"></i>
+                                    <h3 class="h6">Email</h3>
+                                    <p class="mb-0">contact@boucherie-eysa.fr</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-phone fa-2x text-primary mb-2"></i>
+                                    <h3 class="h6">Téléphone</h3>
+                                    <p class="mb-0">02 41 50 57 18</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="mt-3"><strong>Réclamation auprès de la CNIL :</strong><br>
+                    Si vous estimez que vos droits ne sont pas respectés, vous pouvez introduire une réclamation auprès de la CNIL : <a href="https://www.cnil.fr/fr/plaintes" target="_blank" class="text-decoration-none">www.cnil.fr/fr/plaintes</a></p>
+
+                    <hr class="my-4">
+
+                    <div class="text-center">
+                        <div class="text-muted">
+                            <small>Dernière mise à jour : {{ "now"|date("d/m/Y") }}</small>
+                        </div>
+                        <p class="mt-3">
+                            <strong>Des questions ?</strong> 
+                            <a href="mailto:contact@boucherie-eysa.fr" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-envelope me-1"></i>Nous contacter
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

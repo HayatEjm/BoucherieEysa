@@ -1,0 +1,108 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% block title %}Dashboard Admin{% endblock %}
+
+{% block body %}
+  <div class="admin-header">
+    <h1><i class="fas fa-tachometer-alt"></i> Tableau de bord</h1>
+    <p class="subtitle">Vue d'ensemble de votre boucherie — {{ "now"|date("d/m/Y à H:i") }}</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card info">
+      <div class="icon">🛒</div>
+      <h3>{{ orders_today|default(0) }}</h3>
+      <p>Commandes aujourd'hui</p>
+    </div>
+    <div class="stat-card success">
+      <div class="icon">👥</div>
+      <h3>{{ total_users|default(0) }}</h3>
+      <p>Clients inscrits</p>
+    </div>
+    <div class="stat-card {{ (low_stock_count|default(0)) > 0 ? 'warning' : 'success' }}">
+      <div class="icon">📦</div>
+      <h3>{{ low_stock_count|default(0) }}</h3>
+      <p>Produits en stock faible</p>
+    </div>
+    <div class="stat-card primary">
+      <div class="icon">💰</div>
+      <h3>{{ total_revenue|default(0)|number_format(2, ',', ' ') }}€</h3>
+      <p>Chiffre d'affaires du jour</p>
+    </div>
+  </div>
+
+  {% if (low_stock_products|default([])|length > 0) or (recent_orders|default([])|length > 0) %}
+  <div class="admin-sections">
+    {% if low_stock_products|default([])|length > 0 %}
+    <div class="admin-section">
+      <div class="section-header">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span>Alertes stock</span>
+      </div>
+      <div class="section-content">
+        {% for product in low_stock_products|default([]) %}
+        <div class="list-item">
+          <div class="item-info">
+            <div class="item-title">{{ product.name|default('Produit sans nom') }}</div>
+            <div class="item-subtitle">{{ product.price|default(0)|number_format(2, ',', ' ') }}€</div>
+          </div>
+          <span class="stock-indicator {{ product.stock == 0 ? 'stock-out' : 'stock-low' }}">
+            {{ product.stock == 0 ? 'Rupture' : (product.stock|default(0) ~ ' restant' ~ (product.stock > 1 ? 's' : '')) }}
+          </span>
+        </div>
+        {% endfor %}
+        <div style="margin-top: 24px;">
+          <a href="{{ path('admin_products_index') }}" class="btn btn-warning">
+            <i class="fas fa-boxes"></i> Gérer les stocks
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if recent_orders|default([])|length > 0 %}
+    <div class="admin-section">
+      <div class="section-header">
+        <i class="fas fa-clock"></i>
+        <span>Commandes récentes</span>
+      </div>
+      <div class="section-content">
+        {% for order in recent_orders|default([]) %}
+        <div class="list-item">
+          <div class="item-info">
+            <div class="item-title">{{ order.orderNumber|default('#' ~ order.id) }}</div>
+            <div class="item-subtitle">{{ order.customerName|default('Client') }} — {{ order.createdAt|default('now')|date('d/m/Y H:i') }}</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span class="status-badge status-{{ order.status|default('pending') }}">{{ order.status|default('pending')|title }}</span>
+            <strong>{{ order.totalTtc|default(0)|number_format(2, ',', ' ') }}€</strong>
+          </div>
+        </div>
+        {% endfor %}
+        <div style="margin-top: 24px;">
+          <a href="{{ path('admin_orders_index') }}" class="btn btn-info">
+            <i class="fas fa-list"></i> Voir toutes les commandes
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  <div style="text-align: center; margin-top: 48px; padding: 32px; background: var(--admin-gray-50); border-radius: var(--admin-radius); border: 2px dashed var(--admin-gray-200);">
+    <h3 style="color: var(--admin-primary); margin-bottom: 16px;">
+      <i class="fas fa-rocket"></i> Actions rapides
+    </h3>
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <a href="{{ path('admin_products_add') }}" class="btn btn-success">
+        <i class="fas fa-plus"></i> Nouveau produit
+      </a>
+      <a href="{{ path('admin_orders_export') }}" class="btn btn-info">
+        <i class="fas fa-download"></i> Export commandes
+      </a>
+      <a href="{{ path('app_home') }}" class="btn btn-outline">
+        <i class="fas fa-globe"></i> Voir le site
+      </a>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{# Détail d'une commande pour l'espace client #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail commande {{ order.orderNumber }} - Mon Compte{% endblock %}
+
+{% block body %}
+<div class="account-container" style="max-width:600px;margin:2em auto;">
+    <div class="account-card">
+        <h2 style="margin-bottom:0.5em;"><i class="fas fa-receipt"></i> Commande n°{{ order.orderNumber ?? ('#' ~ order.id) }}</h2>
+        <p style="color:#666;">Passée le {{ order.createdAt|date('d/m/Y à H:i') }}</p>
+        <p><span class="status-badge status-{{ order.status }}">{{ order.status|title }}</span></p>
+        <hr>
+        <p><strong>Date de retrait :</strong> {{ order.pickupDate ? order.pickupDate|date('d/m/Y') : '?' }}{% if order.pickupTimeSlot %} à {{ order.pickupTimeSlot }}{% endif %}</p>
+        <p><strong>Total TTC :</strong> {{ order.totalTtc|number_format(2, ',', ' ') }} €</p>
+        {% if order.notes %}
+            <div style="margin:1em 0; background:#f8fafc; border-left:3px solid #8b1538; border-radius:8px; padding:10px 15px;">
+                <strong><i class="fas fa-comment-dots"></i> Message laissé :</strong><br>
+                <span style="white-space:pre-line;">{{ order.notes }}</span>
+            </div>
+        {% endif %}
+        <h3 style="margin-top:1.5em;">Articles commandés</h3>
+        <ul style="margin-bottom:1.5em;">
+            {% for item in order.orderItems %}
+                <li>{{ item.quantity }} x {{ item.product.name }} — {{ item.totalTtc|number_format(2, ',', ' ') }} €</li>
+            {% endfor %}
+        </ul>
+        <a href="{{ path('app_account') }}" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Retour à mon compte</a>
+    </div>
+</div>
+{% endblock %}

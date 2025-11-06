@@ -1,0 +1,83 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% block title %}Gestion des catégories{% endblock %}
+
+{% block body %}
+<div class="admin-header">
+    <h1><i class="fas fa-tags"></i> Gestion des catégories</h1>
+    <p class="subtitle">{{ categories|length }} catégorie(s) disponible(s)</p>
+</div>
+
+<div class="admin-actions">
+    <a href="{{ path('admin_categories_add') }}" class="btn btn-success">
+        <i class="fas fa-plus"></i> Nouvelle catégorie
+    </a>
+</div>
+
+{% if categories|length > 0 %}
+<div class="admin-table-container">
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Produits</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+            <tr>
+                <td><span class="badge">#{{ category.id }}</span></td>
+                <td>
+                    <strong>{{ category.name }}</strong>
+                    {% if category.slug %}
+                        <br><small class="text-muted">{{ category.slug }}</small>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if category.description %}
+                        {{ category.description|slice(0, 80) }}{% if category.description|length > 80 %}...{% endif %}
+                    {% else %}
+                        <span class="text-muted">Aucune description</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <span class="badge badge-info">{{ category.products|length }} produit(s)</span>
+                </td>
+                <td>
+                    {% if category.image %}
+                        <img src="{{ asset('images/' ~ category.image) }}" alt="{{ category.name }}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px;">
+                    {% else %}
+                        <span class="text-muted">Aucune image</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <div class="action-buttons">
+                        <a href="{{ path('admin_categories_edit', {id: category.id}) }}" class="btn btn-sm btn-warning">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <form method="post" action="{{ path('admin_categories_delete', {id: category.id}) }}" style="display: inline;">
+                            <button class="btn btn-sm btn-danger" onclick="return confirm('Supprimer cette catégorie ?')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="empty-state">
+    <i class="fas fa-tags"></i>
+    <h3>Aucune catégorie</h3>
+    <p>Commencez par créer des catégories pour organiser vos produits.</p>
+    <a href="{{ path('admin_categories_add') }}" class="btn btn-success">
+        <i class="fas fa-plus"></i> Créer la première catégorie
+    </a>
+</div>
+{% endif %}
+{% endblock %}

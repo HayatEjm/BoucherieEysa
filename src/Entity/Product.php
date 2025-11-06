@@ -195,4 +195,16 @@ class Product
         $this->maxWeight = $maxWeight;
         return $this;
     }
+
+    // Méthode simple pour vérifier si le produit est en stock
+    public function isInStock(): bool
+    {
+        return $this->stock > 0;
+    }
+
+    // Méthode pour savoir si le stock est faible (moins de 5)
+    public function isLowStock(): bool
+    {
+        return $this->stock > 0 && $this->stock <= 5;
+    }
 }

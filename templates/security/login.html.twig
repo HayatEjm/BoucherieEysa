@@ -1,38 +1,100 @@
+{# Template pour la page de connexion #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion - Boucherie Eysa{% endblock %}
 
 {% block body %}
-    <form method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
-
-        {% if app.user %}
-            <div class="mb-3">
-                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+    <div class="auth-container">
+        <div class="auth-card">
+            {# En-tête du formulaire #}
+            <div class="auth-header">
+                <h1>Se connecter</h1>
+                <p>Accédez à votre compte Boucherie Eysa</p>
             </div>
-        {% endif %}
 
-        <h2 class="h3 mb-3 font-weight-normal">Please sign in</h2>
-        <label for="username">Email</label>
-        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
-        <label for="password">Password</label>
-        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
-        <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+            {# Affichage des erreurs s'il y en a #}
+            {% if error %}
+                <div class="alert alert-error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
 
-        {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
+            {# Formulaire de connexion #}
+            <form method="post" class="auth-form">
+                {# Champ email #}
+                <div class="form-group">
+                    <label for="username">
+                        <i class="fas fa-envelope"></i>
+                        Adresse email
+                    </label>
+                    <input 
+                        type="email" 
+                        value="{{ last_username }}" 
+                        name="_username" 
+                        id="username" 
+                        class="form-control"
+                        required 
+                        autocomplete="email"
+                        placeholder="votre@email.com"
+                    >
+                </div>
 
-            <div class="checkbox mb-3">
-                <input type="checkbox" name="_remember_me" id="_remember_me">
-                <label for="_remember_me">Remember me</label>
+                {# Champ mot de passe #}
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i>
+                        Mot de passe
+                    </label>
+                    <input 
+                        type="password" 
+                        name="_password" 
+                        id="password" 
+                        class="form-control"
+                        required 
+                        autocomplete="current-password"
+                        placeholder="Votre mot de passe"
+                    >
+                    <div class="form-help">
+                        <a href="{{ path('password_reset_request') }}" class="forgot-password-link">
+                            <i class="fas fa-key"></i>
+                            Mot de passe oublié ?
+                        </a>
+                    </div>
+                </div>
+
+                {# Champ caché pour la sécurité CSRF #}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                {# Bouton de connexion #}
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Se connecter
+                </button>
+            </form>
+
+            {# Liens utiles #}
+            <div class="auth-links">
+                <p>Pas encore de compte ?</p>
+                <a href="{{ path('app_signup') }}" class="btn btn-outline">
+                    <i class="fas fa-user-plus"></i>
+                    Créer un compte
+                </a>
             </div>
-        #}
 
-        <button class="btn-eysa-primary" type="submit">
-            Sign in
-        </button>
-    </form>
+            {# Retour à l'accueil #}
+            <div class="auth-back">
+                <a href="{{ path('app_home') }}" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Retour à l'accueil
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{# CSS spécifique pour l'authentification #}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/css/auth.css') }}">
 {% endblock %}

@@ -1,0 +1,405 @@
+/* Design System - Boucherie Eysa */
+/* Variables CSS globales pour la cohérence du design */
+
+ 
+/* Palette : Beige chaleureux, Header noir, Bordeaux pour CTA */
+
+:root {
+  /* 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  � COULEURS - Votre palette de couleurs
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  */
+  
+  /* COULEURS PRINCIPALES - Pour vos boutons et liens importants */
+  --primary-color: #8B1538;            /* Bordeaux principal */
+  --primary-light: #A91B47;            /* Bordeaux clair */
+  --primary-dark: #6B1028;             /* Bordeaux foncé */
+  
+  /* COULEURS BEIGE - Pour vos arrière-plans et cartes */
+  --beige-light: #FAF7F2;             /* Beige très clair */
+  --beige-warm: #F5F1E8;              /* Beige chaleureux */
+  --beige-medium: #F0E9DC;            /* Beige moyen */
+  --beige-dark: #E8DDD0;              /* Beige foncé */
+  --cream: #FBF9F5;                   /* Crème */
+  
+  /* COULEURS HEADER/FOOTER - Pour le haut et bas de page */
+  --header-bg: #1a1a1a;               /* Noir header */
+  --header-text: #ffffff;             /* Blanc texte */
+  --header-hover: #2d2d2d;            /* Noir survol */
+  
+  /* COULEURS TEXTE - Pour tous vos textes */
+  --text-primary: #2c2c2c;            /* Gris foncé */
+  --text-secondary: #5a5a5a;          /* Gris moyen */
+  --text-muted: #8a8a8a;              /* Gris clair */
+  
+  /* COULEURS NEUTRES - Couleurs de base */
+  --white: #ffffff;                    /* Blanc pur */
+  --medium-gray: #9ca3af;             /* Gris moyen */
+  --border-color: #e5ddd4;            /* Bordure beige */
+  
+  /* COULEURS SYSTÈME - Pour messages d'état */
+  --success-color: #065f46;           /* Vert foncé */
+  --warning-color: #d97706;           /* Orange */
+  --danger-color: #dc2626;            /* Rouge */
+  --info-color: #0369a1;             /* Bleu */
+
+  /* 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  TEXTES ET POLICES - Comment vos textes apparaissent
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  */
+  
+  /* FAMILLES DE POLICE */
+  --font-family-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;    /* Police principale */
+  --font-family-headings: 'Georgia', 'Times New Roman', serif;               /* Police titres */
+  
+  /* TAILLES DE TEXTE - Essentielles seulement */
+  --font-size-sm: 0.875rem;           /* Petit (14px) */
+  --font-size-base: 1rem;             /* Normal (16px) */
+  --font-size-lg: 1.125rem;           /* Grand (18px) */
+  --font-size-xl: 1.25rem;            /* Très grand (20px) */
+  --font-size-2xl: 1.5rem;            /* XXL (24px) */
+  --font-size-3xl: 1.875rem;          /* XXXL (30px) */
+  --font-size-4xl: 2.25rem;           /* XXXXL (36px) */
+  
+  /* ÉPAISSEUR DE TEXTE - Essentielles seulement */
+  --font-weight-normal: 400;          /* Normal */
+  --font-weight-medium: 500;          /* Moyen */
+  --font-weight-semibold: 600;        /* Semi-gras */
+  --font-weight-bold: 700;            /* Gras */
+
+  /* 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ESPACEMENTS - Marges et padding entre les éléments
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  */
+  
+  /* ESPACEMENTS - Du plus petit au plus grand */
+  --spacing-xs: 0.25rem;              /* Très petit (4px) */
+  --spacing-sm: 0.5rem;               /* Petit (8px) */
+  --spacing-md: 1rem;                 /* Moyen (16px) */
+  --spacing-lg: 1.5rem;               /* Grand (24px) */
+  --spacing-xl: 2rem;                 /* Très grand (32px) */
+  --spacing-2xl: 3rem;                /* XXL (48px) */
+  --spacing-3xl: 4rem;                /* XXXL (64px) */
+  --spacing-4xl: 5rem;                /* Énorme (80px) */
+
+  /* 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  FORMES ET EFFETS - Bordures, coins arrondis, ombres
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  */
+  
+  /* COINS ARRONDIS - Du carré au rond */
+  --border-radius-sm: 4px;            /* Légèrement arrondi */
+  --border-radius-md: 8px;            /* Moyennement arrondi */
+  --border-radius-lg: 12px;           /* Bien arrondi */
+  --border-radius-xl: 16px;           /* Très arrondi */
+  --border-radius-round: 50%;         /* 🔘 Complètement rond → UTILISÉ DANS : avatars, icônes */
+  
+  /* ➖ BORDURES */
+  --border-width: 1px;                /* ➖ Épaisseur → UTILISÉ DANS : contours de cartes */
+  --border-style: solid;              /* ➖ Style → UTILISÉ DANS : lignes continues */
+  
+  /* OMBRES - Effet de profondeur (avec votre couleur bordeaux) */
+  --shadow-sm: 0 2px 4px rgba(139, 21, 56, 0.1);     /* Ombre légère → UTILISÉ DANS : petites cartes */
+  --shadow-md: 0 4px 12px rgba(139, 21, 56, 0.15);   /* Ombre moyenne → UTILISÉ DANS : cartes normales */
+  --shadow-lg: 0 8px 25px rgba(139, 21, 56, 0.2);    /* Ombre forte → UTILISÉ DANS : cartes importantes */
+  --shadow-xl: 0 12px 35px rgba(139, 21, 56, 0.25);  /* Ombre très forte → UTILISÉ DANS : modales */
+  
+  /* ⚡ ANIMATIONS - Vitesse des transitions */
+  --transition-fast: 0.2s ease;       /* ⚡ Rapide → UTILISÉ DANS : hover légers */
+  --transition-normal: 0.3s ease;     /* ⚡ Normal → UTILISÉ DANS : hover standards */
+  --transition-slow: 0.5s ease;       /* ⚡ Lent → UTILISÉ DANS : animations importantes */
+
+  /* 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  � CONTENEURS - Largeur principale du site
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  */
+  
+  /* � CONTENEUR PRINCIPAL */
+  --container-xl: 1140px;             /* Conteneur principal → UTILISÉ DANS : tous les layouts */
+}
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+/STYLES DE BASE - Appliqués automatiquement à votre site
+
+
+
+Ces styles s'appliquent automatiquement sans que vous ayez besoin de faire quoi que ce soit.
+Ils donnent l'apparence de base à votre site (couleur de fond, police, etc.)
+*/
+
+/* FOND GÉNÉRAL DU SITE */
+body {
+  background-color: var(--beige-light);   /* Fond beige clair sur tout le site */
+  color: var(--text-primary);             /* Texte gris foncé par défaut */
+  font-family: var(--font-family-primary); /* Police Segoe UI partout */
+  line-height: 1.6;                       /* Espacement des lignes pour la lisibilité */
+}
+
+/* 📦 CONTENEURS - Centrent le contenu sur la page */
+.container-eysa {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* 🎨 BACKGROUNDS - Sections beiges */
+.bg-warm {
+  background-color: var(--beige-warm);
+}
+
+.bg-light {
+  background-color: var(--beige-light);
+}
+
+.bg-cream {
+  background-color: var(--cream);
+}
+
+.bg-header {
+  background-color: var(--header-bg);
+  color: var(--header-text);
+}
+
+/* 🔘 BOUTONS UNIFIÉS - Style de votre image */
+.btn-eysa {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-xl);
+  border: var(--border-width) var(--border-style) transparent;
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.btn-eysa:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+
+/* Bouton principal - Bordeaux (comme dans votre image) */
+.btn-eysa-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+  border-color: var(--primary-color);
+}
+
+.btn-eysa-primary:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  color: var(--white);
+}
+
+/* Bouton secondaire - Contour bordeaux */
+.btn-eysa-secondary {
+  background-color: var(--white);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-eysa-secondary:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+/* Bouton outline */
+.btn-eysa-outline {
+  background-color: transparent;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-eysa-outline:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+/* Bouton light - Pour backgrounds sombres */
+.btn-eysa-light {
+  background-color: var(--white);
+  color: var(--primary-color);
+  border-color: var(--white);
+}
+
+.btn-eysa-light:hover {
+  background-color: var(--beige-light);
+  border-color: var(--beige-light);
+  color: var(--primary-color);
+}
+
+/* COMPATIBILITÉ - Boutons .btn-primary (legacy) */
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 21, 56, 0.3);
+}
+
+/* CARTES UNIFORMISÉES - Style image */
+.card-eysa {
+  background: var(--cream);
+  border: var(--border-width) var(--border-style) var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+}
+
+.card-eysa:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* TITRES UNIFORMISÉS */
+.title-eysa-1 {
+  font-family: var(--font-family-headings);
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: var(--spacing-lg);
+}
+
+.title-eysa-2 {
+  font-family: var(--font-family-headings);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  line-height: 1.3;
+  margin-bottom: var(--spacing-md);
+}
+
+.title-eysa-3 {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  line-height: 1.4;
+  margin-bottom: var(--spacing-md);
+}
+
+/* TEXTES */
+.text-eysa-lead {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-normal);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.text-eysa-body {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.text-eysa-small {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* SECTIONS */
+.section-eysa {
+  padding: var(--spacing-4xl) 0;
+  background-color: var(--beige-light);
+}
+
+.section-eysa-alt {
+  padding: var(--spacing-4xl) 0;
+  background-color: var(--beige-warm);
+}
+
+/* BADGES UNIFORMISÉS */
+.badge-eysa {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: var(--success-color);
+  color: var(--white);
+  font-size: 0.75rem;                  /* 12px directement */
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--border-radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-eysa-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.badge-eysa-warning {
+  background-color: var(--warning-color);
+  color: var(--white);
+}
+
+.badge-eysa-info {
+  background-color: var(--info-color);
+  color: var(--white);
+}
+
+/* GRILLES RESPONSIVES */
+.grid-eysa {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.grid-eysa-2 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid-eysa-3 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.grid-eysa-4 {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* RESPONSIVE HELPERS */
+@media (max-width: 768px) {
+  .title-eysa-1 { font-size: var(--font-size-3xl); }
+  .title-eysa-2 { font-size: var(--font-size-2xl); }
+  .title-eysa-3 { font-size: var(--font-size-lg); }
+  
+  .section-eysa,
+  .section-eysa-alt {
+    padding: var(--spacing-2xl) 0;
+  }
+  
+  .container-eysa {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .btn-eysa {
+    width: 100%;
+    justify-content: center;
+  }
+}

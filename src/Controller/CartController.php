@@ -88,6 +88,15 @@ class CartController extends AbstractController
     #[Route('/panier/add/{id}', name: 'app_cart_add', methods: ['POST'])]
     public function addProduct(int $id, Request $request): Response
     {
+        // DEBUG temporaire : log des données reçues
+        if ($request->isXmlHttpRequest()) {
+            file_put_contents(__DIR__.'/debug_cart.log', print_r([
+                'id' => $id,
+                'quantity' => $request->request->get('quantity'),
+                'POST' => $request->request->all()
+            ], true), FILE_APPEND);
+        }
+
         // Je trouve le produit en base de données
         $product = $this->entityManager->getRepository(Product::class)->find($id);
         

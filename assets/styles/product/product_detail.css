@@ -1,6 +1,6 @@
-/* ========================================================================
+/* 
    STYLES POUR LA MENTION DU POIDS MINIMUM (extraits du template)
-   ======================================================================== */
+   */
 
 .min-weight-notice {
     background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
@@ -57,26 +57,23 @@
         font-size: 0.8em;
     }
 }
-/* ========================================================================
+/*
    CSS POUR LA PAGE DE DÉTAIL PRODUIT - BOUCHERIE EYSA
-   ======================================================================== */
+   */
 
 /* 
-   📄 CE FICHIER CONTIENT :
-   ✅ Styles pour la page de détail d'un produit
-   ✅ Design responsive et moderne  
-   ✅ Calculateur de prix interactif
-   ✅ Boutons d'action (ajouter au panier)
-   ✅ Informations produit complètes
+   CE FICHIER CONTIENT :
+   Styles pour la page de détail d'un produit
+   Design responsive et moderne  
+   Calculateur de prix interactif
+   Boutons d'action (ajouter au panier)
+   Informations produit complètes
    
-   👩‍💻 POUR TOI : Ce fichier est commenté pour t'aider à comprendre
-   chaque section et pouvoir modifier facilement les couleurs,
-   tailles, espacements selon tes besoins.
 */
 
-/* ========================================================================
+/* 
    CONTENEUR PRINCIPAL
-   ======================================================================== */
+   */
 
 .product-detail-page {
     background: #FAF7F2; /* Beige clair - arrière-plan général */
@@ -89,9 +86,9 @@
     margin: 0 auto;
 }
 
-/* ========================================================================
+/* 
    FIL D'ARIANE (Navigation)
-   ======================================================================== */
+  */
 
 .breadcrumb-nav {
     background: white;
@@ -138,9 +135,9 @@
     font-weight: 600;
 }
 
-/* ========================================================================
+/*
    GRILLE PRINCIPALE (Image + Infos)
-   ======================================================================== */
+  */
 
 .product-detail-grid {
     display: grid;
@@ -157,9 +154,9 @@
     }
 }
 
-/* ========================================================================
+/* 
    SECTION IMAGE
-   ======================================================================== */
+    */
 
 .product-image-section {
     position: relative;
@@ -212,9 +209,9 @@
     color: white;
 }
 
-/* ========================================================================
+/*
    SECTION INFORMATIONS
-   ======================================================================== */
+ */
 
 .product-info-section {
     background: white;
@@ -249,9 +246,9 @@
     margin-bottom: 2rem;
 }
 
-/* ========================================================================
+/*
    CALCULATEUR DE PRIX
-   ======================================================================== */
+   */
 
 .price-calculator {
     background: #F5F1E8; /* Beige chaleureux */
@@ -276,7 +273,7 @@
 .current-price {
     font-size: 2rem;
     font-weight: 700;
-    color: #8B1538; /* Bordeaux pour le prix */
+    color: var(--text-secondary); /* Gris moyen */
 }
 
 .price-per-kg {
@@ -285,9 +282,9 @@
     margin-top: 0.5rem;
 }
 
-/* ========================================================================
+/*
    CONTRÔLES DE QUANTITÉ
-   ======================================================================== */
+  */
 
 .quantity-controls {
     margin-bottom: 1.5rem;
@@ -308,7 +305,7 @@
 
 /* Boutons + et - */
 .qty-btn {
-    background: #8B1538; /* Bordeaux */
+    background: #8B1538 !important; /* Bordeaux */ 
     color: white;
     border: none;
     width: 40px;
@@ -356,9 +353,9 @@
     color: #5a5a5a;
 }
 
-/* ========================================================================
+/* 
    SUGGESTIONS DE QUANTITÉ
-   ======================================================================== */
+  */
 
 .quantity-suggestions {
     margin-bottom: 1.5rem;
@@ -403,9 +400,9 @@
     opacity: 0.8;
 }
 
-/* ========================================================================
+/*
    BOUTON AJOUTER AU PANIER
-   ======================================================================== */
+   */
 
 .add-to-cart-btn {
     background: #8B1538; /* Bordeaux */
@@ -427,9 +424,9 @@
     box-shadow: 0 4px 15px rgba(139, 21, 56, 0.3);
 }
 
-/* ========================================================================
+/* 
    ONGLETS D'INFORMATIONS
-   ======================================================================== */
+    */
 
 .product-tabs {
     margin-top: 3rem;
@@ -477,9 +474,9 @@
     display: block;
 }
 
-/* ========================================================================
+/* 
    NOTIFICATIONS TOAST
-   ======================================================================== */
+    */
 
 .toast {
     position: fixed;
@@ -508,9 +505,9 @@
     background: #dc2626; /* Rouge */
 }
 
-/* ========================================================================
+/*
    RESPONSIVE - MOBILE
-   ======================================================================== */
+   */
 
 @media (max-width: 768px) {
     .product-detail-page {
@@ -546,9 +543,9 @@
     }
 }
 
-/* ========================================================================
+/* 
    STYLES POUR L'ANCIEN TEMPLATE (Compatibilité)
-   ======================================================================== */
+   */
 
 /* Si tu utilises encore l'ancien template product_detail.html.twig */
 .product-detail-container {
@@ -609,7 +606,7 @@
 .price {
     font-size: 2rem;
     font-weight: 700;
-    color: #8B1538;
+    color: var(--text-secondary);
     margin-bottom: 1rem;
 }
 
@@ -628,22 +625,4 @@
     border: 2px solid #e5ddd4;
     border-radius: 6px;
     font-size: 1rem;
-}
-
-.btn-primary {
-    background: #8B1538;
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 100%;
-}
-
-.btn-primary:hover {
-    background: #6B1028;
-    transform: translateY(-2px);
 }

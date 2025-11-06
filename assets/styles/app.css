@@ -3,14 +3,13 @@
    ======================================================================== */
 
 /* Import du design system principal */
-@import './design-system-new.css';
+@import './design-system.css';
 
 /* Import des composants partiels */
 @import './partials/header.css';
 @import './partials/footer.css';
 @import './partials/page_banner.css';
 @import './partials/pickup-slots.css';
-@import './partials/checkout.css';
 
 /* Import des pages spécifiques */
 @import './home.css';
@@ -28,12 +27,12 @@
 
 /* CSS général de base */
 body {
-    background-color: white;
+    background-color: var(--beige-light);
     margin: 0;
     padding: 0;
-    font-family: var(--font-secondary);
+    font-family: var(--font-family-primary);
     line-height: 1.6;
-    color: var(--color-text);
+    color: var(--text-primary);
 }
 
 /* Reset de base */
@@ -43,12 +42,12 @@ body {
 
 /* Liens de base */
 a {
-    color: var(--color-burgundy);
+    color: var(--primary-color);
     text-decoration: none;
 }
 
 a:hover {
-    color: var(--color-burgundy-dark);
+    color: var(--primary-dark);
 }
 
 /* ========================================================================
@@ -65,7 +64,7 @@ input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-    display: none; /* Ajout pour forcer la suppression */
+    display: none;
 }
 
 /* Supprimer les flèches (spinners) des inputs number sur Firefox */
@@ -181,7 +180,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .search-item:hover {
-    background: var(--bg-beige);
+    background: var(--beige-light);
     transform: translateY(-1px);
 }
 
@@ -236,4 +235,18 @@ input[type="number"]::-webkit-outer-spin-button {
         width: 250px;
         right: -2rem;
     }
+}
+
+/* ========================================================================
+   OVERRIDE PRIX EN GRIS - SPÉCIFICITÉ ÉLEVÉE
+   ======================================================================== */
+
+/* Force tous les prix à être en gris avec haute spécificité */
+.price,
+.product-price,
+.current-price,
+.home-product-price,
+.product-card .price,
+.product-item .price {
+    color: #5a5a5a !important; /* Gris moyen - force avec !important */
 }

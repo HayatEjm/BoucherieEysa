@@ -11,19 +11,13 @@
 				<li>
 					<a href="{{ path('app_home') }}">ACCUEIL</a>
 				</li>
-				<li class="dropdown">
-					<a href="#" class="dropbtn">NOS PRODUITS
-						<span class="arrow">▼</span>
-					</a>
-					<ul class="dropdown-content">
-						{% for category in categories %}
-							<li>
-								<a href="{{ path('app_category_show', { id: category.id }) }}">{{ category.name }}</a>
-							</li>
-						{% endfor %}
-					</ul>
 
+				{# 🔽 MOUNT POINT VUE 3 ICI - POUR DropdownMenu.vue #}
+				<li id="vue-dropdown-menu" {% if categoriesJson is defined %} 
+				data-categories='{{ categoriesJson|json_encode|e("html_attr") }}' {% endif %}>
+					<a href="#">NOS PRODUITS</a>
 				</li>
+
 
 				<li>
 					<a href="{{ path('app_click_collect') }}">CLICK & COLLECT</a>
@@ -38,18 +32,30 @@
 		</nav>
 
 		<div class="header-icons">
-			<a href="#" class="icon-link">
-				<i class="fa-solid fa-user" aria-hidden="true"></i>
-				<span class="label">Mon compte</span>
-			</a>
-			{# 🛒 PANIER - Lien avec badge dynamique #}
+			{# Gestion intelligente du lien "Mon Compte" #}
+			{% if is_granted('ROLE_USER') %}
+				{# Utilisateur connecté - Lien vers son compte #}
+				<a href="{{ path('app_account') }}" class="icon-link">
+					<i class="fa-solid fa-user" aria-hidden="true"></i>
+					<span class="label">MON COMPTE</span>
+				</a>
+			{% else %}
+				{# Utilisateur pas connecté - Lien vers la connexion #}
+				<a href="{{ path('app_login') }}" class="icon-link">
+					<i class="fa-solid fa-user" aria-hidden="true"></i>
+					<span class="label">CONNEXION</span>
+				</a>
+			{% endif %}
+
 			<a href="{{ path('app_cart_index') }}" class="icon-link cart-icon-container" aria-label="Panier" data-tooltip="Voir mon panier">
 				<i class="fa-solid fa-cart-shopping cart-icon" aria-hidden="true"></i>
-				<span class="cart-badge hidden" id="cart-badge" data-count="0" aria-label="0 articles dans le panier">0</span>
+				<span id="cart-badge" data-count="0" aria-label="0 articles dans le panier">0</span>
 			</a>
-			
-			{# 🔍 RECHERCHE - Dropdown simple #}
-			<div class="search-container">
+
+			<!-- searchBar monté par Vue -->
+			<div class="search-container"></div>
+		
+			{# <div class="search-container">
 				<a href="#" class="icon-link" id="searchToggle" aria-label="Rechercher">
 					<i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
 				</a>
@@ -59,7 +65,11 @@
 						<p class="search-hint">Tapez au moins 2 caractères...</p>
 					</div>
 				</div>
-			</div>
+			</div> #}
 		</div>
 	</div>
+
+	{# ASSETS ENCORE : À PLACER EN BAS DU HEADER #}
+	{{ encore_entry_link_tags('app') }}
+	{{ encore_entry_script_tags('app') }}
 </header>
