@@ -43,8 +43,10 @@
 		{{ encore_entry_link_tags('app') }}
 
 		{% block stylesheets %}{% endblock %}
+            {{ encore_entry_link_tags('app') }}
 
 		{% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
 			{{ encore_entry_script_tags('app') }}
 			{% block importmap %}{% endblock %}
 		{% endblock %}

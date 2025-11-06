@@ -28,7 +28,8 @@ Encore
     .enableStimulusBridge('./assets/controllers.json')
     .enableSingleRuntimeChunk()
 
-    // Support Vue.js (si utilisé)
+    // Support Vue.js (si utilisé)
+
     // Source maps en dev
     .enableSourceMaps(!Encore.isProduction())
     // Pas de versioning pour des noms de fichiers propres
