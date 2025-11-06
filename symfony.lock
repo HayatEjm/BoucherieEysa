@@ -247,7 +247,7 @@
         ]
     },
     "symfony/stimulus-bundle": {
-        "version": "2.26",
+        "version": "2.31",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -287,7 +287,7 @@
         ]
     },
     "symfony/ux-turbo": {
-        "version": "2.26",
+        "version": "2.31",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -296,7 +296,7 @@
         }
     },
     "symfony/ux-vue": {
-        "version": "2.27",
+        "version": "2.31",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
