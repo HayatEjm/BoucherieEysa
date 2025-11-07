@@ -1,4 +1,3 @@
-import { registerVueControllerComponents } from '@symfony/ux-vue';
 import './bootstrap.js';
 
 // Import Vue.js et composants principaux
