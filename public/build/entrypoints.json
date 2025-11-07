@@ -2,25 +2,25 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/build/runtime.e57c391e.js",
+        "/build/runtime.be343072.js",
         "/build/895.f8e5b60a.js",
         "/build/602.600a6249.js",
         "/build/408.03b4e45b.js",
         "/build/582.6b041d3c.js",
-        "/build/41.f7bc2f3e.js",
+        "/build/777.7175d3b0.js",
         "/build/545.f609a425.js",
         "/build/508.1aead82f.js",
-        "/build/app.e5963bcf.js"
+        "/build/app.d12f4f3f.js"
       ],
       "css": [
-        "/build/41.ef6a8557.css",
+        "/build/777.ef6a8557.css",
         "/build/545.eb47bd9e.css",
         "/build/app.a225af84.css"
       ]
     },
     "cart-app": {
       "js": [
-        "/build/runtime.e57c391e.js",
+        "/build/runtime.be343072.js",
         "/build/895.f8e5b60a.js",
         "/build/408.03b4e45b.js",
         "/build/cart-app.d54ea33a.js"
@@ -31,7 +31,7 @@
     },
     "admin": {
       "js": [
-        "/build/runtime.e57c391e.js",
+        "/build/runtime.be343072.js",
         "/build/895.f8e5b60a.js",
         "/build/602.600a6249.js",
         "/build/582.6b041d3c.js",
@@ -44,7 +44,7 @@
     },
     "legal": {
       "js": [
-        "/build/runtime.e57c391e.js"
+        "/build/runtime.be343072.js"
       ],
       "css": [
         "/build/legal.d0bc34e0.css"
