@@ -2,12 +2,6 @@
 
 {% block title %}{{ product.name }} - EYSA BOUCHERIE{% endblock %}
 
-{# Bloc HEAD pour s'assurer que le CSS est bien chargé #}
-{% block stylesheets %}
-    {{ parent() }}
-    {{ encore_entry_link_tags('app') }}
-{% endblock %}
-
 {% block body %}
 <div class="product-detail-page">
     <!-- Fils d'Ariane -->
@@ -65,10 +59,4 @@
         {% include 'components/product_tabs.html.twig' with { product: product } %}
     </div>
 </div>
-{% endblock %}
-
-{# Bloc JS : charge Vue, composant et app.js #}
-{% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('app') }}
 {% endblock %}
