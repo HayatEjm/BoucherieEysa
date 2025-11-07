@@ -16,12 +16,6 @@
 {# Titre de la page qui apparaîtra dans l'onglet du navigateur #}
 {% block title %}Click & Collect - Commandez en ligne, retirez en magasin{% endblock %}
 
-{# On importe le CSS spécifique au Click & Collect #}
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
-{% endblock %}
-
 {% block body %}
 
 {# BANDEAU COMMUN - Changera selon la page #}

@@ -41,9 +41,12 @@
     {{ encore_entry_link_tags('app') }}
     {% block stylesheets %}{% endblock %}
 
-    {# JS via Webpack Encore - DANS LE HEAD pour éviter warning Turbo #}
-    {{ encore_entry_script_tags('app', { defer: true }) }}
-    {% block javascripts %}{% endblock %}
+    {# JS via Webpack Encore #}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+
+
 </head>
 <body>
     {% include 'partials/header.html.twig' %}

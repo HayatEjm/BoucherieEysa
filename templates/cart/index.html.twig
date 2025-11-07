@@ -13,11 +13,6 @@
   Mon panier - Boucherie Eysa
 {% endblock %}
 
-{% block stylesheets %}
-  {{ parent() }}
-  <link rel="stylesheet" href="{{ asset('build/app.css') }}">
-{% endblock %}
-
 {% block body %}
 <div class="cart-page">
 
@@ -54,5 +49,5 @@
 
 {% block javascripts %}
   {{ parent() }}
-  <script type="module" src="{{ asset('build/cart-app.js') }}"></script>
+  {{ encore_entry_script_tags('cart-app') }}
 {% endblock %}
