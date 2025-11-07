@@ -120,13 +120,5 @@ import './styles/components/cookie-banner.css'
 // ⚠️ Styles principaux EN DERNIER pour qu'ils gagnent en spécificité
 import './styles/app.css'
 
-// Register Vue UX controllers (si disponible)
-// Note: Cette fonctionnalité nécessite Symfony UX Vue
-// Pour l'instant, on skip si ça génère des erreurs
-if (typeof registerVueControllerComponents === 'function') {
-  try {
-    registerVueControllerComponents()
-  } catch (error) {
-    // Silencieux - pas critique
-  }
-}
+// Note: registerVueControllerComponents supprimé car causait des erreurs en production
+// Les composants Vue sont montés manuellement ci-dessus
