@@ -40,17 +40,18 @@
     {# CSS via Webpack Encore (une seule fois) #}
     {{ encore_entry_link_tags('app') }}
     {% block stylesheets %}{% endblock %}
+
+    {# JS via Webpack Encore - DANS LE HEAD pour éviter warning Turbo #}
+    {{ encore_entry_script_tags('app') }}
+    {% block javascripts %}{% endblock %}
 </head>
 <body>
     {% include 'partials/header.html.twig' %}
     {% block body %}{% endblock %}
     {% include 'partials/footer.html.twig' %}
 
-    {# JS via Webpack Encore (une seule fois) #}
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
-        {% block importmap %}{% endblock %}
-    {% endblock %}
+    {# Bandeau cookie #}
+    {% include 'components/cookie_banner.html.twig' %}
 
     {# Bandeau cookie #}
     {% include 'components/cookie_banner.html.twig' %}
