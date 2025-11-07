@@ -25,6 +25,9 @@
 @import './cart/cart.css';
 @import './cart/cart_badge.css';
 
+/* Import du système checkout */
+@import './checkout/checkout.css';
+
 /* CSS général de base */
 body {
     background-color: var(--beige-light);

@@ -15,9 +15,9 @@
     text-align: center;
     margin-bottom: 3rem;
     padding: 2rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: #f8f6f2; /* Fond beige comme le reste du site */
     border-radius: 12px;
-    color: white;
+    border: 2px solid #8b1538; /* Bordure bordeaux */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -25,12 +25,13 @@
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
     font-weight: 700;
+    color: #8b1538 !important; /* Bordeaux pour le titre */
 }
 
 .welcome-message {
     font-size: 1.2rem;
-    opacity: 0.9;
     margin: 0;
+    color: #2c3e50 !important; /* Texte foncé lisible */
 }
 
 /* Contenu principal avec grille des cartes */

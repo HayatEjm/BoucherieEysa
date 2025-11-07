@@ -364,13 +364,16 @@ body.admin {
     width: 100%;
     background: var(--admin-white);
     border-radius: 15px;
-    overflow: hidden;
+    overflow-x: auto; /* Scroll horizontal sur mobile */
+    overflow-y: visible;
     box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     margin-bottom: 30px;
+    -webkit-overflow-scrolling: touch; /* Smooth scroll sur iOS */
 }
 
 .admin-table table {
     width: 100%;
+    min-width: 600px; /* Largeur minimale pour éviter l'écrasement */
     border-collapse: collapse;
 }
 
@@ -591,12 +594,30 @@ body.admin {
     }
     
     .admin-table {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .admin-table table {
+        min-width: 650px; /* S'assurer qu'on peut scroller */
     }
     
     .admin-table th,
     .admin-table td {
         padding: 10px 8px;
+        font-size: 0.85rem;
+    }
+    
+    /* Indicateur visuel pour le scroll */
+    .admin-table::after {
+        content: "← Faites défiler →";
+        display: block;
+        text-align: center;
+        padding: 8px;
+        background: rgba(139, 69, 19, 0.05);
+        color: var(--admin-primary);
+        font-size: 0.75rem;
+        font-style: italic;
     }
     
     .form-row {

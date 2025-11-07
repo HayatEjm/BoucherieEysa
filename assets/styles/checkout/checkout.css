@@ -15,20 +15,22 @@
 }
 
 .checkout-header {
-    background: var(--color-primary);
-    color: white;
+    background: #8b1538; /* Bordeaux fixe au lieu de var() */
+    color: white !important;
     padding: 2rem 0;
     text-align: center;
 }
 
 .checkout-header-content h1 {
     margin-bottom: 0.5rem;
+    color: white !important;
 }
 
 .checkout-subtitle {
     font-size: 1.1rem;
     opacity: 0.9;
     margin: 0;
+    color: white !important;
 }
 
 .checkout-content {
@@ -186,6 +188,79 @@
 
 .form-group .form-control:invalid {
     border-color: var(--color-error);
+}
+
+/* ========== ERREURS DE VALIDATION - TOUTES VARIANTES SYMFONY ========== */
+
+/* Cibler TOUTES les erreurs Symfony possibles */
+.form-group .invalid-feedback,
+.form-group .form-error-message,
+.form-group .form-errors,
+.form-group ul.form-error-list,
+.form-group .help-block.error,
+.form-group span.error,
+.form-group div.error {
+    display: block !important;
+    color: #dc3545 !important;
+    font-size: 0.85rem !important;
+    margin-top: 0.5rem !important;
+    list-style: none !important;
+    padding: 0 !important;
+    font-weight: 500 !important;
+}
+
+.form-group ul.form-error-list li {
+    margin-bottom: 0.25rem;
+    color: #dc3545 !important;
+}
+
+/* Champs invalides - toutes variantes */
+.form-group .form-control.is-invalid,
+.form-group .form-control:invalid:not(:placeholder-shown),
+.form-group input.error,
+.form-group select.error,
+.form-group textarea.error {
+    border-color: #dc3545 !important;
+    background-color: #fff5f5 !important;
+}
+
+.form-group .form-control.is-invalid:focus,
+.form-group input.error:focus,
+.form-group select.error:focus {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15) !important;
+}
+
+/* S'assurer que les erreurs sont visibles même si le thème change */
+.checkout-form .invalid-feedback,
+.checkout-card .invalid-feedback,
+form .invalid-feedback {
+    display: block !important;
+    color: #dc3545 !important;
+    font-size: 0.875rem !important;
+    margin-top: 0.5rem !important;
+}
+
+/* DEBUG: Forcer l'affichage de TOUS les éléments après form_errors */
+.form-group > ul,
+.form-group > span,
+.form-group > div:not(.form-control) {
+    display: block !important;
+    color: #dc3545 !important;
+}
+
+/* Style spécifique pour les erreurs Symfony par défaut */
+.form-group ul {
+    margin: 0.5rem 0 0 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+.form-group ul li {
+    color: #dc3545 !important;
+    font-size: 0.85rem !important;
+    padding: 0.25rem 0 !important;
+    font-weight: 500 !important;
 }
 
 /* ========== INFORMATIONS RETRAIT ========== */

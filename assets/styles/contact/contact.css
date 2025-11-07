@@ -11,6 +11,7 @@
 .contact-content {
     max-width: 800px;
     margin: 0 auto;
+    padding: 0 1rem;
 }
 
 /* ========================================================================
@@ -275,22 +276,48 @@ textarea.form-control {
 }
 
 /* ========================================================================
-   ERREURS DE VALIDATION
+   ERREURS DE VALIDATION - Style Symfony Forms
    ======================================================================== */
 
-.form-error {
+/* Messages d'erreur Symfony (ul.form-error-list) */
+.form-error,
+.invalid-feedback,
+ul.form-error-list {
     color: #dc3545;
     font-size: 0.85rem;
-    margin-top: 0.25rem;
+    margin-top: 0.5rem;
+    display: block;
+    list-style: none;
+    padding: 0;
 }
 
-.form-control.is-invalid {
-    border-color: #dc3545;
+ul.form-error-list li {
+    margin-bottom: 0.25rem;
 }
 
-.form-control.is-invalid:focus {
+/* Champs invalides */
+.form-control.is-invalid,
+.form-control:invalid {
+    border-color: #dc3545 !important;
+    background-color: #fff5f5;
+}
+
+.form-control.is-invalid:focus,
+.form-control:invalid:focus {
     border-color: #dc3545;
     box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+/* Style pour les erreurs de formulaire Symfony */
+.form-group .invalid-feedback {
+    display: block;
+}
+
+/* Forcer l'affichage des erreurs sous les champs */
+.form-row .form-group .invalid-feedback,
+.form-row .form-col .invalid-feedback {
+    display: block !important;
+    margin-top: 0.5rem;
 }
 
 /* ========================================================================

@@ -72,13 +72,16 @@ class CheckoutFormType extends AbstractType
             ])
             
             ->add('customerEmail', EmailType::class, [
-                'label' => 'Email (optionnel)',
-                'required' => false,
+                'label' => 'Email *',
+                'required' => true,
                 'attr' => [
                     'placeholder' => 'Ex: jean.dupont@email.com',
                     'class' => 'form-control',
                 ],
                 'constraints' => [
+                    new Assert\NotBlank([
+                        'message' => 'Veuillez saisir votre adresse email'
+                    ]),
                     new Assert\Email([
                         'message' => 'Veuillez saisir une adresse email valide'
                     ])
