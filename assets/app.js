@@ -102,7 +102,6 @@ if (el) {
 import './js/header.js'
 import './js/category_products.js'
 import './js/click_collect.js'
-import './bootstrap.js'
 import './js/pickupSlots.js'
 
 // Icônes et système de design
@@ -119,7 +118,15 @@ import './styles/philosophy/philosophy.css'
 import './styles/checkout/checkout.css'
 import './styles/auth/auth.css'
 import './styles/account.css'
+import './styles/account.css'
 import './styles/components/cookie-banner.css'
 
-registerVueControllerComponents(require.context('./vue/controllers', true, /\.vue$/));
-registerVueControllerComponents();
+// Register Vue controllers si le contexte existe
+try {
+  const vueContext = require.context('./vue/controllers', true, /\.vue$/)
+  if (vueContext.keys().length > 0) {
+    registerVueControllerComponents(vueContext)
+  }
+} catch (error) {
+  console.warn('Pas de contrôleurs Vue à enregistrer')
+}
