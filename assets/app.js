@@ -108,25 +108,25 @@ import './js/pickupSlots.js'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import './styles/design-system.css'
 
-// Styles principaux
-import './styles/app.css'
-
-// Styles spécifiques par page/composant
+// Styles spécifiques par page/composant (chargés AVANT app.css)
 import './styles/category/quantity-selector.css' 
 import './styles/partials/SearchBar.css'
 import './styles/philosophy/philosophy.css'
 import './styles/checkout/checkout.css'
 import './styles/auth/auth.css'
 import './styles/account.css'
-import './styles/account.css'
 import './styles/components/cookie-banner.css'
 
-// Register Vue controllers si le contexte existe
-try {
-  const vueContext = require.context('./vue/controllers', true, /\.vue$/)
-  if (vueContext.keys().length > 0) {
-    registerVueControllerComponents(vueContext)
+// ⚠️ Styles principaux EN DERNIER pour qu'ils gagnent en spécificité
+import './styles/app.css'
+
+// Register Vue UX controllers (si disponible)
+// Note: Cette fonctionnalité nécessite Symfony UX Vue
+// Pour l'instant, on skip si ça génère des erreurs
+if (typeof registerVueControllerComponents === 'function') {
+  try {
+    registerVueControllerComponents()
+  } catch (error) {
+    // Silencieux - pas critique
   }
-} catch (error) {
-  console.warn('Pas de contrôleurs Vue à enregistrer')
 }

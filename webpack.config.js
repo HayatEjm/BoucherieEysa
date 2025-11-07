@@ -28,12 +28,14 @@ Encore
     .enableStimulusBridge('./assets/controllers.json')
     .enableSingleRuntimeChunk()
 
-    // Support Vue.js (si utilisé)
+    // Support Vue.js (si utilisé)
+
 
     // Source maps en dev
     .enableSourceMaps(!Encore.isProduction())
-    // Pas de versioning pour des noms de fichiers propres
-    .enableVersioning(false)
+    
+    // Versioning en production pour éviter les caches navigateurs
+    .enableVersioning(Encore.isProduction())
 
     // Babel (pour compatibilité JS)
     .configureBabelPresetEnv((config) => {
