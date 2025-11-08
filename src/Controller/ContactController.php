@@ -26,13 +26,25 @@ class ContactController extends AbstractController
             $entityManager->persist($contact);
             $entityManager->flush();
 
-            // Envoi d'un email de confirmation à l'utilisateur
-            $email = (new \Symfony\Component\Mime\Email())
+            // Envoi d'un email de confirmation au client
+            $emailClient = (new \Symfony\Component\Mime\Email())
                 ->from('contact@boucherie-eysa.fr')
                 ->to($contact->getEmail())
                 ->subject('Confirmation de votre message')
                 ->html('<p>Merci pour votre message ! Nous vous répondrons rapidement.</p>');
-            $mailer->send($email);
+            $mailer->send($emailClient);
+
+            // Envoi d'un email de notification à l'admin
+            $emailAdmin = (new \Symfony\Component\Mime\Email())
+                ->from('contact@boucherie-eysa.fr')
+                ->to('eysa.boucherie@gmail.com')
+                ->subject('Nouveau message de contact sur Boucherie Eysa')
+                ->html('<p><strong>Nom :</strong> ' . $contact->getName() . '<br>' .
+                       '<strong>Email :</strong> ' . $contact->getEmail() . '<br>' .
+                       '<strong>Téléphone :</strong> ' . $contact->getPhone() . '<br>' .
+                       '<strong>Sujet :</strong> ' . $contact->getSubject() . '<br>' .
+                       '<strong>Message :</strong><br>' . nl2br($contact->getMessage()) . '</p>');
+            $mailer->send($emailAdmin);
 
             // Message de confirmation
             $this->addFlash('success', 'Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.');

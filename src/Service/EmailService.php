@@ -19,15 +19,25 @@ class EmailService
     public function sendOrderConfirmation($order): void
     {
         try {
-            $email = (new Email())
+            // Email de confirmation au client
+            $emailClient = (new Email())
                 ->from('eysa.boucherie@gmail.com')
                 ->to($order->getCustomerEmail())
                 ->subject('Commande confirmée #' . $order->getId() . ' - Boucherie Eysa')
                 ->html($this->twig->render('emails/order_confirmation.html.twig', [
                     'order' => $order
                 ]));
+            $this->mailer->send($emailClient);
 
-            $this->mailer->send($email);
+            // Email de notification à l'admin
+            $emailAdmin = (new Email())
+                ->from('eysa.boucherie@gmail.com')
+                ->to('eysa.boucherie@gmail.com')
+                ->subject('Nouvelle commande #' . $order->getId() . ' - À préparer')
+                ->html($this->twig->render('emails/new_order_admin.html.twig', [
+                    'order' => $order
+                ]));
+            $this->mailer->send($emailAdmin);
         } catch (\Exception $e) {
             // En cas d'erreur email, on n'interrompt pas le processus de commande
             // En production, on loggerait cette erreur
