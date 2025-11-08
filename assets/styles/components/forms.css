@@ -1,0 +1,376 @@
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📝 COMPOSANTS FORMULAIRES - Boucherie Eysa
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Composants réutilisables pour tous les formulaires du site.
+Utilise les variables du design-system.css pour la cohérence.
+
+UTILISATION:
+  1. Importer ce fichier dans vos CSS: @import '../components/forms.css';
+  2. Utiliser les classes .form-eysa-* dans vos templates
+
+COMPOSANTS DISPONIBLES:
+  - .form-eysa-group         → Groupe de champ (label + input)
+  - .form-eysa-label         → Label de champ
+  - .form-eysa-input         → Input texte/email/password
+  - .form-eysa-textarea      → Zone de texte multiligne
+  - .form-eysa-select        → Menu déroulant
+  - .form-eysa-checkbox      → Case à cocher
+  - .form-eysa-radio         → Bouton radio
+  - .form-eysa-error         → Message d'erreur
+  - .form-eysa-help          → Texte d'aide sous l'input
+  - .form-eysa-input-icon    → Input avec icône à gauche
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📦 GROUPE DE CHAMP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+.form-eysa-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Espacement réduit pour groupes compacts (ex: adresse ligne 1 + ligne 2) */
+.form-eysa-group.compact {
+    margin-bottom: var(--spacing-md);
+}
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🏷️ LABEL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+.form-eysa-label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.4;
+}
+
+/* Indicateur de champ obligatoire */
+.form-eysa-label .required {
+    color: var(--danger-color);
+    margin-left: 0.25rem;
+}
+
+/* Icône dans le label (optionnel) */
+.form-eysa-label i {
+    margin-right: var(--spacing-xs);
+    color: var(--primary-color);
+    width: 16px;
+}
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📝 INPUTS (texte, email, password, number, tel, url, date)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+.form-eysa-input {
+    display: block;
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background-color: var(--white);
+    color: var(--text-primary);
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.5;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+}
+
+/* État focus */
+.form-eysa-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(139, 21, 56, 0.1);
+}
+
+/* État désactivé */
+.form-eysa-input:disabled {
+    background-color: var(--beige-light);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* État erreur */
+.form-eysa-input.error {
+    border-color: var(--danger-color);
+}
+
+.form-eysa-input.error:focus {
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* État succès (optionnel, validation en temps réel) */
+.form-eysa-input.success {
+    border-color: var(--success-color);
+}
+
+/* Placeholder */
+.form-eysa-input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📝 INPUT AVEC ICÔNE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+.form-eysa-input-icon {
+    position: relative;
+}
+
+.form-eysa-input-icon i {
+    position: absolute;
+    left: var(--spacing-lg);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+    font-size: var(--font-size-lg);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Input avec padding à gauche pour l'icône */
+.form-eysa-input-icon .form-eysa-input {
+    padding-left: 3rem; /* Espace pour l'icône */
+}
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📄 TEXTAREA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+.form-eysa-textarea {
+    display: block;
+    width: 100%;
+    min-height: 120px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background-color: var(--white);
+    color: var(--text-primary);
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.6;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+    resize: vertical; /* Permet redimensionnement vertical seulement */
+}
+
+.form-eysa-textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(139, 21, 56, 0.1);
+}
+
+.form-eysa-textarea.error {
+    border-color: var(--danger-color);
+}
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 SELECT (menu déroulant)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+.form-eysa-select {
+    display: block;
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background-color: var(--white);
+    color: var(--text-primary);
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    appearance: none; /* Retire le style natif */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238B1538' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--spacing-lg) center;
+    padding-right: 3rem; /* Espace pour la flèche */
+}
+
+.form-eysa-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(139, 21, 56, 0.1);
+}
+
+.form-eysa-select.error {
+    border-color: var(--danger-color);
+}
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+☑️ CHECKBOX
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+.form-eysa-checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.form-eysa-checkbox {
+    width: 20px;
+    height: 20px;
+    min-width: 20px; /* Empêche rétrécissement */
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    margin-top: 0.15rem; /* Alignement avec première ligne de texte */
+}
+
+.form-eysa-checkbox:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='white' d='M13.5 3L6 10.5 2.5 7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.form-eysa-checkbox:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(139, 21, 56, 0.1);
+}
+
+.form-eysa-checkbox-label {
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔘 RADIO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+.form-eysa-radio-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.form-eysa-radio {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.form-eysa-radio:checked {
+    border-color: var(--primary-color);
+    background-color: var(--white);
+    box-shadow: inset 0 0 0 4px var(--primary-color);
+}
+
+.form-eysa-radio:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(139, 21, 56, 0.1);
+}
+
+.form-eysa-radio-label {
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    cursor: pointer;
+}
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚠️ MESSAGES D'ERREUR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+.form-eysa-error {
+    display: block;
+    margin-top: var(--spacing-xs);
+    color: var(--danger-color);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.4;
+}
+
+.form-eysa-error i {
+    margin-right: var(--spacing-xs);
+}
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ℹ️ TEXTE D'AIDE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+.form-eysa-help {
+    display: block;
+    margin-top: var(--spacing-xs);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    font-style: italic;
+    line-height: 1.4;
+}
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📱 RESPONSIVE MOBILE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+@media (max-width: 768px) {
+    .form-eysa-input,
+    .form-eysa-textarea,
+    .form-eysa-select {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 16px; /* Évite le zoom auto sur iOS */
+    }
+    
+    .form-eysa-input-icon .form-eysa-input {
+        padding-left: 2.5rem;
+    }
+    
+    .form-eysa-input-icon i {
+        left: var(--spacing-md);
+        font-size: var(--font-size-base);
+    }
+    
+    .form-eysa-group {
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .form-eysa-label {
+        font-size: var(--font-size-sm);
+    }
+}

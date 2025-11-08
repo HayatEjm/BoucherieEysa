@@ -1,0 +1,367 @@
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔘 COMPOSANTS BOUTONS - Boucherie Eysa
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Composants réutilisables pour tous les boutons du site.
+Utilise les variables du design-system.css pour la cohérence.
+
+UTILISATION:
+  1. Importer ce fichier dans vos CSS: @import '../components/buttons.css';
+  2. Utiliser les classes .btn-eysa-* dans vos templates
+
+COMPOSANTS DISPONIBLES:
+  - .btn-eysa                → Bouton de base
+  - .btn-eysa-primary        → Bouton principal bordeaux
+  - .btn-eysa-secondary      → Bouton secondaire blanc/bordeaux
+  - .btn-eysa-outline        → Bouton avec contour seulement
+  - .btn-eysa-light          → Bouton clair (pour backgrounds sombres)
+  - .btn-eysa-danger         → Bouton rouge (suppressions)
+  - .btn-eysa-success        → Bouton vert (validations)
+  - .btn-eysa-sm             → Petit bouton
+  - .btn-eysa-lg             → Grand bouton
+  - .btn-eysa-full           → Bouton pleine largeur
+  - .btn-eysa-icon-only      → Bouton icône seule (ex: suppression)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔘 BOUTON DE BASE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+.btn-eysa {
+    /* Affichage */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    
+    /* Espacement */
+    padding: var(--spacing-md) var(--spacing-xl);
+    
+    /* Bordure */
+    border: 2px solid transparent;
+    border-radius: var(--border-radius-md);
+    
+    /* Texte */
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.4;
+    
+    /* Apparence */
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    
+    /* Transitions */
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Icône dans le bouton */
+.btn-eysa i {
+    font-size: 1.1em;
+}
+
+/* État hover général */
+.btn-eysa:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    text-decoration: none;
+}
+
+/* État actif (clic) */
+.btn-eysa:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+/* État focus (accessibilité) */
+.btn-eysa:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(139, 21, 56, 0.2);
+}
+
+/* État désactivé */
+.btn-eysa:disabled,
+.btn-eysa.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎨 VARIANTES DE COULEURS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+/* PRIMARY - Bordeaux plein (bouton principal du site) */
+.btn-eysa-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+.btn-eysa-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    color: var(--white);
+}
+
+.btn-eysa-primary:focus {
+    box-shadow: 0 0 0 3px rgba(139, 21, 56, 0.3);
+}
+
+/* SECONDARY - Blanc avec contour bordeaux */
+.btn-eysa-secondary {
+    background-color: var(--white);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-eysa-secondary:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+/* OUTLINE - Transparent avec contour bordeaux */
+.btn-eysa-outline {
+    background-color: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    box-shadow: none;
+}
+
+.btn-eysa-outline:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+/* LIGHT - Pour backgrounds sombres (header, footer) */
+.btn-eysa-light {
+    background-color: var(--white);
+    color: var(--primary-color);
+    border-color: var(--white);
+}
+
+.btn-eysa-light:hover {
+    background-color: var(--beige-light);
+    border-color: var(--beige-light);
+    color: var(--primary-color);
+}
+
+/* DANGER - Rouge pour suppressions/annulations */
+.btn-eysa-danger {
+    background-color: var(--danger-color);
+    color: var(--white);
+    border-color: var(--danger-color);
+}
+
+.btn-eysa-danger:hover {
+    background-color: #b91c1c; /* Rouge plus foncé */
+    border-color: #b91c1c;
+    color: var(--white);
+}
+
+.btn-eysa-danger:focus {
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.3);
+}
+
+/* SUCCESS - Vert pour validations */
+.btn-eysa-success {
+    background-color: var(--success-color);
+    color: var(--white);
+    border-color: var(--success-color);
+}
+
+.btn-eysa-success:hover {
+    background-color: #047857; /* Vert plus foncé */
+    border-color: #047857;
+    color: var(--white);
+}
+
+.btn-eysa-success:focus {
+    box-shadow: 0 0 0 3px rgba(6, 95, 70, 0.3);
+}
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📏 VARIANTES DE TAILLE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+/* SMALL - Petit bouton (filtres, tags) */
+.btn-eysa-sm {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+    gap: var(--spacing-xs);
+}
+
+/* LARGE - Grand bouton (CTA principaux) */
+.btn-eysa-lg {
+    padding: var(--spacing-lg) var(--spacing-2xl);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+}
+
+/* FULL WIDTH - Pleine largeur (mobile, formulaires) */
+.btn-eysa-full {
+    width: 100%;
+    justify-content: center;
+}
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔲 BOUTON ICÔNE SEULE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+.btn-eysa-icon-only {
+    padding: var(--spacing-sm);
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: var(--border-radius-md);
+}
+
+.btn-eysa-icon-only.sm {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    padding: var(--spacing-xs);
+}
+
+.btn-eysa-icon-only.lg {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    padding: var(--spacing-md);
+}
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔗 BOUTON LIEN (apparence de bouton, comportement de lien)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+a.btn-eysa {
+    text-decoration: none;
+}
+
+a.btn-eysa:hover {
+    text-decoration: none;
+}
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 GROUPES DE BOUTONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+.btn-eysa-group {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+/* Alignement centré */
+.btn-eysa-group.center {
+    justify-content: center;
+}
+
+/* Alignement à droite */
+.btn-eysa-group.end {
+    justify-content: flex-end;
+}
+
+/* Espacement vertical (formulaires) */
+.btn-eysa-group.vertical {
+    flex-direction: column;
+}
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⏳ ÉTAT CHARGEMENT (loading)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+.btn-eysa.loading {
+    position: relative;
+    color: transparent;
+    pointer-events: none;
+}
+
+.btn-eysa.loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: btn-eysa-spin 0.6s linear infinite;
+}
+
+@keyframes btn-eysa-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📱 RESPONSIVE MOBILE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+@media (max-width: 768px) {
+    /* Boutons pleine largeur sur mobile */
+    .btn-eysa {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Sauf si explicitement défini comme inline */
+    .btn-eysa.inline {
+        width: auto;
+    }
+    
+    /* Groupe de boutons vertical sur mobile */
+    .btn-eysa-group {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .btn-eysa-group .btn-eysa {
+        width: 100%;
+    }
+    
+    /* Boutons icône restent carrés */
+    .btn-eysa-icon-only {
+        width: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Réduction padding sur petits écrans */
+    .btn-eysa {
+        padding: var(--spacing-sm) var(--spacing-lg);
+        font-size: var(--font-size-sm);
+    }
+    
+    .btn-eysa-lg {
+        padding: var(--spacing-md) var(--spacing-xl);
+        font-size: var(--font-size-base);
+    }
+}
