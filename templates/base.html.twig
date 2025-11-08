@@ -44,6 +44,8 @@
     {# JS via Webpack Encore #}
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
+        {{ encore_entry_link_tags('cart-app') }}
+        {{ encore_entry_script_tags('cart-app') }}
     {% endblock %}
 
 
@@ -56,4 +58,6 @@
     {# Bandeau cookie #}
     {% include 'components/cookie_banner.html.twig' %}
 </body>
+
+
 </html>

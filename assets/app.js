@@ -116,7 +116,7 @@ import './styles/auth/auth.css'
 import './styles/account.css'
 import './styles/components/cookie-banner.css'
 
-// ⚠️ Styles principaux EN DERNIER pour qu'ils gagnent en spécificité
+//  Styles principaux EN DERNIER pour qu'ils gagnent en spécificité
 import './styles/app.css'
 
 // Note: registerVueControllerComponents supprimé car causait des erreurs en production
