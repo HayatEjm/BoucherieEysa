@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Controller pour l'inscription des nouveaux utilisateurs
@@ -40,7 +41,8 @@ final class SignupController extends AbstractController
         Request $request,
         UserPasswordHasherInterface $hasher,
         EntityManagerInterface $em,
-        MailerInterface $mailer
+        MailerInterface $mailer,
+        LoggerInterface $logger
     ): Response {
         // Si l'utilisateur est déjà connecté, je le redirige vers son compte
         if ($this->getUser()) {
@@ -73,16 +75,17 @@ final class SignupController extends AbstractController
                 
                 // ÉTAPE 3 : J'envoie un email de bienvenue (optionnel)
                 try {
-                    $email = new Email();
-                    $email
+                    $email = (new Email())
+                        ->from('contact@boucherie-eysa.fr')
                         ->to($user->getEmail())
                         ->subject('Bienvenue chez Boucherie Eysa !')
                         ->html('<p>Votre compte a été créé avec succès. Bienvenue !</p>');
-                    
                     $mailer->send($email);
                 } catch (\Exception $e) {
-                    // Si l'email échoue, ce n'est pas grave, l'inscription est valide
-                    // En production, on pourrait logger cette erreur
+                    $logger->error('Echec envoi email bienvenue', [
+                        'userEmail' => $user->getEmail(),
+                        'exception' => $e->getMessage(),
+                    ]);
                 }
                 
                 // ÉTAPE 4 : Je confirme la création du compte

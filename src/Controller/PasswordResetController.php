@@ -59,7 +59,7 @@ class PasswordResetController extends AbstractController
                 ], UrlGeneratorInterface::ABSOLUTE_URL);
 
                 $email = (new TemplatedEmail())
-                    ->from('noreply@boucherie-eysa.fr')
+                    ->from('contact@boucherie-eysa.fr')
                     ->to($user->getEmail())
                     ->subject('Réinitialisation de votre mot de passe - Boucherie Eysa')
                     ->htmlTemplate('emails/password_reset.html.twig')

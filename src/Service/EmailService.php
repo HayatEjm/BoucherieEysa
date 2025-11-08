@@ -5,12 +5,14 @@ namespace App\Service;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Twig\Environment;
+use Psr\Log\LoggerInterface;
 
 class EmailService
 {
     public function __construct(
         private MailerInterface $mailer,
-        private Environment $twig
+        private Environment $twig,
+        private ?LoggerInterface $logger = null
     ) {}
 
     /**
@@ -21,7 +23,7 @@ class EmailService
         try {
             // Email de confirmation au client
             $emailClient = (new Email())
-                ->from('eysa.boucherie@gmail.com')
+                ->from('contact@boucherie-eysa.fr')
                 ->to($order->getCustomerEmail())
                 ->subject('Commande confirmée #' . $order->getId() . ' - Boucherie Eysa')
                 ->html($this->twig->render('emails/order_confirmation.html.twig', [
@@ -31,7 +33,8 @@ class EmailService
 
             // Email de notification à l'admin
             $emailAdmin = (new Email())
-                ->from('eysa.boucherie@gmail.com')
+                ->from('contact@boucherie-eysa.fr')
+                ->replyTo(method_exists($order, 'getCustomerEmail') ? (string) $order->getCustomerEmail() : 'contact@boucherie-eysa.fr')
                 ->to('eysa.boucherie@gmail.com')
                 ->subject('Nouvelle commande #' . $order->getId() . ' - À préparer')
                 ->html($this->twig->render('emails/new_order_admin.html.twig', [
@@ -40,7 +43,12 @@ class EmailService
             $this->mailer->send($emailAdmin);
         } catch (\Exception $e) {
             // En cas d'erreur email, on n'interrompt pas le processus de commande
-            // En production, on loggerait cette erreur
+            if ($this->logger) {
+                $this->logger->error('Erreur envoi emails commande', [
+                    'orderId' => method_exists($order, 'getId') ? $order->getId() : null,
+                    'exception' => $e->getMessage(),
+                ]);
+            }
         }
     }
 
@@ -54,7 +62,7 @@ class EmailService
             $adminEmail = 'eysa.boucherie@gmail.com';
 
             $email = (new Email())
-                ->from('eysa.boucherie@gmail.com')
+                ->from('contact@boucherie-eysa.fr')
                 ->to($adminEmail)
                 ->subject('🛒 Nouvelle commande #' . $order->getId() . ' - À préparer')
                 ->html($this->twig->render('emails/new_order_admin.html.twig', [
@@ -63,7 +71,12 @@ class EmailService
 
             $this->mailer->send($email);
         } catch (\Exception $e) {
-            // En cas d'erreur, on n'interrompt pas le processus
+            if ($this->logger) {
+                $this->logger->error('Erreur notification admin commande', [
+                    'orderId' => method_exists($order, 'getId') ? $order->getId() : null,
+                    'exception' => $e->getMessage(),
+                ]);
+            }
         }
     }
 }
