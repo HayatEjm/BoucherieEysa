@@ -64,7 +64,7 @@ class EmailService
             $email = (new Email())
                 ->from('contact@boucherie-eysa.fr')
                 ->to($adminEmail)
-                ->subject('🛒 Nouvelle commande #' . $order->getId() . ' - À préparer')
+                ->subject('Nouvelle commande #' . $order->getId() . ' - À préparer')
                 ->html($this->twig->render('emails/new_order_admin.html.twig', [
                     'order' => $order
                 ]));

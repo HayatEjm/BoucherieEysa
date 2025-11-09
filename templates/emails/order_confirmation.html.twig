@@ -128,7 +128,7 @@
 
             <!-- Informations de commande -->
             <div class="order-info">
-                <h3 style="margin: 0 0 10px; color: #8b4513;">📋 Détails de votre commande</h3>
+                <h3 style="margin: 0 0 10px; color: #8b4513;">Détails de votre commande</h3>
                 <p><strong>Numéro :</strong> #{{ order.id }}</p>
                 <p><strong>Date :</strong> {{ order.createdAt|date('d/m/Y à H:i') }}</p>
                 <p><strong>Total :</strong> <span style="color: #8b4513; font-weight: bold;">{{ (order.totalTtcCents / 100)|number_format(2, ',', ' ') }} €</span></p>
@@ -173,9 +173,9 @@
                         {{ order.pickupTimeSlot }}
                     {% endif %}
                 </div>
-                <p><strong>📍 Boucherie Eysa</strong><br>
-                Votre adresse ici<br>
-                Téléphone : XX XX XX XX XX</p>
+                <p><strong>📍Boucherie Eysa</strong><br>
+                123 Rue du Dr Schweitzer, 49400 Saumur<br>
+                Téléphone : 02 41 50 57 18</p>
             </div>
             {% endif %}
 
@@ -189,7 +189,7 @@
         <!-- Pied de page -->
         <div class="footer">
             <p><strong>Boucherie Eysa</strong> - Tradition et qualité depuis toujours</p>
-            <p>Votre adresse | Tél: XX XX XX XX XX | Email: <a href="mailto:eysa.boucherie@gmail.com">eysa.boucherie@gmail.com</a></p>
+            <p>123 Rue du Dr Schweitzer, 49400 Saumur | Tél: 02 41 50 57 18 | Email: <a href="mailto:eysa.boucherie@gmail.com">eysa.boucherie@gmail.com</a></p>
             <p style="margin-top: 15px; opacity: 0.8;">
                 Une question ? N'hésitez pas à nous contacter !
             </p>

@@ -11,7 +11,7 @@
             <p>{{ product.description ?: 'Produit de qualité exceptionnelle, sélectionné avec soin par nos bouchers.' }}</p>
         </div>
         <div class="tab-panel" id="tab-details">
-            <h3>📋 Informations détaillées</h3>
+            <h3>Informations détaillées</h3>
             <ul>
                 <li><strong>Catégorie :</strong> {{ product.category ? product.category.name : 'Non spécifiée' }}</li>
                 <li><strong>Prix au kg :</strong> {{ product.price|number_format(2, ',', ' ') }}€</li>
@@ -21,7 +21,7 @@
             </ul>
         </div>
         <div class="tab-panel" id="tab-preparation">
-            <h3>👨‍🍳 Conseils de préparation</h3>
+            <h3>Conseils de préparation</h3>
             <p>Nos bouchers sont à votre disposition pour vous conseiller sur la préparation et la cuisson de ce produit.</p>
             <p><strong>Astuce :</strong> Sortez votre viande du réfrigérateur 30 minutes avant la cuisson pour un résultat optimal.</p>
         </div>

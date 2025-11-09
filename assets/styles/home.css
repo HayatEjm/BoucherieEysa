@@ -343,7 +343,6 @@
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3; /* Limite à 3 lignes max */
-  line-clamp: 3;
   -webkit-box-orient: vertical;
   flex-grow: 0; /* Ne grandit pas */
   flex-shrink: 1; /* Peut rétrécir si nécessaire */

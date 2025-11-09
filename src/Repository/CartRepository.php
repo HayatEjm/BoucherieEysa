@@ -7,7 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * 🗄️ REPOSITORY CART - Je gère les requêtes en base de données pour les paniers
+ * REPOSITORY CART - Je gère les requêtes en base de données pour les paniers
  * 
  * POURQUOI CE REPOSITORY ?
  * - Je fournis des méthodes pour chercher, sauvegarder, supprimer les paniers

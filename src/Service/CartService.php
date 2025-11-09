@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * 🛒 SERVICE CARTSERVICE - Je gère toute la logique métier du panier
+ * SERVICE CARTSERVICE - Je gère toute la logique métier du panier
  * 
  * POURQUOI CE SERVICE ?
  * - Je centralise toute la logique complexe du panier

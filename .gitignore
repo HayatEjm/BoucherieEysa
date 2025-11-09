@@ -40,6 +40,9 @@ ROADMAP_BOUCHERIE_EYSA.md
 KANBAN_BOUCHERIE_EYSA.md
 ECOCONCEPTION_REELLE.md
 DOSSIER_PROJET_AJUSTE.md
+AUDIT_CSS_COMPLET.md
+CSS_COMPOSANTS_MIGRATION_COMPLETE.md
+POST_MORTEM_REEL.md
 
 # Dossier académique complet
 dossier_academique/
@@ -56,6 +59,16 @@ GuidesPerso/
 TVA_BOUCHERIE_IMPLEMENTEE.md
 CHECKLIST_CORRECTIONS_CSS.md
 NETTOYAGE_CSS_TERMINE.md
+AMÉLIORATIONS_UX_TERMINÉES.md
+
+# Fichiers Markdown terminés ou internes à ne pas versionner
+*_TERMINÉES.md
+DOSSIER_PROJET_BROUILLON*.md
+DOSSIER_PROJET_TEMP*.md
+
+# Log de debug (non versionné)
+src/Controller/debug_cart.log
+
 ###> phpstan/phpstan ###
 phpstan.neon
 ###< phpstan/phpstan ###

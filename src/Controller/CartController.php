@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * 🛒 CONTROLLER CARTCONTROLLER - Je gère toutes les pages et actions du panier
+ * CONTROLLER CARTCONTROLLER - Je gère toutes les pages et actions du panier
  * 
  * POURQUOI CE CONTROLLER ?
  * - Je fournis toutes les routes liées au panier (/panier, /panier/add, etc.)

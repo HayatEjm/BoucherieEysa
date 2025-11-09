@@ -1,6 +1,6 @@
 /* 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📝 COMPOSANTS FORMULAIRES - Boucherie Eysa
+COMPOSANTS FORMULAIRES - Boucherie Eysa
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Composants réutilisables pour tous les formulaires du site.
@@ -27,7 +27,7 @@ COMPOSANTS DISPONIBLES:
 
 /* 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📦 GROUPE DE CHAMP
+GROUPE DE CHAMP
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 */
 
@@ -42,7 +42,7 @@ COMPOSANTS DISPONIBLES:
 
 /* 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🏷️ LABEL
+LABEL
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 */
 
@@ -71,13 +71,16 @@ COMPOSANTS DISPONIBLES:
 
 /* 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📝 INPUTS (texte, email, password, number, tel, url, date)
+INPUTS (texte, email, password, number, tel, url, date)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 */
 
 .form-eysa-input {
     display: block;
     width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: 100%;
     padding: var(--spacing-md) var(--spacing-lg);
     background-color: var(--white);
     color: var(--text-primary);
@@ -128,7 +131,7 @@ COMPOSANTS DISPONIBLES:
 
 /* 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📝 INPUT AVEC ICÔNE
+INPUT AVEC ICÔNE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 */
 
@@ -154,13 +157,16 @@ COMPOSANTS DISPONIBLES:
 
 /* 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📄 TEXTAREA
+TEXTAREA
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 */
 
 .form-eysa-textarea {
     display: block;
     width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: 100%;
     min-height: 120px;
     padding: var(--spacing-md) var(--spacing-lg);
     background-color: var(--white);
@@ -188,13 +194,16 @@ COMPOSANTS DISPONIBLES:
 
 /* 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📋 SELECT (menu déroulant)
+SELECT (menu déroulant)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 */
 
 .form-eysa-select {
     display: block;
     width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: 100%;
     padding: var(--spacing-md) var(--spacing-lg);
     background-color: var(--white);
     color: var(--text-primary);
@@ -225,7 +234,7 @@ COMPOSANTS DISPONIBLES:
 
 /* 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-☑️ CHECKBOX
+CHECKBOX
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 */
 
@@ -309,7 +318,7 @@ COMPOSANTS DISPONIBLES:
 
 /* 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠️ MESSAGES D'ERREUR
+MESSAGES D'ERREUR
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 */
 
@@ -328,7 +337,7 @@ COMPOSANTS DISPONIBLES:
 
 /* 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-ℹ️ TEXTE D'AIDE
+TEXTE D'AIDE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 */
 

@@ -141,14 +141,14 @@ body {
   line-height: 1.6;                       /* Espacement des lignes pour la lisibilité */
 }
 
-/* 📦 CONTENEURS - Centrent le contenu sur la page */
+/* CONTENEURS - Centrent le contenu sur la page */
 .container-eysa {
   max-width: var(--container-xl);
   margin: 0 auto;
   padding: 0 var(--spacing-md);
 }
 
-/* 🎨 BACKGROUNDS - Sections beiges */
+/* BACKGROUNDS - Sections beiges */
 .bg-warm {
   background-color: var(--beige-warm);
 }

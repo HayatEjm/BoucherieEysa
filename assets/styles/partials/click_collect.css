@@ -116,7 +116,7 @@
     color: var(--white);
 }
 
-/* 📄 STYLES POUR LA PAGE CLICK & COLLECT DÉDIÉE */
+/* STYLES POUR LA PAGE CLICK & COLLECT DÉDIÉE */
 
 /* Section Hero avec beige chaleureux */
 .click-collect-page .hero-section {
@@ -370,7 +370,7 @@
 
 /* Styles CTA remplacés par btn-eysa - voir plus bas */
 
-/* 📦 CONTAINERS CSS PURS - Sans Bootstrap */
+/* CONTAINERS CSS PURS - Sans Bootstrap */
 
 /* Container principal responsive */
 .cc-container {

@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const minDisplay = minWeight >= 1000 ?
                     (minWeight/1000).toFixed(1) + 'kg' :
                     minWeight + 'g';
-                window.BoucherieCart?.showNotification(`⚠️ Quantité insuffisante pour "${productName}".\n\nMinimum requis : ${minDisplay}\nCette contrainte est nécessaire pour la rentabilité et la praticité en boucherie.`, 'error');
+                window.BoucherieCart?.showNotification(`Quantité insuffisante pour "${productName}".\n\nMinimum requis : ${minDisplay}\nCette contrainte est nécessaire pour la rentabilité et la praticité en boucherie.`, 'error');
                 return;
             }
             this.disabled = true;
@@ -93,15 +93,15 @@ function addToCartWithValidation(productId, quantityInGrams, productName, button
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            window.BoucherieCart?.showNotification(`✅ ${productName} ajouté au panier !`, 'success');
+            window.BoucherieCart?.showNotification(`${productName} ajouté au panier !`, 'success');
             window.BoucherieCart?.loadCartCount();
         } else {
-            window.BoucherieCart?.showNotification(`❌ ${data.error || 'Erreur lors de l\'ajout au panier'}`, 'error');
+            window.BoucherieCart?.showNotification(`${data.error || 'Erreur lors de l\'ajout au panier'}`, 'error');
         }
     })
     .catch(error => {
         console.error('Erreur:', error);
-        window.BoucherieCart?.showNotification('❌ Erreur de connexion', 'error');
+        window.BoucherieCart?.showNotification('Erreur de connexion', 'error');
     })
     .finally(() => {
         buttonElement.disabled = false;

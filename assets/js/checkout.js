@@ -46,7 +46,7 @@ class CheckoutManager {
                     onSlotSelected: this.config.onSlotSelected
                 });
             } else {
-                console.error('❌ initPickupSlotSelector non disponible');
+                console.error('initPickupSlotSelector non disponible');
                 this.showError('Erreur lors du chargement du sélecteur de créneaux');
             }
         }, 100);
@@ -156,7 +156,7 @@ class CheckoutManager {
     showError(message) {
         // Simple alert pour l'instant, peut être amélioré avec un toast
         alert(message);
-        console.error('❌ Erreur checkout:', message);
+        console.error('Erreur checkout:', message);
     }
     
     /**

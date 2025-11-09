@@ -9,7 +9,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * 🛒 REPOSITORY CARTITEM - Je gère les requêtes pour les articles du panier
+ * REPOSITORY CARTITEM - Je gère les requêtes pour les articles du panier
  * 
  * POURQUOI CE REPOSITORY ?
  * - Je fournis des méthodes pour gérer les articles dans les paniers

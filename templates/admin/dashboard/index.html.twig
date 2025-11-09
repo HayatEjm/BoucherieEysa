@@ -9,17 +9,17 @@
 
   <div class="stats-grid">
     <div class="stat-card info">
-      <div class="icon">🛒</div>
+      <div class="icon">+</div>
       <h3>{{ orders_today|default(0) }}</h3>
       <p>Commandes aujourd'hui</p>
     </div>
     <div class="stat-card success">
-      <div class="icon">👥</div>
+      <div class="icon">■</div>
       <h3>{{ total_users|default(0) }}</h3>
       <p>Clients inscrits</p>
     </div>
     <div class="stat-card {{ (low_stock_count|default(0)) > 0 ? 'warning' : 'success' }}">
-      <div class="icon">📦</div>
+      <div class="icon">#</div>
       <h3>{{ low_stock_count|default(0) }}</h3>
       <p>Produits en stock faible</p>
     </div>

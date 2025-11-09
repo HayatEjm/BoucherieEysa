@@ -79,40 +79,14 @@ Cela garantit la compatibilité sans modifier les templates Twig.
     margin-bottom: var(--spacing-lg);
 }
 
-/* Label → utilise le composant */
-.form-label {
-    display: block;
-    margin-bottom: var(--spacing-sm);
-    color: var(--text-primary);
-    font-weight: var(--font-weight-medium);
-    font-size: var(--font-size-base);
-}
-
+/* Label → hérité du composant forms.css */
 .form-label i {
     margin-right: var(--spacing-xs);
     color: var(--primary-color);
     width: 16px;
 }
 
-/* Champs de saisie → utilise le composant */
-.form-control {
-    width: 100%;
-    padding: var(--spacing-md) var(--spacing-lg);
-    border: 2px solid var(--border-color);
-    border-radius: var(--border-radius-md);
-    font-size: var(--font-size-base);
-    transition: all var(--transition-normal);
-    background: var(--white);
-    color: var(--text-primary);
-    box-shadow: var(--shadow-sm);
-}
-
-/* Focus sur les champs → utilise le composant */
-.form-control:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(139, 21, 56, 0.1);
-}
+/* .form-control → défini dans components/forms.css, pas de redéfinition */
 
 /* Hint sous les champs */
 .form-hint {

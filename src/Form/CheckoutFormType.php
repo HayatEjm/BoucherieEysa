@@ -16,7 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * 📋 FORM TYPE CHECKOUT - Formulaire de finalisation de commande
+ * FORM TYPE CHECKOUT - Formulaire de finalisation de commande
  * 
  * RESPONSABILITÉS :
  * - Collecte des informations client

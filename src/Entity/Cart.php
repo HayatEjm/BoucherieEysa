@@ -9,7 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * 🛒 ENTITÉ CART - Je représente un panier de courses
+ * ENTITÉ CART - Je représente un panier de courses
  * 
  * POURQUOI CETTE ENTITÉ ?
  * - Je stocke les informations générales du panier (total, date création, session)
@@ -138,7 +138,7 @@ class Cart
 
     /**
      * Je retourne le taux de TVA appliqué en boucherie
-     * 👩‍💻 POUR TOI : 5,5% pour les produits alimentaires de première nécessité
+     * POUR TOI : 5,5% pour les produits alimentaires de première nécessité
      */
     public function getTaxRate(): float
     {
@@ -180,7 +180,7 @@ class Cart
 
     /**
      * Je retourne le total TTC (Toutes Taxes Comprises)
-     * 👩‍💻 POUR TOI : C'est le même que getTotal() mais plus explicite
+     * POUR TOI : C'est le même que getTotal() mais plus explicite
      */
     public function getTotalTTC(): float
     {

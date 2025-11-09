@@ -107,10 +107,15 @@ import './js/pickupSlots.js'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import './styles/design-system.css'
 
+// Composants réutilisables (AVANT les pages qui les utilisent)
+import './styles/components/forms.css'
+import './styles/components/buttons.css'
+
 // Styles spécifiques par page/composant (chargés AVANT app.css)
 import './styles/category/quantity-selector.css' 
 import './styles/partials/SearchBar.css'
 import './styles/philosophy/philosophy.css'
+import './styles/contact/contact.css'
 import './styles/checkout/checkout.css'
 import './styles/auth/auth.css'
 import './styles/account.css'

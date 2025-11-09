@@ -192,14 +192,14 @@
         <div class="content">
             <!-- Alerte urgente -->
             <div class="urgent-box">
-                <h2>🛒 Commande à préparer immédiatement</h2>
+                <h2>Commande à préparer immédiatement</h2>
                 <div class="order-number">#{{ order.id }}</div>
                 <p><strong>Reçue le :</strong> {{ order.createdAt|date('d/m/Y à H:i:s') }}</p>
             </div>
 
             <!-- Informations client -->
             <div class="customer-info">
-                <h3>👤 Informations Client</h3>
+                <h3>Informations Client</h3>
                 <p><strong>Nom :</strong> {{ order.customerName }}</p>
                 <p><strong>Email :</strong> <a href="mailto:{{ order.customerEmail }}">{{ order.customerEmail }}</a></p>
                 {% if order.customerPhone %}
@@ -234,10 +234,10 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>🥩 Produit à préparer</th>
-                            <th>📦 Quantité</th>
-                            <th>💰 Prix unit.</th>
-                            <th>💵 Total</th>
+                            <th>Produit à préparer</th>
+                            <th>Quantité</th>
+                            <th>Prix unit.</th>
+                            <th>Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -254,7 +254,7 @@
                         </tr>
                         {% endfor %}
                         <tr class="total-row">
-                            <td colspan="3"><strong>💰 TOTAL COMMANDE</strong></td>
+                            <td colspan="3"><strong>TOTAL COMMANDE</strong></td>
                             <td><strong>{{ (order.totalTtcCents / 100)|number_format(2, ',', ' ') }} €</strong></td>
                         </tr>
                     </tbody>
@@ -264,7 +264,7 @@
             <!-- Créneau de retrait -->
             {% if order.pickupDate %}
             <div class="pickup-alert">
-                <h3>🕐 Créneau de retrait</h3>
+                <h3>Créneau de retrait</h3>
                 <p><strong>La commande doit être prête pour :</strong></p>
                 <div class="pickup-time">
                     {{ order.pickupDate|date('d/m/Y') }} 
@@ -273,7 +273,7 @@
                     {% endif %}
                 </div>
                 <p style="color: #c05621; font-weight: bold; margin-top: 15px;">
-                    ⏰ Temps de préparation restant à calculer
+                    Temps de préparation restant à calculer
                 </p>
             </div>
             {% endif %}
@@ -281,7 +281,7 @@
 
         <!-- Actions à effectuer -->
         <div class="actions">
-            <h3>📋 Actions à effectuer</h3>
+            <h3>Actions à effectuer</h3>
             <ul class="action-list">
                 <li>Vérifier la disponibilité de tous les produits</li>
                 <li>Préparer et découper les viandes selon les quantités</li>

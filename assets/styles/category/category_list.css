@@ -63,7 +63,7 @@
     /* La largeur est maintenant héritée du parent .categories-section */
 }
 
-/* 📦 Carte de catégorie avec fond image */
+/* Carte de catégorie avec fond image */
 .category-card {
     position: relative;
     width: 100%;
@@ -85,7 +85,7 @@
     transform: translateY(-6px);
 }
 
-/* ☁️ Dégradé lisible sur l’image */
+/* Dégradé lisible sur l'image */
 .category-overlay {
     width: 100%;
     padding: 2rem;

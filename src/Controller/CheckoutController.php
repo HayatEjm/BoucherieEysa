@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * 🛒 CONTRÔLEUR CHECKOUT - Gestion de la finalisation des commandes
+ * CONTRÔLEUR CHECKOUT - Gestion de la finalisation des commandes
  * 
  * RESPONSABILITÉS :
  * - Affichage du formulaire de checkout
@@ -37,7 +37,7 @@ class CheckoutController extends AbstractController
     ) {}
 
     /**
-     * 📋 PAGE DE CHECKOUT - Formulaire de finalisation
+     * PAGE DE CHECKOUT - Formulaire de finalisation
      * 
      * ROUTE : GET /checkout
      * 
@@ -75,7 +75,7 @@ class CheckoutController extends AbstractController
     }
 
     /**
-     * 💳 TRAITEMENT DU CHECKOUT - Validation et confirmation
+     * TRAITEMENT DU CHECKOUT - Validation et confirmation
      * 
      * ROUTE : POST /checkout
      * 
@@ -134,10 +134,7 @@ class CheckoutController extends AbstractController
                 // Vider le panier
                 $this->cartService->clearCart();
 
-                // Message de succès
-                $this->addFlash('success', 
-                    'Votre commande a été confirmée ! Numéro de retrait : ' . $order->getPickupNumber()
-                );
+                // Pas de flash message car la page success affiche déjà toutes les infos
 
                 $this->logger->info('Commande finalisée avec succès', [
                     'order_number' => $order->getOrderNumber(),
@@ -171,7 +168,7 @@ class CheckoutController extends AbstractController
     }
 
     /**
-     * 🎉 PAGE DE CONFIRMATION - Commande réussie
+     * PAGE DE CONFIRMATION - Commande réussie
      * 
      * ROUTE : GET /checkout/success/{orderNumber}
      * 
@@ -196,7 +193,7 @@ class CheckoutController extends AbstractController
     }
 
     /**
-     * 📋 RÉCAPITULATIF DE COMMANDE - Pour réaffichage
+     * RÉCAPITULATIF DE COMMANDE - Pour réaffichage
      * 
      * ROUTE : GET /checkout/order/{orderNumber}
      * 
