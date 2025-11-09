@@ -37,3 +37,8 @@ services:
 
     App\Twig\AppExtension:
         tags: ['twig.extension']
+
+    # Configure l'adresse d'expédition par défaut pour EmailService via variable d'environnement
+    App\Service\EmailService:
+        arguments:
+            $fromAddress: '%env(string:MAILER_FROM)%'

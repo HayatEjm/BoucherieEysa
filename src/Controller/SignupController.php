@@ -69,29 +69,42 @@ final class SignupController extends AbstractController
                 // Le mot de passe en clair ne sera jamais stocké en base
                 $user->setPassword($hasher->hashPassword($user, $user->getPassword()));
                 
+                // ÉTAPE 2.5 : Je génère un token de vérification unique
+                $token = $user->generateVerificationToken();
+                $user->setIsVerified(false);
+                
                 // ÉTAPE 3 : Je sauvegarde l'utilisateur en base de données
                 $em->persist($user); // Prépare l'insertion
                 $em->flush();        // Exécute l'insertion
                 
-                // ÉTAPE 3 : J'envoie un email de bienvenue (optionnel)
+                // ÉTAPE 4 : J'envoie l'email de vérification avec le lien
                 try {
+                    $verificationUrl = $this->generateUrl('app_verify_email', [
+                        'token' => $token
+                    ], \Symfony\Component\Routing\Generator\UrlGeneratorInterface::ABSOLUTE_URL);
+                    
                     $email = (new Email())
                         ->from('contact@boucherie-eysa.fr')
                         ->to($user->getEmail())
-                        ->subject('Bienvenue chez Boucherie Eysa !')
-                        ->html('<p>Votre compte a été créé avec succès. Bienvenue !</p>');
+                        ->subject('Vérifiez votre adresse email - Boucherie Eysa')
+                        ->html($this->renderView('emails/verify_email.html.twig', [
+                            'verificationUrl' => $verificationUrl,
+                            'user' => $user
+                        ]));
                     $mailer->send($email);
+                    
+                    $logger->info('Email de vérification envoyé', ['email' => $user->getEmail()]);
                 } catch (\Exception $e) {
-                    $logger->error('Echec envoi email bienvenue', [
+                    $logger->error('Echec envoi email vérification', [
                         'userEmail' => $user->getEmail(),
                         'exception' => $e->getMessage(),
                     ]);
                 }
                 
-                // ÉTAPE 4 : Je confirme la création du compte
-                $this->addFlash('success', 'Votre compte a été créé avec succès ! Vous pouvez maintenant vous connecter.');
+                // ÉTAPE 5 : Je confirme la création du compte et demande vérification
+                $this->addFlash('success', 'Votre compte a été créé ! Veuillez vérifier votre email pour activer votre compte.');
                 
-                // ÉTAPE 5 : Je redirige vers la page de connexion
+                // ÉTAPE 6 : Je redirige vers la page de connexion
                 return $this->redirectToRoute('app_login');
                 
             } catch (\Exception $e) {

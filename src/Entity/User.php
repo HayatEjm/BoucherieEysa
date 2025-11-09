@@ -28,6 +28,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $phone = null;
 
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
+    private bool $isVerified = false;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $verificationToken = null;
+
     /**
      * @var list<string> The user roles
      */
@@ -167,5 +173,38 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function isProfileComplete(): bool
     {
         return $this->firstName && $this->lastName && $this->phone;
+    }
+
+    // ========== VÉRIFICATION EMAIL ==========
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): static
+    {
+        $this->isVerified = $isVerified;
+        return $this;
+    }
+
+    public function getVerificationToken(): ?string
+    {
+        return $this->verificationToken;
+    }
+
+    public function setVerificationToken(?string $verificationToken): static
+    {
+        $this->verificationToken = $verificationToken;
+        return $this;
+    }
+
+    /**
+     * Génère un token de vérification unique
+     */
+    public function generateVerificationToken(): string
+    {
+        $this->verificationToken = bin2hex(random_bytes(32));
+        return $this->verificationToken;
     }
 }
