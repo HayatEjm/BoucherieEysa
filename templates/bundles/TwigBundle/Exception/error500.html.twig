@@ -1,0 +1,28 @@
+{# templates/bundles/TwigBundle/Exception/error500.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur interne - 500 | Boucherie Eysa{% endblock %}
+
+{% block body %}
+<div class="error-page" style="min-height:60vh;display:flex;align-items:center;justify-content:center;padding:2.5rem 1.25rem;background:linear-gradient(135deg,#faf7f3,#fff);">
+  <div class="error-container" style="max-width:640px;width:100%;text-align:center;">
+      <div style="font-size:4rem;line-height:1;margin-bottom:1rem;">🥩</div>
+      <h1 style="font-size:2.2rem;margin:0 0 1rem;color:#5a1f1f;font-weight:700;">Oups… une erreur est survenue</h1>
+      <p style="font-size:1.05rem;line-height:1.55;color:#5a463f;margin:0 0 1.25rem;">
+          Un incident technique momentané a empêché l'affichage de la page.<br>
+          Votre panier n'est pas perdu. Vous pouvez réessayer dans quelques secondes.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-bottom:1.5rem;">
+          <a href="{{ path('app_home') }}" class="btn-eysa btn-eysa-primary" style="text-decoration:none;padding:.85rem 1.4rem;border-radius:6px;background:#7b1f1f;color:#fff;font-weight:600;">🏠 Retour à l'accueil</a>
+          <a href="{{ path('app_cart_index') }}" class="btn-eysa" style="text-decoration:none;padding:.85rem 1.4rem;border-radius:6px;background:#d4af37;color:#3a2722;font-weight:600;">🛒 Voir mon panier</a>
+          <a href="{{ path('app_contact') }}" class="btn-eysa" style="text-decoration:none;padding:.85rem 1.4rem;border-radius:6px;background:#ebe2d6;color:#3a2722;font-weight:600;">✉️ Nous contacter</a>
+      </div>
+      <details style="margin:1rem auto 0;max-width:480px;text-align:left;background:#fff;border:1px solid #eadfd4;border-radius:6px;padding:.75rem 1rem;">
+          <summary style="cursor:pointer;font-weight:600;color:#5a1f1f;">Informations techniques</summary>
+          <p style="font-size:.85rem;line-height:1.4;margin:.75rem 0 0;color:#6b564e;">
+              L'équipe a été automatiquement notifiée. Si le problème persiste lors du paiement ou de la validation d'une commande, merci de nous appeler directement à la boucherie.
+          </p>
+      </details>
+  </div>
+</div>
+{% endblock %}

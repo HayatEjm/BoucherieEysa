@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class EmailVerificationController extends AbstractController
 {
-    #[Route('/verify-email/{token}', name: 'app_verify_email')]
+    #[Route('/verifier-email/{token}', name: 'app_verify_email')]
     public function verifyEmail(
         string $token,
         UserRepository $userRepository,

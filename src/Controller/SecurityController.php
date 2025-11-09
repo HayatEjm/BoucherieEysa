@@ -28,7 +28,7 @@ class SecurityController extends AbstractController
      * ROUTE : GET/POST /login
      * NOTE : Le traitement POST est géré automatiquement par Symfony Security
      */
-    #[Route(path: '/login', name: 'app_login')]
+    #[Route(path: '/connexion', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // Si l'utilisateur est déjà connecté, je le redirige vers son compte
@@ -61,7 +61,7 @@ class SecurityController extends AbstractController
      * ROUTE : GET /logout
      * NOTE : Le traitement réel est dans config/packages/security.yaml
      */
-    #[Route(path: '/logout', name: 'app_logout')]
+    #[Route(path: '/deconnexion', name: 'app_logout')]
     public function logout(): void
     {
         // Cette méthode peut être vide - elle est interceptée par le système

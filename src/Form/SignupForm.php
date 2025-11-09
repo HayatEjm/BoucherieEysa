@@ -14,12 +14,14 @@ class SignupForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
+            ->add('email', null, [
+                'label' => 'Adresse e-mail'
+            ])
             ->add('password', RepeatedType::class, [
                 'type' =>PasswordType::class,
                 'required'=> true,
-                'first_options' => ['label' => 'Passeword'],
-                'second_options' => ['label' => 'Repeat passeword']
+                'first_options' => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Confirmer le mot de passe']
             ])
             
         ;

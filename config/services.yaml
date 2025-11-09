@@ -41,4 +41,5 @@ services:
     # Configure l'adresse d'expédition par défaut pour EmailService via variable d'environnement
     App\Service\EmailService:
         arguments:
-            $fromAddress: '%env(string:MAILER_FROM)%'
+            # Fallback sécurisé: si MAILER_FROM est absent en prod, on utilise une adresse par défaut
+            $fromAddress: '%env(string:default:contact@boucherie-eysa.fr:MAILER_FROM)%'

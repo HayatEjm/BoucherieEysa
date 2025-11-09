@@ -36,7 +36,7 @@ final class SignupController extends AbstractController
      * 
      * ROUTE : GET/POST /signup
      */
-    #[Route('/signup', name: 'app_signup')]
+    #[Route('/inscription', name: 'app_signup')]
     public function index(
         Request $request,
         UserPasswordHasherInterface $hasher,
