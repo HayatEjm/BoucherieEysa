@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\CheckoutFormType;
 use App\Service\CartService;
+use App\Service\EmailService;
 use App\Service\OrderService;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -33,7 +34,8 @@ class CheckoutController extends AbstractController
         private CartService $cartService,
         private OrderService $orderService,
         private EntityManagerInterface $entityManager,
-        private LoggerInterface $logger
+        private LoggerInterface $logger,
+        private EmailService $emailService,
     ) {}
 
     /**
@@ -133,6 +135,17 @@ class CheckoutController extends AbstractController
 
                 // Vider le panier
                 $this->cartService->clearCart();
+
+                // Envoyer les emails (client + admin)
+                try {
+                    $this->emailService->sendOrderConfirmation($order);
+                } catch (\Throwable $e) {
+                    // On log l'erreur mais on n'empêche pas la redirection vers la page de succès
+                    $this->logger->error('Erreur lors de l\'envoi des emails de commande', [
+                        'order_number' => $order->getOrderNumber(),
+                        'exception' => $e->getMessage(),
+                    ]);
+                }
 
                 // Pas de flash message car la page success affiche déjà toutes les infos
 
