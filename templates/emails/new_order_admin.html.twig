@@ -27,14 +27,7 @@
             text-align: center;
             position: relative;
         }
-        .header::before {
-            content: "🚨";
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 24px;
-            animation: pulse 2s infinite;
-        }
+        /* Icône retirée pour éviter l'emoji dans l'email */
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.7; transform: scale(1.1); }
@@ -184,7 +177,7 @@
     <div class="container">
         <!-- En-tête urgent -->
         <div class="header">
-            <h1>NOUVELLE COMMANDE</h1>
+            <h1>Nouvelle commande</h1>
             <p>Action requise - Préparation nécessaire</p>
         </div>
 
@@ -192,7 +185,7 @@
         <div class="content">
             <!-- Alerte urgente -->
             <div class="urgent-box">
-                <h2>Commande à préparer immédiatement</h2>
+                <h2>Commande à préparer</h2>
                 <div class="order-number">#{{ order.id }}</div>
                 <p><strong>Reçue le :</strong> {{ order.createdAt|date('d/m/Y à H:i:s') }}</p>
             </div>
@@ -218,13 +211,15 @@
                     <div class="stat-label">Total</div>
                 </div>
                 <div class="stat">
-                    {% set totalWeight = 0 %}
+                    {% set totalWeightG = 0 %}
                     {% for item in order.orderItems %}
                         {% if item.product.unit in ['kg', 'g'] %}
-                            {% set totalWeight = totalWeight + item.quantity %}
+                            {# Somme en grammes (quantity stockée en g) #}
+                            {% set totalWeightG = totalWeightG + (item.quantity) %}
                         {% endif %}
                     {% endfor %}
-                    <div class="stat-value">{{ totalWeight|number_format(1, ',', ' ') }}</div>
+                    {% set totalWeightKg = (totalWeightG / 1000) %}
+                    <div class="stat-value">{{ totalWeightKg|number_format(2, ',', ' ') }}</div>
                     <div class="stat-label">Kg approx.</div>
                 </div>
             </div>
@@ -248,7 +243,19 @@
                                 <br><small style="color: #718096;">{{ item.product.category.name }}</small>
                                 {% endif %}
                             </td>
-                            <td><strong style="color: #c53030;">{{ item.quantity }} {{ item.product.unit }}</strong></td>
+                            {% set qtyDisplay = item.quantity ~ ' ' ~ (item.product.unit ?? '') %}
+                            {% if item.product.unit in ['kg','g'] %}
+                                {% if item.product.unit == 'kg' %}
+                                    {% if item.quantity >= 1000 %}
+                                        {% set qtyDisplay = (item.quantity / 1000)|number_format(2, ',', ' ') ~ ' kg' %}
+                                    {% else %}
+                                        {% set qtyDisplay = item.quantity ~ ' g' %}
+                                    {% endif %}
+                                {% else %}
+                                    {% set qtyDisplay = item.quantity ~ ' g' %}
+                                {% endif %}
+                            {% endif %}
+                            <td><strong style="color: #c53030;">{{ qtyDisplay }}</strong></td>
                             <td>{{ (item.unitPriceHtCents / 100)|number_format(2, ',', ' ') }} €</td>
                             <td><strong>{{ (item.totalTtcCents / 100)|number_format(2, ',', ' ') }} €</strong></td>
                         </tr>
@@ -294,7 +301,7 @@
             
             <div style="margin-top: 20px; padding: 15px; background-color: rgba(229, 62, 62, 0.1); border-radius: 8px;">
                 <p style="margin: 0; font-weight: bold; color: #fed7aa;">
-                    🚨 Cette notification nécessite une action immédiate de votre part
+                    Cette notification nécessite une action immédiate de votre part
                 </p>
             </div>
         </div>

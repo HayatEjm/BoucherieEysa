@@ -70,8 +70,21 @@
                         
                         <div class="order-items">
                             {% for item in order.orderItems %}
+                                {% set qtyLabel = item.quantity ~ 'x' %}
+                                {% if item.product.unit in ['kg','g'] %}
+                                    {# quantity stockée en g --> conversion intelligente #}
+                                    {% if item.product.unit == 'kg' %}
+                                        {% if item.quantity >= 1000 %}
+                                            {% set qtyLabel = (item.quantity / 1000)|number_format(2, ',', ' ') ~ ' kg' %}
+                                        {% else %}
+                                            {% set qtyLabel = item.quantity ~ ' g' %}
+                                        {% endif %}
+                                    {% else %}
+                                        {% set qtyLabel = item.quantity ~ ' g' %}
+                                    {% endif %}
+                                {% endif %}
                                 <div class="order-item">
-                                    <span>{{ item.quantity }}x {{ item.product.name }}</span>
+                                    <span>{{ qtyLabel }} {{ item.product.name }}</span>
                                     <span>{{ item.totalTtc|number_format(2, ',', ' ') }} €</span>
                                 </div>
                             {% endfor %}

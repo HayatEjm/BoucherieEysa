@@ -115,8 +115,8 @@
     <div class="container">
         <!-- En-tête -->
         <div class="header">
-            <div class="logo">🥩</div>
-            <h1>Commande Confirmée !</h1>
+            <div class="logo" aria-hidden="true" style="display:none"></div>
+            <h1>Commande Confirmée</h1>
             <p>Merci pour votre confiance</p>
         </div>
 
@@ -147,9 +147,22 @@
                     </thead>
                     <tbody>
                         {% for item in order.orderItems %}
+                        {% set qtyDisplay = item.quantity ~ ' ' ~ (item.product.unit ?? '') %}
+                        {% if item.product.unit in ['kg','g'] %}
+                            {# Convention: quantity stockée en grammes pour les produits au poids #}
+                            {% if item.product.unit == 'kg' %}
+                                {% if item.quantity >= 1000 %}
+                                    {% set qtyDisplay = (item.quantity / 1000)|number_format(2, ',', ' ') ~ ' kg' %}
+                                {% else %}
+                                    {% set qtyDisplay = item.quantity ~ ' g' %}
+                                {% endif %}
+                            {% elseif item.product.unit == 'g' %}
+                                {% set qtyDisplay = item.quantity ~ ' g' %}
+                            {% endif %}
+                        {% endif %}
                         <tr>
                             <td><strong>{{ item.product.name }}</strong></td>
-                            <td>{{ item.quantity }} {{ item.product.unit }}</td>
+                            <td>{{ qtyDisplay }}</td>
                             <td>{{ (item.unitPriceHtCents / 100)|number_format(2, ',', ' ') }} €</td>
                             <td>{{ (item.totalTtcCents / 100)|number_format(2, ',', ' ') }} €</td>
                         </tr>
@@ -165,7 +178,7 @@
             <!-- Informations de retrait -->
             {% if order.pickupDate %}
             <div class="pickup-info">
-                <h3>🏪 Retrait en magasin</h3>
+                <h3>Retrait en magasin</h3>
                 <p>Votre commande sera prête le :</p>
                 <div class="pickup-time">
                     {{ order.pickupDate|date('d/m/Y') }} 
@@ -173,7 +186,7 @@
                         {{ order.pickupTimeSlot }}
                     {% endif %}
                 </div>
-                <p><strong>📍Boucherie Eysa</strong><br>
+                <p><strong>Boucherie Eysa</strong><br>
                 123 Rue du Dr Schweitzer, 49400 Saumur<br>
                 Téléphone : 02 41 50 57 18</p>
             </div>

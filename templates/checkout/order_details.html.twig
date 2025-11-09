@@ -21,7 +21,21 @@
         <h3 style="margin-top:1.5em;">Articles commandés</h3>
         <ul style="margin-bottom:1.5em;">
             {% for item in order.orderItems %}
-                <li>{{ item.quantity }} x {{ item.product.name }} — {{ item.totalTtc|number_format(2, ',', ' ') }} €</li>
+                {% set qtyDisplay = item.quantity %}
+                {% if item.product.unit in ['kg','g'] %}
+                    {% if item.product.unit == 'kg' %}
+                        {% if item.quantity >= 1000 %}
+                            {% set qtyDisplay = (item.quantity / 1000)|number_format(2, ',', ' ') ~ ' kg' %}
+                        {% else %}
+                            {% set qtyDisplay = item.quantity ~ ' g' %}
+                        {% endif %}
+                    {% else %}
+                        {% set qtyDisplay = item.quantity ~ ' g' %}
+                    {% endif %}
+                {% else %}
+                    {% set qtyDisplay = item.quantity ~ 'x' %}
+                {% endif %}
+                <li>{{ qtyDisplay }} {{ item.product.name }} — {{ item.totalTtc|number_format(2, ',', ' ') }} €</li>
             {% endfor %}
         </ul>
         <a href="{{ path('app_account') }}" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Retour à mon compte</a>
