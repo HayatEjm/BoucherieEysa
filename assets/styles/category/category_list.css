@@ -39,9 +39,9 @@
     border-radius: 10px;
 }
 
-/* �📰 Titre principal */
+/* 📰 Titre principal */
 .section-title {
-    font-size: 5rem;
+    font-size: 2rem; /* 32px - bon équilibre */
     margin-bottom: 1rem;
     color: #131212;
 }

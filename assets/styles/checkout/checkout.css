@@ -1,20 +1,11 @@
-/* 
-   CHECKOUT STYLES - Styles pour les pages de finalisation de commande
-   
-   Architecture :
-   - Layout en deux colonnes (résumé + formulaire)
-   - Design cohérent avec le design system
-   - Responsive mobile-first
-   - États de validation et erreurs
-*/
+/* CHECKOUT STYLES - simplifié, lisible, sans propriétés avancées */
 
-/* Import des composants réutilisables */
+/* Import composants (conservé) */
 @import '../components/forms.css';
 @import '../components/buttons.css';
 
 /* ========== LAYOUT PRINCIPAL ========== */
 .checkout-page {
-    min-height: 100vh;
     background: var(--beige-light);
     padding: var(--spacing-3xl) 0;
 }
@@ -59,7 +50,6 @@
     padding: var(--spacing-2xl);
     box-shadow: var(--shadow-md);
     border: 1px solid var(--border-color);
-    height: fit-content;
 }
 
 .checkout-card__title {
@@ -176,24 +166,20 @@
     font-weight: var(--font-weight-medium);
     color: var(--text-primary);
     margin-bottom: var(--spacing-sm);
-    font-size: 0.875rem; /* 14px - plus petit */
+    font-size: 0.95rem;
     line-height: 1.4;
-    word-wrap: break-word;
 }
 
 .form-group .form-control {
     width: 100%;
     box-sizing: border-box;
-    min-width: 0;
-    max-width: 100%;
-    padding: 0.65rem 0.875rem; /* padding réduit */
+    padding: 0.7rem 0.9rem;
     border: 2px solid var(--border-color);
     border-radius: var(--border-radius-md);
-    font-size: 0.875rem; /* 14px - cohérent avec label */
+    font-size: 1rem;
     transition: all var(--transition-normal);
     background: var(--white);
     color: var(--text-primary);
-    box-shadow: var(--shadow-sm);
 }
 
 .form-group .form-control:focus {
@@ -208,7 +194,7 @@
 
 /* ========== ERREURS DE VALIDATION - Redirigées vers composants ========== */
 
-/* Cibler TOUTES les erreurs Symfony possibles */
+/* Erreurs formulaires - version simple et compacte */
 .form-group .invalid-feedback,
 .form-group .form-error-message,
 .form-group .form-errors,
@@ -218,7 +204,7 @@
 .form-group div.error {
     display: block !important;
     color: var(--danger-color) !important;
-    font-size: var(--font-size-sm) !important;
+    font-size: 0.9rem !important;
     margin-top: var(--spacing-sm) !important;
     list-style: none !important;
     padding: 0 !important;
@@ -232,7 +218,6 @@
 
 /* Champs invalides - toutes variantes */
 .form-group .form-control.is-invalid,
-.form-group .form-control:invalid:not(:placeholder-shown),
 .form-group input.error,
 .form-group select.error,
 .form-group textarea.error {
@@ -321,15 +306,18 @@ form .invalid-feedback {
 }
 
 .checkout-success-header {
-    /* Vert succès éclairci au lieu du vert très foncé précédent */
-    background: #0d7f5c; /* Nouveau vert succès (ancien trop sombre) */
+    background: #0d7f5c; /* Vert succès */
     color: var(--white);
     padding: var(--spacing-4xl) 0;
     text-align: center;
 }
 
 /* Forcer tous les textes en blanc dans le bandeau de succès */
-.checkout-success-header * {
+.checkout-success-header,
+.checkout-success-header *,
+.checkout-success-header h1,
+.checkout-success-header p,
+.checkout-success-header .success-subtitle {
     color: var(--white) !important;
 }
 
@@ -351,10 +339,11 @@ form .invalid-feedback {
 .checkout-success-header h1 {
     color: var(--white) !important;
     font-weight: var(--font-weight-bold);
+    font-size: 2rem; /* Taille raisonnable */
 }
 
 .success-subtitle {
-    font-size: var(--font-size-lg);
+    font-size: 1.1rem;
     opacity: 0.9;
     margin: 0;
     color: var(--white) !important;
@@ -498,10 +487,7 @@ form .invalid-feedback {
         min-width: auto;
     }
 
-    /* Sur mobile, garder 16px pour éviter le zoom iOS et assurer la lisibilité */
-    .form-group .form-control {
-        font-size: 16px;
-    }
+    .form-group .form-control { font-size: 16px; }
 
     .success-layout {
         grid-template-columns: 1fr;

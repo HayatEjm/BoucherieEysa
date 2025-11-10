@@ -1,28 +1,17 @@
-/* Affichage bordeaux des titres de catégorie uniquement sur la page d'accueil */
-.home-page .category-name {
-  color: var(--primary-color) !important;
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: var(--spacing-md);
-}
-/* ========================================================================
-   CSS POUR LA PAGE D'ACCUEIL 
-   ======================================================================== */
+/* ====================================
+   PAGE D'ACCUEIL - BOUCHERIE EYSA
+   ==================================== */
 
-
-
-/* 
-   CONTENEUR GÉNÉRAL
-  */
-
+/* Conteneur principal */
 .container {
   max-width: 1300px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
-
- /* SECTION HERO (BANNIÈRE PRINCIPALE) */
+/* ====================================
+   SECTION HERO (BANNIÈRE PRINCIPALE)
+   ==================================== */
 
 .hero-section {
   background: var(--beige-light);
@@ -31,7 +20,6 @@
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-3xl);
   align-items: center;
-  min-height: 600px;
 }
 
 .hero-content {
@@ -39,9 +27,9 @@
 }
 
 .hero-title {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  font-size: 3.5rem;
-  color: #8b1538; /* Bordeaux */
+  font-family: var(--font-family-primary);
+  font-size: 3rem;
+  color: var(--primary-color);
   margin-bottom: 1rem;
   font-weight: 700;
   line-height: 1.2;
@@ -54,15 +42,8 @@
   font-weight: var(--font-weight-semibold);
 }
 
-.hero-description {
-  font-size: var(--font-size-lg);
-  color: var(--text-primary);
-  line-height: 1.6;
-  margin-bottom: var(--spacing-xl);
-}
-
 .btn-hero {
-  background: linear-gradient(135deg, #8b1538, #6b1028);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   color: white;
   padding: 1rem 2.5rem;
   border-radius: 8px;
@@ -80,27 +61,22 @@
   color: white;
 }
 
-.hero-image {
-  text-align: center;
-}
-
 .hero-image img {
   width: 100%;
-  max-width: 100%;
   height: 400px;
   object-fit: cover;
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* ========================================================================
+/* ====================================
    TITRES DE SECTIONS
-   ======================================================================== */
+   ==================================== */
 
 .section-title {
-  font-family: "Poppins", sans-serif;
-  font-size: 2.75rem;
-  color: #8b1538; /* Bordeaux */
+  font-family: var(--font-family-primary);
+  font-size: 2rem;
+  color: var(--primary-color);
   text-align: center;
   margin-bottom: 1rem;
   font-weight: 700;
@@ -110,7 +86,7 @@
 
 .section-description {
   font-size: 1.2rem;
-  color: #2c2c2c; /* Gris foncé */
+  color: var(--text-primary);
   text-align: center;
   margin-bottom: 3rem;
   max-width: 800px;
@@ -119,9 +95,9 @@
   line-height: 1.6;
 }
 
-/* ========================================================================
+/* ====================================
    SECTION CATÉGORIES
-   ======================================================================== */
+   ==================================== */
 
 .categories-section {
   padding: 4rem 0;
@@ -133,19 +109,15 @@
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
-  align-items: stretch; /* Ajouté pour forcer les cartes à même hauteur */
 }
 
 .category-card-mini {
   background: white;
   border-radius: 8px;
-  overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   text-align: center;
   padding: 1.5rem;
-
-  /* Alignement vertical pour homogénéité */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -156,52 +128,46 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
-.category-image {
-  margin-bottom: 1rem;
-}
-
 .category-image img {
   width: 100%;
   height: 150px;
   object-fit: cover;
   border-radius: 8px;
+  margin-bottom: 1rem;
 }
 
 .category-name {
-  font-size: 0.6rem;
-  color: #8b1538 !important; /* Bordeaux */
+  font-size: 1rem;
+  color: var(--primary-color);
   margin-bottom: 1rem;
   font-weight: 600;
-  line-height: 1.3;
 }
 
 .btn-category {
   background: transparent;
-  color: #8b1538 !important; /* Bordeaux */
-  border: 2px solid #8b1538 !important;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
   padding: 0.5rem 1.5rem;
   border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
   display: inline-block;
-
-  /* Pour pousser le bouton en bas si nécessaire */
   margin-top: auto;
 }
 
 .btn-category:hover {
-  background: #8b1538;
+  background: var(--primary-color);
   color: white;
 }
 
-/* ========================================================================
-   SECTION AVANTAGES (GRILLE 2x2)
-   ======================================================================== */
+/* ====================================
+   SECTION AVANTAGES
+   ==================================== */
 
 .advantages-section {
   padding: 4rem 0;
-  background: #faf7f2; /* Beige clair */
+  background: var(--beige-light);
 }
 
 .advantages-grid {
@@ -227,26 +193,26 @@
 
 .advantage-icon {
   font-size: 3rem;
+  color: var(--primary-color);
   margin-bottom: 1rem;
   display: block;
-  color: #8b1538; /* Bordeaux pour les icônes */
 }
 
 .advantage-card h3 {
-  color: #8b1538; /* Bordeaux */
+  color: var(--primary-color);
   font-size: 1.3rem;
   margin-bottom: 1rem;
   font-weight: 600;
 }
 
 .advantage-card p {
-  color: #2c2c2c; /* Gris foncé */
+  color: var(--text-primary);
   line-height: 1.6;
 }
 
-/* ========================================================================
+/* ====================================
    SECTION PRODUITS VEDETTES
-   ======================================================================== */
+   ==================================== */
 
 .featured-products-section {
   padding: 4rem 0;
@@ -260,16 +226,15 @@
   margin-bottom: 3rem;
 }
 
-/* Cartes uniformes avec hauteur égale */
 .featured-products-section .product-card {
   background: var(--white);
   border-radius: var(--border-radius-md);
-  overflow: hidden;
   box-shadow: var(--shadow-sm);
   transition: var(--transition-normal);
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow: hidden;
 }
 
 .featured-products-section .product-card:hover {
@@ -277,54 +242,29 @@
   box-shadow: var(--shadow-lg);
 }
 
-/* Images des produits vedettes */
 .featured-products-section .product-image {
   width: 100%;
-  height: 200px !important;
+  height: 200px;
   overflow: hidden;
-  flex-shrink: 0;
   background-color: var(--beige-medium);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
 }
 
 .featured-products-section .product-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
-/* Image par défaut désactivée */
-/* .featured-products-section .product-image::before {
-  content: "🥩";
-  font-size: 3rem;
-  color: var(--primary-color);
-  position: absolute;
-  z-index: 1;
-} */
-
-.featured-products-section .product-image img[src*="images.unsplash.com"] {
-  z-index: 2;
-  position: relative;
-}
-
-/* Animation hover pour les images */
 .featured-products-section .product-card:hover .product-image img {
   transform: scale(1.05);
-  transition: transform var(--transition-normal);
+  transition: transform 0.3s ease;
 }
 
-/* Styles spécifiques pour les produits de la page d'accueil */
 .featured-products-section .home-product-info {
   padding: var(--spacing-lg);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   flex-grow: 1;
-  min-height: 0;
 }
 
 .featured-products-section .home-product-name {
@@ -336,28 +276,20 @@
 
 .featured-products-section .home-product-description {
   color: var(--text-primary);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   margin-bottom: 1rem;
   line-height: 1.5;
-  /* Empêche le débordement de texte */
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3; /* Limite à 3 lignes max */
-  line-clamp: 3; /* Propriété standard */
-  -webkit-box-orient: vertical;
-  flex-grow: 0; /* Ne grandit pas */
-  flex-shrink: 1; /* Peut rétrécir si nécessaire */
 }
 
 .product-price {
-  color: var(--text-secondary); /* Gris moyen */
+  color: var(--text-secondary);
   font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 1rem;
 }
 
 .btn-add-to-cart {
-  background: linear-gradient(135deg, #8b1538, #6b1028);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -373,14 +305,10 @@
   box-shadow: 0 4px 15px rgba(139, 21, 56, 0.3);
 }
 
-.text-center {
-  text-align: center;
-}
-
 .btn-view-all {
   background: transparent;
-  color: #8b1538; /* Bordeaux */
-  border: 2px solid #8b1538;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
   padding: 1rem 2rem;
   border-radius: 8px;
   text-decoration: none;
@@ -390,18 +318,17 @@
 }
 
 .btn-view-all:hover {
-  background: #8b1538;
+  background: var(--primary-color);
   color: white;
 }
 
-/* ========================================================================
-   SECTION INFORMATIONS - CORRIGÉE ET SIMPLIFIÉE
-   ======================================================================== */
+/* ====================================
+   SECTION INFORMATIONS
+   ==================================== */
 
 .info-section {
   padding: 4rem 0;
-  background: #f5f1e8; /* Beige chaleureux comme les autres sections */
-  color: #2c2c2c; /* Texte foncé pour la lisibilité */
+  background: var(--beige-warm);
 }
 
 .info-grid {
@@ -413,35 +340,27 @@
 .info-card {
   text-align: center;
   padding: 1.5rem;
-  background: #ffffff; /* Fond blanc pour les cartes */
+  background: white;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .info-card h3 {
-  color: #2c2c2c; /* Texte foncé pour les titres */
+  color: var(--text-primary);
   margin-bottom: 1rem;
   font-size: 1.2rem;
   font-weight: 600;
 }
 
 .info-card p {
-  color: #5a5a5a; /* Texte gris foncé pour la lisibilité */
+  color: var(--text-secondary);
   line-height: 1.6;
   font-size: 0.95rem;
 }
 
-/* Style spécial pour les icônes dans les cartes info */
-.info-card i {
-  color: #8b1538; /* Bordeaux pour les icônes */
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  display: block;
-}
-
-/* ========================================================================
-   RESPONSIVITÉ
-   ======================================================================== */
+/* ====================================
+   RESPONSIVE
+   ==================================== */
 
 @media (max-width: 768px) {
   .hero-section {
@@ -455,15 +374,7 @@
   }
 
   .section-title {
-    font-size: 2.25rem;
-  }
-
-  .advantages-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .products-grid {
-    grid-template-columns: 1fr;
+    font-size: 1.75rem;
   }
 
   .categories-preview {
@@ -476,10 +387,7 @@
     font-size: 2rem;
   }
 
-  .categories-preview {
-    grid-template-columns: 1fr;
-  }
-
+  .categories-preview,
   .info-grid {
     grid-template-columns: 1fr;
   }

@@ -286,7 +286,7 @@ body {
 
 .title-eysa-2 {
   font-family: var(--font-family-headings);
-  font-size: var(--font-size-3xl);
+  font-size: 1.75rem; /* Cohérent avec h2 global (28px) */
   font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
   line-height: 1.3;
@@ -328,11 +328,54 @@ body {
 .section-eysa {
   padding: var(--spacing-4xl) 0;
   background-color: var(--beige-light);
+  color: var(--text-primary); /* Texte foncé par défaut */
 }
 
 .section-eysa-alt {
   padding: var(--spacing-4xl) 0;
   background-color: var(--beige-warm);
+  color: var(--text-primary); /* Texte foncé par défaut */
+}
+
+/* TITRES GLOBAUX - Tailles harmonieuses et lisibles */
+h1 {
+  font-size: 2.25rem; /* 36px - grand mais pas énorme */
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-primary);
+}
+
+h2 {
+  font-size: 1.75rem; /* 28px - proportionné au h1 */
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.3;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+}
+
+h3 {
+  font-size: 1.375rem; /* 22px */
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.4;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+}
+
+/* DESCRIPTIONS - Textes sous les titres */
+.hero-description {
+  font-size: var(--font-size-lg); /* 18px */
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-xl);
+}
+
+.section-description {
+  font-size: 1.1rem; /* 17.6px */
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
 }
 
 /* BADGES UNIFORMISÉS */

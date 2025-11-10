@@ -15,7 +15,7 @@
 
 /* Titre section */
 .section-title {
-    font-size: var(--font-size-4xl);
+    font-size: 2rem; /* 32px - harmonisé */
     color: var(--secondary-color);
     margin-bottom: var(--spacing-sm);
     font-weight: var(--font-weight-semibold);
@@ -132,13 +132,6 @@
     margin-bottom: var(--spacing-lg);
     text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     color: var(--secondary-color);
-}
-
-.click-collect-page .hero-section .lead {
-    font-size: var(--font-size-xl);
-    margin-bottom: var(--spacing-xl);
-    opacity: 0.9;
-    color: var(--secondary-light);
 }
 
 .click-collect-page .hero-badges {
@@ -358,13 +351,6 @@
     font-size: var(--font-size-4xl);
     font-weight: var(--font-weight-semibold);
     margin-bottom: var(--spacing-lg);
-    color: var(--white);
-}
-
-.cta-section .lead {
-    font-size: var(--font-size-lg);
-    opacity: 0.95;
-    margin-bottom: var(--spacing-xl);
     color: var(--white);
 }
 
