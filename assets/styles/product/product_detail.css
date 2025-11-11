@@ -215,7 +215,7 @@
 
 /* Nom du produit */
 .product-title {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 4vw, 2rem); /* Responsive : 24px mobile → 32px desktop */
     font-weight: 700;
     color: #2c2c2c;
     margin-bottom: 0.5rem;
@@ -224,7 +224,7 @@
 
 /* Catégorie */
 .product-category {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 1.5vw, 1rem); /* Responsive : 14px mobile → 16px desktop */
     color: #8B1538; /* Bordeaux */
     text-transform: uppercase;
     font-weight: 600;
@@ -233,7 +233,7 @@
 
 /* Description */
 .product-description {
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2vw, 1.1rem); /* Responsive : 16px mobile → 18px desktop */
     color: #5a5a5a; /* Gris moyen */
     line-height: 1.6;
     margin-bottom: 2rem;
@@ -264,13 +264,13 @@
 }
 
 .current-price {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 4vw, 2rem); /* Responsive : 24px mobile → 32px desktop */
     font-weight: 700;
     color: var(--text-secondary); /* Gris moyen */
 }
 
 .price-per-kg {
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 1.5vw, 0.9rem); /* Responsive : 14px mobile → 14.4px desktop */
     color: #8a8a8a; /* Gris clair */
     margin-top: 0.5rem;
 }

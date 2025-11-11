@@ -15,7 +15,7 @@
 
 /* Titre section */
 .section-title {
-    font-size: 2rem; /* 32px - harmonisé */
+    font-size: clamp(1.5rem, 4vw, 2.5rem); /* Responsive : 24px mobile → 40px desktop */
     color: var(--secondary-color);
     margin-bottom: var(--spacing-sm);
     font-weight: var(--font-weight-semibold);
@@ -24,7 +24,7 @@
 }
 
 .section-subtitle {
-    font-size: var(--font-size-lg);
+    font-size: clamp(1rem, 2vw, 1.25rem); /* Responsive : 16px mobile → 20px desktop */
     color: var(--medium-gray);
     margin-bottom: var(--spacing-2xl);
     font-style: italic;

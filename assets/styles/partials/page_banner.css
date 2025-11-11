@@ -27,7 +27,7 @@
 }
 
 .banner-title {
-    font-size: 3.5rem;
+    font-size: clamp(2rem, 5vw, 3.5rem); /* Responsive : 32px mobile → 56px desktop */
     font-weight: 700;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
@@ -44,7 +44,7 @@
     text-decoration: none;
     border-radius: 8px;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2vw, 1.2rem); /* Responsive : 16px mobile → 19px desktop */
     text-transform: uppercase;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(139, 0, 0, 0.3);
@@ -96,16 +96,7 @@
 /* Responsive */
 @media (max-width: 768px) {
     .page-banner {
-        height: 300px;
-    }
-    
-    .banner-title {
-        font-size: 2.5rem;
-    }
-    
-    .banner-button {
-        padding: 12px 25px;
-        font-size: 1rem;
+        height: clamp(250px, 40vw, 300px); /* Hauteur adaptative */
     }
     
     .page-banner .hero-badges {
@@ -118,15 +109,5 @@
         width: 250px;
         text-align: center;
         justify-content: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .page-banner {
-        height: 250px;
-    }
-    
-    .banner-title {
-        font-size: 2rem;
     }
 }
