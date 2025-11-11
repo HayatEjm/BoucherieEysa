@@ -14,7 +14,7 @@
 
             {# Affichage des erreurs s'il y en a #}
             {% if error %}
-                <div class="alert alert-error">
+                <div class="alert-eysa alert-error">
                     <i class="fas fa-exclamation-triangle"></i>
                     {{ error.messageKey|trans(error.messageData, 'security') }}
                 </div>
@@ -67,7 +67,7 @@
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                 {# Bouton de connexion #}
-                <button type="submit" class="btn btn-primary btn-full">
+                <button type="submit" class="btn-eysa btn-eysa-primary btn-full">
                     <i class="fas fa-sign-in-alt"></i>
                     Se connecter
                 </button>
@@ -76,7 +76,7 @@
             {# Liens utiles #}
             <div class="auth-links">
                 <p>Pas encore de compte ?</p>
-                <a href="{{ path('app_signup') }}" class="btn btn-outline">
+                <a href="{{ path('app_signup') }}" class="btn-eysa btn-eysa-outline">
                     <i class="fas fa-user-plus"></i>
                     Créer un compte
                 </a>

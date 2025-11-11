@@ -211,13 +211,13 @@ BOUTONS - Redirigés vers composants
     margin-right: var(--spacing-xs);
 }
 
-/* 
+/*
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-ALERTES - Redirigées vers composants
+ALERTES - Composants personnalisés (sans Bootstrap)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 */
 
-.alert {
+.alert-eysa {
     padding: var(--spacing-md);
     border-radius: var(--border-radius-md);
     margin-bottom: var(--spacing-xl);
@@ -226,24 +226,22 @@ ALERTES - Redirigées vers composants
     align-items: center;
 }
 
-.alert i {
+.alert-eysa i {
     margin-right: var(--spacing-sm);
     font-size: var(--font-size-lg);
 }
 
-.alert-error {
+.alert-eysa.alert-error {
     background: rgba(220, 38, 38, 0.1);
     color: var(--danger-color);
     border: 1px solid rgba(220, 38, 38, 0.2);
 }
 
-.alert-success {
+.alert-eysa.alert-success {
     background: rgba(6, 95, 70, 0.1);
     color: var(--success-color);
     border: 1px solid rgba(6, 95, 70, 0.2);
-}
-
-/* Erreurs de formulaire → utilise le composant */
+}/* Erreurs de formulaire → utilise le composant */
 .form-error {
     color: var(--danger-color);
     font-size: var(--font-size-sm);
