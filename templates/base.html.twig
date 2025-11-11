@@ -17,11 +17,13 @@
     {# Canonical #}
     <link rel="canonical" href="{% block canonical_url %}{{ app.request.uri }}{% endblock %}">
 
-    {# Favicons #}
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🥩</text></svg>">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon-16x16.png') }}">
+    {# Favicons / PWA (utilise les fichiers présents dans public/images) #}
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/logo_favicon.png') }}?v=3">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/logo_favicon.png') }}?v=3">
+    <link rel="shortcut icon" href="{{ asset('images/logo_favicon.png') }}?v=3">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/logo_web.png') }}?v=3">
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}?v=3">
+    <meta name="theme-color" content="#8B1538">
 
     {# Open Graph #}
     <meta property="og:title" content="{% block og_title %}{{ block('title') }}{% endblock %}">
