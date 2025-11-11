@@ -158,27 +158,14 @@
     flex-wrap: wrap;
 }
 
-.btn {
-    padding: 1rem 2rem;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.8rem;
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-}
-
-.btn-secondary {
+/* Bouton secondaire spécifique à la CTA (sur fond sombre) */
+.btn-eysa-secondary {
     background-color: transparent;
     color: #ffffff;
     border: 2px solid #ffffff;
 }
 
-.btn-secondary:hover {
+.btn-eysa-secondary:hover {
     background-color: #ffffff;
     color: #2c1810;
     transform: translateY(-2px);

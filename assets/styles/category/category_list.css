@@ -1,32 +1,12 @@
-/*  Conteneur principal */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LISTE DES CATÉGORIES - Grille de cartes avec images de fond
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* Conteneur principal */
 .categories-container {
     text-align: center;
     padding: 3rem 2rem;
     background-color: #ffffff;
-    min-height: 50vh;
-}
-
-/*  Dégradé lisible sur l'image */
-.category-overlay {
-    width: 100%;
-    padding: 2rem;
-    background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.0) 60%);
-    box-sizing: border-box;
-}
-
-/*  Titre */
-.category-name {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    font-weight: bold;
-    color: white !important; /* Force le blanc pour les noms de catégories */
-}
-
-/*  Conteneur principal */
-.categories-container {
-    text-align: center;
-    padding: 3rem 2rem;
-  
     min-height: 50vh;
 }
 
@@ -39,14 +19,14 @@
     border-radius: 10px;
 }
 
-/* 📰 Titre principal */
+/* Titre principal */
 .section-title {
-    font-size: 2rem; /* 32px - bon équilibre */
+    font-size: 2rem;
     margin-bottom: 1rem;
     color: #131212;
 }
 
-/* 🧾 Description */
+/* Description sous le titre */
 .section-description {
     font-size: 2.5rem;
     color: #555;
@@ -54,13 +34,12 @@
     text-align: center;
 }
 
-/* 🔲 Grille responsive */
+/* Grille responsive */
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     justify-items: center;
-    /* La largeur est maintenant héritée du parent .categories-section */
 }
 
 /* Carte de catégorie avec fond image */
@@ -69,8 +48,8 @@
     width: 100%;
     max-width: 400px;
     height: 400px;
-    background-size: cover;              /* adapte à la taille */
-    background-position: center center;  /* centrage parfait */
+    background-size: cover;
+    background-position: center center;
     background-repeat: no-repeat;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.15);
@@ -93,14 +72,22 @@
     box-sizing: border-box;
 }
 
-/* 📜 Description */
+/* Nom de la catégorie */
+.category-name {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    color: white !important;
+}
+
+/* Description de la catégorie */
 .category-description {
     font-size: 1.5rem;
     margin-bottom: 1.2rem;
     color: #f3f3f3;
 }
 
-/* 🔘 Lien bouton */
+/* Lien bouton */
 .category-link {
     display: inline-block;
     background-color: #d72638;
@@ -116,14 +103,18 @@
     background-color: #a71b28;
 }
 
-/* 📱 Responsive : 2 colonnes en tablette */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RESPONSIVE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* Tablette : 2 colonnes */
 @media screen and (max-width: 1024px) {
     .categories-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-/* 📱 Responsive : 1 colonne en mobile */
+/* Mobile : 1 colonne */
 @media screen and (max-width: 600px) {
     .categories-grid {
         grid-template-columns: 1fr;
@@ -131,12 +122,12 @@
 
     .category-card {
         max-width: 90%;
-        height: 500px; /* réajustée pour mobile */
+        height: 500px;
     }
 
     .category-name {
         font-size: 1.8rem;
-        color: white !important; /* Force le blanc aussi en mobile */
+        color: white !important;
     }
 
     .category-description {

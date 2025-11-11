@@ -39,7 +39,7 @@
   --border-color: #e5ddd4;            /* Bordure beige */
   
   /* COULEURS SYSTÈME - Pour messages d'état */
-  --success-color: #065f46;           /* Vert foncé */
+  --success-color: #149e27;           /* Vert foncé */
   --warning-color: #d97706;           /* Orange */
   --danger-color: #dc2626;            /* Rouge */
   --info-color: #0369a1;             /* Bleu */
@@ -330,7 +330,7 @@ body {
   color: var(--text-primary); /* Texte foncé par défaut */
 }
 
-/* TITRES GLOBAUX - Tailles harmonieuses et lisibles */
+/* TITRES GLOBAUX */
 h1 {
   font-size: 2.25rem; /* 36px - grand mais pas énorme */
   font-weight: var(--font-weight-bold);

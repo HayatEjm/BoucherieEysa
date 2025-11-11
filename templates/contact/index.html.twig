@@ -15,14 +15,14 @@
     <div class="container">
         <!-- Messages flash -->
         {% for message in app.flashes('success') %}
-            <div class="alert alert-success">
+            <div class="alert-eysa alert-success">
                 <i class="fas fa-check-circle"></i>
                 {{ message }}
             </div>
         {% endfor %}
 
         {% for message in app.flashes('error') %}
-            <div class="alert alert-error">
+            <div class="alert-eysa alert-error">
                 <i class="fas fa-exclamation-triangle"></i>
                 {{ message }}
             </div>

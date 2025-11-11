@@ -294,6 +294,12 @@
   box-shadow: 0 4px 15px rgba(139, 21, 56, 0.3);
 }
 
+/* Centrage du bouton */
+.text-center {
+  text-align: center;
+  margin-top: var(--spacing-3xl);
+}
+
 .btn-view-all {
   background: transparent;
   color: var(--primary-color);
