@@ -18,22 +18,39 @@ class CategoryController extends AbstractController
     {
         $categories = $categoryRepository->findAll();
         
-    // dd($categories);
+        // Format pour le menu déroulant Vue
+        $formattedCategories = array_map(function ($category) {
+            return [
+                'id' => $category->getId(),
+                'name' => $category->getName()
+            ];
+        }, $categories);
 
         return $this->render('category/category_list.html.twig', [
             'categories' => $categories,
+            'categoriesJson' => $formattedCategories,
         ]);
     }
 
     // Afficher les produits d'une catégorie donnée
     #[Route('/categories/{id}', name: 'app_category_show')]
-    public function show(Category $category): Response
+    public function show(Category $category, CategoryRepository $categoryRepository): Response
     {
         $products = $category->getProducts();
+        
+        // Format pour le menu déroulant Vue
+        $categories = $categoryRepository->findAll();
+        $formattedCategories = array_map(function ($cat) {
+            return [
+                'id' => $cat->getId(),
+                'name' => $cat->getName()
+            ];
+        }, $categories);
 
         return $this->render('category/category_products.html.twig', [
             'category' => $category,
             'products' => $products,
+            'categoriesJson' => $formattedCategories,
         ]);
     }
   

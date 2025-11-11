@@ -8,37 +8,61 @@ import SearchBar from './components/SearchBar.vue'
 import CartBadge from './components/CartBadge.vue'
 import AddToCartButton from './components/AddToCartButton.vue'
 
-// Initialisation du menu déroulant des catégories
-const mountPoint = document.getElementById('vue-dropdown-menu')
-if (mountPoint) {
-  try {
-    const categories = JSON.parse(mountPoint.dataset.categories)
-    const dropdownApp = createApp(DropdownMenu, { categories })
-    dropdownApp.mount(mountPoint)
-  } catch (error) {
-    console.error("Erreur initialisation menu :", error)
-  }
-}
+// Attendre que le DOM soit complètement chargé
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('🚀 DOM chargé, initialisation des composants Vue...')
 
-// Composant de recherche avec store Pinia
-const searchEl = document.querySelector('.search-container')
-if (searchEl) {
-  const searchApp = createApp(SearchBar)
-  searchApp.use(pinia)
-  searchApp.mount(searchEl)
-}
-
-// Badge compteur panier dans le header
-const cartBadgeEl = document.getElementById('cart-badge')
-if (cartBadgeEl) {
-  try {
-    const badgeApp = createApp(CartBadge)
-    badgeApp.use(pinia)
-    badgeApp.mount(cartBadgeEl)
-  } catch (error) {
-    console.error('Erreur initialisation badge panier :', error)
+  // Initialisation du menu déroulant des catégories
+  const mountPoint = document.getElementById('vue-dropdown-menu')
+  if (mountPoint) {
+    const categoriesData = mountPoint.dataset.categories
+    console.log('🔍 DEBUG Menu - data-categories:', categoriesData)
+    
+    if (categoriesData) {
+      try {
+        const categories = JSON.parse(categoriesData)
+        console.log('✅ Categories parsées:', categories)
+        
+        const dropdownApp = createApp(DropdownMenu, { categories })
+        dropdownApp.mount(mountPoint)
+        console.log('✅ Menu déroulant Vue monté avec succès')
+      } catch (error) {
+        console.error("❌ Erreur initialisation menu :", error)
+        console.error("Stack trace:", error.stack)
+      }
+    } else {
+      console.error('❌ ERREUR: data-categories est vide ou undefined')
+    }
+  } else {
+    console.error('❌ ERREUR: Element #vue-dropdown-menu introuvable dans le DOM')
   }
-}
+
+  // Composant de recherche avec store Pinia
+  const searchEl = document.querySelector('.search-container')
+  if (searchEl) {
+    const searchApp = createApp(SearchBar)
+    searchApp.use(pinia)
+    searchApp.mount(searchEl)
+    console.log('✅ Barre de recherche montée')
+  } else {
+    console.log('ℹ️ Pas de barre de recherche sur cette page')
+  }
+
+  // Badge compteur panier dans le header
+  const cartBadgeEl = document.getElementById('cart-badge')
+  if (cartBadgeEl) {
+    try {
+      const badgeApp = createApp(CartBadge)
+      badgeApp.use(pinia)
+      badgeApp.mount(cartBadgeEl)
+      console.log('✅ Badge panier monté')
+    } catch (error) {
+      console.error('❌ Erreur initialisation badge panier :', error)
+    }
+  } else {
+    console.log('ℹ️ Pas de badge panier sur cette page')
+  }
+})
 
 // Boutons d'ajout au panier sur toutes les pages
 const addToCartButtons = document.querySelectorAll('.add-to-cart[data-product-id]')
@@ -111,7 +135,13 @@ import './styles/design-system.css'
 import './styles/components/forms.css'
 import './styles/components/buttons.css'
 
+// Partials réutilisables
+import './styles/partials/page_banner.css'
+
 // Styles spécifiques par page/composant (chargés AVANT app.css)
+import './styles/home.css'
+import './styles/category/category_list.css'
+import './styles/category/category_products.css'
 import './styles/category/quantity-selector.css' 
 import './styles/partials/SearchBar.css'
 import './styles/philosophy/philosophy.css'

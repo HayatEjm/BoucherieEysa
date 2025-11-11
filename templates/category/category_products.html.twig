@@ -73,9 +73,10 @@
 {% endblock %}
 
 {% block javascripts %}
-{#
-    Toute la logique JS de gestion des produits et du panier est désormais externalisée dans
-    assets/js/category_products.js (importé via assets/app.js).
-    Ce template ne contient plus aucun code JS inline, pour respecter le MVC et garantir la maintenabilité.
-#}
+    {{ parent() }}
+    {#
+        Toute la logique JS de gestion des produits et du panier est désormais externalisée dans
+        assets/js/category_products.js (importé via assets/app.js).
+        Ce template ne contient plus aucun code JS inline, pour respecter le MVC et garantir la maintenabilité.
+    #}
 {% endblock %}

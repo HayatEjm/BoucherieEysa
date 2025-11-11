@@ -30,12 +30,12 @@
     min-height: 50vh;
 }
 
-/* � Section centrée (titre + description + grille) */
+/* Section centrée */
 .categories-section {
-    max-width: auto;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 15px 15px;
-    background-color: #f8f4e3; /* Couleur de fond douce */
+    background-color: var(--beige-warm);
     border-radius: 10px;
 }
 

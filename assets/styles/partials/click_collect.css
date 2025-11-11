@@ -183,8 +183,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr;  /* 2 colonnes égales */
     gap: 100px;                       /* Espace entre les cartes */
-    max-width: auto;               /* Largeur max du conteneur */
-    margin: auto;                 /* Centré */
+    max-width: 100%;                  /* Largeur max du conteneur */
+    margin: auto;                     /* Centré */
 }
 
 /* CARTES - DIMENSIONS FACILES À CHANGER */

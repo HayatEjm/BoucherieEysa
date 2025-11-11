@@ -302,14 +302,7 @@ body {
   margin-bottom: var(--spacing-md);
 }
 
-/* TEXTES */
-.text-eysa-lead {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-normal);
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
+/* TEXTES UTILITAIRES */
 .text-eysa-body {
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-normal);

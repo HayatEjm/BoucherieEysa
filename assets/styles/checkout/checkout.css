@@ -305,26 +305,23 @@ form .invalid-feedback {
     background: var(--beige-light);
 }
 
+/* Bandeau de confirmation de commande */
 .checkout-success-header {
-    background: #0d7f5c; /* Vert succès */
-    color: var(--white);
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%); /* Vert émeraude doux */
+    color: white;
     padding: var(--spacing-4xl) 0;
     text-align: center;
 }
 
-/* Forcer tous les textes en blanc dans le bandeau de succès */
-.checkout-success-header,
-.checkout-success-header *,
 .checkout-success-header h1,
-.checkout-success-header p,
-.checkout-success-header .success-subtitle {
-    color: var(--white) !important;
+.checkout-success-header p {
+    color: white;
 }
 
 .success-icon {
-    font-size: var(--font-size-4xl);
+    font-size: 4rem;
     margin-bottom: var(--spacing-md);
-    color: var(--white);
+    color: white;
 }
 
 .success-icon i {
@@ -337,16 +334,15 @@ form .invalid-feedback {
 }
 
 .checkout-success-header h1 {
-    color: var(--white) !important;
     font-weight: var(--font-weight-bold);
-    font-size: 2rem; /* Taille raisonnable */
+    font-size: 2rem;
+    margin-bottom: var(--spacing-md);
 }
 
 .success-subtitle {
     font-size: 1.1rem;
-    opacity: 0.9;
+    opacity: 0.95;
     margin: 0;
-    color: var(--white) !important;
 }
 
 .checkout-success-details {

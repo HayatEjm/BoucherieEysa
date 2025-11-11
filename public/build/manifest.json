@@ -29,5 +29,8 @@
   "build/fonts/fa-regular-400.ttf": "/build/fonts/fa-regular-400.914997e1.ttf",
   "build/fonts/fa-regular-400.woff2": "/build/fonts/fa-regular-400.89999bdf.woff2",
   "build/fonts/fa-v4compatibility.ttf": "/build/fonts/fa-v4compatibility.da94ef45.ttf",
-  "build/fonts/fa-v4compatibility.woff2": "/build/fonts/fa-v4compatibility.ea8f94e1.woff2"
+  "build/fonts/fa-v4compatibility.woff2": "/build/fonts/fa-v4compatibility.ea8f94e1.woff2",
+  "build/cart-app.css": "/build/cart-app.css",
+  "build/admin.css": "/build/admin.css",
+  "build/assets_components_CartApp_vue.css": "/build/assets_components_CartApp_vue.css"
 }

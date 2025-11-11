@@ -1,17 +1,12 @@
-/* ====================================
-   PAGE D'ACCUEIL - BOUCHERIE EYSA
-   ==================================== */
+/* PAGE D'ACCUEIL - Styles spécifiques à la homepage */
 
-/* Conteneur principal */
 .container {
   max-width: 1300px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
-/* ====================================
-   SECTION HERO (BANNIÈRE PRINCIPALE)
-   ==================================== */
+/* === HERO SECTION === */
 
 .hero-section {
   background: var(--beige-light);
@@ -69,9 +64,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* ====================================
-   TITRES DE SECTIONS
-   ==================================== */
+/* === SECTION TITLES === */
 
 .section-title {
   font-family: var(--font-family-primary);
@@ -95,9 +88,7 @@
   line-height: 1.6;
 }
 
-/* ====================================
-   SECTION CATÉGORIES
-   ==================================== */
+/* === CATEGORIES SECTION === */
 
 .categories-section {
   padding: 4rem 0;
@@ -161,9 +152,7 @@
   color: white;
 }
 
-/* ====================================
-   SECTION AVANTAGES
-   ==================================== */
+/* === ADVANTAGES SECTION === */
 
 .advantages-section {
   padding: 4rem 0;
