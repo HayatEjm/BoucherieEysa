@@ -191,14 +191,7 @@
     gap: 0.5rem;
 }
 
-.badge {
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
+/* Styles spécifiques aux badges de qualité */
 .badge-fresh {
     background: #065f46; /* Vert foncé */
     color: white;
