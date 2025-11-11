@@ -23,7 +23,7 @@
 
 .hero-title {
   font-family: var(--font-family-primary);
-  font-size: 3rem;
+  font-size: var(--fluid-3xl); /* Responsive : 40px mobile → 64px desktop */
   color: var(--primary-color);
   margin-bottom: 1rem;
   font-weight: 700;
@@ -31,7 +31,7 @@
 }
 
 .hero-subtitle {
-  font-size: var(--font-size-2xl);
+  font-size: var(--fluid-xl); /* Responsive : 24px mobile → 36px desktop */
   color: var(--primary-dark);
   margin-bottom: var(--spacing-lg);
   font-weight: var(--font-weight-semibold);
@@ -68,7 +68,7 @@
 
 .section-title {
   font-family: var(--font-family-primary);
-  font-size: 2rem;
+  font-size: var(--fluid-2xl); /* Responsive : 32px mobile → 48px desktop */
   color: var(--primary-color);
   text-align: center;
   margin-bottom: 1rem;
@@ -78,7 +78,7 @@
 }
 
 .section-description {
-  font-size: 1.2rem;
+  font-size: var(--fluid-lg); /* Responsive : 18px mobile → 24px desktop */
   color: var(--text-primary);
   text-align: center;
   margin-bottom: 3rem;
