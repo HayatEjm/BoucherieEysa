@@ -4,7 +4,14 @@
 {% block body %}
 <div class="admin-header">
   <h1><i class="fas fa-receipt"></i> {{ order.orderNumber ?? ('#' ~ order.id) }}</h1>
-  <p class="subtitle">Créée le {{ order.createdAt|date('d/m/Y H:i') }}</p>
+  <p class="subtitle">
+    Créée le {{ order.createdAt|date('d/m/Y H:i') }}
+    {% if order.pickupNumber %}
+    <span style="margin-left:15px;background:#8b4513;color:white;padding:6px 12px;border-radius:6px;font-weight:bold;">
+      <i class="fas fa-ticket-alt"></i> Retrait: {{ order.pickupNumber }}
+    </span>
+    {% endif %}
+  </p>
 </div>
 
 <div class="admin-section">

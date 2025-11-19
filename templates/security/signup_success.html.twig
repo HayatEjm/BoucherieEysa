@@ -1,0 +1,239 @@
+{# Template pour la page de confirmation après inscription #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Vérifiez votre email - Boucherie Eysa{% endblock %}
+
+{% block body %}
+    <div class="auth-container">
+        <div class="auth-card auth-success">
+            {# Icône de succès #}
+            <div class="success-icon">
+                <i class="fas fa-envelope-circle-check"></i>
+            </div>
+
+            {# En-tête #}
+            <div class="auth-header">
+                <h1>Vérifiez votre email</h1>
+                <p class="success-subtitle">Votre compte a bien été créé !</p>
+            </div>
+
+            {# Message principal #}
+            <div class="verification-message">
+                <div class="alert-eysa alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <p>
+                        Un <strong>email de confirmation</strong> vient d'être envoyé à&nbsp;:<br>
+                        <strong class="user-email">{{ email }}</strong>
+                    </p>
+                </div>
+
+                <div class="verification-steps">
+                    <h2>Que faire maintenant ?</h2>
+                    <ol class="steps-list">
+                        <li>
+                            <i class="fas fa-1"></i>
+                            <div>
+                                <strong>Consultez votre boîte mail</strong>
+                                <p>Recherchez un email de <code>contact@boucherie-eysa.fr</code></p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-2"></i>
+                            <div>
+                                <strong>Cliquez sur le lien de vérification</strong>
+                                <p>Le lien est valide pendant 24 heures</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-3"></i>
+                            <div>
+                                <strong>Connectez-vous à votre compte</strong>
+                                <p>Une fois votre email vérifié, vous pourrez vous connecter</p>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+
+                {# Aide #}
+                <div class="verification-help">
+                    <p class="help-title">
+                        <i class="fas fa-question-circle"></i>
+                        Vous n'avez pas reçu l'email ?
+                    </p>
+                    <ul class="help-list">
+                        <li>Vérifiez votre dossier <strong>spam/courrier indésirable</strong></li>
+                        <li>Attendez quelques minutes (délai de livraison)</li>
+                        <li>Vérifiez que l'adresse email est correcte</li>
+                    </ul>
+
+                    {# Bouton renvoyer l'email (optionnel - nécessite route dédiée) #}
+                    {# <form method="post" action="{{ path('app_resend_verification') }}" class="resend-form">
+                        <input type="hidden" name="email" value="{{ email }}">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('resend_verification') }}">
+                        <button type="submit" class="btn-eysa btn-eysa-outline">
+                            <i class="fas fa-paper-plane"></i>
+                            Renvoyer l'email
+                        </button>
+                    </form> #}
+                </div>
+            </div>
+
+            {# Actions #}
+            <div class="auth-actions">
+                <a href="{{ path('app_login') }}" class="btn-eysa btn-eysa-outline">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Aller à la page de connexion
+                </a>
+                <a href="{{ path('app_home') }}" class="btn-eysa btn-eysa-secondary">
+                    <i class="fas fa-home"></i>
+                    Retour à l'accueil
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{# CSS spécifique #}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/css/auth.css') }}">
+    <style>
+        .success-icon {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .success-icon i {
+            font-size: 4rem;
+            color: var(--success-color, #149e27);
+            animation: checkBounce 0.6s ease-out;
+        }
+        
+        @keyframes checkBounce {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .success-subtitle {
+            color: var(--success-color, #149e27);
+            font-weight: 600;
+        }
+        
+        .user-email {
+            color: var(--primary-color, #8B1538);
+            font-size: 1.1rem;
+        }
+        
+        .verification-steps {
+            margin: 2rem 0;
+        }
+        
+        .verification-steps h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary, #2c2c2c);
+        }
+        
+        .steps-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: step;
+        }
+        
+        .steps-list li {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--beige-light, #FAF7F2);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid var(--primary-color, #8B1538);
+        }
+        
+        .steps-list li i {
+            width: 32px;
+            height: 32px;
+            background: var(--primary-color, #8B1538);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .steps-list li strong {
+            display: block;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary, #2c2c2c);
+        }
+        
+        .steps-list li p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: var(--text-secondary, #5a5a5a);
+        }
+        
+        .steps-list code {
+            background: rgba(139, 21, 56, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            color: var(--primary-color, #8B1538);
+        }
+        
+        .verification-help {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .help-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #856404;
+        }
+        
+        .help-title i {
+            margin-right: 0.5rem;
+        }
+        
+        .help-list {
+            list-style: none;
+            padding-left: 1.5rem;
+            margin: 0;
+        }
+        
+        .help-list li {
+            position: relative;
+            margin-bottom: 0.5rem;
+            color: #856404;
+        }
+        
+        .help-list li::before {
+            content: "→";
+            position: absolute;
+            left: -1.5rem;
+            font-weight: bold;
+        }
+        
+        .auth-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .auth-actions {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+    </style>
+{% endblock %}

@@ -160,6 +160,13 @@ class CheckoutController extends AbstractController
                     'orderNumber' => $order->getOrderNumber()
                 ]);
 
+            } catch (\InvalidArgumentException $e) {
+                // Erreurs fonctionnelles (ex: jour fermé, créneau indisponible) affichées clairement à l'utilisateur
+                $this->logger->warning('Validation checkout échouée', [
+                    'error' => $e->getMessage(),
+                    'customer_name' => $order->getCustomerName()
+                ]);
+                $this->addFlash('error', $e->getMessage());
             } catch (\Exception $e) {
                 $this->logger->error('Erreur lors du traitement de la commande', [
                     'error' => $e->getMessage(),

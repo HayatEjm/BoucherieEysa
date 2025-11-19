@@ -40,7 +40,10 @@ function setSuggestion(val) {
 // Ajout au panier via store Pinia
 async function addToCart() {
   if (quantity.value < props.minWeight) {
-    alert(`Quantité minimale requise : ${props.minWeight}g`)
+    const minDisplay = props.minWeight >= 1000 
+      ? (props.minWeight / 1000).toFixed(1) + ' kg'
+      : props.minWeight + ' g';
+    toast.showToast(`Quantité insuffisante : minimum ${minDisplay} requis`, 'error')
     return
   }
 
@@ -50,7 +53,7 @@ async function addToCart() {
     const message = await cart.addToCart(props.product.id, quantity.value)
     toast.showToast('Produit ajouté au panier')
   } catch (err) {
-    toast.showToast(err.message || 'Erreur lors de l’ajout au panier', 'error')
+    toast.showToast(err.message || "Erreur lors de l'ajout au panier", 'error')
   } finally {
     isAdding.value = false
   }

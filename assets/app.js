@@ -3,38 +3,48 @@ import './bootstrap.js';
 // Import Vue.js et composants principaux
 import { createApp } from 'vue'
 import { pinia } from './stores/pinia'
+import { useToast } from './composables/useToast'
 import DropdownMenu from './components/DropdownMenu.vue'
 import SearchBar from './components/SearchBar.vue'
 import CartBadge from './components/CartBadge.vue'
 import AddToCartButton from './components/AddToCartButton.vue'
+import ToastVue from './components/ToastVue.vue'
 
 // Attendre que le DOM soit complètement chargé
 document.addEventListener('DOMContentLoaded', function() {
   console.log('🚀 DOM chargé, initialisation des composants Vue...')
 
+  // Monter le système de toast global (doit être monté en premier)
+  const toastEl = document.getElementById('vue-toasts')
+  if (toastEl) {
+    const toastApp = createApp(ToastVue)
+    toastApp.mount(toastEl)
+    console.log('✅ Système de toasts monté globalement')
+  }
+
   // Initialisation du menu déroulant des catégories
   const mountPoint = document.getElementById('vue-dropdown-menu')
   if (mountPoint) {
     const categoriesData = mountPoint.dataset.categories
-    console.log('🔍 DEBUG Menu - data-categories:', categoriesData)
+    console.log('DEBUG Menu - data-categories:', categoriesData)
     
     if (categoriesData) {
       try {
         const categories = JSON.parse(categoriesData)
-        console.log('✅ Categories parsées:', categories)
+        console.log('Categories parsées:', categories)
         
         const dropdownApp = createApp(DropdownMenu, { categories })
         dropdownApp.mount(mountPoint)
-        console.log('✅ Menu déroulant Vue monté avec succès')
+        console.log('Menu déroulant Vue monté avec succès')
       } catch (error) {
-        console.error("❌ Erreur initialisation menu :", error)
+        console.error("Erreur initialisation menu :", error)
         console.error("Stack trace:", error.stack)
       }
     } else {
-      console.error('❌ ERREUR: data-categories est vide ou undefined')
+      console.error('ERREUR: data-categories est vide ou undefined')
     }
   } else {
-    console.error('❌ ERREUR: Element #vue-dropdown-menu introuvable dans le DOM')
+    console.error('ERREUR: Element #vue-dropdown-menu introuvable dans le DOM')
   }
 
   // Composant de recherche avec store Pinia
@@ -43,9 +53,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchApp = createApp(SearchBar)
     searchApp.use(pinia)
     searchApp.mount(searchEl)
-    console.log('✅ Barre de recherche montée')
+    console.log('Barre de recherche montée')
   } else {
-    console.log('ℹ️ Pas de barre de recherche sur cette page')
+    console.log('ℹPas de barre de recherche sur cette page')
   }
 
   // Badge compteur panier dans le header
@@ -55,12 +65,12 @@ document.addEventListener('DOMContentLoaded', function() {
       const badgeApp = createApp(CartBadge)
       badgeApp.use(pinia)
       badgeApp.mount(cartBadgeEl)
-      console.log('✅ Badge panier monté')
+      console.log(' Badge panier monté')
     } catch (error) {
-      console.error('❌ Erreur initialisation badge panier :', error)
+      console.error('Erreur initialisation badge panier :', error)
     }
   } else {
-    console.log('ℹ️ Pas de badge panier sur cette page')
+    console.log('ℹPas de badge panier sur cette page')
   }
 })
 
@@ -153,6 +163,19 @@ import './styles/components/cookie-banner.css'
 
 //  Styles principaux EN DERNIER pour qu'ils gagnent en spécificité
 import './styles/app.css'
+
+// Exposer le système de toast globalement pour les scripts JS vanilla
+const globalToast = useToast()
+window.BoucherieCart = {
+  showNotification: (message, type = 'success') => {
+    globalToast.showToast(message, type)
+  },
+  loadCartCount: () => {
+    // Recharger le badge panier si présent
+    const event = new CustomEvent('cart-updated')
+    window.dispatchEvent(event)
+  }
+}
 
 // Note: registerVueControllerComponents supprimé car causait des erreurs en production
 // Les composants Vue sont montés manuellement ci-dessus

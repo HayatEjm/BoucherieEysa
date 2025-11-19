@@ -25,13 +25,13 @@ class OrderController extends AbstractController
         return $this->render('admin/orders/index.html.twig', ['orders' => $orders]);
     }
 
-    #[Route('/{id}', name: 'view', methods: ['GET'])]
+    #[Route('/{id}', name: 'view', methods: ['GET'], requirements: ['id' => '\\d+'])]
     public function view(Order $order): Response
     {
         return $this->render('admin/orders/view.html.twig', ['order' => $order]);
     }
 
-    #[Route('/{id}/status', name: 'status', methods: ['POST'])]
+    #[Route('/{id}/status', name: 'status', methods: ['POST'], requirements: ['id' => '\\d+'])]
     public function updateStatus(Order $order, Request $request): Response
     {
         // Simple formulaire POST (pas d'AJAX ici)
@@ -56,12 +56,13 @@ class OrderController extends AbstractController
         $orders = $this->em->getRepository(Order::class)->findBy([], ['id' => 'DESC']);
 
         $fh = fopen('php://temp', 'r+');
-        fputcsv($fh, ['ID', 'N° commande', 'Date', 'Client', 'Email', 'Téléphone', 'Statut', 'Retrait (date)', 'Créneau', 'Total TTC (€)'], ';');
+        fputcsv($fh, ['ID', 'N° commande', 'N° retrait', 'Date', 'Client', 'Email', 'Téléphone', 'Statut', 'Retrait (date)', 'Créneau', 'Total TTC (€)'], ';');
 
         foreach ($orders as $o) {
             fputcsv($fh, [
                 $o->getId(),
                 $o->getOrderNumber(),
+                $o->getPickupNumber() ?? '-',
                 $o->getCreatedAt()?->format('Y-m-d H:i'),
                 $o->getCustomerName(),
                 $o->getCustomerEmail(),
@@ -76,9 +77,16 @@ class OrderController extends AbstractController
         $csv = stream_get_contents($fh);
         fclose($fh);
 
-        return new Response($csv, 200, [
+        // Compat Excel Windows: ajoute le BOM UTF-8 et force les fins de ligne CRLF
+        $csvWithBom = "\xEF\xBB\xBF" . str_replace("\n", "\r\n", $csv);
+        $date = (new \DateTime())->format('Y-m-d');
+        $filename = sprintf('orders-%s.csv', $date);
+
+        return new Response($csvWithBom, 200, [
             'Content-Type'        => 'text/csv; charset=UTF-8',
-            'Content-Disposition' => 'attachment; filename="orders.csv"',
+            'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
+            'Cache-Control'       => 'no-store, no-cache, must-revalidate',
+            'Pragma'              => 'no-cache',
         ]);
     }
 }

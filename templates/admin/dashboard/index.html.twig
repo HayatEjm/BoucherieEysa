@@ -69,7 +69,14 @@
         {% for order in recent_orders|default([]) %}
         <div class="list-item">
           <div class="item-info">
-            <div class="item-title">{{ order.orderNumber|default('#' ~ order.id) }}</div>
+            <div class="item-title">
+              {{ order.orderNumber|default('#' ~ order.id) }}
+              {% if order.pickupNumber %}
+              <span style="margin-left:8px;background:#8b4513;color:white;padding:2px 8px;border-radius:4px;font-size:0.85em;font-weight:bold;">
+                {{ order.pickupNumber }}
+              </span>
+              {% endif %}
+            </div>
             <div class="item-subtitle">{{ order.customerName|default('Client') }} — {{ order.createdAt|default('now')|date('d/m/Y H:i') }}</div>
           </div>
           <div style="display: flex; align-items: center; gap: 12px;">

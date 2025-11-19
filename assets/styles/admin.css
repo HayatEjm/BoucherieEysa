@@ -4,17 +4,36 @@
 
 /* Variables globales */
 :root {
+    /* Couleurs principales */
     --admin-primary: #8B4513;
     --admin-primary-dark: #654321;
     --admin-secondary: #D2691E;
-    --admin-success: #28a745;
-    --admin-warning: #ffc107;
+
+    /* Semantic - Contraste amélioré WCAG AA */
+    --admin-success: #218838;      /* Vert plus foncé pour meilleur contraste (ratio 4.5:1) */
+    --admin-warning: #e0a800;      /* Jaune foncé lisible */
     --admin-danger: #dc3545;
-    --admin-info: #17a2b8;
+    --admin-info: #138496;         /* Teal foncé */
+    /* Shades for hover (contraste renforcé) */
+    --admin-success-600: #155724;  /* Vert très foncé au hover */
+    --admin-warning-600: #c69500;  /* Jaune très foncé */
+    --admin-danger-600: #a71d2a;   /* Rouge très foncé */
+    --admin-info-600: #0e6674;     /* Teal très foncé */
+
+    /* Neutres / gris */
+    --admin-white: #ffffff;
     --admin-light: #f8f9fa;
     --admin-dark: #343a40;
-    --admin-white: #ffffff;
     --admin-border: #dee2e6;
+    --admin-gray-50: #f9fafb;
+    --admin-gray-100: #f3f4f6;
+    --admin-gray-200: #e5e7eb;
+    --admin-gray-300: #d1d5db;
+
+    /* Rayons et ombres */
+    --admin-radius: 12px;
+    --admin-shadow-sm: 0 1px 2px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.1);
+    --admin-shadow-lg: 0 10px 25px rgba(0,0,0,0.12);
 }
 
 /* Reset et base */
@@ -24,7 +43,9 @@
     box-sizing: border-box;
 }
 
-body.admin {
+/* Appliquer le thème admin au body avec les deux variantes de classe */
+body.admin,
+body.admin-body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--admin-light);
     color: var(--admin-dark);
@@ -328,6 +349,7 @@ body.admin {
 
 .btn:hover {
     background: var(--admin-primary-dark);
+    color: var(--admin-white);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
 }
@@ -354,6 +376,33 @@ body.admin {
 .btn-outline:hover {
     background: var(--admin-primary);
     color: var(--admin-white);
+}
+
+/* Boutons – survol à contraste élevé (priorité sur le générique) */
+.btn-primary:hover {
+    background: var(--admin-primary-dark);
+    color: var(--admin-white);
+    box-shadow: 0 6px 20px rgba(101, 67, 33, 0.4);
+}
+.btn-success:hover {
+    background: var(--admin-success-600);
+    color: var(--admin-white);
+    box-shadow: 0 6px 20px rgba(21, 87, 36, 0.4); /* Ombre verte renforcée */
+}
+.btn-danger:hover {
+    background: var(--admin-danger-600);
+    color: var(--admin-white);
+    box-shadow: 0 6px 20px rgba(167, 29, 42, 0.4);
+}
+.btn-info:hover {
+    background: var(--admin-info-600);
+    color: var(--admin-white);
+    box-shadow: 0 6px 20px rgba(14, 102, 116, 0.4);
+}
+.btn-warning:hover {
+    background: var(--admin-warning-600);
+    color: var(--admin-dark);
+    box-shadow: 0 6px 20px rgba(198, 149, 0, 0.4);
 }
 
 /* ========================================
@@ -948,7 +997,9 @@ body.admin {
         transform: translateX(-100%);
     }
     
-    .admin-sidebar.open {
+    /* Supporter à la fois .open (ancien) et .sidebar-mobile-open (JS actuel) */
+    .admin-sidebar.open,
+    .admin-sidebar.sidebar-mobile-open {
         transform: translateX(0);
     }
     
@@ -961,7 +1012,58 @@ body.admin {
         display: block;
     }
     
-    .sidebar-overlay.active {
+    /* Supporter à la fois .active (ancien) et .overlay-active (JS actuel) */
+    .sidebar-overlay.active,
+    .sidebar-overlay.overlay-active {
         display: block;
     }
+}
+
+/* ========================================
+   ACCESSIBILITÉ & COMPORTEMENT (SÛR PAR DÉFAUT)
+   ======================================== */
+
+/* Focus visibles pour la navigation clavier */
+.nav-link:focus,
+.nav-link:focus-visible,
+.btn:focus,
+.btn:focus-visible,
+.header-btn:focus,
+.header-btn:focus-visible {
+    outline: 3px solid var(--admin-secondary);
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
+/* Prise en charge des classes togglées par le JS */
+.admin-sidebar.sidebar-collapsed {
+    transform: translateX(-100%);
+}
+
+.admin-main.main-expanded {
+    margin-left: 0;
+}
+
+/* Désactiver toutes les animations/transitions dans l'admin */
+.admin-body *,
+.admin-body *::before,
+.admin-body *::after {
+    animation: none !important;
+    transition: none !important;
+}
+
+/* Éviter les "sauts" dus aux transforms sur hover */
+.btn:hover,
+.stat-card:hover,
+.admin-nav a:hover,
+.list-item:hover {
+    transform: none !important;
+}
+
+/* Boutons désactivés */
+.btn[disabled],
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
 }

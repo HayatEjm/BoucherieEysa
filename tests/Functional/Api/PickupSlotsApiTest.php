@@ -33,6 +33,15 @@ class PickupSlotsApiTest extends WebTestCase
         if ($response['success']) {
             $this->assertArrayHasKey('data', $response, 'Une réponse réussie doit avoir un champ data');
             $this->assertArrayHasKey('slots', $response['data'], 'Les données doivent contenir les slots');
+
+            // Nouveau contrat: chaque jour inclut un indicateur closed
+            if (!empty($response['data']['slots'])) {
+                $premierJour = $response['data']['slots'][0];
+                $this->assertArrayHasKey('date', $premierJour);
+                $this->assertArrayHasKey('day_name', $premierJour);
+                $this->assertArrayHasKey('closed', $premierJour);
+                $this->assertArrayHasKey('slots', $premierJour);
+            }
         }
     }
 
@@ -48,17 +57,20 @@ class PickupSlotsApiTest extends WebTestCase
         $response = json_decode($client->getResponse()->getContent(), true);
 
         if ($response['success'] && !empty($response['data']['slots'])) {
-            $premierCreneau = $response['data']['slots'][0];
-            
-            // Vérifier la structure mentionnée dans le dossier section 4.6
-            $this->assertArrayHasKey('date', $premierCreneau, 'Chaque créneau doit avoir une date');
-            $this->assertArrayHasKey('day_name', $premierCreneau, 'Chaque créneau doit avoir un nom de jour');
-            
-            if (isset($premierCreneau['slots']) && !empty($premierCreneau['slots'])) {
-                $premierSlot = $premierCreneau['slots'][0];
-                $this->assertArrayHasKey('key', $premierSlot, 'Chaque slot doit avoir une clé');
-                $this->assertArrayHasKey('time', $premierSlot, 'Chaque slot doit avoir une heure');
-                $this->assertArrayHasKey('available', $premierSlot, 'Chaque slot doit avoir un statut disponible');
+            $premierJour = $response['data']['slots'][0];
+            $this->assertArrayHasKey('closed', $premierJour, 'Le champ closed doit exister');
+
+            if ($premierJour['closed'] === true) {
+                $this->assertIsArray($premierJour['slots'], 'Slots doit être un tableau même fermé');
+                $this->assertEmpty($premierJour['slots'], 'Jour fermé => slots vide');
+            } else {
+                if (!empty($premierJour['slots'])) {
+                    $premierSlot = $premierJour['slots'][0];
+                    $this->assertArrayHasKey('key', $premierSlot);
+                    $this->assertArrayHasKey('time', $premierSlot);
+                    $this->assertArrayHasKey('available', $premierSlot);
+                    $this->assertArrayHasKey('status', $premierSlot);
+                }
             }
         }
     }
@@ -78,5 +90,27 @@ class PickupSlotsApiTest extends WebTestCase
             in_array($client->getResponse()->getStatusCode(), [200, 400]),
             'L\'API doit gérer les paramètres invalides'
         );
+    }
+
+    public function testApiInclutJoursFermes(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/api/pickup-slots');
+        $this->assertResponseIsSuccessful();
+        $data = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey('data', $data);
+        $this->assertArrayHasKey('slots', $data['data']);
+
+        $foundClosed = false;
+        foreach ($data['data']['slots'] as $jour) {
+            if (isset($jour['closed']) && $jour['closed'] === true) {
+                $foundClosed = true;
+                $this->assertIsArray($jour['slots']);
+                $this->assertEmpty($jour['slots']);
+                break;
+            }
+        }
+        $this->assertTrue($foundClosed, 'Au moins un jour fermé devrait apparaître (dimanche ou lundi)');
     }
 }

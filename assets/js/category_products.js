@@ -71,7 +71,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 const minDisplay = minWeight >= 1000 ?
                     (minWeight/1000).toFixed(1) + 'kg' :
                     minWeight + 'g';
-                window.BoucherieCart?.showNotification(`Quantité insuffisante pour "${productName}".\n\nMinimum requis : ${minDisplay}\nCette contrainte est nécessaire pour la rentabilité et la praticité en boucherie.`, 'error');
+                window.BoucherieCart?.showNotification(
+                    `Quantité insuffisante : minimum ${minDisplay} requis pour ce produit`, 
+                    'error'
+                );
                 return;
             }
             this.disabled = true;

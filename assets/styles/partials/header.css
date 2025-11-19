@@ -237,6 +237,24 @@
 
 .main-header .nav-links a {
     color: #ffffff !important;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* Underline animé au hover */
+.main-header .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #C2185B; /* Bordeaux rosé plus clair pour l'underline */
+    transition: width 0.3s ease;
+}
+
+.main-header .nav-links a:hover::after {
+    width: 100%;
 }
 
 .main-header .icon-link {
@@ -247,17 +265,20 @@
     color: #ffffff !important;
 }
 
-/* Au survol, seul le rouge est autorisé */
+/* Au survol, underline + texte légèrement teinté (effet halo lumineux) */
 .main-header a:hover {
-    color: #8B1538 !important;
+    color: #E8B4BC !important; /* Rose très pâle, effet lumineux discret */
+    text-shadow: 0 0 8px rgba(226, 180, 188, 0.3); /* Halo doux */
 }
 
 .main-header .nav-links a:hover {
-    color: #8B1538 !important;
+    color: #E8B4BC !important; /* Effet halo rose pâle */
+    text-shadow: 0 0 8px rgba(226, 180, 188, 0.3);
 }
 
 .main-header .icon-link:hover {
-    color: #8B1538 !important;
+    color: #E8B4BC !important; /* Même effet sur les icônes */
+    text-shadow: 0 0 8px rgba(226, 180, 188, 0.3);
 }
 
 /* Menu déroulant "nos produits" */

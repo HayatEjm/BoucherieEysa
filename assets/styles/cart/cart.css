@@ -1,11 +1,4 @@
-/* 
-   CSS SPÉCIFIQUE POUR LA PAGE PANIER (aligné Design System)
-   - Utilise exclusivement les variables du design system :
-     --primary-color, --primary-dark, --beige-light, --text-primary,
-     --border-color, --medium-gray, --danger-color, --success-color,
-     --shadow-sm/md/lg, --border-radius-md, --font-family-primary,
-     --transition-normal
-*/
+
 
 /* CONTENEUR PRINCIPAL DU PANIER */
 .cart-container {
@@ -155,6 +148,12 @@
     transition: transform var(--transition-normal), box-shadow var(--transition-normal), background-color var(--transition-normal);
 }
 
+.btn-remove-item i,
+.btn-clear-cart i {
+    font-size: 0.85rem;
+    opacity: 1;
+}
+
 /* BOUTON MODIFIER */
 .btn-modify-item {
     background: var(--primary-color);
@@ -174,11 +173,20 @@
     transition: transform var(--transition-normal), box-shadow var(--transition-normal), background-color var(--transition-normal);
 }
 
+.btn-modify-item i {
+    font-size: 0.9rem;
+    opacity: 1;
+}
+
 .btn-modify-item:hover {
     background: var(--primary-dark);
     box-shadow: var(--shadow-sm);
     transform: translateY(-1px);
     color: var(--white);
+}
+
+.btn-modify-item:hover i {
+    opacity: 1;
 }
 
 .btn-remove-item:hover,
@@ -187,6 +195,11 @@
     box-shadow: var(--shadow-sm);
     transform: translateY(-1px);
     color: var(--white);
+}
+
+.btn-remove-item:hover i,
+.btn-clear-cart:hover i {
+    opacity: 1;
 }
 .btn-remove-item:active,
 .btn-clear-cart:active,
@@ -215,8 +228,6 @@
     outline: 2px solid #c53030;
     outline-offset: 2px;
 }
-.btn-remove-item i,
-.btn-clear-cart i { font-size: 0.85rem; }
 
 /* RÉSUMÉ DU PANIER */
 .cart-summary {
@@ -306,11 +317,25 @@
     cursor: pointer;
     transition: all var(--transition-normal);
     text-decoration: none;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
+
+.btn-checkout i {
+    font-size: 1rem;
+    opacity: 1;
+}
+
 .btn-checkout:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
+    color: var(--white);
+}
+
+.btn-checkout:hover i {
+    opacity: 1;
 }
 
 /* === OPTIMISATION UX CHECKOUT === */

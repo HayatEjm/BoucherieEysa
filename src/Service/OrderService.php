@@ -24,7 +24,8 @@ class OrderService
         private EntityManagerInterface $entityManager,
         private OrderRepository $orderRepository,
         private CartService $cartService,
-        private LoggerInterface $logger
+        private LoggerInterface $logger,
+        private PickupSlotService $pickupSlotService
     ) {}
 
     /**
@@ -114,6 +115,14 @@ class OrderService
 
         if ($order->getPickupDate() < new \DateTime('today')) {
             throw new \InvalidArgumentException('La date de retrait ne peut pas être dans le passé');
+        }
+
+        // Vérifier que le créneau est disponible (jour non fermé + capacité non dépassée)
+        if (!$this->pickupSlotService->isSlotAvailable($order->getPickupDate(), $order->getPickupTimeSlot())) {
+            throw new \InvalidArgumentException(
+                'Le créneau sélectionné n\'est pas disponible. ' .
+                'Veuillez choisir un autre jour ou créneau horaire.'
+            );
         }
 
         $this->logger->info('Commande validée', ['order_number' => $order->getOrderNumber()]);

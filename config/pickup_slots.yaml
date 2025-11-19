@@ -9,11 +9,12 @@ pickup_slots:
         apres-midi: "15:30-19:15"
     
     # Jours fermés (0 = dimanche, 1 = lundi, etc.)
-    closed_days: [1]  # Lundi fermé
+    closed_days: [0, 1]  # Dimanche et Lundi fermés
     
     # Nombre de jours à afficher dans le calendrier
     days_ahead: 7
     
-    # Horaires spéciaux par jour de la semaine
-    special_hours:
-        0: "10:00-13:00"  # Dimanche : seulement matin modifié
+    # Horaires spéciaux par jour de la semaine (optionnel)
+    # Exemple si un jour a des horaires différents pour le matin :
+    # special_hours:
+    #     2: "10:00-13:00"  # Mardi : matin décalé

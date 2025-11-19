@@ -16,11 +16,13 @@ class AdminAccessTest extends WebTestCase
     {
         $client = static::createClient();
         
-        // Tentative d'accès au dashboard sans authentification
-        $client->request('GET', '/admin/dashboard');
+    // Tentative d'accès à la page d'accueil admin sans authentification
+    // Note: la route '/admin/dashboard' n'existe pas; on teste la racine admin
+    $client->request('GET', '/admin');
         
         // Doit être redirigé vers login (302) ou refusé (403/401)
-        $this->assertResponseRedirects('/login', 302);
+        $loginUrl = static::getContainer()->get('router')->generate('app_login');
+        $this->assertResponseRedirects($loginUrl, 302);
     }
     
     /**
@@ -31,8 +33,8 @@ class AdminAccessTest extends WebTestCase
         $client = static::createClient();
         
         $client->request('GET', '/admin/products');
-        
-        $this->assertResponseRedirects('/login', 302);
+        $loginUrl = static::getContainer()->get('router')->generate('app_login');
+        $this->assertResponseRedirects($loginUrl, 302);
     }
     
     /**
@@ -43,7 +45,7 @@ class AdminAccessTest extends WebTestCase
         $client = static::createClient();
         
         $client->request('GET', '/admin/orders');
-        
-        $this->assertResponseRedirects('/login', 302);
+        $loginUrl = static::getContainer()->get('router')->generate('app_login');
+        $this->assertResponseRedirects($loginUrl, 302);
     }
 }

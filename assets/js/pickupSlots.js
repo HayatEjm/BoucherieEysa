@@ -166,36 +166,45 @@ const PickupSlotSelector = {
                         :key="day.date"
                         class="pickup-day"
                     >
-                        <div class="pickup-day__header">
+                        <div class="pickup-day__header" :class="{ 'pickup-day--closed': day.closed }">
                             <h4 class="pickup-day__date">
                                 {{ formatDate(day.date) }}
+                                <span v-if="day.closed" class="pickup-day__badge pickup-day__badge--closed">Fermé</span>
                             </h4>
                         </div>
 
                         <div class="pickup-day__slots">
-                            <button
-                                v-for="slot in day.slots"
-                                :key="slot.key"
-                                :class="[
-                                    getSlotClass(slot),
-                                    { 'pickup-slot--selected': isSelected(day.date, slot.key) }
-                                ]"
-                                :disabled="!slot.available"
-                                @click="selectSlot(day.date, slot)"
-                            >
-                                <span class="pickup-slot__time">{{ slot.time }}</span>
-                                <span class="pickup-slot__status">
-                                    <span v-if="slot.status === 'available'" class="status-text">
-                                        {{ slot.max_orders - slot.current_orders }} places restantes
+                            <template v-if="day.closed">
+                                <button class="pickup-slot pickup-slot--full" disabled>
+                                    <span class="pickup-slot__time">Aucun retrait</span>
+                                    <span class="pickup-slot__status">Jour fermé</span>
+                                </button>
+                            </template>
+                            <template v-else>
+                                <button
+                                    v-for="slot in day.slots"
+                                    :key="slot.key"
+                                    :class="[
+                                        getSlotClass(slot),
+                                        { 'pickup-slot--selected': isSelected(day.date, slot.key) }
+                                    ]"
+                                    :disabled="!slot.available"
+                                    @click="selectSlot(day.date, slot)"
+                                >
+                                    <span class="pickup-slot__time">{{ slot.time }}</span>
+                                    <span class="pickup-slot__status">
+                                        <span v-if="slot.status === 'available'" class="status-text">
+                                            {{ slot.max_orders - slot.current_orders }} places restantes
+                                        </span>
+                                        <span v-else-if="slot.status === 'limited'" class="status-text">
+                                            Plus que {{ slot.max_orders - slot.current_orders }} places
+                                        </span>
+                                        <span v-else class="status-text">
+                                            Complet
+                                        </span>
                                     </span>
-                                    <span v-else-if="slot.status === 'limited'" class="status-text">
-                                        Plus que {{ slot.max_orders - slot.current_orders }} places
-                                    </span>
-                                    <span v-else class="status-text">
-                                        Complet
-                                    </span>
-                                </span>
-                            </button>
+                                </button>
+                            </template>
                         </div>
                     </div>
                 </div>

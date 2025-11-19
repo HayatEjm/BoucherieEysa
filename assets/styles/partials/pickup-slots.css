@@ -99,6 +99,26 @@
     text-transform: capitalize;
 }
 
+/* Badge de statut jour fermé */
+.pickup-day__badge {
+    display: inline-block;
+    margin-left: var(--spacing-sm);
+    padding: 2px 8px;
+    font-size: var(--text-xs, 12px);
+    border-radius: 999px;
+    vertical-align: middle;
+}
+
+.pickup-day__badge--closed {
+    background: var(--color-gray-200);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+}
+
+.pickup-day--closed .pickup-day__date {
+    color: var(--color-text-secondary);
+}
+
 .pickup-day__slots {
     padding: var(--spacing-md);
     display: grid;

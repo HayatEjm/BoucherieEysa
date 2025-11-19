@@ -174,12 +174,12 @@
     width: 100%;
     box-sizing: border-box;
     padding: 0.7rem 0.9rem;
-    border: 2px solid var(--border-color);
+    border: 1px solid #d1d5db; /* Gris neutre par défaut */
     border-radius: var(--border-radius-md);
     font-size: 1rem;
     transition: all var(--transition-normal);
     background: var(--white);
-    color: var(--text-primary);
+    color: #1f2937; /* Gris très foncé pour texte lisible */
 }
 
 .form-group .form-control:focus {
@@ -188,8 +188,15 @@
     box-shadow: 0 0 0 3px rgba(139, 21, 56, 0.1);
 }
 
+.form-group .form-control::placeholder {
+    color: #9ca3af; /* Gris moyen pour placeholder */
+    opacity: 1;
+}
+
+/* Empêche le navigateur d'appliquer le liseret rouge automatiquement */
 .form-group .form-control:invalid {
-    border-color: var(--danger-color);
+    border-color: #d1d5db; /* Garde la bordure grise par défaut */
+    box-shadow: none; /* Retire toute ombre du navigateur */
 }
 
 /* ========== ERREURS DE VALIDATION - Redirigées vers composants ========== */
@@ -216,20 +223,20 @@
     color: var(--danger-color) !important;
 }
 
-/* Champs invalides - toutes variantes */
+/* Champs invalides - toutes variantes - Style doux, pas agressif */
 .form-group .form-control.is-invalid,
 .form-group input.error,
 .form-group select.error,
 .form-group textarea.error {
-    border-color: var(--danger-color) !important;
-    background-color: rgba(220, 38, 38, 0.05) !important;
+    border-color: rgba(220, 38, 38, 0.3) !important; /* Bordure rouge très légère */
+    background-color: rgba(220, 38, 38, 0.03) !important; /* Fond à peine teinté */
 }
 
 .form-group .form-control.is-invalid:focus,
 .form-group input.error:focus,
 .form-group select.error:focus {
-    border-color: var(--danger-color) !important;
-    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15) !important;
+    border-color: rgba(220, 38, 38, 0.5) !important; /* Un peu plus visible au focus */
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.08) !important; /* Shadow discrète */
 }
 
 /* S'assurer que les erreurs sont visibles */

@@ -38,6 +38,28 @@ class ProductController extends AbstractController
             $p->setStock((int) $request->request->get('stock', 0));
             $p->setImage($request->request->get('image', ''));
             $p->setUnit($request->request->get('unit', 'kg'));
+
+            // Limites de poids (en grammes) - facultatives
+            $minWeightRaw = trim((string) $request->request->get('min_weight', ''));
+            $maxWeightRaw = trim((string) $request->request->get('max_weight', ''));
+
+            $minWeight = ($minWeightRaw === '') ? null : max(0, (int) $minWeightRaw);
+            $maxWeight = ($maxWeightRaw === '') ? null : max(0, (int) $maxWeightRaw);
+
+            // Validation simple cohérence min/max
+            if ($minWeight !== null && $maxWeight !== null && $maxWeight < $minWeight) {
+                $this->addFlash('error', 'Le poids maximum doit être supérieur ou égal au poids minimum.');
+                // Re-render formulaire avec valeurs saisies
+                $categories = $this->em->getRepository(Category::class)->findAll();
+                return $this->render('admin/products/form.html.twig', [
+                    'product' => $p,
+                    'action'  => 'add',
+                    'categories' => $categories,
+                ]);
+            }
+
+            $p->setMinWeight($minWeight);
+            $p->setMaxWeight($maxWeight);
             
             // Gérer la catégorie
             $categoryId = $request->request->get('category_id');
@@ -74,6 +96,26 @@ class ProductController extends AbstractController
             $product->setStock((int) $request->request->get('stock', $product->getStock()));
             $product->setImage($request->request->get('image', $product->getImage()));
             $product->setUnit($request->request->get('unit', $product->getUnit() ?? 'kg'));
+
+            // Limites de poids (en grammes) - facultatives
+            $minWeightRaw = trim((string) $request->request->get('min_weight', ''));
+            $maxWeightRaw = trim((string) $request->request->get('max_weight', ''));
+
+            $minWeight = ($minWeightRaw === '') ? null : max(0, (int) $minWeightRaw);
+            $maxWeight = ($maxWeightRaw === '') ? null : max(0, (int) $maxWeightRaw);
+
+            if ($minWeight !== null && $maxWeight !== null && $maxWeight < $minWeight) {
+                $this->addFlash('error', 'Le poids maximum doit être supérieur ou égal au poids minimum.');
+                $categories = $this->em->getRepository(Category::class)->findAll();
+                return $this->render('admin/products/form.html.twig', [
+                    'product' => $product,
+                    'action'  => 'edit',
+                    'categories' => $categories,
+                ]);
+            }
+
+            $product->setMinWeight($minWeight);
+            $product->setMaxWeight($maxWeight);
             
             // Gérer la catégorie
             $categoryId = $request->request->get('category_id');

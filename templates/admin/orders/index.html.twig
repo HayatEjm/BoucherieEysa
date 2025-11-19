@@ -15,7 +15,8 @@
   <table>
     <thead>
       <tr>
-        <th>N°</th>
+        <th>N° Commande</th>
+        <th>N° Retrait</th>
         <th>Retrait</th>
         <th>Client</th>
         <th>Total</th>
@@ -31,6 +32,11 @@
               <i class="fas fa-eye" style="font-size:1.1em;"></i>
               {{ order.orderNumber ?? ('#' ~ order.id) }}
             </a>
+          </td>
+          <td>
+            <span style="background:#8b4513;color:white;padding:4px 10px;border-radius:6px;font-weight:bold;font-size:1.05em;">
+              {{ order.pickupNumber ?? '-' }}
+            </span>
           </td>
           <td>
             {% if order.pickupDate or order.pickupTimeSlot %}

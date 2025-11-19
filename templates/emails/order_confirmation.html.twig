@@ -129,7 +129,8 @@
             <!-- Informations de commande -->
             <div class="order-info">
                 <h3 style="margin: 0 0 10px; color: #8b4513;">Détails de votre commande</h3>
-                <p><strong>Numéro :</strong> #{{ order.id }}</p>
+                <p><strong>Numéro de commande :</strong> {{ order.orderNumber }}</p>
+                <p><strong>Numéro de retrait :</strong> <span style="color: #8b4513; font-weight: bold; font-size: 1.1em;">{{ order.pickupNumber }}</span></p>
                 <p><strong>Date :</strong> {{ order.createdAt|date('d/m/Y à H:i') }}</p>
                 <p><strong>Total :</strong> <span style="color: #8b4513; font-weight: bold;">{{ (order.totalTtcCents / 100)|number_format(2, ',', ' ') }} €</span></p>
             </div>

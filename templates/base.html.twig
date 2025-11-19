@@ -54,6 +54,21 @@
 </head>
 <body>
     {% include 'partials/header.html.twig' %}
+    
+        {# Conteneur global pour les toasts/notifications #}
+        <div id="vue-toasts"></div>
+    
+    {# Messages flash (site public) #}
+    <div class="flash-container" style="max-width: 1100px; margin: 10px auto; padding: 0 16px;">
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type == 'error' ? 'danger' : type }}" role="alert" style="display:flex;align-items:center;gap:.5rem;border:1px solid #ddd;border-left-width:4px;border-radius:8px;padding:10px 12px;margin:8px 0;background:#fff;{{ type == 'success' ? 'border-left-color:#2e7d32;background:#e8f5e9' : (type == 'error' ? 'border-left-color:#c62828;background:#ffebee' : (type == 'warning' ? 'border-left-color:#ef6c00;background:#fff3e0' : 'border-left-color:#1976d2;background:#e3f2fd')) }}">
+                    <i class="fas fa-{{ type == 'success' ? 'check-circle' : (type == 'error' ? 'exclamation-circle' : (type == 'warning' ? 'exclamation-triangle' : 'info-circle')) }}" aria-hidden="true"></i>
+                    <span>{{ message }}</span>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
     {% block body %}{% endblock %}
     {% include 'partials/footer.html.twig' %}
 

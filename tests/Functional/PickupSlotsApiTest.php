@@ -32,6 +32,15 @@ class PickupSlotsApiTest extends WebTestCase
         $this->assertArrayHasKey('success', $data);
         $this->assertTrue($data['success']);
         $this->assertArrayHasKey('data', $data);
+        $this->assertArrayHasKey('slots', $data['data']);
+
+        if (!empty($data['data']['slots'])) {
+            $firstDay = $data['data']['slots'][0];
+            $this->assertArrayHasKey('date', $firstDay);
+            $this->assertArrayHasKey('day_name', $firstDay);
+            $this->assertArrayHasKey('closed', $firstDay);
+            $this->assertArrayHasKey('slots', $firstDay);
+        }
     }
     
     /**
@@ -79,7 +88,8 @@ class PickupSlotsApiTest extends WebTestCase
             'CONTENT_TYPE' => 'application/json',
         ], json_encode([
             'date' => $tomorrow,
-            'timeSlot' => '10:00-11:00'
+            // La clé correcte côté API est 'time_slot' (contrat de l'API)
+            'time_slot' => 'matin'
         ]));
         
         $this->assertResponseIsSuccessful();
@@ -89,5 +99,27 @@ class PickupSlotsApiTest extends WebTestCase
         $this->assertIsArray($data);
         $this->assertArrayHasKey('success', $data);
         $this->assertArrayHasKey('data', $data);
+    }
+
+    public function testApiContainsClosedDaysFlag(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/api/pickup-slots');
+        $this->assertResponseIsSuccessful();
+        $payload = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey('data', $payload);
+        $this->assertArrayHasKey('slots', $payload['data']);
+
+        $foundClosed = false;
+        foreach ($payload['data']['slots'] as $day) {
+            if (isset($day['closed']) && $day['closed'] === true) {
+                $foundClosed = true;
+                $this->assertIsArray($day['slots']);
+                $this->assertEmpty($day['slots']);
+                break;
+            }
+        }
+        $this->assertTrue($foundClosed, 'Au moins un jour fermé (dimanche/lundi) doit être présent.');
     }
 }

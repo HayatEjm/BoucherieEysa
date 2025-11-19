@@ -28,16 +28,24 @@
             <p>Total : {{ item.totalTTC.toFixed(2) }} €</p>
           </div>
           <div class="cart-item-actions">
-            <button @click="modify(item.product.id)" class="btn-modify-item">Modifier</button>
-            <button @click="remove(item.product.id)" class="btn-remove-item">Supprimer</button>
+            <button @click="modify(item.product.id)" class="btn-modify-item">
+              <i class="fas fa-edit"></i> Modifier
+            </button>
+            <button @click="remove(item.product.id)" class="btn-remove-item">
+              <i class="fas fa-trash-alt"></i> Supprimer
+            </button>
           </div>
         </div>
       </div>
       <div class="cart-summary">
         <h3>Total TTC : {{ cart.totalPrice.toFixed(2) }} €</h3>
         <div class="cart-actions">
-          <button @click="confirmClear" class="btn-clear-cart">Vider le panier</button>
-          <a href="/checkout" class="btn-checkout">Valider le panier</a>
+          <button @click="confirmClear" class="btn-clear-cart">
+            <i class="fas fa-times-circle"></i> Vider le panier
+          </button>
+          <a href="/checkout" class="btn-checkout">
+            <i class="fas fa-check-circle"></i> Valider le panier
+          </a>
         </div>
       </div>
     </div>

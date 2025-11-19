@@ -68,6 +68,23 @@
       </div>
     </div>
 
+    <div class="form-row">
+      <div class="form-group">
+        <label for="min_weight"><i class="fas fa-weight-hanging"></i> Poids minimum (en grammes)</label>
+        <input id="min_weight" name="min_weight" type="number" min="0" step="50" class="form-control"
+               value="{{ product and product.minWeight is not null ? product.minWeight : '' }}"
+               placeholder="ex: 300 (pour 300g)">
+        <small class="help-text">Laisser vide si non applicable. Les valeurs sont stockées en grammes.</small>
+      </div>
+      <div class="form-group">
+        <label for="max_weight"><i class="fas fa-weight-scale"></i> Poids maximum (en grammes)</label>
+        <input id="max_weight" name="max_weight" type="number" min="0" step="50" class="form-control"
+               value="{{ product and product.maxWeight is not null ? product.maxWeight : '' }}"
+               placeholder="ex: 3000 (pour 3kg)">
+        <small class="help-text">Laisser vide si pas de limite. Doit être ≥ au minimum.</small>
+      </div>
+    </div>
+
     <div class="admin-actions">
       <button class="btn btn-success"><i class="fas fa-save"></i> {{ action == 'add' ? 'Ajouter' : 'Enregistrer' }}</button>
       <a href="{{ path('admin_products_index') }}" class="btn btn-secondary" style="background:#6c757d;"><i class="fas fa-times"></i> Annuler</a>

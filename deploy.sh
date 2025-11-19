@@ -32,7 +32,24 @@ echo ""
 echo "[6/7] Vidage du cache Symfony..."
 php bin/console cache:clear --env=prod --no-warmup
 
-echo ""
+echo ""<?php
+class CheckoutFormType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('customerName', TextType::class, [
+                'label' => 'Nom complet *',
+                'constraints' => [
+                    new Assert\class CheckoutFormType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('customerName', TextType::class, [
+                'label' => 'Nom complet *',
+                'constraints' => [
+                    new Assert\
 echo "[7/7] Prechauffage du cache Symfony..."
 php bin/console cache:warmup --env=prod
 

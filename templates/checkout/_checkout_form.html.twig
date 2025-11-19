@@ -49,7 +49,11 @@
         </div>
 
         {# CRÉNEAU DE RETRAIT #}
-        <div class="checkout-section">
+        <div class="checkout-section"
+             data-controller="pickup"
+             data-pickup-closed-days-value='[0,1]'
+             data-pickup-api-base-value="{{ path('api_pickup_slots_list') }}"
+             data-pickup-check-url-value="{{ path('api_pickup_slots_check') }}">
             <h3 class="checkout-section__title">
                 <i class="fas fa-clock"></i>
                 Créneau de retrait
@@ -58,15 +62,31 @@
             <div class="form-row">
                 <div class="form-group form-group--half">
                     {{ form_label(form.pickupDate) }}
-                    {{ form_widget(form.pickupDate) }}
+                    {{ form_widget(form.pickupDate, {
+                        attr: {
+                            'data-pickup-target': 'dateInput',
+                            'data-action': 'change->pickup#onDateChange'
+                        }
+                    }) }}
                     {{ form_errors(form.pickupDate) }}
                 </div>
                 <div class="form-group form-group--half">
                     {{ form_label(form.pickupTimeSlot) }}
-                    {{ form_widget(form.pickupTimeSlot) }}
+                    {{ form_widget(form.pickupTimeSlot, {
+                        attr: {
+                            'data-pickup-target': 'timeSlotSelect',
+                            'data-action': 'change->pickup#onTimeSlotChange'
+                        }
+                    }) }}
                     {{ form_errors(form.pickupTimeSlot) }}
                 </div>
             </div>
+
+            <div data-pickup-target="message" aria-live="polite" style="margin-top:6px;"></div>
+            <p class="form-hint" style="color:#666;margin-top:6px;">
+                <i class="fas fa-info-circle"></i>
+                Pas de retrait le <strong>dimanche</strong> ni le <strong>lundi</strong>.
+            </p>
             
             <div class="pickup-info">
                 <p class="pickup-info__text">

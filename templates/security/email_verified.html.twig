@@ -1,0 +1,193 @@
+{# Template pour la page de confirmation après vérification email #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Email vérifié - Boucherie Eysa{% endblock %}
+
+{% block body %}
+    <div class="auth-container">
+        <div class="auth-card auth-success">
+            {# Icône de succès animée #}
+            <div class="success-icon">
+                <i class="fas fa-circle-check"></i>
+            </div>
+
+            {# En-tête #}
+            <div class="auth-header">
+                <h1>Email vérifié ✓</h1>
+                <p class="success-subtitle">Votre compte a été activé avec succès !</p>
+            </div>
+
+            {# Message de confirmation #}
+            <div class="verification-success">
+                <div class="alert-eysa alert-success">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <strong>Félicitations !</strong>
+                        <p>Votre adresse email a été vérifiée. Vous pouvez maintenant vous connecter à votre compte.</p>
+                    </div>
+                </div>
+
+                {# Avantages du compte #}
+                <div class="account-benefits">
+                    <h2>Avec votre compte, vous pouvez :</h2>
+                    <ul class="benefits-list">
+                        <li>
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Commander vos produits en ligne</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Choisir votre créneau de retrait</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-history"></i>
+                            <span>Consulter l'historique de vos commandes</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-user"></i>
+                            <span>Gérer vos informations personnelles</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            {# Actions #}
+            <div class="auth-actions">
+                <a href="{{ path('app_login') }}" class="btn-eysa btn-eysa-primary btn-large">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Se connecter maintenant
+                </a>
+                <a href="{{ path('app_home') }}" class="btn-eysa btn-eysa-outline">
+                    <i class="fas fa-home"></i>
+                    Retour à l'accueil
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{# CSS spécifique #}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/css/auth.css') }}">
+    <style>
+        .success-icon {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .success-icon i {
+            font-size: 5rem;
+            color: var(--success-color, #149e27);
+            animation: successPulse 1s ease-in-out infinite;
+        }
+        
+        @keyframes successPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .success-subtitle {
+            color: var(--success-color, #149e27);
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+        
+        .verification-success {
+            margin: 2rem 0;
+        }
+        
+        .alert-eysa {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .alert-eysa i {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .alert-eysa strong {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .alert-eysa p {
+            margin: 0;
+        }
+        
+        .account-benefits {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--beige-light, #FAF7F2);
+            border-radius: 12px;
+        }
+        
+        .account-benefits h2 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary, #2c2c2c);
+        }
+        
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .benefits-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: white;
+            border-radius: 8px;
+            transition: transform 0.2s ease;
+        }
+        
+        .benefits-list li:hover {
+            transform: translateX(4px);
+        }
+        
+        .benefits-list i {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color, #8B1538);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.125rem;
+            flex-shrink: 0;
+        }
+        
+        .benefits-list span {
+            font-weight: 500;
+            color: var(--text-primary, #2c2c2c);
+        }
+        
+        .auth-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 2rem;
+        }
+        
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        
+        @media (min-width: 768px) {
+            .auth-actions {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+    </style>
+{% endblock %}

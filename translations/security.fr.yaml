@@ -1,0 +1,18 @@
+# Traductions françaises pour les messages de sécurité Symfony
+# Fichier: translations/security.fr.yaml
+
+# Messages d'erreur d'authentification
+"Invalid credentials.": "Identifiants invalides. Vérifiez votre email et votre mot de passe."
+"Bad credentials.": "Email ou mot de passe incorrect."
+"Username could not be found.": "Aucun compte associé à cet email."
+"The presented password is invalid.": "Le mot de passe saisi est incorrect."
+"Authentication credentials could not be found.": "Veuillez vous connecter pour accéder à cette page."
+"Access Denied.": "Accès refusé."
+"Account disabled.": "Ce compte a été désactivé."
+"Account locked.": "Ce compte a été verrouillé."
+
+# Messages génériques de sécurité
+"An authentication exception occurred.": "Une erreur d'authentification s'est produite."
+"Authentication request could not be processed due to a system problem.": "La demande d'authentification n'a pas pu être traitée en raison d'un problème système."
+"Invalid CSRF token.": "Jeton de sécurité invalide. Veuillez réessayer."
+"No session available, it either timed out or cookies are not enabled.": "Session expirée ou cookies désactivés."

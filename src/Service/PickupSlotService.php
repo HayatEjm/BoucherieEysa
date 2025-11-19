@@ -32,19 +32,15 @@ class PickupSlotService
             $date = clone $today;
             $date->add(new DateInterval("P{$i}D"));
             
-            // Skip les jours fermés
-            if (in_array((int)$date->format('w'), $this->config['closed_days'])) {
-                continue;
-            }
-            
-            $daySlots = $this->getSlotsForDate($date);
-            if (!empty($daySlots)) {
-                $slots[] = [
-                    'date' => $date->format('Y-m-d'),
-                    'day_name' => $this->getFrenchDayName($date),
-                    'slots' => $daySlots
-                ];
-            }
+            $isClosed = $this->isClosedDay($date);
+            $daySlots = $isClosed ? [] : $this->getSlotsForDate($date);
+
+            $slots[] = [
+                'date' => $date->format('Y-m-d'),
+                'day_name' => $this->getFrenchDayName($date),
+                'closed' => $isClosed,
+                'slots' => $daySlots
+            ];
         }
         
         return $slots;
@@ -70,8 +66,8 @@ class PickupSlotService
             
             $slots[] = [
                 'key' => $slotKey,
-                'time' => $slotKey === 'matin' && $dayOfWeek === 0 
-                    ? $this->config['special_hours'][0] 
+                'time' => ($slotKey === 'matin' && $dayOfWeek === 0 && isset($this->config['special_hours'][0]))
+                    ? $this->config['special_hours'][0]
                     : $slotTime,
                 'available' => $isAvailable,
                 'current_orders' => $currentOrders,
@@ -125,14 +121,7 @@ class PickupSlotService
         return $days[$date->format('l')];
     }
 
-    /**
-     * Vérifie si un créneau est disponible
-     */
-    public function isSlotAvailable(DateTime $date, string $timeSlot): bool
-    {
-        $currentOrders = $this->countOrdersForSlot($date, $timeSlot);
-        return $currentOrders < $this->config['max_orders_per_slot'];
-    }
+    
 
     /**
      * Récupère les créneaux disponibles pour une période donnée
@@ -143,17 +132,15 @@ class PickupSlotService
         $currentDate = clone $startDate;
         
         while ($currentDate <= $endDate) {
-            // Skip les jours fermés
-            if (!in_array((int)$currentDate->format('w'), $this->config['closed_days'])) {
-                $daySlots = $this->getSlotsForDate($currentDate);
-                if (!empty($daySlots)) {
-                    $slots[] = [
-                        'date' => $currentDate->format('Y-m-d'),
-                        'day_name' => $this->getFrenchDayName($currentDate),
-                        'slots' => $daySlots
-                    ];
-                }
-            }
+            $isClosed = $this->isClosedDay($currentDate);
+            $daySlots = $isClosed ? [] : $this->getSlotsForDate($currentDate);
+
+            $slots[] = [
+                'date' => $currentDate->format('Y-m-d'),
+                'day_name' => $this->getFrenchDayName($currentDate),
+                'closed' => $isClosed,
+                'slots' => $daySlots
+            ];
             
             $currentDate->add(new DateInterval('P1D'));
         }
@@ -167,10 +154,37 @@ class PickupSlotService
     public function getAvailableSlotsForDate(DateTime $date): array
     {
         // Vérifier si ce n'est pas un jour fermé
-        if (in_array((int)$date->format('w'), $this->config['closed_days'])) {
+        if ($this->isClosedDay($date)) {
             return [];
         }
         
         return $this->getSlotsForDate($date);
+    }
+
+    /**
+     * Indique si une date correspond à un jour fermé
+     */
+    private function isClosedDay(DateTime $date): bool
+    {
+        return in_array((int)$date->format('w'), $this->config['closed_days']);
+    }
+
+    /**
+     * Vérifie si un créneau est disponible (prend en compte les jours fermés)
+     */
+    public function isSlotAvailable(DateTime $date, string $timeSlot): bool
+    {
+        // Jour fermé => indisponible
+        if ($this->isClosedDay($date)) {
+            return false;
+        }
+
+        // Dimanche après-midi explicitement non disponible (défense en profondeur)
+        if ((int)$date->format('w') === 0 && $timeSlot === 'apres-midi') {
+            return false;
+        }
+
+        $currentOrders = $this->countOrdersForSlot($date, $timeSlot);
+        return $currentOrders < $this->config['max_orders_per_slot'];
     }
 }

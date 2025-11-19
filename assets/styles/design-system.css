@@ -11,7 +11,7 @@
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   */
   
-  /* COULEURS PRINCIPALES - Pour vos boutons et liens importants */
+  /* COULEURS PRINCIPALES */
   --primary-color: #8B1538;            /* Bordeaux principal */
   --primary-light: #A91B47;            /* Bordeaux clair */
   --primary-dark: #6B1028;             /* Bordeaux foncé */
@@ -175,7 +175,7 @@ body {
   color: var(--header-text);
 }
 
-/* 🔘 BOUTONS UNIFIÉS - Style de votre image */
+/* BOUTONS UNIFIÉS */
 .btn-eysa {
   display: inline-flex;
   align-items: center;
@@ -199,7 +199,7 @@ body {
   text-decoration: none;
 }
 
-/* Bouton principal - Bordeaux (comme dans votre image) */
+/* Bouton principal - Bordeau */
 .btn-eysa-primary {
   background-color: var(--primary-color);
   color: var(--white);

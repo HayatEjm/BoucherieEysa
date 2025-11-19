@@ -5,6 +5,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\OrderItem;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity]
 class Product
@@ -43,9 +45,11 @@ class Product
 
     // Nouvelles propriétés pour la gestion du poids
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Assert\Positive(message: 'Le poids minimum doit être positif.')]
     private ?int $minWeight = null;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Assert\Positive(message: 'Le poids maximum doit être positif.')]
     private ?int $maxWeight = null;
 
     public function __construct()
@@ -194,6 +198,26 @@ class Product
     {
         $this->maxWeight = $maxWeight;
         return $this;
+    }
+
+    /**
+     * Validation personnalisée cohérence min/max.
+     */
+    public function validateWeights(ExecutionContextInterface $context): void
+    {
+        if ($this->minWeight !== null && $this->maxWeight !== null) {
+            if ($this->maxWeight < $this->minWeight) {
+                $context->buildViolation('Le poids maximum doit être supérieur ou égal au poids minimum.')
+                    ->atPath('maxWeight')
+                    ->add();
+            }
+        }
+        // Option: détecter valeurs irréalistes (> 20kg) pour une boucherie fine
+        if ($this->maxWeight !== null && $this->maxWeight > 20000) {
+            $context->buildViolation('Valeur de poids maximum anormalement élevée (> 20kg).')
+                ->atPath('maxWeight')
+                ->add();
+        }
     }
 
     // Méthode simple pour vérifier si le produit est en stock

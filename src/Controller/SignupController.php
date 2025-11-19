@@ -61,6 +61,15 @@ final class SignupController extends AbstractController
         
         // Si le formulaire a été soumis et est valide
         if ($form->isSubmitted() && $form->isValid()) {
+            // Vérifier si l'email existe déjà
+            $existingUser = $em->getRepository(User::class)->findOneBy(['email' => $user->getEmail()]);
+            if ($existingUser) {
+                $this->addFlash('error', 'Cette adresse email est déjà utilisée. Veuillez vous connecter ou utiliser une autre adresse.');
+                return $this->render('security/register.html.twig', [
+                    'signupForm' => $form->createView()
+                ]);
+            }
+            
             try {
                 // ÉTAPE 1 : J'assigne le rôle utilisateur par défaut
                 $user->setRoles(['ROLE_USER']);
@@ -101,11 +110,11 @@ final class SignupController extends AbstractController
                     ]);
                 }
                 
-                // ÉTAPE 5 : Je confirme la création du compte et demande vérification
-                $this->addFlash('success', 'Votre compte a été créé ! Veuillez vérifier votre email pour activer votre compte.');
-                
-                // ÉTAPE 6 : Je redirige vers la page de connexion
-                return $this->redirectToRoute('app_login');
+                // ÉTAPE 5 : Je redirige vers la page de confirmation avec l'email
+                // L'utilisateur verra un message lui demandant de vérifier sa boîte mail
+                return $this->render('security/signup_success.html.twig', [
+                    'email' => $user->getEmail()
+                ]);
                 
             } catch (\Exception $e) {
                 // En cas d'erreur (email déjà utilisé, etc.)
