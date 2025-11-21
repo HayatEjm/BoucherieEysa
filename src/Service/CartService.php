@@ -331,6 +331,7 @@ if ($distinctCount > $MAX_TOTAL) {
                         'id' => $item->getProduct()->getId(),
                         'name' => $item->getProduct()->getName(),
                         'priceHT' => $item->getProduct()->getPrice(),
+                        'image' => $item->getProduct()->getImage(),
                     ],
                     'quantity' => $item->getQuantity(),
                     'unitPrice' => $item->getUnitPrice(),

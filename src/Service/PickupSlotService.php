@@ -19,6 +19,14 @@ class PickupSlotService
         $configPath = $this->projectDir . '/config/pickup_slots.yaml';
         $this->config = Yaml::parseFile($configPath)['pickup_slots'];
     }
+    
+    /**
+     * Retourne la configuration complète (pour accès externe)
+     */
+    public function getConfig(): array
+    {
+        return $this->config;
+    }
 
     /**
      * Récupère tous les créneaux disponibles pour les prochains jours
@@ -52,28 +60,46 @@ class PickupSlotService
     private function getSlotsForDate(DateTime $date): array
     {
         $slots = [];
-        $dayOfWeek = (int)$date->format('w');
+        $now = new DateTime();
+        $isToday = $date->format('Y-m-d') === $now->format('Y-m-d');
         
-        // Créneaux normaux
-        foreach ($this->config['time_slots'] as $slotKey => $slotTime) {
-            // Vérifier horaires spéciaux pour le dimanche
-            if ($dayOfWeek === 0 && $slotKey === 'apres-midi') {
-                continue; // Pas d'après-midi le dimanche
+        // Calculer l'heure limite si c'est aujourd'hui (maintenant + délai de préparation)
+        $minTimeLimit = null;
+        if ($isToday) {
+            $minPreparationHours = $this->config['min_preparation_hours'] ?? 2;
+            $minTimeLimit = clone $now;
+            $minTimeLimit->modify("+{$minPreparationHours} hours");
+        }
+        
+        // Parcourir chaque plage horaire (morning, afternoon)
+        foreach ($this->config['time_slots'] as $periodKey => $periodConfig) {
+            // Récupérer les créneaux 30min de cette plage
+            $timeSlots = $periodConfig['slots'] ?? [];
+            
+            foreach ($timeSlots as $timeSlot) {
+                // Si c'est aujourd'hui, filtrer les créneaux trop proches
+                if ($isToday && $minTimeLimit) {
+                    $slotDateTime = DateTime::createFromFormat('Y-m-d H:i', $date->format('Y-m-d') . ' ' . $timeSlot);
+                    if ($slotDateTime < $minTimeLimit) {
+                        // Créneau trop proche, on le saute
+                        continue;
+                    }
+                }
+                
+                // Compter les commandes pour ce créneau précis (heure exacte)
+                $currentOrders = $this->countOrdersForSlot($date, $timeSlot);
+                $isAvailable = $currentOrders < $this->config['max_orders_per_slot'];
+                
+                $slots[] = [
+                    'period' => $periodKey,  // 'morning' ou 'afternoon'
+                    'time' => $timeSlot,     // '10:00', '10:30', etc.
+                    'label' => $timeSlot,    // Affichage '10:00'
+                    'available' => $isAvailable,
+                    'current_orders' => $currentOrders,
+                    'max_orders' => $this->config['max_orders_per_slot'],
+                    'status' => $this->getSlotStatus($currentOrders)
+                ];
             }
-            
-            $currentOrders = $this->countOrdersForSlot($date, $slotKey);
-            $isAvailable = $currentOrders < $this->config['max_orders_per_slot'];
-            
-            $slots[] = [
-                'key' => $slotKey,
-                'time' => ($slotKey === 'matin' && $dayOfWeek === 0 && isset($this->config['special_hours'][0]))
-                    ? $this->config['special_hours'][0]
-                    : $slotTime,
-                'available' => $isAvailable,
-                'current_orders' => $currentOrders,
-                'max_orders' => $this->config['max_orders_per_slot'],
-                'status' => $this->getSlotStatus($currentOrders)
-            ];
         }
         
         return $slots;
@@ -84,7 +110,9 @@ class PickupSlotService
      */
     private function countOrdersForSlot(DateTime $date, string $timeSlot): int
     {
-        return $this->orderRepository->countByDateAndTimeSlot($date, $timeSlot);
+        // Pour l'instant on compte par heure exacte (ex: "10:00")
+        // Plus tard en Phase 2, on comptera via pickupSlot_id
+        return $this->orderRepository->countByDateAndTime($date, $timeSlot);
     }
 
     /**
@@ -179,12 +207,41 @@ class PickupSlotService
             return false;
         }
 
-        // Dimanche après-midi explicitement non disponible (défense en profondeur)
-        if ((int)$date->format('w') === 0 && $timeSlot === 'apres-midi') {
+        // Vérifier que le créneau horaire existe dans la config
+        $slotExists = false;
+        foreach ($this->config['time_slots'] as $periodConfig) {
+            if (in_array($timeSlot, $periodConfig['slots'] ?? [])) {
+                $slotExists = true;
+                break;
+            }
+        }
+        
+        if (!$slotExists) {
             return false;
         }
 
+        // Vérifier la capacité (Phase 2: comptera via BDD)
         $currentOrders = $this->countOrdersForSlot($date, $timeSlot);
         return $currentOrders < $this->config['max_orders_per_slot'];
+    }
+    
+    /**
+     * Récupère tous les créneaux horaires disponibles (liste simple pour select)
+     */
+    public function getAllTimeSlots(): array
+    {
+        $allSlots = [];
+        
+        foreach ($this->config['time_slots'] as $periodKey => $periodConfig) {
+            foreach ($periodConfig['slots'] ?? [] as $timeSlot) {
+                $allSlots[] = [
+                    'value' => $timeSlot,
+                    'label' => $timeSlot,
+                    'period' => $periodConfig['label']
+                ];
+            }
+        }
+        
+        return $allSlots;
     }
 }

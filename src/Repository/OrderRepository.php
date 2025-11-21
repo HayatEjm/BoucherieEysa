@@ -72,6 +72,21 @@ class OrderRepository extends ServiceEntityRepository
     }
 
     /**
+     * Compte le nombre de commandes pour une date et une heure précise (créneaux 30min)
+     */
+    public function countByDateAndTime(\DateTime $date, string $time): int
+    {
+        return $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->andWhere('o.pickupDate = :date')
+            ->andWhere('o.pickupTimeSlot = :time')
+            ->setParameter('date', $date->format('Y-m-d'))
+            ->setParameter('time', $time)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
      * Compte le nombre de commandes pour une date donnée
      */
     public function countOrdersByDate(\DateTime $date): int

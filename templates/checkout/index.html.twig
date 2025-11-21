@@ -43,12 +43,6 @@
 {% block javascripts %}
     {{ parent() }}
     
-    {# Configuration pour le checkout manager #}
-    <script>
-        // Configuration passée au checkout manager
-        window.checkoutConfig = {
-            apiUrl: '{{ path('api_pickup_slots_list')|e('js') }}',
-            daysToShow: 7
-        };
-    </script>
+    {# Script pour la gestion dynamique des créneaux #}
+    <script src="{{ asset('build/checkout-slots.js') }}"></script>
 {% endblock %}

@@ -1,20 +1,45 @@
 # Configuration des créneaux de retrait Click & Collect
 pickup_slots:
-    # Limite maximum de commandes par créneau
-    max_orders_per_slot: 10
+    # Limite maximum de commandes par créneau (sera utilisé plus tard en Phase 2)
+    max_orders_per_slot: 3
     
-    # Définition des créneaux horaires
-    time_slots:
-        matin: "09:00-12:30"
-        apres-midi: "15:30-19:15"
+    # Délai minimum de préparation en heures (pour commandes le jour même)
+    # Si un client commande aujourd'hui à 14h30, il ne pourra choisir que les créneaux >= 16h30
+    min_preparation_hours: 2
     
-    # Jours fermés (0 = dimanche, 1 = lundi, etc.)
+    # Jours de retrait disponibles (0 = dimanche, 6 = samedi)
+    available_days: [2, 3, 4, 5]  # Mardi, Mercredi, Jeudi, Vendredi
+    
+    # Jours fermés (0 = dimanche, 1 = lundi)
     closed_days: [0, 1]  # Dimanche et Lundi fermés
     
-    # Nombre de jours à afficher dans le calendrier
-    days_ahead: 7
+    # Définition des plages horaires avec créneaux 30 minutes
+    time_slots:
+        morning:
+            label: "Matin"
+            start: "10:00"
+            end: "12:00"
+            interval: 30  # minutes
+            slots:
+                - "10:00"
+                - "10:30"
+                - "11:00"
+                - "11:30"
+        
+        afternoon:
+            label: "Après-midi"
+            start: "15:00"
+            end: "19:00"
+            interval: 30  # minutes
+            slots:
+                - "15:00"
+                - "15:30"
+                - "16:00"
+                - "16:30"
+                - "17:00"
+                - "17:30"
+                - "18:00"
+                - "18:30"
     
-    # Horaires spéciaux par jour de la semaine (optionnel)
-    # Exemple si un jour a des horaires différents pour le matin :
-    # special_hours:
-    #     2: "10:00-13:00"  # Mardi : matin décalé
+    # Nombre de jours à afficher dans le calendrier
+    days_ahead: 14  # 2 semaines glissantes

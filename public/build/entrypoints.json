@@ -2,28 +2,30 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/build/runtime.f9b97e0e.js",
-        "/build/895.f8e5b60a.js",
+        "/build/runtime.f779562c.js",
+        "/build/591.2551f2d1.js",
+        "/build/919.8db5522b.js",
         "/build/602.600a6249.js",
         "/build/408.03b4e45b.js",
         "/build/582.6b041d3c.js",
         "/build/906.43fae413.js",
         "/build/545.f609a425.js",
         "/build/714.cf8f36ee.js",
-        "/build/app.3976b7c2.js"
+        "/build/app.93fc3bfb.js"
       ],
       "css": [
         "/build/906.ef6a8557.css",
         "/build/545.d0ccc70d.css",
-        "/build/app.ba3fcb2c.css"
+        "/build/app.c7bd9d4e.css"
       ]
     },
     "cart-app": {
       "js": [
-        "/build/runtime.f9b97e0e.js",
-        "/build/895.f8e5b60a.js",
+        "/build/runtime.f779562c.js",
+        "/build/591.2551f2d1.js",
+        "/build/919.8db5522b.js",
         "/build/408.03b4e45b.js",
-        "/build/cart-app.07983802.js"
+        "/build/cart-app.03d7fcb0.js"
       ],
       "css": [
         "/build/cart-app.c48b0165.css"
@@ -31,20 +33,28 @@
     },
     "admin": {
       "js": [
-        "/build/runtime.f9b97e0e.js",
-        "/build/895.f8e5b60a.js",
+        "/build/runtime.f779562c.js",
+        "/build/591.2551f2d1.js",
+        "/build/919.8db5522b.js",
         "/build/602.600a6249.js",
         "/build/582.6b041d3c.js",
         "/build/545.f609a425.js",
-        "/build/admin.7e5b3f5f.js"
+        "/build/admin.f4dc58f3.js"
       ],
       "css": [
         "/build/545.d0ccc70d.css"
       ]
     },
+    "checkout-slots": {
+      "js": [
+        "/build/runtime.f779562c.js",
+        "/build/591.2551f2d1.js",
+        "/build/checkout-slots.35cf108f.js"
+      ]
+    },
     "legal": {
       "js": [
-        "/build/runtime.f9b97e0e.js"
+        "/build/runtime.f779562c.js"
       ],
       "css": [
         "/build/legal.d0bc34e0.css"

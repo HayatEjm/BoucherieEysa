@@ -52,6 +52,10 @@ class Product
     #[Assert\Positive(message: 'Le poids maximum doit être positif.')]
     private ?int $maxWeight = null;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    #[Assert\PositiveOrZero(message: 'Le seuil d\'alerte doit être positif ou nul.')]
+    private ?int $alertThreshold = null;
+
     public function __construct()
     {
         $this->orderItems = new ArrayCollection();
@@ -230,5 +234,33 @@ class Product
     public function isLowStock(): bool
     {
         return $this->stock > 0 && $this->stock <= 5;
+    }
+
+    public function getAlertThreshold(): ?int
+    {
+        return $this->alertThreshold;
+    }
+
+    public function setAlertThreshold(?int $alertThreshold): static
+    {
+        $this->alertThreshold = $alertThreshold;
+        return $this;
+    }
+
+    /**
+     * Retourne le statut du stock basé sur le seuil d'alerte
+     * 'good' : stock > seuil, 'low' : stock <= seuil mais > 0, 'critical' : stock = 0
+     */
+    public function getStockStatus(): string
+    {
+        if ($this->stock === 0) {
+            return 'critical';
+        }
+        
+        if ($this->alertThreshold !== null && $this->stock <= $this->alertThreshold) {
+            return 'low';
+        }
+        
+        return 'good';
     }
 }

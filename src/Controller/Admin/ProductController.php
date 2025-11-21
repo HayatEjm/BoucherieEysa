@@ -155,6 +155,41 @@ class ProductController extends AbstractController
         return $this->redirectToRoute('admin_products_index');
     }
 
+    #[Route('/{id}/update-stock', name: 'update_stock', methods: ['POST'])]
+    public function updateStock(Product $product, Request $request): JsonResponse
+    {
+        try {
+            $data = json_decode($request->getContent(), true);
+            
+            if (!isset($data['stock']) || !is_numeric($data['stock']) || $data['stock'] < 0) {
+                return new JsonResponse(['success' => false, 'error' => 'Stock invalide'], 400);
+            }
+            
+            $newStock = (int) $data['stock'];
+            $product->setStock($newStock);
+            
+            // Mise à jour du seuil d'alerte si fourni
+            if (isset($data['alertThreshold'])) {
+                $threshold = $data['alertThreshold'] === null ? null : (int) $data['alertThreshold'];
+                if ($threshold !== null && $threshold < 0) {
+                    return new JsonResponse(['success' => false, 'error' => 'Seuil d\'alerte invalide'], 400);
+                }
+                $product->setAlertThreshold($threshold);
+            }
+            
+            $this->em->flush();
+            
+            return new JsonResponse([
+                'success' => true,
+                'stock' => $newStock,
+                'status' => $product->getStockStatus()
+            ]);
+            
+        } catch (\Exception $e) {
+            return new JsonResponse(['success' => false, 'error' => $e->getMessage()], 500);
+        }
+    }
+
     #[Route('/{id}/delete', name: 'delete', methods: ['POST'])]
     public function delete(Product $product): Response
     {

@@ -19,7 +19,7 @@
       <div class="cart-items">
         <div v-for="item in cart.items" :key="item.product.id" class="cart-item">
           <div class="cart-item-image">
-            <img :src="item.product.imageUrl || 'https://via.placeholder.com/80'" alt="">
+            <img :src="item.product.image ? `/images/${item.product.image}` : 'https://via.placeholder.com/80'" alt="">
           </div>
           <div class="cart-item-info">
             <h3>{{ item.product.name }}</h3>

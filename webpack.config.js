@@ -15,6 +15,7 @@ Encore
     .addEntry('app', './assets/app.js')
     .addEntry('cart-app', './assets/js/cart-app.js')
     .addEntry('admin', './assets/admin/main-admin.js')
+    .addEntry('checkout-slots', './assets/js/checkout-slots.js')
 
     // Entrées CSS séparées (uniquement pour les pages qui en ont besoin)
     .addStyleEntry('legal', './assets/styles/legal.css')

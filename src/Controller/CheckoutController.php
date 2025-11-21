@@ -6,9 +6,11 @@ use App\Form\CheckoutFormType;
 use App\Service\CartService;
 use App\Service\EmailService;
 use App\Service\OrderService;
+use App\Service\PickupSlotService;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,6 +38,7 @@ class CheckoutController extends AbstractController
         private EntityManagerInterface $entityManager,
         private LoggerInterface $logger,
         private EmailService $emailService,
+        private PickupSlotService $pickupSlotService,
     ) {}
 
     /**
@@ -211,7 +214,6 @@ class CheckoutController extends AbstractController
             'order' => $order,
         ]);
     }
-
     /**
      * RÉCAPITULATIF DE COMMANDE - Pour réaffichage
      * 
@@ -230,6 +232,58 @@ class CheckoutController extends AbstractController
 
         return $this->render('checkout/order_details.html.twig', [
             'order' => $order,
+        ]);
+    }
+
+    /**
+     * API : Récupérer les créneaux disponibles pour une date
+     * 
+     * ROUTE : GET /checkout/api/slots?date=2025-11-20
+     * 
+     * Retourne les créneaux disponibles avec filtrage 2h pour aujourd'hui
+     */
+    #[Route('/api/slots', name: 'app_checkout_api_slots', methods: ['GET'])]
+    public function getAvailableSlots(Request $request): JsonResponse
+    {
+        $dateString = $request->query->get('date');
+        
+        if (!$dateString) {
+            return new JsonResponse(['error' => 'Date requise'], 400);
+        }
+
+        try {
+            $date = new \DateTime($dateString);
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => 'Format de date invalide'], 400);
+        }
+
+        // Vérifier si c'est un jour fermé
+        $config = $this->pickupSlotService->getConfig();
+        $dayOfWeek = (int)$date->format('w');
+        
+        if (in_array($dayOfWeek, $config['closed_days'])) {
+            return new JsonResponse([
+                'closed' => true,
+                'slots' => []
+            ]);
+        }
+
+        // Récupérer les créneaux (avec filtrage 2h automatique si c'est aujourd'hui)
+        $slots = $this->pickupSlotService->getAvailableSlotsForDate($date);
+        
+        // Formatter pour le select
+        $formattedSlots = [];
+        foreach ($slots as $slot) {
+            $formattedSlots[] = [
+                'value' => $slot['time'],
+                'label' => str_replace(':', 'h', $slot['time']),
+                'available' => $slot['available']
+            ];
+        }
+
+        return new JsonResponse([
+            'closed' => false,
+            'slots' => $formattedSlots
         ]);
     }
 }

@@ -62,7 +62,7 @@
         <input id="image" name="image" class="form-control" value="{{ product ? product.image : '' }}" placeholder="ex: cote-boeuf.jpg">
         {% if product and product.image %}
           <div style="margin-top:10px;">
-            <img src="{{ asset('images/products/' ~ product.image) }}" alt="{{ product.name }}" style="max-width:150px;border-radius:8px;">
+            <img src="{{ asset('images/' ~ product.image) }}" alt="{{ product.name }}" style="max-width:150px;border-radius:8px;">
           </div>
         {% endif %}
       </div>

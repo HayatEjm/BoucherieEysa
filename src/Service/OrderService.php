@@ -124,6 +124,30 @@ class OrderService
                 'Veuillez choisir un autre jour ou créneau horaire.'
             );
         }
+        
+        // Validation du délai de préparation pour les commandes le jour même
+        $now = new \DateTime();
+        $pickupDate = $order->getPickupDate();
+        $isToday = $pickupDate->format('Y-m-d') === $now->format('Y-m-d');
+        
+        if ($isToday) {
+            $timeSlot = $order->getPickupTimeSlot();
+            $slotDateTime = \DateTime::createFromFormat('Y-m-d H:i', $pickupDate->format('Y-m-d') . ' ' . $timeSlot);
+            
+            // Récupérer le délai minimum de préparation depuis la config (par défaut 2h)
+            $config = $this->pickupSlotService->getConfig();
+            $minPreparationHours = $config['min_preparation_hours'] ?? 2;
+            
+            $minTimeLimit = clone $now;
+            $minTimeLimit->modify("+{$minPreparationHours} hours");
+            
+            if ($slotDateTime < $minTimeLimit) {
+                throw new \InvalidArgumentException(
+                    "Le créneau sélectionné est trop proche. " .
+                    "Merci de choisir un créneau au moins {$minPreparationHours}h après l'heure actuelle pour nous laisser le temps de préparer votre commande."
+                );
+            }
+        }
 
         $this->logger->info('Commande validée', ['order_number' => $order->getOrderNumber()]);
     }

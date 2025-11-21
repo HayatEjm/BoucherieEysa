@@ -3,10 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Order;
+use App\Service\PickupSlotService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -31,6 +33,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class CheckoutFormType extends AbstractType
 {
+    public function __construct(
+        private PickupSlotService $pickupSlotService
+    ) {
+    }
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -107,12 +113,11 @@ class CheckoutFormType extends AbstractType
                 ]
             ])
             
-            ->add('pickupTimeSlot', ChoiceType::class, [
+            ->add('pickupTimeSlot', TextType::class, [
                 'label' => 'Créneau horaire *',
-                'choices' => $this->getAvailableTimeSlots(),
-                'placeholder' => 'Choisissez un créneau',
                 'attr' => [
                     'class' => 'form-control',
+                    'data-slot-input' => 'true', // Marqueur pour JavaScript
                 ],
                 'constraints' => [
                     new Assert\NotBlank([
@@ -159,20 +164,42 @@ class CheckoutFormType extends AbstractType
     }
 
     /**
-     * Retourne les créneaux horaires disponibles
-     * TODO: Cette logique devrait être dans un service dédié
+     * Retourne les créneaux horaires disponibles depuis le service
+     * Phase 1 : créneaux 30min fixes depuis config YAML avec filtrage 2h
+     * Phase 2 : créneaux dynamiques avec capacité en BDD
      */
     private function getAvailableTimeSlots(): array
     {
-        return [
-            '09:00 - 10:00' => '09:00-10:00',
-            '10:00 - 11:00' => '10:00-11:00',
-            '11:00 - 12:00' => '11:00-12:00',
-            '14:00 - 15:00' => '14:00-15:00',
-            '15:00 - 16:00' => '15:00-16:00',
-            '16:00 - 17:00' => '16:00-17:00',
-            '17:00 - 18:00' => '17:00-18:00',
-        ];
+        // Utiliser aujourd'hui comme date de référence pour le filtrage initial
+        // (l'utilisateur verra les créneaux filtrés pour aujourd'hui par défaut)
+        $today = new \DateTime();
+        $todaySlots = $this->pickupSlotService->getAvailableSlotsForDate($today);
+        
+        // Si c'est aujourd'hui et qu'il reste des créneaux filtrés, les utiliser
+        // Sinon, afficher tous les créneaux (pour les jours futurs)
+        $slots = [];
+        
+        if (!empty($todaySlots)) {
+            // Utiliser les créneaux filtrés d'aujourd'hui (avec délai 2h)
+            foreach ($todaySlots as $slotData) {
+                $slots[] = [
+                    'value' => $slotData['time'],
+                    'label' => $slotData['time']
+                ];
+            }
+        } else {
+            // Aucun créneau aujourd'hui, afficher tous les créneaux disponibles
+            $slots = $this->pickupSlotService->getAllTimeSlots();
+        }
+        
+        // Formatter pour le select: ['10h00' => '10:00', '10h30' => '10:30', ...]
+        $choices = [];
+        foreach ($slots as $slot) {
+            $label = str_replace(':', 'h', $slot['value']); // '10:00' → '10h00'
+            $choices[$label] = $slot['value'];
+        }
+        
+        return $choices;
     }
 
     /**

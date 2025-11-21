@@ -257,7 +257,7 @@
 }
 
 .featured-products-section .home-product-name {
-  color: var(--primary-color);
+  color: var(--primary-color) !important;
   font-size: var(--font-size-xl);
   margin-bottom: var(--spacing-sm);
   font-weight: var(--font-weight-semibold);
