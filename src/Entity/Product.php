@@ -56,6 +56,9 @@ class Product
     #[Assert\PositiveOrZero(message: 'Le seuil d\'alerte doit être positif ou nul.')]
     private ?int $alertThreshold = null;
 
+    #[ORM\Column(type: 'string', length: 255, unique: true, nullable: true)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->orderItems = new ArrayCollection();
@@ -262,5 +265,16 @@ class Product
         }
         
         return 'good';
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): static
+    {
+        $this->slug = $slug;
+        return $this;
     }
 }

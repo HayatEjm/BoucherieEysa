@@ -28,7 +28,7 @@ function close() {
     </a>
     <ul class="dropdown-content" :class="{ show: isOpen }">
       <li v-for="category in categories" :key="category.id">
-        <a :href="`/categories/${category.id}`">{{ category.name }}</a>
+  <a :href="`/categories/${category.slug}`">{{ category.name }}</a>
       </li>
     </ul>
   </li>

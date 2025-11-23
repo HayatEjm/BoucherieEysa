@@ -40,7 +40,8 @@ class HomeController extends AbstractController
         $formattedCategories = array_map(function ($category) {
             return [
                 'id' => $category->getId(),
-                'name' => $category->getName()
+                'name' => $category->getName(),
+                'slug' => $category->getSlug()
             ];
         }, $categories);
 

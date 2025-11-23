@@ -21,9 +21,15 @@ class ProductController extends AbstractController
     }
 
     // Afficher les détails d'un produit
-#[Route('/product/{id}', name: 'app_product_show')]
-public function show(Product $product): Response
+#[Route('/product/{slug}', name: 'app_product_show')]
+public function show(string $slug, ProductRepository $productRepository): Response
 {
+    $product = $productRepository->findOneBy(['slug' => $slug]);
+    
+    if (!$product) {
+        throw $this->createNotFoundException('Produit introuvable');
+    }
+    
     $minWeight = $product->getMinWeight() ?? 100; // fallback si null
     $maxWeight = $product->getMaxWeight() ?? 5000;
 
@@ -39,6 +45,7 @@ public function show(Product $product): Response
         'category' => $product->getCategory() ? [
             'id' => $product->getCategory()->getId(),
             'name' => $product->getCategory()->getName(),
+            'slug' => $product->getCategory()->getSlug(),
         ] : null,
     ];
 

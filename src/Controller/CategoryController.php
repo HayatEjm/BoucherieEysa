@@ -22,7 +22,8 @@ class CategoryController extends AbstractController
         $formattedCategories = array_map(function ($category) {
             return [
                 'id' => $category->getId(),
-                'name' => $category->getName()
+                'name' => $category->getName(),
+                'slug' => $category->getSlug()
             ];
         }, $categories);
 
@@ -33,9 +34,15 @@ class CategoryController extends AbstractController
     }
 
     // Afficher les produits d'une catégorie donnée
-    #[Route('/categories/{id}', name: 'app_category_show')]
-    public function show(Category $category, CategoryRepository $categoryRepository): Response
+    #[Route('/categories/{slug}', name: 'app_category_show')]
+    public function show(string $slug, CategoryRepository $categoryRepository): Response
     {
+        $category = $categoryRepository->findOneBy(['slug' => $slug]);
+        
+        if (!$category) {
+            throw $this->createNotFoundException('Catégorie introuvable');
+        }
+        
         $products = $category->getProducts();
         
         // Format pour le menu déroulant Vue
@@ -43,7 +50,8 @@ class CategoryController extends AbstractController
         $formattedCategories = array_map(function ($cat) {
             return [
                 'id' => $cat->getId(),
-                'name' => $cat->getName()
+                'name' => $cat->getName(),
+                'slug' => $cat->getSlug()
             ];
         }, $categories);
 

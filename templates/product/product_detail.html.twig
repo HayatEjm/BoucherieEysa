@@ -11,7 +11,7 @@
                 <li><a href="{{ path('app_home') }}">🏠 Accueil</a></li>
                 <li><a href="{{ path('app_category_index') }}">Nos produits</a></li>
                 {% if product.category %}
-                    <li><a href="{{ path('app_category_show', { id: product.category.id }) }}">{{ product.category.name }}</a></li>
+                    <li><a href="{{ path('app_category_show', { slug: product.category.slug }) }}">{{ product.category.name }}</a></li>
                 {% endif %}
                 <li class="current">{{ product.name }}</li>
             </ol>

@@ -19,7 +19,7 @@
 
 				{# 🔽 MOUNT POINT VUE 3 ICI - POUR DropdownMenu.vue #}
 				<li id="vue-dropdown-menu" {% if categoriesJson is defined %} 
-				data-categories='{{ categoriesJson|json_encode|e("html_attr") }}' {% endif %}>
+				data-categories="{{ categoriesJson|json_encode }}" {% endif %}>
 					<a href="#">NOS PRODUITS</a>
 				</li>
 

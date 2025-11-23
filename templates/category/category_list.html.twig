@@ -21,7 +21,7 @@
                             <p class="category-description">{{ category.description }}</p>
                         {% endif %}
 
-                        <a href="{{ path('app_category_show', { id: category.id }) }}" class="category-link">
+                        <a href="{{ path('app_category_show', { slug: category.slug }) }}" class="category-link">
                             Voir les produits
                         </a>
                     </div>

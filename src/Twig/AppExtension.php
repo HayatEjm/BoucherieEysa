@@ -23,6 +23,7 @@ class AppExtension extends AbstractExtension implements GlobalsInterface
             return [
                 'id' => $category->getId(),
                 'name' => $category->getName(),
+                'slug' => $category->getSlug(),
             ];
         }, $categories);
 
